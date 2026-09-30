@@ -1,0 +1,128 @@
+{
+    "_vcs_DPI_package": [
+        "_vcs_DPI_package",
+        "uM9F1",
+        "module",
+        1
+    ],
+    "vcs_paramclassrepository": [
+        "vcs_paramclassrepository",
+        "hEeZs",
+        "module",
+        2
+    ],
+    "_vcs_unit__2912028335": [
+        "_vcs_unit__2912028335",
+        "MUpDW",
+        "module",
+        15
+    ],
+    "std": [
+        "std",
+        "reYIK",
+        "module",
+        4
+    ],
+    "uvm_pkg": [
+        "uvm_pkg",
+        "zr7M1",
+        "module",
+        5
+    ],
+    "_vcs_msglog": [
+        "_vcs_msglog",
+        "zQBzV",
+        "module",
+        6
+    ],
+    "uvm_custom_install_recording": [
+        "uvm_custom_install_recording",
+        "nhiwz",
+        "module",
+        7
+    ],
+    "uvm_custom_install_verdi_recording": [
+        "uvm_custom_install_verdi_recording",
+        "EbjT3",
+        "module",
+        8
+    ],
+    "axi_interconnect_wrap_3x14": [
+        "axi_interconnect_wrap_3x14",
+        "CGgy4",
+        "module",
+        13
+    ],
+    "arbiter": [
+        "arbiter",
+        "ujx5M",
+        "module",
+        12
+    ],
+    "priority_encoder_0000": [
+        "priority_encoder_0000",
+        "VTikG",
+        "module",
+        11
+    ],
+    "axi_internal_fifo_0000": [
+        "axi_internal_fifo_0000",
+        "Bvfk1",
+        "module",
+        10
+    ],
+    "axi_internal_fifo_0001": [
+        "axi_internal_fifo_0001",
+        "jTQWg",
+        "module",
+        9
+    ],
+    "axi_uart_top_0000": [
+        "axi_uart_top_0000",
+        "x5KIA",
+        "module",
+        17
+    ],
+    "spi_fifo": [
+        "spi_fifo",
+        "LJ0Ct",
+        "module",
+        18
+    ],
+    "qrs_axi4_wrapper": [
+        "qrs_axi4_wrapper",
+        "hQ6AJ",
+        "module",
+        19
+    ],
+    "fir_top": [
+        "fir_top",
+        "RgrQK",
+        "module",
+        20
+    ],
+    "adc_pkg": [
+        "adc_pkg",
+        "HI8NI",
+        "module",
+        3
+    ],
+    "adc_controller_0000": [
+        "adc_controller_0000",
+        "wJMjm",
+        "module",
+        22
+    ],
+    "tb_soc_uart_qrs_spi_fir_adc_top": [
+        "tb_soc_uart_qrs_spi_fir_adc_top",
+        "qNIiC",
+        "module",
+        23
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module",
+        16
+    ]
+}

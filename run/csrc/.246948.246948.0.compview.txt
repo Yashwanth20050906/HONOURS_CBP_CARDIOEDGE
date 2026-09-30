@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1790746666.077047800, "rt":7.39, "ut":4.82, "st":0.22}}
+{"vcselab":{"timestamp_begin":1790746673.526765936, "rt":2.76, "ut":0.20, "st":0.05}}
+{"link":{"timestamp_begin":1790746676.340360014, "rt":0.54, "ut":0.42, "st":0.12}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1790746665.724827379}
+{"VCS_COMP_START_TIME": 1790746665.724827379}
+{"VCS_COMP_END_TIME": 1790746676.999042474}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -ntb_opts uvm -timescale=1ns/1ps -debug_access+all -kdb -f filelist_uart_qrs_integration.f -l compile.log"}
+{"vcs1": {"peak_mem": 536268}}
+{"vcselab": {"peak_mem": 260316}}
