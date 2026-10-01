@@ -6,9 +6,10 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
 Command: vcs -full64 -sverilog -ntb_opts uvm -timescale=1ns/1ps -debug_access+all \
--kdb -f filelist_uart_qrs_spi_fir_adc_integration.f -l compile.log
+-kdb -f filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f -l compile.log \
+
                          Chronologic VCS (TM)
-         Version U-2023.03_Full64 -- Wed Sep 30 15:53:31 2026
+         Version U-2023.03_Full64 -- Thu Oct  1 15:58:02 2026
 
                     Copyright (c) 1991 - 2023 Synopsys, Inc.
    This software and the associated documentation are proprietary to Synopsys,
@@ -336,6 +337,8 @@ Parsing design file '../rtl/interconnect/axi_interconnect.v'
 Parsing design file '../rtl/interconnect/axi_interconnect_wrap_3x14.v'
 Parsing design file '../rtl/interconnect/arbiter.v'
 Parsing design file '../rtl/interconnect/priority_encoder.v'
+Parsing design file '../rtl/common/axi4lite_slave_adapter.sv'
+Parsing design file '../rtl/common/axi4_to_axi4lite_bridge.sv'
 Parsing design file '../rtl/uart/axi_internal_fifo.v'
 Parsing design file '../rtl/uart/uart_parity_bit_compute.v'
 Parsing design file '../rtl/uart/uart_receiver.v'
@@ -382,17 +385,24 @@ Parsing design file '../rtl/ADC/adc_sampling_scheduler.sv'
 Parsing design file '../rtl/ADC/adc_registers.sv'
 Parsing design file '../rtl/ADC/adc_axi_lite_slave.sv'
 Parsing design file '../rtl/ADC/adc_controller.sv'
-Parsing design file '../rtl/soc_uart_qrs_spi_fir_adc_top.sv'
-Parsing design file '../tb/tb_soc_uart_qrs_spi_fir_adc_top.sv'
+Parsing design file '../rtl/gpio/gpio_bit.sv'
+Parsing design file '../rtl/gpio/gpio_wrapper.sv'
+Parsing design file '../rtl/gpio/gpio_regs.sv'
+Parsing design file '../rtl/gpio/gpio_axi.sv'
+Parsing design file '../rtl/timer/timer_core.sv'
+Parsing design file '../rtl/timer/timer_regs.sv'
+Parsing design file '../rtl/timer/timer_axi.sv'
+Parsing design file '../rtl/soc_uart_qrs_spi_fir_adc_gpio_timer_top_BRIDGED.sv'
+Parsing design file '../tb/tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top.sv'
 Top Level Modules:
        uvm_custom_install_recording
        uvm_custom_install_verdi_recording
-       tb_soc_uart_qrs_spi_fir_adc_top
+       tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top
 TimeScale is 1 ns / 1 ps
 
 Warning-[TFIPC] Too few instance port connections
-../rtl/soc_uart_qrs_spi_fir_adc_top.sv, 468
-soc_uart_qrs_spi_fir_adc_top, "axi_interconnect_wrap_3x14 #(.DATA_WIDTH(DATA_WIDTH), .ADDR_WIDTH(ADDR_WIDTH), .STRB_WIDTH(STRB_WIDTH), .ID_WIDTH(ID_WIDTH), .AWUSER_WIDTH(1), .WUSER_WIDTH(1), .BUSER_WIDTH(1), .ARUSER_WIDTH(1), .RUSER_WIDTH(1), .M_REGIONS(1), .M00_BASE_ADDR(32'h40000000), .M00_ADDR_WIDTH(32'd12), .M00_CONNECT_READ(3'b1), .M00_CONNECT_WRITE(3'b1), .M01_BASE_ADDR(32'h40001000), .M01_ADDR_WIDTH(32'd12), .M01_CONNECT_READ(3'b1), .M01_CONNECT_WRITE(3'b1), .M02_BASE_ADDR(32'h40002000), .M02_ADDR_WIDTH(32'd12), .M02_CONNECT_READ(3'b1), .M02_CONNECT_WRITE(3'b1), .M03_BASE_ADDR(32'h40003000), .M03_ADDR_WIDTH(32'd12), .M03_CONNECT_READ(3'b1), .M03_CONNECT_WRITE(3'b1), .M04_BASE_ADDR(32'h40004000), .M04_ADDR_WIDTH(32'd12), .M04_CONNECT_READ(3'b1), .M04_CONNECT_WRITE(3'b1), .M05_A ... "
+../rtl/soc_uart_qrs_spi_fir_adc_gpio_timer_top_BRIDGED.sv, 579
+soc_uart_qrs_spi_fir_adc_gpio_timer_top, "axi_interconnect_wrap_3x14 #(.DATA_WIDTH(DATA_WIDTH), .ADDR_WIDTH(ADDR_WIDTH), .STRB_WIDTH(STRB_WIDTH), .ID_WIDTH(ID_WIDTH), .AWUSER_WIDTH(1), .WUSER_WIDTH(1), .BUSER_WIDTH(1), .ARUSER_WIDTH(1), .RUSER_WIDTH(1), .M_REGIONS(1), .M00_BASE_ADDR(32'h40000000), .M00_ADDR_WIDTH(32'd12), .M00_CONNECT_READ(3'b1), .M00_CONNECT_WRITE(3'b1), .M01_BASE_ADDR(32'h40001000), .M01_ADDR_WIDTH(32'd12), .M01_CONNECT_READ(3'b1), .M01_CONNECT_WRITE(3'b1), .M02_BASE_ADDR(32'h40002000), .M02_ADDR_WIDTH(32'd12), .M02_CONNECT_READ(3'b1), .M02_CONNECT_WRITE(3'b1), .M03_BASE_ADDR(32'h40003000), .M03_ADDR_WIDTH(32'd12), .M03_CONNECT_READ(3'b1), .M03_CONNECT_WRITE(3'b1), .M04_BASE_ADDR(32'h40004000), .M04_ADDR_WIDTH(32'd12), .M04_CONNECT_READ(3'b1), .M04_CONNECT_WRITE(3'b1), .M05_B ... "
   The above instance has fewer port connections than the module definition.
   Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
   ports.
@@ -409,23 +419,47 @@ Warning-[PCWM-W] Port connection width mismatch
 
 Starting vcs inline pass...
 
-17 modules and 0 UDP read.
+Notice: Ports coerced to inout, use -notice for details
+21 modules and 0 UDP read.
+recompiling package vcs_paramclassrepository
+recompiling package _vcs_DPI_package
+recompiling package uvm_pkg
+recompiling package _vcs_msglog
+recompiling module uvm_custom_install_recording
 recompiling module uvm_custom_install_verdi_recording
-recompiling module tb_soc_uart_qrs_spi_fir_adc_top
-Both modules done.
-	However, due to incremental compilation, only 2 modules need to be compiled. 
+recompiling module axi_interconnect_wrap_3x14
+recompiling module arbiter
+recompiling module priority_encoder
+recompiling module axi4lite_slave_adapter
+recompiling module axi4_to_axi4lite_bridge
+recompiling module axi_internal_fifo
+recompiling module axi_uart_top
+recompiling module spi_fifo
+recompiling module qrs_axi4_wrapper
+recompiling module fir_top
+recompiling package adc_pkg
+recompiling module adc_controller
+recompiling module gpio_axi
+recompiling module timer_axi
+recompiling module tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top
+All of 21 modules done
 rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+g++ -w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include \
+-c /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/dpi/uvm_dpi.cc
+g++ -w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include \
+-c /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/verdi/dpi/uvm_verdi_dpi.cpp \
+
 if [ -x ../simv ]; then chmod a-x ../simv; fi
 g++  -o ../simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir \
 -Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib -L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib \
 -Wl,-rpath-link=./  /usr/lib64/libnuma.so.1 uvm_dpi.o uvm_verdi_dpi.o   objs/amcQw_d.o \
-_419662_archive_1.so _prev_archive_1.so  SIM_l.o      rmapats_mop.o rmapats.o rmar.o \
-rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o            -lvirsim -lerrorinf -lsnpsmalloc \
--lvfs    -lvcsnew -lsimprofile -luclinative /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_tls.o \
+_33399_archive_1.so  SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o \
+rmar_llvm_0_0.o            -lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile \
+-luclinative /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_tls.o \
 -Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive       ./../simv.daidir/vc_hdrs.o \
 _vcs_pli_stub_.o   /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_save_restore_new.o \
 /home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/pli.a -ldl \
 -lc -lm -lpthread -ldl 
 ../simv up to date
-CPU time: 5.223 seconds to compile + .276 seconds to elab + .386 seconds to link
+CPU time: 7.681 seconds to compile + .283 seconds to elab + .572 seconds to link
 Verdi KDB elaboration done and the database successfully generated: 0 error(s), 0 warning(s)

@@ -620,7 +620,7 @@
 -P
 -Xufe=2steps
 -debug_access+all
--f filelist_uart_qrs_spi_fir_adc_integration.f
+-f filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f
 -fsdb
 -full64
 -gen_obj
@@ -637,7 +637,7 @@ compile.log
 /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/verdi/uvm_custom_install_verdi_recorder.sv
 uvm
 /home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/verdi.tab
-filelist_uart_qrs_spi_fir_adc_integration.f
+filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f
 95
 which_declare=declare -f
 sentaurus_HOME=/home/student/snps_tools_target/sentaurus/T-2022.03-SP2
@@ -655,7 +655,7 @@ XDG_RUNTIME_DIR=/run/user/1000
 XDG_MENU_PREFIX=gnome-
 XDG_DATA_DIRS=/home/student/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
 XDG_CURRENT_DESKTOP=GNOME
-XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.1OEAW3
+XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.5L56V3
 WAYLAND_DISPLAY=wayland-0
 VTE_VERSION=5204
 VMR_MODE_FLAG=64
@@ -682,7 +682,7 @@ SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 SNPS_VERDI_INTERNAL_LP_XML_NEW_FLOW=1
 SNPS_VCS_CLANG_PATH=/home/student/snps_tools_target/vcs/U-2023.03/linux64/clang
 SNPS_INTERNAL_VCS_LINUX_OS=linux
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3980,unix/unix:/tmp/.ICE-unix/3980
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/2545,unix/unix:/tmp/.ICE-unix/2545
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 QT_IM_MODULE=ibus
@@ -696,12 +696,12 @@ MODULES_CMD=/usr/share/Modules/libexec/modulecmd.tcl
 MODULESHOME=/usr/share/Modules
 MODULEPATH_modshare=/usr/share/Modules/modulefiles:2:/etc/modulefiles:2:/usr/share/modulefiles:2
 MODULEPATH=/etc/scl/modulefiles:/etc/scl/modulefiles:/etc/scl/modulefiles:/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles
-MANAGERPID=3928
+MANAGERPID=2482
 LOADEDMODULES=
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 LC_ALL=C
-JOURNAL_STREAM=9:53506
-INVOCATION_ID=4d784bcbd8ee4eb08816a739d17d58e7
+JOURNAL_STREAM=9:48907
+INVOCATION_ID=9c05456b5aa143e48a291dc9d3021d72
 HOSTTYPE=x86_64-linux
 HISTCONTROL=ignoredups
 GUESTFISH_RESTORE=\e[0m
@@ -709,8 +709,8 @@ GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\]
 GUESTFISH_OUTPUT=\e[0m
 GUESTFISH_INIT=\e[1;34m
 GROUP=student
-GNOME_TERMINAL_SERVICE=:1.89
-GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/99ae8fc8_e4b8_4bb5_8dfb_2e724413de30
+GNOME_TERMINAL_SERVICE=:1.84
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/4de36d23_057b_47a0_8e09_6add489fa7c3
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 GDM_LANG=en_IN.UTF-8
 GDMSESSION=gnome
@@ -719,8 +719,8 @@ FINESIM_HOME=/home/student/snps_tools_target/finesim/U-2023.03
 DESKTOP_SESSION=gnome
 DEBUGINFOD_URLS=https://debuginfod.centos.org/ 
 DBUS_STARTER_BUS_TYPE=session
-DBUS_STARTER_ADDRESS=unix:path=/run/user/1000/bus,guid=111ca24be084a89b23c23d646abbc316
-DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus,guid=111ca24be084a89b23c23d646abbc316
+DBUS_STARTER_ADDRESS=unix:path=/run/user/1000/bus,guid=38240828c69c822245f4267a6abe239e
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus,guid=38240828c69c822245f4267a6abe239e
 CONDA_SHLVL=1
 CONDA_PYTHON_EXE=/home/student/miniconda3/bin/python
 CONDA_PROMPT_MODIFIER=(base) 
@@ -736,7 +736,7 @@ BASH_FUNC_ml%%=() {  module ml "$@"_}
 BASH_FUNC__module_raw%%=() {  unset _mlshdbg;_ if [ "${MODULES_SILENT_SHELL_DEBUG:-0}" = '1' ]; then_ case "$-" in _ *v*x*)_ set +vx;_ _mlshdbg='vx'_ ;;_ *v*)_ set +v;_ _mlshdbg='v'_ ;;_ *x*)_ set +x;_ _mlshdbg='x'_ ;;_ *)_ _mlshdbg=''_ ;;_ esac;_ fi;_ unset _mlre _mlIFS;_ if [ -n "${IFS+x}" ]; then_ _mlIFS=$IFS;_ fi;_ IFS=' ';_ for _mlv in ${MODULES_RUN_QUARANTINE:-};_ do_ if [ "${_mlv}" = "${_mlv##*[!A-Za-z0-9_]}" -a "${_mlv}" = "${_mlv#[0-9]}" ]; then_ if [ -n "`eval 'echo ${'$_mlv'+x}'`" ]; then_ _mlre="${_mlre:-}${_mlv}_modquar='`eval 'echo ${'$_mlv'}'`' ";_ fi;_ _mlrv="MODULES_RUNENV_${_mlv}";_ _mlre="${_mlre:-}${_mlv}='`eval 'echo ${'$_mlrv':-}'`' ";_ fi;_ done;_ if [ -n "${_mlre:-}" ]; then_ eval `eval ${_mlre} /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash '"$@"'`;_ else_ eval `/usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash "$@"`;_ fi;_ _mlstatus=$?;_ if [ -n "${_mlIFS+x}" ]; then_ IFS=$_mlIFS;_ else_ unset IFS;_ fi;_ unset _mlre _mlv _mlrv _mlIFS;_ if [ -n "${_mlshdbg:-}" ]; then_ set -$_mlshdbg;_ fi;_ unset _mlshdbg;_ return $_mlstatus_}
 0
 0
-202
+211
 1617064580 ../rtl/spi/include/axi_spi.vh
 1617064580 ../rtl/spi/include/axi_spi_defines.vh
 1790694256 ../rtl/uart/include/axi_uart.vh
@@ -888,8 +888,15 @@ BASH_FUNC__module_raw%%=() {  unset _mlshdbg;_ if [ "${MODULES_SILENT_SHELL_DEBU
 1677387028 /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/macros/snps_macros.svp
 1677387028 /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/macros/uvm_version_defines.svh
 1677387029 /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh
-1790763803 ../tb/tb_soc_uart_qrs_spi_fir_adc_top.sv
-1790743616 ../rtl/soc_uart_qrs_spi_fir_adc_top.sv
+1790827068 ../tb/tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top.sv
+1790846771 ../rtl/soc_uart_qrs_spi_fir_adc_gpio_timer_top_BRIDGED.sv
+1784852269 ../rtl/timer/timer_axi.sv
+1784852269 ../rtl/timer/timer_regs.sv
+1784852269 ../rtl/timer/timer_core.sv
+1784852269 ../rtl/gpio/gpio_axi.sv
+1784852269 ../rtl/gpio/gpio_regs.sv
+1784852269 ../rtl/gpio/gpio_wrapper.sv
+1784852269 ../rtl/gpio/gpio_bit.sv
 1790761059 ../rtl/ADC/adc_controller.sv
 1790739950 ../rtl/ADC/adc_axi_lite_slave.sv
 1790761093 ../rtl/ADC/adc_registers.sv
@@ -928,6 +935,8 @@ BASH_FUNC__module_raw%%=() {  unset _mlshdbg;_ if [ "${MODULES_SILENT_SHELL_DEBU
 1790694256 ../rtl/uart/uart_receiver.v
 1790694256 ../rtl/uart/uart_parity_bit_compute.v
 1790694256 ../rtl/uart/axi_internal_fifo.v
+1790846753 ../rtl/common/axi4_to_axi4lite_bridge.sv
+1790850358 ../rtl/common/axi4lite_slave_adapter.sv
 1790694256 ../rtl/interconnect/priority_encoder.v
 1790694256 ../rtl/interconnect/arbiter.v
 1790694256 ../rtl/interconnect/axi_interconnect_wrap_3x14.v
@@ -936,7 +945,7 @@ BASH_FUNC__module_raw%%=() {  unset _mlshdbg;_ if [ "${MODULES_SILENT_SHELL_DEBU
 1677387029 /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/verdi/uvm_custom_install_verdi_recorder.sv
 1677387029 /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/vcs/uvm_custom_install_vcs_recorder.sv
 1677387029 /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_pkg.sv
-1790743616 filelist_uart_qrs_spi_fir_adc_integration.f
+1790848829 filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f
 1685268911 /home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/verdi.tab
 1677384340 /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcsdp_lite.tab
 6
@@ -946,5 +955,5 @@ BASH_FUNC__module_raw%%=() {  unset _mlshdbg;_ if [ "${MODULES_SILENT_SHELL_DEBU
 1677385060 /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/liberrorinf.so
 1677385018 /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/libsnpsmalloc.so
 1677385055 /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/libvfs.so
-1790763820 simv.daidir
+1790850495 simv.daidir
 -1 partitionlib

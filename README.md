@@ -1,529 +1,347 @@
-# CARDIOEDGE
+# CardioEdge — AXI4 RISC-V SoC Hardware Project
 
-### RISC-V Based ECG Processing SoC with AXI-Based RTL Integration
-
-CARDIOEDGE is an RTL-level hardware design project for a RISC-V based ECG acquisition and processing system. The project integrates multiple ECG-processing and communication IPs through an AXI-based interconnect to create a modular SoC architecture for real-time cardiac signal processing.
-
-The current work focuses on:
-
-* RTL IP integration
-* AXI4 / AXI4-Lite interfacing
-* AXI interconnect integration
-* ECG signal-processing hardware
-* Peripheral integration
-* Interface adaptation using wrappers
-* RTL simulation and verification using Synopsys VCS
+> **CardioEdge** is a RISC-V-based real-time ECG acquisition and processing SoC project.  
+> The project is being developed as a synthesizable RTL system with AXI-based memory-mapped peripherals, hardware signal-processing blocks, verification environments, and a VeeR EL2 processor integration path.
 
 ---
 
-# 1. Project Overview
+## 1. Project Overview
 
-CARDIOEDGE is designed as a modular hardware platform in which ECG data can be acquired, filtered, processed, and analyzed using dedicated hardware accelerators.
+CardioEdge is designed around a **VeeR EL2 RISC-V processor complex** and a memory-mapped AXI fabric. The application architecture targets:
 
-The current integrated subsystem contains:
+- ECG sample acquisition
+- Digital ECG signal conditioning
+- FIR filtering
+- QRS/heartbeat detection
+- Heart-rate and RR-interval calculation
+- Arrhythmia indication
+- UART-based reporting/debug
+- SPI-based peripheral communication
 
-```text
-                         +------------------+
-                         |    AXI Master    |
-                         |   / SoC Master   |
-                         +---------+--------+
-                                   |
-                                   v
-                         +-------------------+
-                         |  AXI 3 × 14       |
-                         |   Interconnect    |
-                         +---------+---------+
-                                   |
-             +----------+----------+----------+----------+
-             |          |          |          |          |
-             v          v          v          v          v
-           UART        QRS        SPI        FIR        ADC
-             |          |          |          |          |
-             |          |          |          |          |
-             +----------+----------+----------+----------+
-                                   |
-                            ECG Processing
-```
+The frozen CardioEdge AXI4 specification defines a **64-bit AXI4 system**, 32-bit addressing, separate VeeR IFU/LSU master interfaces, and nine memory-mapped CardioEdge slave targets.
 
-The current top-level integration uses five active peripheral connections:
+### Target architectural fabric
 
 ```text
-M00 → UART
-M01 → QRS
-M02 → SPI
-M03 → FIR
-M04 → ADC
+                    +----------------------+
+                    |      VeeR EL2       |
+                    |                      |
+                    | IFU AXI4  | LSU AXI4|
+                    +------+-----+----+-----+
+                           |          |
+                           +----+-----+
+                                |
+                                v
+                    +----------------------+
+                    |    AXI4 Interconnect |
+                    |                      |
+                    |   Target: 2 x 9      |
+                    |   64-bit AXI4        |
+                    +----------+-----------+
+                               |
+       +----------+------------+------------+------------+
+       |          |            |            |            |
+      IMEM      DMEM         UART         Timer        GPIO
+       |          |            |            |            |
+       +----------+------------+------------+------------+
+                               |
+                    +----------+----------+
+                    |                     |
+                   ADC                   FIR
+                                         |
+                                         v
+                                  FIR-QRS FIFO
+                                         |
+                                         v
+                                        QRS
+                                         |
+                                         v
+                              BPM / RR / Arrhythmia
 ```
-
-The remaining interconnect slots are currently unused.
 
 ---
 
-# 2. Current Project Status
+## 2. Current Repository Snapshot
 
-The project is currently in the **RTL integration and verification stage**.
+### Main source areas
 
-## Completed / Verified
+```text
+HONOURS_CBP_CARDIOEDGE/
+├── rtl/
+│   ├── common/              ← AXI adapter modules (see §3a)
+│   ├── interconnect/        ← AXI4 3×14 interconnect
+│   ├── uart/                ← AXI4-Lite UART IP
+│   ├── gpio/                ← AXI4-Lite GPIO IP
+│   ├── timer/               ← AXI4-Lite General Timer IP
+│   ├── spi/                 ← AXI SPI IP
+│   ├── FIR/                 ← 31-tap FIR filter
+│   ├── QRS/                 ← QRS/ECG detector
+│   └── ADC/                 ← ADC controller
+├── tb/                      ← Testbenches (standalone + integration)
+├── scripts/                 ← Python interconnect-wrapper generator
+├── doc/                     ← Specification, architecture docs
+└── run/                     ← VCS filelist files; simulation artifacts (excluded by .gitignore)
+```
 
-* [x] AXI interconnect evaluated
-* [x] AXI 3 × 14 interconnect wrapper integrated
-* [x] AXI arbitration and priority logic integrated
-* [x] UART integrated
-* [x] UART AXI interface tested
-* [x] FFT IP integrated/tested during subsystem development
-* [x] FIR integrated
-* [x] FIR AXI register interface verified
-* [x] FIR streaming datapath verified
-* [x] QRS integrated
-* [x] QRS register interface verified
-* [x] SPI integrated
-* [x] SPI AXI interface verified
-* [x] ADC integrated into the current top-level subsystem
-* [x] Peripheral-specific integration testbenches developed
-* [x] Multi-peripheral AXI integration testbench developed
-* [x] AXI4-to-AXI4-Lite wrapper approach established
-* [x] Synopsys VCS simulation environment established
-
-## Current / Remaining Work
-
-* [ ] Complete ADC-level verification/regression
-* [ ] Complete final subsystem regression
-* [ ] Integrate remaining system-level components
-* [ ] Integrate VeeR RISC-V processor
-* [ ] Finalize processor-to-interconnect integration
-* [ ] Complete top-level SoC integration
-* [ ] Perform complete end-to-end ECG processing verification
+The repository contains RTL source, testbenches, documentation, scripts, and filelist files for VCS simulation.
+Simulator-generated artifacts (`simv`, `csrc/`, `*.daidir/`, `compile.log`, etc.) are excluded from version control by `.gitignore`.
 
 ---
 
-# 3. Current Top-Level Architecture
+## 3. Repository Structure
 
-The current top-level integration is based on the RTL module:
+### `rtl/common/`
 
-```text
-soc_uart_qrs_spi_fir_adc_top
-```
-
-The current architecture is:
+Contains shared AXI adapter modules used across the CardioEdge integration.
 
 ```text
-                         AXI Master
-                             |
-                             |
-                             v
-                   +---------------------+
-                   | AXI 3 × 14          |
-                   | Interconnect        |
-                   |                     |
-                   | 32-bit AXI          |
-                   +----------+----------+
-                              |
-       +----------+-----------+-----------+----------+
-       |          |           |           |          |
-       v          v           v           v          v
-      M00        M01         M02         M03        M04
-       |          |           |           |          |
-       v          v           v           v          v
-     UART        QRS         SPI         FIR        ADC
+rtl/common/
+├── axi4lite_slave_adapter.sv   ← AXI4-Lite → register-bus (used by gpio_axi, timer_axi)
+└── axi4_to_axi4lite_bridge.sv  ← AXI4 → AXI4-Lite bridge (used by BRIDGED SoC top)
 ```
 
-The active master-to-slave connections are:
+These are **two distinct modules with different roles**:
 
-```text
-M00 → UART
-M01 → QRS
-M02 → SPI
-M03 → FIR
-M04 → ADC
-```
+| Module | Purpose | Used by |
+|---|---|---|
+| `axi4lite_slave_adapter` | Converts AXI4-Lite slave signals to a simple synchronous register-bus | `gpio_axi.sv`, `timer_axi.sv` |
+| `axi4_to_axi4lite_bridge` | Converts full AXI4 (with ID/LEN/BURST) to AXI4-Lite | `soc_uart_qrs_spi_fir_adc_gpio_timer_top_BRIDGED.sv` |
 
-Interconnect slots M05 through M13 are currently unused.
+### `rtl/interconnect/`
 
----
-
-# 4. Current Memory Map
-
-The memory map below is taken from the **current top-level RTL implementation**.
-
-The current active peripheral address regions are:
-
-| Interconnect Master | Peripheral |  Base Address |               Address Range | Size |
-| ------------------- | ---------- | ------------: | --------------------------: | ---: |
-| M00                 | UART       | `0x4000_0000` | `0x4000_0000 – 0x4000_0FFF` | 4 KB |
-| M01                 | QRS        | `0x4000_1000` | `0x4000_1000 – 0x4000_1FFF` | 4 KB |
-| M02                 | SPI        | `0x4000_2000` | `0x4000_2000 – 0x4000_2FFF` | 4 KB |
-| M03                 | FIR        | `0x4000_3000` | `0x4000_3000 – 0x4000_3FFF` | 4 KB |
-| M04                 | ADC        | `0x4000_4000` | `0x4000_4000 – 0x4000_4FFF` | 4 KB |
-| M05                 | Unused     |             — |                           — |    — |
-| M06                 | Unused     |             — |                           — |    — |
-| M07                 | Unused     |             — |                           — |    — |
-| M08                 | Unused     |             — |                           — |    — |
-| M09                 | Unused     |             — |                           — |    — |
-| M10                 | Unused     |             — |                           — |    — |
-| M11                 | Unused     |             — |                           — |    — |
-| M12                 | Unused     |             — |                           — |    — |
-| M13                 | Unused     |             — |                           — |    — |
-
-### Address Layout
-
-```text
-0x4000_0000 ──────────────────────
-             UART
-             4 KB
-0x4000_0FFF ──────────────────────
-
-0x4000_1000 ──────────────────────
-             QRS
-             4 KB
-0x4000_1FFF ──────────────────────
-
-0x4000_2000 ──────────────────────
-             SPI
-             4 KB
-0x4000_2FFF ──────────────────────
-
-0x4000_3000 ──────────────────────
-             FIR
-             4 KB
-0x4000_3FFF ──────────────────────
-
-0x4000_4000 ──────────────────────
-             ADC
-             4 KB
-0x4000_4FFF ──────────────────────
-
-             M05–M13
-             Currently unused
-```
-
-There are no overlapping active address regions in the current peripheral map.
-
----
-
-# 5. Current AXI Configuration
-
-The current top-level AXI configuration uses:
-
-| Parameter         | Current Value |
-| ----------------- | ------------: |
-| AXI Data Width    |       32 bits |
-| AXI Address Width |       32 bits |
-| AXI Write Strobe  |        4 bits |
-| AXI ID Width      |        8 bits |
-| Interconnect      |    AXI 3 × 14 |
-
-Therefore, the current integrated subsystem should be described as a:
-
-```text
-32-bit AXI data path
-32-bit AXI address path
-4-bit write strobe
-8-bit AXI ID
-```
-
-The earlier concept of a 64-bit AXI system is **not the current top-level implementation** and should not be represented as the current project status.
-
----
-
-# 6. AXI 3 × 14 Interconnect
-
-The project uses a reusable AXI interconnect supporting:
-
-```text
-3 Masters
-14 Slaves
-```
-
-Conceptually:
-
-```text
-                 +------------------+
-M00 ------------>|                  |
-M01 ------------>| AXI Interconnect|----> S00
-M02 ------------>|      3 × 14      |----> S01
-                 |                  |----> S02
-                 |                  |       ...
-                 |                  |----> S13
-                 +------------------+
-```
-
-The reusable interconnect contains supporting arbitration and priority logic.
-
-Typical infrastructure includes:
+Contains the AXI interconnect infrastructure.
 
 ```text
 rtl/interconnect/
-├── axi_interconnect.v
-├── axi_interconnect_wrap_3x14.v
 ├── arbiter.v
-└── priority_encoder.v
+├── priority_encoder.v
+├── axi_interconnect.v
+└── axi_interconnect_wrap_3x14.v
 ```
 
-For the current CardioEdge subsystem, only the required peripheral slots are enabled.
+#### `axi_interconnect.v`
+
+Generic AXI4 interconnect implementation.
+
+Current source defaults include:
+
+- `DATA_WIDTH = 32`
+- `ADDR_WIDTH = 32`
+- `STRB_WIDTH = DATA_WIDTH/8`
+- `ID_WIDTH = 8`
+- Configurable number of AXI slave-side inputs
+- Configurable number of AXI master-side outputs
+- Configurable address regions
+- Optional ID forwarding
+- Read/write connection configuration
+
+The source is parameterized and can therefore be configured for a wider data path without changing the original source file.
+
+#### `axi_interconnect_wrap_3x14.v`
+
+Generated/configured wrapper providing:
+
+- **3 AXI master-side inputs**
+- **14 AXI slave/IP-side outputs**
+- Parameterized data/address/ID widths
+- Individual address parameters for the 14 output slots
+
+The current wrapper is being retained as reusable infrastructure for multiple projects.
+
+Current project direction:
 
 ```text
-M00 → UART
-M01 → QRS
-M02 → SPI
-M03 → FIR
-M04 → ADC
+M0 = VeeR IFU
+M1 = VeeR LSU
+M2 = Reserved/Dummy/Future Master
+
+S0-S8  = CardioEdge / project IP slots
+S9-S13 = Future / additional project IP slots
 ```
 
-M05–M13 remain unused.
+> The **frozen CardioEdge application specification itself defines 2 masters × 9 slaves**. The 3×14 wrapper is being retained as a reusable/common interconnect infrastructure for the wider honours project work.
 
 ---
 
-# 7. AXI4 and AXI4-Lite Integration
+## 4. UART RTL
 
-The integrated peripherals do not all use identical AXI interfaces.
-
-Some peripherals use AXI4, while others use AXI4-Lite-style register interfaces.
-
-Instead of modifying the original IP whenever possible, CARDIOEDGE uses interface wrappers.
+The UART source is located at:
 
 ```text
-                  AXI Interconnect
-                        |
-                        | AXI4
-                        v
-                +---------------+
-                | AXI Wrapper   |
-                |               |
-                | Interface     |
-                | Adaptation    |
-                +-------+-------+
-                        |
-                        | AXI4-Lite / Native AXI
-                        v
-                  Peripheral IP
+rtl/uart/
+├── axi_uart_top.v
+├── axi_internal_fifo.v
+├── uart_controller.v
+├── uart_parity_bit_compute.v
+├── uart_receiver.v
+├── uart_transmitter.v
+└── include/
+    ├── axi_uart.vh
+    └── axi_uart_defines.vh
 ```
 
-This approach provides:
-
-* IP reuse
-* Reduced modification of original RTL
-* Easier debugging
-* Independent peripheral verification
-* AXI protocol adaptation
-* Cleaner subsystem integration
-
----
-
-# 8. UART
-
-UART provides serial communication and can also be used for system-level debugging and status reporting.
-
-The integration is:
+### UART architecture
 
 ```text
-AXI
- |
- v
-UART Register Interface
- |
- +---- TX
- |
- +---- RX
+AXI UART top
+     |
+     +-- AXI register interface
+     |
+     +-- UART controller
+            |
+            +-- TX FIFO
+            +-- RX FIFO
+            +-- transmitter
+            +-- receiver
+            +-- parity logic
 ```
 
-The UART occupies:
+The supplied UART IP is an **AXI4-Lite UART**.
+
+The current UART definition specifies:
 
 ```text
-Base Address : 0x4000_0000
-Size         : 4 KB
+AXI data width : 32 bits
+AXI address    : 5 bits
+AXI ID width   : 12 bits
+FIFO depth     : 32
+UART data      : 8 bits
 ```
 
-The top-level integration maps the UART system address into the UART's local register address space.
+The UART's internal 8-bit TX/RX datapath is intentional and does not need to be converted to 64 bits.
 
-### Status
+### Integration strategy
 
-**UART integration and verification completed.**
+The original UART source is intended to remain unchanged.
 
-UART has been exercised through dedicated and subsystem-level testbenches.
-
----
-
-# 9. QRS Accelerator
-
-The QRS accelerator is responsible for ECG QRS/beat detection and associated cardiac measurements.
-
-The intended processing structure is:
+A dedicated wrapper is planned between the CardioEdge AXI4 fabric and the existing UART:
 
 ```text
-Filtered ECG
+64-bit AXI4
      |
      v
- Derivative
-     |
-     v
- Squaring
-     |
-     v
- Moving Integration
-     |
-     v
- Threshold Detection
-     |
-     v
- QRS / R-Peak Detection
-     |
-     +----------+----------+
-     |          |          |
-     v          v          v
-    BPM     RR Interval  Rhythm
++----------------------+
+| uart_axi4_wrapper    |
+|                      |
+| AXI4 -> AXI4-Lite    |
+| 64-bit -> 32-bit     |
++----------+-----------+
+           |
+           v
+     Original UART
 ```
 
-The QRS peripheral occupies:
-
-```text
-Base Address : 0x4000_1000
-Size         : 4 KB
-```
-
-### QRS Register Map
-
-| Offset | Register     |
-| -----: | ------------ |
-| `0x00` | CONTROL      |
-| `0x04` | STATUS       |
-| `0x08` | ECG_INPUT    |
-| `0x0C` | RPEAK        |
-| `0x10` | RR_INTERVAL  |
-| `0x14` | BPM          |
-| `0x18` | RHYTHM_CLASS |
-
-Therefore:
-
-```text
-CONTROL      = 0x4000_1000
-STATUS       = 0x4000_1004
-ECG_INPUT    = 0x4000_1008
-RPEAK        = 0x4000_100C
-RR_INTERVAL  = 0x4000_1010
-BPM          = 0x4000_1014
-RHYTHM_CLASS = 0x4000_1018
-```
-
-### Status
-
-**QRS integration and verification completed at the current RTL subsystem level.**
+This preserves the original UART IP while allowing it to participate in the final CardioEdge architecture.
 
 ---
 
-# 10. SPI
+## 5. AES-256 RTL
 
-SPI provides serial peripheral communication.
-
-The integrated structure is:
+AES sources are present in both:
 
 ```text
-AXI Register Interface
-        |
-        v
-   SPI Controller
-        |
-   +----+----+----+----+
-   |    |    |    |
- MOSI MISO SCLK  CS
+rtl/aes_axi_slave/
+rtl/verilog_aes/
 ```
 
-The SPI peripheral occupies:
+and also under the standalone:
 
 ```text
-Base Address : 0x4000_2000
-Size         : 4 KB
+aes256_axi/
 ```
 
-The top-level integration passes the required local address bits to the SPI AXI interface.
+directory.
 
-### Status
+### AES AXI slave
 
-**SPI integration and verification completed.**
+```text
+rtl/aes_axi_slave/aes_axi_slave.sv
+```
 
-Dedicated SPI integration tests were used to verify register access and SPI functionality.
+The supplied AES AXI slave currently uses a **32-bit AXI register interface**.
+
+The register map documented in the source is:
+
+| Offset | Register | Description |
+|---:|---|---|
+| `0x00` | CONTROL/STATUS | START, DECRYPT, DONE, BUSY |
+| `0x04` | KEY0 | Key bits `[31:0]` |
+| `0x08` | KEY1 | Key bits `[63:32]` |
+| `0x0C` | KEY2 | Key bits `[95:64]` |
+| `0x10` | KEY3 | Key bits `[127:96]` |
+| `0x14` | KEY4 | Key bits `[159:128]` |
+| `0x18` | KEY5 | Key bits `[191:160]` |
+| `0x1C` | KEY6 | Key bits `[223:192]` |
+| `0x20` | KEY7 | Key bits `[255:224]` |
+| `0x24` | DATA_IN0 | Input bits `[31:0]` |
+| `0x28` | DATA_IN1 | Input bits `[63:32]` |
+| `0x2C` | DATA_IN2 | Input bits `[95:64]` |
+| `0x30` | DATA_IN3 | Input bits `[127:96]` |
+| `0x34` | DATA_OUT0 | Output bits `[31:0]` |
+| `0x38` | DATA_OUT1 | Output bits `[63:32]` |
+| `0x3C` | DATA_OUT2 | Output bits `[95:64]` |
+| `0x40` | DATA_OUT3 | Output bits `[127:96]` |
+
+The AES core itself is implemented in:
+
+```text
+rtl/verilog_aes/
+├── aes_cipher_top.v
+├── aes_inv_cipher_top.v
+├── aes_inv_sbox.v
+├── aes_key_expand_256.v
+├── aes_rcon.v
+└── aes_sbox.v
+```
 
 ---
 
-# 11. FIR Filter
+## 6. CardioEdge AXI4 Specification
 
-The FIR block provides hardware-based ECG signal conditioning.
-
-The intended ECG processing path is:
+The repository contains:
 
 ```text
-ADC
- |
- v
-ECG Samples
- |
- v
-+----------------+
-|      FIR       |
-| Digital Filter |
-+-------+--------+
-        |
-        v
-     QRS Path
+doc/CardioEdge_AXI4_Specification_v2.docx
 ```
 
-The FIR peripheral occupies:
+The specification identifies the following frozen system-level requirements.
 
-```text
-Base Address : 0x4000_3000
-Size         : 4 KB
-```
+### AXI configuration
 
-The system-level address is converted into the local FIR register address using the FIR base address.
+| Parameter | Specification |
+|---|---|
+| Protocol | AXI4 |
+| Data width | **64 bits** |
+| Address width | **32 bits** |
+| Write strobes | **8 bits** |
+| Clock | **50 MHz** |
+| Reset | Active-low synchronous `rst_n` |
+| Masters | VeeR IFU + VeeR LSU |
+| Memory-mapped slaves | 9 |
+| Register width | 32-bit registers transported over 64-bit AXI4 |
+| FIR-QRS FIFO | Dedicated streaming path, not AXI mapped |
 
-```text
-FIR Local Address =
-    AXI Address - 0x4000_3000
-```
+### CardioEdge memory map
 
-### Verification
+| Slave | Block | Address range |
+|---|---|---|
+| S0 | Instruction Memory | `0x0000_0000 – 0x0000_FFFF` |
+| S1 | Data Memory | `0x0001_0000 – 0x0001_FFFF` |
+| S2 | UART | `0x1000_0000 – 0x1000_00FF` |
+| S3 | Timer | `0x1000_0100 – 0x1000_01FF` |
+| S4 | GPIO | `0x1000_0200 – 0x1000_02FF` |
+| S5 | ADC Interface | `0x1000_0300 – 0x1000_03FF` |
+| S6 | FIR | `0x1000_0400 – 0x1000_04FF` |
+| S7 | QRS | `0x1000_0500 – 0x1000_05FF` |
+| S8 | SPI2 | `0x1000_0600 – 0x1000_06FF` |
 
-The FIR integration has been tested through:
-
-* AXI register access
-* FIR enable operation
-* Streaming input
-* Filtered output
-* Expected-versus-actual sample comparison
-
-### Status
-
-**FIR integration and verification completed.**
+The dedicated FIR-to-QRS FIFO is not memory mapped.
 
 ---
 
-# 12. ADC
+## 7. ECG Processing Architecture
 
-The ADC block provides the ECG sample acquisition interface.
-
-The current ADC configuration in the integrated top-level design is:
-
-| Parameter   |   Value |
-| ----------- | ------: |
-| Resolution  | 12 bits |
-| Channels    |       1 |
-| FIFO Depth  |      32 |
-| Clock       |  50 MHz |
-| Sample Rate |  250 Hz |
-| FIFO        | Enabled |
-| Interrupt   | Enabled |
-
-The ADC occupies:
-
-```text
-Base Address : 0x4000_4000
-Size         : 4 KB
-```
-
-The ADC is connected through an AXI4-Lite-compatible register interface.
-
-The additional AXI4 signals that are not required by the native ADC interface are left unused through the integration wrapper.
-
-### Intended data path
+The intended application data path is:
 
 ```text
 ADC
@@ -532,479 +350,675 @@ ADC
 ADC FIFO
  |
  v
-ECG Sample
+VeeR firmware
+ |
+ | AXI4 write
+ v
+FIR input
  |
  v
-FIR
+31-tap FIR
  |
  v
-QRS
+FIR-QRS FIFO
+ |
+ v
+QRS Accelerator
+ |
+ +--> Heart Rate / BPM
+ +--> RR Interval
+ +--> Beat Detected
+ +--> Arrhythmia Flag
 ```
 
-### Status
+The specification defines:
 
-**ADC is now integrated into the current top-level subsystem.**
-
-Further verification and complete end-to-end testing remain part of the current development work.
+- 12-bit ECG acquisition
+- Fixed 250 Hz sample rate
+- 32-entry ADC acquisition FIFO
+- 31-tap signed fixed-point FIR
+- 40-bit FIR accumulation
+- Optional 50 Hz / 60 Hz notch coefficient banks
+- 32 × 16-bit FIR-to-QRS FIFO
+- QRS derivative, squaring, integration, thresholding and refractory processing
+- Heart-rate calculation
+- RR-interval calculation
+- Arrhythmia indication based on RR deviation
+- Flat interrupt fan-in
 
 ---
 
-# 13. ECG Processing Pipeline
+## 8. Interrupt Architecture
 
-The intended CARDIOEDGE signal-processing path is:
+The specification uses a flat interrupt OR rather than a programmable interrupt controller.
+
+Conceptually:
 
 ```text
-              ECG Signal
-                  |
-                  v
-             +---------+
-             |   ADC   |
-             +----+----+
-                  |
-                  v
-             +---------+
-             | ADC FIFO|
-             +----+----+
-                  |
-                  v
-             +---------+
-             |   FIR   |
-             +----+----+
-                  |
-                  v
-             +---------+
-             |   QRS   |
-             +----+----+
-                  |
-        +---------+---------+
-        |         |         |
-        v         v         v
-       BPM       RR      Rhythm /
-              Interval   Classification
+irq_timer
+irq_adc_sample
+irq_adc_overrun
+irq_qrs_beat
+irq_qrs_arrhythmia
+       |
+       v
+   +-------+
+   |   OR  |
+   +---+---+
+       |
+       v
+      irq_i
+       |
+       v
+    VeeR EL2
 ```
 
-This represents the intended hardware processing chain.
-
-The current top-level RTL has the individual ADC, FIR, and QRS blocks integrated through their respective interfaces; complete end-to-end streaming verification is still part of the remaining work.
+No separate programmable interrupt controller is part of the frozen CardioEdge architecture.
 
 ---
 
-# 14. FFT
+## 9. Verification
 
-FFT hardware was also evaluated and integrated during the development of the CARDIOEDGE subsystem.
-
-The FFT provides hardware acceleration for frequency-domain signal processing.
-
-Typical processing flow:
+### Interconnect testbench
 
 ```text
-Input Samples
+tb/tb_axi_interconnect_wrap_3x14.sv
+```
+
+The current testbench is configured for:
+
+```text
+3 masters × 14 slaves
+DATA_WIDTH = 32
+ID_WIDTH   = 8
+```
+
+It uses inline responder logic and does not require external AXI VIP.
+
+The current testbench models 16 MB windows using base addresses of the form:
+
+```text
+slave N -> N << 24
+```
+
+This is the **current generic interconnect test configuration**, not the final CardioEdge memory map.
+
+### UART standalone testbench
+
+```text
+tb/uart_standalone_tb.sv
+```
+
+The UART testbench exercises AXI UART register accesses and includes timeout/handshake checking.
+
+The supplied testbench comments indicate that the UART implementation expects specific handshake behavior, including keeping the read request asserted while waiting for the response.
+
+### AES testbench
+
+```text
+tb/aes_axi_slave_tb.sv
+```
+
+Tests the AES AXI slave through its 32-bit register interface.
+
+### AES top-level testbench
+
+```text
+tb/aes_test_bench_top.v
+```
+
+---
+
+## 10. Simulation / Tooling
+
+The repository contains evidence of **Synopsys VCS** usage.
+
+The interconnect testbench identifies:
+
+```text
+Tool: Synopsys VCS
+Language: SystemVerilog
+UVM: Not required for the inline interconnect testbench
+```
+
+The repository also contains generated VCS/Verdi artifacts under `run/`.
+
+### Typical VCS command
+
+A representative command documented by the repository's compile log is:
+
+```bash
+vcs -full64 -sverilog -ntb_opts uvm \
+    -debug_access+all -kdb \
+    -f filelist.f \
+    -l compile.log
+```
+
+> The archived `compile.log` records a failure because `filelist.f` was not found in that particular invocation. Therefore, this README does **not** claim that the complete repository currently builds successfully from a clean checkout.
+
+---
+
+## 11. Current Development Status
+
+### Present in the repository
+
+- [x] AXI interconnect RTL
+- [x] 3×14 AXI interconnect wrapper
+- [x] Arbitration/priority support
+- [x] AXI UART IP
+- [x] UART TX/RX/FIFO/parity RTL
+- [x] AES-256 RTL
+- [x] AES AXI slave
+- [x] AES standalone verification
+- [x] UART standalone verification
+- [x] Interconnect verification environment
+- [x] CardioEdge AXI4 specification
+- [x] Supporting scripts
+- [ ] Final VeeR EL2 integration
+- [ ] Final 64-bit CardioEdge interconnect configuration
+- [ ] UART AXI4 compatibility wrapper
+- [ ] AES AXI compatibility wrapper
+- [ ] Remaining CardioEdge peripheral IPs
+- [ ] Final CardioEdge top-level SoC
+- [ ] Complete end-to-end firmware/software integration
+- [ ] Complete SoC regression
+
+---
+
+## 12. Wrapper-Based Integration Strategy
+
+A key project design rule is:
+
+> **Original IP files should remain unchanged. Interface adaptation should be performed in dedicated wrapper modules.**
+
+This allows each supplied IP to remain independently testable while providing a consistent system-level AXI interface.
+
+### Planned integration structure
+
+```text
+VeeR EL2
+   |
+   v
+[VeeR AXI Wrapper]
+   |
+   v
+Common AXI4 Interconnect
+   |
+   +--> [IMEM Wrapper] --> Existing IMEM
+   |
+   +--> [DMEM Wrapper] --> Existing DMEM
+   |
+   +--> [UART Wrapper] --> Existing AXI UART
+   |
+   +--> [Timer Wrapper] --> Existing Timer
+   |
+   +--> [GPIO Wrapper] --> Existing GPIO
+   |
+   +--> [ADC Wrapper] --> Existing ADC
+   |
+   +--> [FIR Wrapper] --> Existing FIR
+   |
+   +--> [QRS Wrapper] --> Existing QRS
+   |
+   +--> [SPI2 Wrapper] --> Existing SPI
+   |
+   +--> Future / Dummy slots
+```
+
+The wrapper strategy also supports the wider **3-master × 14-slot reusable interconnect infrastructure** being developed for the honours project.
+
+---
+
+## 13. Width-Checking Rule
+
+Before integrating any IP, its bus interface must be checked.
+
+The target CardioEdge system is:
+
+```text
+AXI protocol : AXI4
+AXI data     : 64 bits
+AXI address  : 32 bits
+WSTRB        : 8 bits
+```
+
+Peripheral registers remain 32 bits.
+
+Therefore, a peripheral can internally remain 32-bit or 8-bit while its system wrapper exposes the required 64-bit AXI4 interface.
+
+Example:
+
+```text
+64-bit AXI4
      |
      v
-+-----------+
-|    FFT    |
-+-----+-----+
-      |
-      v
-Frequency-Domain Data
-```
-
-FFT-related integration and testing were performed during the project development.
-
-The current `soc_uart_qrs_spi_fir_adc_top` address map described in this README is specifically the **UART/QRS/SPI/FIR/ADC top-level integration** and does not assign an FFT address window.
-
----
-
-# 15. Verification Strategy
-
-Verification is performed incrementally.
-
-```text
-Individual IP Verification
++--------------------+
+| Peripheral Wrapper |
+|                    |
+| 64-bit bus         |
+| 32-bit registers   |
++---------+----------+
           |
           v
-AXI Interface Verification
-          |
-          v
-Peripheral + Interconnect
-          |
-          v
-Multi-IP Integration
-          |
-          v
-Processor Integration
-          |
-          v
-Complete SoC Verification
+Original IP
 ```
 
-This approach allows interface and functional issues to be isolated before complete SoC integration.
-
 ---
 
-# 16. Current Verification Environment
+## 14. Addressing and Register Adaptation
 
-The primary RTL simulation environment uses:
+CardioEdge architectural registers are 32 bits even though the AXI data bus is 64 bits.
 
-### HDL
-
-* Verilog
-* SystemVerilog
-
-### Simulation
-
-* Synopsys VCS
-
-### Debugging
-
-* Verdi
-* Simulation logs
-* RTL waveforms
-
-The testbenches exercise:
-
-* AXI writes
-* AXI reads
-* Register configuration
-* Peripheral enable/disable
-* Streaming data
-* Expected-versus-actual data comparison
-* Integrated peripheral access
-
----
-
-# 17. Integration Test Status
-
-| IP / Component            | Current Status                      |
-| ------------------------- | ----------------------------------- |
-| AXI Interconnect          | ✅ Integrated                        |
-| AXI 3 × 14 Wrapper        | ✅ Integrated                        |
-| Arbitration Logic         | ✅ Integrated                        |
-| Priority Encoder          | ✅ Integrated                        |
-| UART                      | ✅ Integrated / Verified             |
-| FFT                       | ✅ Tested during development         |
-| FIR                       | ✅ Integrated / Verified             |
-| QRS                       | ✅ Integrated / Verified             |
-| SPI                       | ✅ Integrated / Verified             |
-| ADC                       | ✅ Integrated / Verification ongoing |
-| M05–M13                   | ⏸ Unused                            |
-| VeeR EL2                  | 🔄 Future integration stage         |
-| Complete SoC              | 🔄 In progress                      |
-| End-to-End ECG Regression | ⏳ Pending                           |
-
----
-
-# 18. Repository Structure
-
-The repository contains the RTL, testbenches, integration files, and supporting project material.
-
-A representative structure is:
+For a register read:
 
 ```text
-HONOURS_CBP_CARDIOEDGE/
-│
-├── rtl/
-│   ├── interconnect/
-│   │   ├── axi_interconnect.v
-│   │   ├── axi_interconnect_wrap_3x14.v
-│   │   ├── arbiter.v
-│   │   └── priority_encoder.v
-│   │
-│   ├── uart/
-│   ├── qrs/
-│   ├── spi/
-│   ├── fir/
-│   ├── adc/
-│   └── fft/
-│
-├── tb/
-│   ├── UART testbenches
-│   ├── QRS testbenches
-│   ├── SPI testbenches
-│   ├── FIR testbenches
-│   ├── ADC testbenches
-│   └── integration testbenches
-│
-├── scripts/
-│
-├── doc/
-│
-└── README.md
+RDATA[31:0]  = register value
+RDATA[63:32] = 0
 ```
 
-The repository structure may change as the SoC integration progresses.
-
----
-
-# 19. Design Approach
-
-CARDIOEDGE follows several design principles.
-
-### 1. Reuse Existing IP
-
-Original IP implementations are preserved wherever possible.
-
-### 2. Wrapper-Based Integration
-
-Interface mismatches are handled using wrappers rather than unnecessarily modifying the original peripheral RTL.
-
-### 3. Incremental Verification
-
-Each peripheral is verified individually before being integrated into the larger subsystem.
-
-### 4. Non-Overlapping Address Map
-
-Every active peripheral receives its own 4 KB address window.
+For a register write:
 
 ```text
-UART → 0x4000_0000
-QRS  → 0x4000_1000
-SPI  → 0x4000_2000
-FIR  → 0x4000_3000
-ADC  → 0x4000_4000
+WDATA[31:0]  = register value
+WSTRB        = applicable lower byte lanes
 ```
 
-### 5. Modular Architecture
-
-The AXI interconnect and peripheral interfaces are designed to allow additional IPs to be added later.
+The upper half of the 64-bit AXI data bus is ignored by 32-bit architectural peripherals unless a peripheral-specific rule says otherwise.
 
 ---
 
-# 20. Current System Address Map Summary
+## 15. Current Integration Roadmap
 
-For quick reference:
+### Phase 1 — Existing IP verification
+
+1. Verify each IP independently.
+2. Confirm AXI protocol behavior.
+3. Confirm register maps.
+4. Confirm data widths.
+5. Confirm reset behavior.
+
+### Phase 2 — Wrapper creation
+
+Create dedicated wrappers where interfaces differ:
 
 ```text
-+----------------------+----------------------+
-| Peripheral           | Base Address         |
-+----------------------+----------------------+
-| UART                 | 0x4000_0000          |
-| QRS                  | 0x4000_1000          |
-| SPI                  | 0x4000_2000          |
-| FIR                  | 0x4000_3000          |
-| ADC                  | 0x4000_4000          |
-+----------------------+----------------------+
-| M05–M13              | Unused               |
-+----------------------+----------------------+
+VeeR AXI wrapper
+UART AXI4 wrapper
+AES AXI wrapper
+...
 ```
 
-Each active peripheral receives a 4 KB window.
+Original IP sources remain unchanged.
 
----
+### Phase 3 — Interconnect integration
 
-# 21. Current Development Architecture
-
-The current integrated subsystem can be summarized as:
+Connect:
 
 ```text
-                         32-bit AXI
-                             |
-                             v
-                  +---------------------+
-                  | AXI 3 × 14          |
-                  | Interconnect        |
-                  +----------+----------+
-                             |
-       +----------+----------+----------+----------+
-       |          |          |          |          |
-       v          v          v          v          v
-      UART       QRS        SPI        FIR        ADC
-       |          |          |          |          |
-       |          |          |          +----------+
-       |          |          |                     |
-       |          |          +                     v
-       |          |                              ECG
-       |          |                            Processing
-       |          |
-       |          +------------------------------+
-       |                                         |
-       +-----------------------------------------+
+VeeR / master wrapper
+        |
+        v
+3 × 14 reusable AXI infrastructure
+        |
+        +--> S2 UART
+        +--> other peripherals
 ```
 
-The architecture is being progressively extended toward the final RISC-V based SoC.
+### Phase 4 — Peripheral integration
+
+Integrate peripherals one at a time and verify each address window independently.
+
+### Phase 5 — Processor integration
+
+Connect the verified AXI fabric to the VeeR EL2 IFU and LSU interfaces.
+
+### Phase 6 — Full SoC verification
+
+Verify:
+
+- instruction fetch
+- data memory
+- peripheral reads/writes
+- interrupts
+- ADC acquisition
+- FIR processing
+- QRS processing
+- UART reporting
+- SPI2 reporting
+- end-to-end ECG processing
 
 ---
 
-# 22. Future Integration
+## 16. Repository Timeline
 
-The next major stages are:
+The following dates/times are based on the **ZIP archive file timestamps**, not Git commit history. The archive does not contain a repository-wide Git history, so these timestamps should be treated as file/archive metadata.
 
-### VeeR RISC-V Integration
+### Interconnect development
 
-Integrate the VeeR processor and connect its instruction/data interfaces to the AXI fabric.
+| Component | Archived timestamp |
+|---|---|
+| `arbiter.v` | 2026-08-29 13:54:32 |
+| `axi_interconnect.v` | 2026-08-29 13:54:32 |
+| `priority_encoder.v` | 2026-08-29 13:54:34 |
+| `axi_interconnect_wrap_3x14.v` | 2026-08-29 16:02:42 |
+| `tb_axi_interconnect_wrap_3x14.sv` | 2026-08-29 16:02:42 |
+| `compile.log` | 2026-08-29 16:11:00 |
+| `axi_interconnect_wrap.py` | 2026-08-29 13:54:38 |
+
+### UART source
+
+The UART IP files carry an older source timestamp:
 
 ```text
-             +-----------+
-             |  VeeR EL2 |
-             +-----+-----+
-                   |
-                   v
-             AXI Interconnect
+2023-05-29 16:48:32
 ```
 
-### Additional System Components
+This includes:
 
-Additional system-level components can be connected to the currently unused interconnect slots as the architecture develops.
+- `axi_uart_top.v`
+- `axi_internal_fifo.v`
+- `uart_controller.v`
+- `uart_parity_bit_compute.v`
+- `uart_receiver.v`
+- `uart_transmitter.v`
+- `axi_uart.vh`
+- `axi_uart_defines.vh`
 
-### End-to-End ECG Verification
+This indicates that the UART IP is an existing imported IP block rather than a newly written CardioEdge block.
 
-The final verification objective is:
+### AES/CardioEdge development
+
+The archived AES/CardioEdge files have timestamps on:
 
 ```text
-ECG Input
-   |
-   v
- ADC
-   |
-   v
- FIR
-   |
-   v
- QRS
-   |
-   +----> R-Peak
-   |
-   +----> RR Interval
-   |
-   +----> BPM
-   |
-   +----> Rhythm Classification
+2026-09-19
 ```
+
+Examples include:
+
+| Component | Archived timestamp |
+|---|---|
+| AES AXI slave | 2026-09-19 11:41:58 |
+| AES key expansion | 2026-09-19 11:38:12 |
+| AES S-box | 2026-09-19 11:36:50 |
+| AES RCON | 2026-09-19 11:37:34 |
+| AES cipher top | 2026-09-19 13:34:20 |
+| AES inverse cipher top | 2026-09-19 13:50:16 |
+| AES inverse S-box | 2026-09-19 13:46:58 |
+| AES AXI testbench | 2026-09-19 13:38:52 |
+| AES testbench top | 2026-09-19 12:30:00 |
+| UART standalone testbench | 2026-09-19 12:04:08 |
+
+These timestamps describe the packaged files only; they are **not proof of individual Git commits or authorship events**.
 
 ---
 
-# 23. Project Scope
+## 17. Important Compatibility Notes
 
-CARDIOEDGE is currently focused on **RTL-level SoC architecture, IP integration, AXI interfacing, and simulation-based verification**.
+### AXI4 vs AXI4-Lite
 
-The project combines:
+The final CardioEdge specification requires **AXI4**, not AXI4-Lite.
+
+Some currently supplied IPs use 32-bit AXI4-Lite interfaces.
+
+They should therefore be integrated through wrappers rather than by modifying the original IP.
+
+### Current interconnect defaults
+
+The generic interconnect source currently defaults to:
 
 ```text
-RISC-V
-   +
-AXI Interconnect
-   +
-ECG Acquisition
-   +
-Digital Filtering
-   +
-QRS Detection
-   +
-Peripheral Communication
-   +
-RTL Verification
+DATA_WIDTH = 32
+ID_WIDTH   = 8
 ```
 
-The project does not claim to be a clinically certified medical device. The current work is focused on digital hardware implementation and verification.
-
----
-
-# 24. Tools and Technologies
-
-### Hardware Description Languages
-
-* Verilog
-* SystemVerilog
-
-### SoC / Bus Architecture
-
-* RISC-V
-* AXI4
-* AXI4-Lite
-* AXI Interconnect
-
-### Verification
-
-* Synopsys VCS
-* Verdi
-* SystemVerilog Testbenches
-
-### ECG Processing
-
-* ADC acquisition
-* FIR filtering
-* QRS detection
-* BPM calculation
-* RR interval calculation
-* Rhythm classification
-
-### Communication
-
-* UART
-* SPI
-
----
-
-# 25. Project Progress
+The final CardioEdge architecture requires:
 
 ```text
-AXI Infrastructure
-      |
-      v
-   COMPLETE
-      |
-      v
-UART ──────── COMPLETE
-QRS  ──────── COMPLETE
-SPI  ──────── COMPLETE
-FIR  ──────── COMPLETE
-ADC  ──────── INTEGRATED / VERIFYING
-      |
-      v
-Subsystem Regression
-      |
-      v
-VeeR Integration
-      |
-      v
-Complete SoC
-      |
-      v
-End-to-End Verification
+DATA_WIDTH = 64
+ID handling = preserved
 ```
+
+The integration layer is responsible for resolving this interface difference while keeping the original source files intact.
+
+### Address-window granularity
+
+The current generic interconnect wrapper uses 24-bit address-region defaults, corresponding to large 16 MB windows.
+
+The frozen CardioEdge map uses much smaller peripheral windows, including 256-byte UART/Timer/GPIO/etc. regions.
+
+Therefore, the final CardioEdge address configuration must be handled deliberately rather than assuming the generic wrapper defaults are the final memory map.
 
 ---
 
-# 26. Current Status
+## 18. Third-Party Source and Licensing
 
-**CARDIOEDGE is currently in the RTL integration and verification phase.**
+The interconnect source contains an MIT-style copyright/license notice attributed to **Alex Forencich**.
 
-The current top-level subsystem successfully brings together:
+The UART source contains its own upstream project copyright/authorship information.
+
+These notices should be preserved when redistributing the corresponding source files.
+
+The uploaded archive does not contain a repository-wide `LICENSE` file. Before publishing the complete repository publicly, the project should add an appropriate top-level license and retain all required third-party notices.
+
+---
+
+## 19. Design Principles
+
+The project follows these integration principles:
+
+1. **Do not modify original IP unnecessarily.**
+2. **Use wrappers for interface adaptation.**
+3. **Verify bus width before integrating every IP.**
+4. **Keep peripheral register semantics at 32 bits.**
+5. **Use 64-bit AXI4 at the final CardioEdge system boundary.**
+6. **Preserve AXI transaction IDs where required.**
+7. **Keep FIR-to-QRS streaming separate from the memory-mapped AXI fabric.**
+8. **Do not silently change the frozen CardioEdge address map.**
+9. **Verify every IP independently before system integration.**
+10. **Keep generated simulator artifacts out of source control where possible.**
+
+---
+
+## 20. Git Repository Cleanup
+
+A `.gitignore` is present at the repository root, excluding generated simulation artifacts from version control.
+
+Files excluded from tracking include:
 
 ```text
-UART
-QRS
-SPI
-FIR
-ADC
+run/simv
+run/simv_*/
+run/*.daidir/
+run/csrc/
+run/compile.log
+run/ucli.key
+run/vc_hdrs.h
+run/verdi_config_file
+*.vpd
+*.fsdb
+*.vcd
 ```
 
-through a reusable **AXI 3 × 14 interconnect**.
+Source RTL, testbenches, scripts, documentation, specifications, and filelist (`.f`) files are kept under version control.
 
-The active memory map is:
+---
+
+## 21. Getting Started
+
+### Clone
+
+```bash
+git clone <your-repository-url>
+cd HONOURS_CBP_CARDIOEDGE
+```
+
+### Inspect the RTL
+
+```bash
+find rtl -type f
+```
+
+### Inspect testbenches
+
+```bash
+find tb -type f
+```
+
+### Compile with VCS
+
+Use the project-specific file list and VCS configuration after creating/validating the appropriate `filelist.f`.
+
+A typical VCS/SystemVerilog invocation is:
+
+```bash
+vcs -full64 -sverilog \
+    -ntb_opts uvm \
+    -debug_access+all \
+    -kdb \
+    -f filelist.f \
+    -l compile.log
+```
+
+### Run simulation
+
+The exact simulation command depends on the selected testbench and VCS setup.
+
+For example, after a successful VCS build:
+
+```bash
+./simv
+```
+
+---
+
+## 22. Project Scope
+
+### In scope
+
+- RTL design
+- AXI4 interconnect
+- VeeR EL2 integration
+- Memory-mapped peripherals
+- ECG acquisition
+- FIR filtering
+- QRS detection
+- Heart-rate calculation
+- RR interval calculation
+- Arrhythmia indication
+- UART/SPI reporting
+- Simulation and verification
+- Firmware integration
+- Synthesis-oriented RTL
+
+### Explicitly outside the frozen CardioEdge scope
+
+The specification explicitly excludes:
+
+- APB interconnect
+- APB bridges
+- AXI4-to-APB bridges
+- DMA
+- Second processor
+- Programmable interrupt controller
+- Cache
+- MMU
+- OLED/BLE protocols
+- Additional application accelerators
+- Physical ADC hardware dependencies
+- Physical SPI endpoint dependencies
+
+---
+
+## 23. Final Target
+
+The final CardioEdge system is intended to converge on:
 
 ```text
-0x4000_0000 → UART
-0x4000_1000 → QRS
-0x4000_2000 → SPI
-0x4000_3000 → FIR
-0x4000_4000 → ADC
+                    +------------------+
+                    |     VeeR EL2     |
+                    |                  |
+                    | IFU       LSU    |
+                    +---+-------+------+
+                        |       |
+                        | AXI4  |
+                        | 64b   |
+                        v       v
+                  +---------------+
+                  | AXI4 FABRIC   |
+                  |               |
+                  | 2 Master      |
+                  | 9 Slave       |
+                  | 64-bit        |
+                  +-------+-------+
+                          |
+       +---------+--------+--------+---------+
+       |         |        |        |         |
+      IMEM      DMEM     UART     Timer     GPIO
+
+                          +---------+
+                          |   ADC   |
+                          +----+----+
+                               |
+                         ADC acquisition
+                               |
+                               v
+                              FIR
+                               |
+                         FIR-QRS FIFO
+                               |
+                               v
+                              QRS
+                               |
+                   +-----------+-----------+
+                   |           |           |
+                  BPM      RR Interval   Alert
 ```
 
-The current system interface is **32-bit AXI**, with a 32-bit address bus and 4-bit write strobe.
-
-The next major stage is to complete the remaining verification and extend the subsystem toward the final **RISC-V based CARDIOEDGE SoC**.
+The reusable development infrastructure may retain the **3×14 AXI wrapper** so that additional project IPs and a future/dummy third master can be accommodated without changing the original interconnect source.
 
 ---
 
-## Author
+## 24. Status
 
-**Yashwanth Chakravarthy**
+**Project stage: Active RTL integration and verification**
 
-**Project:** CARDIOEDGE
-**Type:** Honours / Capstone Hardware Design Project
-**Domain:** RISC-V SoC / AXI / RTL / ECG Signal Processing
-**Implementation:** Verilog / SystemVerilog
-**Simulation:** Synopsys VCS / Verdi
+Current focus:
+
+```text
+[✓] Existing interconnect examined
+[✓] Existing UART examined
+[✓] Existing AES AXI slave examined
+[✓] CardioEdge AXI4 specification available
+[✓] Wrapper-based integration strategy defined
+[✓] GPIO and Timer IP integrated (standalone + BRIDGED top)
+[✓] ADC controller integrated
+[✓] FIR filter integrated
+[✓] QRS accelerator integrated
+[✓] SPI controller integrated
+[✓] BRIDGED SoC top (uart+qrs+spi+fir+adc+gpio+timer) verified
+[✓] rtl/common split into two distinct modules (axi4lite_slave_adapter + axi4_to_axi4lite_bridge)
+[✓] Standalone filelists fixed (gpio_standalone.f, timer_standalone.f)
+[✓] .gitignore added to exclude simulator artifacts
+[ ] UART AXI4 wrapper (64-bit CardioEdge compatibility)
+[ ] Final width adaptation (32-bit → 64-bit AXI4 fabric)
+[ ] Final address-map configuration (CardioEdge frozen memory map)
+[ ] VeeR AXI integration
+[ ] Full SoC top
+[ ] End-to-end verification
+```
 
 ---
+
+## 25. Authors / Project
+
+**Project:** CardioEdge  
+**Type:** Honours / Capstone Hardware Design Project  
+**Domain:** RISC-V SoC / AXI4 / RTL / ECG Signal Processing  
+**Implementation:** Verilog / SystemVerilog  
+**Primary simulation environment:** Synopsys VCS / Verdi  
+**Target architecture:** VeeR EL2 + AXI4 memory-mapped SoC
+
+---
+
+> **Note:** This README was generated from the contents and metadata of the uploaded project archive. Where the repository's current RTL configuration differs from the frozen CardioEdge AXI4 specification, the distinction is explicitly stated rather than silently treating the current RTL as the final architecture.
