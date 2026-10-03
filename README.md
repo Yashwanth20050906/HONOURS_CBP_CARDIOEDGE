@@ -1,190 +1,412 @@
-# CardioEdge — Honours CBP SoC
+# CardioEdge — AXI4 RISC-V Healthcare SoC
 
-An AXI4-based System-on-Chip designed for real-time ECG signal processing and cardiac beat detection. The design integrates multiple peripherals over a shared AXI4 interconnect and is verified using Synopsys VCS.
+CardioEdge is an RTL-level System-on-Chip integration project for real-time ECG acquisition and cardiac signal processing. The design combines a **RISC-V VeeR EL2 processor**, an **AXI4 interconnect**, dedicated ECG/QRS processing hardware, and multiple AXI-connected peripheral IPs.
 
----
-
-## Overview
-
-CardioEdge is an RTL SoC built as part of an Honours project. It implements an ECG acquisition and QRS detection pipeline entirely in hardware, alongside a suite of general-purpose peripherals accessible via an AXI4 bus fabric.
-
-The full integrated top-level is `soc_uart_qrs_spi_fir_adc_gpio_timer_top_BRIDGED.sv`, which wraps a 3-master × 14-slave AXI interconnect.
+The current repository focuses on **RTL integration and simulation verification**. It is not a tape-out implementation.
 
 ---
 
-## Architecture
+## Project Overview
 
-```
-                        ┌─────────────────────────────────┐
-                        │   AXI4 Interconnect (3×14)      │
-                        │   axi_interconnect_wrap_3x14.v  │
-                        └────────────┬────────────────────┘
-                                     │
-      ┌──────────┬────────┬──────────┼──────────┬────────┬──────────┐
-      │          │        │          │          │        │          │
-   UART(M00)  QRS(M01)  SPI(M02)  FIR(M03)  ADC(M04) GPIO(M05) Timer(M06)
-```
+The SoC is organized around a shared AXI4 infrastructure. Peripheral IPs that expose AXI4-Lite interfaces are connected through an **AXI4-to-AXI4-Lite bridge**, allowing the same system-level AXI4 fabric to access both AXI4 and AXI4-Lite devices.
 
-The single AXI4 slave port (`s00`) is bridged to AXI4-Lite for each peripheral using a common `axi4_to_axi4lite_bridge.sv`.
+### Current Functional Blocks
+
+- **RISC-V VeeR EL2** — processor subsystem, included as a Git submodule
+- **AXI4 Interconnect** — multi-master / multi-slave address-based routing
+- **UART** — serial communication
+- **QRS Detector** — ECG QRS / R-peak detection hardware
+- **SPI** — serial peripheral interface
+- **FIR** — programmable FIR filtering with AXI4-Stream datapath
+- **ADC** — sample acquisition, scheduling and FIFO support
+- **GPIO** — memory-mapped GPIO peripheral
+- **Timer** — timer, capture/measurement, PWM and interrupt support
+- **AXI4 → AXI4-Lite Bridge** — connects AXI4 interconnect paths to AXI4-Lite peripherals
 
 ---
 
-## RTL Structure
+## High-Level Architecture
 
-```
-rtl/
-├── soc_uart_qrs_spi_fir_adc_gpio_timer_top_BRIDGED.sv   ← integrated top
-├── interconnect/
-│   ├── axi_interconnect.v          ← AXI4 crossbar
-│   ├── axi_interconnect_wrap_3x14.v
-│   ├── arbiter.v
-│   └── priority_encoder.v
-├── common/
-│   ├── axi4_to_axi4lite_bridge.sv  ← AXI4 → AXI4-Lite bridge
-│   └── axi4lite_slave_adapter.sv   ← AXI4-Lite → register bus
-├── uart/                           ← AXI UART (TX/RX FIFOs, parity)
-├── QRS/                            ← Pan-Tompkins-style QRS detector
-│   ├── ecg_wtsee_v6_top.v          ← top-level ECG algorithm
-│   ├── baseline_filter.v
-│   ├── first_difference.v
-│   ├── moving_sum12/20.v
-│   ├── shannon_lut12.v
-│   ├── schmitt_peak_detector.v
-│   ├── search_back.v
-│   └── qrs_axi4_wrapper.v          ← AXI4 register wrapper
-├── spi/                            ← AXI-Lite SPI master
-├── FIR/                            ← AXI4-Stream FIR filter (DSP slices)
-│   ├── fir_top.v
-│   ├── fir_dsp.v
-│   ├── fir_axi_lite.v
-│   └── axis_fifo.v
-├── ADC/                            ← ADC sampling controller
-│   ├── adc_controller.sv
-│   ├── adc_registers.sv
-│   ├── adc_axi_lite_slave.sv
-│   ├── adc_sampling_scheduler.sv
-│   ├── adc_sample_acquisition.sv
-│   └── adc_fifo.sv
-├── gpio/                           ← 8-bit bidirectional GPIO (Gemini IP)
-│   ├── gpio_axi.sv
-│   ├── gpio_regs.sv
-│   ├── gpio_bit.sv
-│   └── gpio_wrapper.sv
-└── timer/                          ← Timer/PWM/capture (Gemini IP)
-    ├── timer_axi.sv
-    ├── timer_core.sv
-    └── timer_regs.sv
+```text
+                         +-------------------------+
+                         |     RISC-V VeeR EL2     |
+                         |      Processor Core     |
+                         +------------+------------+
+                                      |
+                                      | AXI4
+                                      v
+                    +--------------------------------------+
+                    |          AXI4 Interconnect           |
+                    |     Address Decode / Arbitration     |
+                    |          3-master × 14-slave         |
+                    +----+-----+-----+-----+-----+-----+---+
+                         |     |     |     |     |     |
+                       UART   QRS   SPI   FIR   ADC  GPIO
+                                                   |
+                                                   +---- Timer
 ```
 
----
+The current integrated top-level RTL is:
 
-## Peripheral Memory Map
-
-| Peripheral | Address Range         | Interface  |
-|------------|-----------------------|------------|
-| UART       | `0x4000_0000`         | AXI4-Lite  |
-| QRS        | `0x4000_1000`–`1FFF`  | AXI4       |
-| SPI        | `0x4000_2000`         | AXI4-Lite  |
-| FIR        | `0x4000_3000`         | AXI4-Lite + AXI4-Stream |
-| ADC        | `0x4000_4000`         | AXI4-Lite  |
-| GPIO       | `0x4000_5000`         | AXI4-Lite  |
-| Timer      | `0x4000_6000`         | AXI4-Lite  |
-
----
-
-## Top-Level Port Summary
-
-| Signal Group | Direction | Description |
-|---|---|---|
-| `clk`, `rst` | in | System clock and synchronous reset |
-| `s00_axi_*` | in/out | AXI4 slave port (from master/testbench) |
-| `uart_rx_i` / `uart_tx_o` | in/out | UART serial lines |
-| `spi_clk_o`, `spi_cs_n_o`, `spi_mosi_o`, `spi_miso_i` | in/out | SPI bus |
-| `fir_s_axis_*` / `fir_m_axis_*` | in/out | AXI4-Stream FIR data path |
-| `adc_sample_in[11:0]`, `adc_sample_valid` | in | ADC raw sample input |
-| `adc_irq_sample`, `adc_irq_overrun` | out | ADC interrupt lines |
-| `gpio_io[7:0]` | inout | Bidirectional GPIO pad |
-| `gpio_irq` | out | GPIO interrupt |
-| `timer_ext_meas_i`, `timer_capture_i` | in | Timer external inputs |
-| `timer_pwm_o`, `timer_trigger_o`, `timer_irq` | out | Timer outputs |
-
----
-
-## Testbenches
-
+```text
+rtl/soc_uart_qrs_spi_fir_adc_gpio_timer_top_BRIDGED.sv
 ```
-tb/
-├── tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top.sv  ← full integration TB (primary)
-├── tb_gpio_axi.sv                                  ← GPIO standalone
-├── tb_timer_axi.sv                                 ← Timer standalone
-├── tb_fir_top.v                                    ← FIR standalone
-├── qrs_axi4_wrapper_tb.sv                          ← QRS wrapper
-├── adc_tb.sv                                       ← ADC standalone
-├── axi_bfm_tasks.sv                                ← AXI BFM helper tasks
-└── ecg_input.txt                                   ← ECG sample stimulus file
+
+It exposes the system AXI interface together with the external UART, SPI, FIR stream, ADC, GPIO and Timer interfaces.
+
+---
+
+## AXI Interconnect
+
+The project uses:
+
+```text
+rtl/interconnect/axi_interconnect.v
+rtl/interconnect/axi_interconnect_wrap_3x14.v
+```
+
+The wrapper provides a **3-master × 14-slave AXI4 fabric**.
+
+The interconnect architecture intentionally contains more slave positions than the currently populated peripheral set so unused positions can remain available for future IP integration.
+
+The interconnect contains supporting arbitration and address-routing logic:
+
+```text
+rtl/interconnect/arbiter.v
+rtl/interconnect/priority_encoder.v
 ```
 
 ---
 
-## Simulation
+## AXI4 → AXI4-Lite Bridge
 
-Simulations use **Synopsys VCS**. File lists are in `run/`.
+The common bridge is:
 
-### Full integration (primary)
-```bash
-cd run
-vcs -full64 -sverilog -f filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f \
-    -o simv -l compile.log
-./simv
+```text
+rtl/common/axi4_to_axi4lite_bridge.sv
 ```
 
-### GPIO standalone
-```bash
-vcs -full64 -sverilog -f gpio_standalone.f -o simv_gpio
-./simv_gpio
-```
+It provides the protocol boundary between the system AXI4 fabric and AXI4-Lite peripherals such as GPIO and Timer.
 
-### Timer standalone
-```bash
-vcs -full64 -sverilog -f timer_standalone.f -o simv_timer
-./simv_timer
-```
+### Bridge Characteristics
 
-Waveform debugging is supported via **Synopsys Verdi** (`-verdi` flag or open the generated `.vcd`/`fsdb` from `run/`).
+- Single-beat AXI4 transactions
+- One outstanding transaction per bridge
+- Independent AXI4 AW and W channel capture
+- AXI ID preservation for B/R responses
+- AXI4 USER fields terminated at the bridge boundary
+- WLAST not required downstream
+- AXI4-Lite write/read handshaking preserved
+- Suitable for register-mapped peripheral access
+
+This keeps the system-side transport AXI4-based while reusing AXI4-Lite peripherals without modifying their internal register interfaces.
 
 ---
 
-## Documentation
+## Current Peripheral Integration
 
+| IP | Function | Interface | Status |
+|---|---|---|---|
+| UART | Serial communication | AXI4-Lite | Integrated |
+| QRS | ECG QRS / R-peak detection | AXI4 | Integrated |
+| SPI | Serial peripheral communication | AXI4-Lite | Integrated |
+| FIR | Digital filtering | AXI4-Lite + AXI4-Stream | Integrated |
+| ADC | ECG sample acquisition | AXI4-Lite | Integrated |
+| GPIO | General-purpose digital I/O | AXI4-Lite | Integrated |
+| Timer | Timer / capture / PWM / IRQ | AXI4-Lite | Integrated |
+
+---
+
+## ECG / QRS Processing
+
+The QRS subsystem is implemented as dedicated RTL for hardware ECG processing.
+
+The processing chain contains blocks for:
+
+- Baseline filtering
+- First-difference processing
+- Moving-window sums
+- Non-linear processing
+- Shannon-energy related processing
+- Peak detection
+- Search-back processing
+- RR classification
+- AXI4 register/control access
+
+Important QRS files include:
+
+```text
+rtl/QRS/ecg_wtsee_v6_top.v
+rtl/QRS/qrs_axi4_wrapper.v
+rtl/QRS/baseline_filter.v
+rtl/QRS/first_difference.v
+rtl/QRS/moving_sum12.v
+rtl/QRS/moving_sum20.v
+rtl/QRS/schmitt_peak_detector.v
+rtl/QRS/search_back.v
+rtl/QRS/rr_classifier.v
 ```
-doc/
-├── CardioEdge_AXI4_Specification_v2.docx   ← full register-level AXI spec
-├── qrs/
-│   ├── ARCHITECTURE.md                     ← QRS algorithm architecture
-│   ├── OPTIMIZATIONS.md                    ← implementation optimisations
-│   └── JOURNAL_VALIDATION_PLAN.md          ← validation methodology
-└── aes.pdf / AES register set.pdf          ← AES IP reference (legacy)
+
+The verification environment includes ECG stimulus data and checks for R-peak detection.
+
+---
+
+## FIR Processing Path
+
+The FIR subsystem supports register-based configuration together with an AXI4-Stream datapath.
+
+```text
+                 AXI4-Lite
+                    |
+                    v
+             +-------------+
+             | FIR Control |
+             +------+------+
+                    |
+                    v
+AXI4-Stream  --> +--------+ --> AXI4-Stream
+                 | FIR DSP|
+                 +--------+
+```
+
+Relevant RTL:
+
+```text
+rtl/FIR/fir_top.v
+rtl/FIR/fir_dsp.v
+rtl/FIR/fir_axi_lite.v
+rtl/FIR/axis_fifo.v
 ```
 
 ---
 
-## Dependencies
+## ADC Subsystem
 
-- **Synopsys VCS** — simulation and elaboration
-- **Synopsys Verdi** — waveform viewing (optional)
-- SystemVerilog-2012 compatible simulator (for `.sv` files)
+The ADC block contains:
+
+- ADC control
+- Register interface
+- Sampling scheduler
+- Sample acquisition
+- FIFO buffering
+- AXI4-Lite slave interface
+
+Relevant RTL:
+
+```text
+rtl/ADC/adc_controller.sv
+rtl/ADC/adc_registers.sv
+rtl/ADC/adc_axi_lite_slave.sv
+rtl/ADC/adc_sampling_scheduler.sv
+rtl/ADC/adc_sample_acquisition.sv
+rtl/ADC/adc_fifo.sv
+```
+
+The integrated ADC exposes sample and overrun interrupt outputs.
+
+---
+
+## GPIO and Timer
+
+GPIO and Timer are integrated as AXI4-Lite peripherals behind the common AXI4 → AXI4-Lite bridge.
+
+### GPIO
+
+Relevant RTL:
+
+```text
+rtl/gpio/gpio_axi.sv
+rtl/gpio/gpio_regs.sv
+rtl/gpio/gpio_bit.sv
+rtl/gpio/gpio_wrapper.sv
+```
+
+The GPIO subsystem supports memory-mapped register access, bidirectional GPIO pins and interrupt generation.
+
+### Timer
+
+The Timer subsystem supports:
+
+- Timer operation
+- External measurement/capture
+- PWM output
+- Trigger output
+- Interrupt generation
+
+Relevant RTL is under:
+
+```text
+rtl/timer/
+```
+
+---
+
+## RISC-V Processor
+
+The repository includes the **VeeR EL2 RISC-V core** as a Git submodule:
+
+```text
+rtl/Cores-VeeR-EL2
+```
+
+Upstream project:
+
+```text
+https://github.com/chipsalliance/Cores-VeeR-EL2.git
+```
+
+The current SoC integration is being built around the existing AXI system infrastructure so that the working peripheral RTL and verification environments remain reusable.
+
+---
+
+## Address Map
+
+The authoritative project address allocation is maintained in:
+
+```text
+doc/addressmapping.ods
+```
+
+The checked-in address-map document should be treated as the **final source of truth** for peripheral base addresses and ranges.
+
+Historical simulation notes and older README versions should not be used as the source of truth when they differ from the current mapping.
+
+---
+
+## Repository Structure
+
+```text
+HONOURS_CBP_CARDIOEDGE/
+├── doc/
+│   ├── addressmapping.ods
+│   ├── CardioEdge_AXI4_Specification_v2.docx
+│   ├── Combined_SoC_Features_DataPath_ControlPath.pdf
+│   ├── AES register set.pdf
+│   └── qrs/
+│       ├── ARCHITECTURE.md
+│       ├── OPTIMIZATIONS.md
+│       └── JOURNAL_VALIDATION_PLAN.md
+│
+├── rtl/
+│   ├── ADC/
+│   ├── Cores-VeeR-EL2/          # Git submodule
+│   ├── FIR/
+│   ├── QRS/
+│   ├── common/
+│   ├── gpio/
+│   ├── interconnect/
+│   ├── spi/
+│   ├── timer/
+│   ├── uart/
+│   └── soc_uart_qrs_spi_fir_adc_gpio_timer_top_BRIDGED.sv
+│
+├── run/
+│   └── filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f
+│
+├── scripts/
+│   └── axi_interconnect_wrap.py
+│
+└── tb/
+    ├── ADC/
+    ├── tb_axi_interconnect_wrap_3x14.sv
+    ├── tb_gpio_axi.sv
+    ├── tb_timer_axi.sv
+    ├── tb_fir_top.v
+    ├── qrs_axi4_wrapper_tb.sv
+    ├── tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top.sv
+    ├── uart_standalone_tb.sv
+    └── axi_bfm_tasks.sv
+```
+
+---
+
+## Verification
+
+Verification is primarily performed using **Synopsys VCS** with SystemVerilog testbenches and AXI bus-functional models.
+
+### Verification Layers
+
+1. Standalone IP verification
+2. AXI protocol and register-access verification
+3. Peripheral integration verification
+4. Top-level SoC integration verification
+
+The repository contains testbenches for:
+
+- UART
+- QRS
+- FIR
+- ADC
+- GPIO
+- Timer
+- AXI interconnect
+- AES-related verification
+- Full UART/QRS/SPI/FIR/ADC/GPIO/Timer integration
+
+Primary integration file list:
+
+```text
+run/filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f
+```
+
+
+
+For waveform/debug analysis, the design can be compiled with VCS debug options and opened in **Synopsys Verdi**.
+
+---
+
+## Verification Status
+
+| Block | RTL | Standalone | Integration |
+|---|:---:|:---:|:---:|
+| UART | ✅ | ✅ | ✅ |
+| QRS | ✅ | ✅ | ✅ |
+| SPI | ✅ | — | ✅ |
+| FIR | ✅ | ✅ | ✅ |
+| ADC | ✅ | ✅ | ✅ |
+| GPIO | ✅ | ✅ | ✅ |
+| Timer | ✅ | ✅ | ✅ |
+| AXI Interconnect | ✅ | ✅ | ✅ |
+| AXI4 → AXI4-Lite Bridge | ✅ | ✅ | ✅ |
+| VeeR EL2 | Submodule | Core project | Processor-side integration in progress |
+
+Verification is an ongoing RTL development process, so individual register-level and top-level tests may continue to evolve during the processor-side SoC integration.
+
+---
+
+## Design Goals
+
+- Hardware acceleration for ECG/QRS processing
+- RISC-V based SoC integration
+- Reusable AXI-based IP architecture
+- AXI4 system transport with AXI4-Lite peripheral compatibility
+- Modular peripheral integration
+- Simulation-driven RTL verification
+- Clean separation between processing datapaths and control/register interfaces
+- Extensible address-space and interconnect architecture
+
+---
+
+## Tools
+
+- **SystemVerilog / Verilog**
+- **Synopsys VCS**
+- **Synopsys Verdi** (optional)
+- **Linux**
+- **Git / GitHub**
 
 ---
 
 ## Project Status
 
-| Block       | RTL | Standalone TB | Integration TB |
-|-------------|-----|--------------|----------------|
-| UART        | ✅  | ✅            | ✅              |
-| QRS         | ✅  | ✅            | ✅              |
-| SPI         | ✅  | —             | ✅              |
-| FIR         | ✅  | ✅            | ✅              |
-| ADC         | ✅  | ✅            | ✅              |
-| GPIO        | ✅  | ✅            | ✅              |
-| Timer       | ✅  | ✅            | ✅              |
-| Interconnect| ✅  | ✅            | ✅              |
+**Current stage: RTL SoC integration and verification**
+
+The repository currently contains the integrated peripheral subsystem, AXI4 infrastructure, AXI4-Lite bridge, verification environments, documentation, and the VeeR EL2 processor as a Git submodule.
+
+The current development focus is connecting the processor-side AXI master path and completing system-level validation while preserving the already working peripheral integrations.
+
+---
+
+## Repository
+
+[HONOURS_CBP_CARDIOEDGE](https://github.com/Yashwanth20050906/HONOURS_CBP_CARDIOEDGE)
