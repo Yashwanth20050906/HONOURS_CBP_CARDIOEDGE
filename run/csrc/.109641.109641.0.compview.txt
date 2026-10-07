@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1791355019.310145872, "rt":7.98, "ut":0.34, "st":0.06}}
+{"vcselab":{"timestamp_begin":1791355027.375100905, "rt":3.72, "ut":0.17, "st":0.04}}
+{"link":{"timestamp_begin":1791355031.133782082, "rt":0.13, "ut":0.09, "st":0.03}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791355019.084148267}
+{"VCS_COMP_START_TIME": 1791355019.084148267}
+{"VCS_COMP_END_TIME": 1791355031.306311624}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -timescale=1ns/1ps -f filelist_axi_interconnect_wrap_3x18.f -o simv_3x18 -l compile_3x18.log"}
+{"vcs1": {"peak_mem": 378852}}
+{"vcselab": {"peak_mem": 253852}}

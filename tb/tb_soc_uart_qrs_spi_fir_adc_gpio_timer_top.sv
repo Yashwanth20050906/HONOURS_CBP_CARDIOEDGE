@@ -8,9 +8,26 @@ module tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top;
     localparam int STRB_WIDTH = 4;
 
     // ============================================================
+    // ADDRESS MAP & PORT ALLOCATION (3x18 Interconnect)
+    // ============================================================
+    // M00: UART     0x4000_0000 – 0x4000_0FFF
+    // M01: GPIO     0x4000_2000 – 0x4000_2FFF
+    // M02: TIMER    0x4000_4000 – 0x4000_4FFF
+    // M03: FIR      0x4000_C000 – 0x4000_CFFF
+    // M04: ADC      0x4000_E000 – 0x4000_EFFF
+    // M05: SPI      0x4001_0000 – 0x4001_0FFF
+    // M06: QRS      0x4001_2000 – 0x4001_2FFF
+    // M07-M17: DUMMY SLAVES (Watchdog, FFT, AES, etc.)
+    // ============================================================
+    localparam logic [31:0] UART_BASE  = 32'h4000_0000;
+    localparam logic [31:0] QRS_BASE   = 32'h4001_2000;
+    localparam logic [31:0] SPI_BASE   = 32'h4001_0000;
+    localparam logic [31:0] FIR_BASE   = 32'h4000_C000;
+
+    // ============================================================
     // ADC ADDRESS MAP
     // ============================================================
-    localparam logic [31:0] ADC_BASE   = 32'h4000_4000;
+    localparam logic [31:0] ADC_BASE   = 32'h4000_E000;
     localparam logic [31:0] ADC_CTRL   = ADC_BASE + 32'h0000;
     localparam logic [31:0] ADC_STATUS = ADC_BASE + 32'h0004;
     localparam logic [31:0] ADC_SAMPLE = ADC_BASE + 32'h0008;
@@ -18,9 +35,9 @@ module tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top;
     localparam logic [31:0] ADC_IRQ_EN = ADC_BASE + 32'h0010;
 
     // ============================================================
-    // GPIO ADDRESS MAP - M05
+    // GPIO ADDRESS MAP - M01
     // ============================================================
-    localparam logic [31:0] GPIO_BASE   = 32'h4000_5000;
+    localparam logic [31:0] GPIO_BASE   = 32'h4000_2000;
     localparam logic [31:0] GPIO_DATA_I = GPIO_BASE + 32'h0000;
     localparam logic [31:0] GPIO_DATA_O = GPIO_BASE + 32'h0004;
     localparam logic [31:0] GPIO_DIR    = GPIO_BASE + 32'h0008;
@@ -29,9 +46,9 @@ module tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top;
     localparam logic [31:0] GPIO_TGL_O  = GPIO_BASE + 32'h0028;
 
     // ============================================================
-    // TIMER ADDRESS MAP - M06
+    // TIMER ADDRESS MAP - M02
     // ============================================================
-    localparam logic [31:0] TIMER_BASE   = 32'h4000_6000;
+    localparam logic [31:0] TIMER_BASE   = 32'h4000_4000;
     localparam logic [31:0] TIMER_CTRL   = TIMER_BASE + 32'h0000;
     localparam logic [31:0] TIMER_LOAD   = TIMER_BASE + 32'h0004;
     localparam logic [31:0] TIMER_VAL    = TIMER_BASE + 32'h0008;
@@ -943,7 +960,7 @@ module tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top;
         );
 
         // ========================================================
-        // TEST 7: GPIO AXI INTEGRATION - M05
+        // TEST 7: GPIO AXI INTEGRATION - M01
         // ========================================================
 
         $display("");
@@ -975,13 +992,13 @@ module tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top;
         gpio_drive_en = 1'b0;
 
         // ========================================================
-        // TEST 8: TIMER AXI INTEGRATION - M06
+        // TEST 8: TIMER AXI INTEGRATION - M02
         // ========================================================
 
         $display("");
         $display("TEST 8: TIMER AXI INTEGRATION");
 
-        // Register read/write through the complete AXI 3x14 path.
+        // Register read/write through the complete AXI 3x18 path.
         axi_write(TIMER_LOAD, 32'h0000_0005);
         expect_read(TIMER_LOAD, 32'h0000_0005);
 

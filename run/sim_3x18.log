@@ -1,0 +1,109 @@
+Command: /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run/./simv_3x18 -no_save -l sim_3x18.log
+Chronologic VCS simulator copyright 1991-2023
+Contains Synopsys proprietary information.
+Compiler version U-2023.03_Full64; Runtime version U-2023.03_Full64;  Oct  7 12:07 2026
+Addressing configuration for axi_interconnect instance tb_axi_interconnect_wrap_3x18.dut.axi_interconnect_inst
+ 0 ( 0): 00000000 / 24 -- 00000000-00ffffff
+ 1 ( 0): 01000000 / 24 -- 01000000-01ffffff
+ 2 ( 0): 02000000 / 24 -- 02000000-02ffffff
+ 3 ( 0): 03000000 / 24 -- 03000000-03ffffff
+ 4 ( 0): 04000000 / 24 -- 04000000-04ffffff
+ 5 ( 0): 05000000 / 24 -- 05000000-05ffffff
+ 6 ( 0): 06000000 / 24 -- 06000000-06ffffff
+ 7 ( 0): 07000000 / 24 -- 07000000-07ffffff
+ 8 ( 0): 08000000 / 24 -- 08000000-08ffffff
+ 9 ( 0): 09000000 / 24 -- 09000000-09ffffff
+10 ( 0): 0a000000 / 24 -- 0a000000-0affffff
+11 ( 0): 0b000000 / 24 -- 0b000000-0bffffff
+12 ( 0): 0c000000 / 24 -- 0c000000-0cffffff
+13 ( 0): 0d000000 / 24 -- 0d000000-0dffffff
+14 ( 0): 0e000000 / 24 -- 0e000000-0effffff
+15 ( 0): 0f000000 / 24 -- 0f000000-0fffffff
+16 ( 0): 10000000 / 24 -- 10000000-10ffffff
+17 ( 0): 11000000 / 24 -- 11000000-11ffffff
+
+=== TEST: s00 writes to all 18 slaves ===
+PASS: s00 write addr=0 data=dead0000 bresp=OKAY
+PASS: s00 write addr=1000004 data=dead0001 bresp=OKAY
+PASS: s00 write addr=2000008 data=dead0002 bresp=OKAY
+PASS: s00 write addr=300000c data=dead0003 bresp=OKAY
+PASS: s00 write addr=4000010 data=dead0004 bresp=OKAY
+PASS: s00 write addr=5000014 data=dead0005 bresp=OKAY
+PASS: s00 write addr=6000018 data=dead0006 bresp=OKAY
+PASS: s00 write addr=700001c data=dead0007 bresp=OKAY
+PASS: s00 write addr=8000020 data=dead0008 bresp=OKAY
+PASS: s00 write addr=9000024 data=dead0009 bresp=OKAY
+PASS: s00 write addr=a000028 data=dead000a bresp=OKAY
+PASS: s00 write addr=b00002c data=dead000b bresp=OKAY
+PASS: s00 write addr=c000030 data=dead000c bresp=OKAY
+PASS: s00 write addr=d000034 data=dead000d bresp=OKAY
+PASS: s00 write addr=e000038 data=dead000e bresp=OKAY
+PASS: s00 write addr=f00003c data=dead000f bresp=OKAY
+PASS: s00 write addr=10000040 data=dead0010 bresp=OKAY
+PASS: s00 write addr=11000044 data=dead0011 bresp=OKAY
+
+=== TEST: s00 reads from all 18 slaves ===
+PASS: s00 read  addr=0 rdata=c0000000 rresp=OKAY
+PASS: s00 read  addr=1000004 rdata=c0000104 rresp=OKAY
+PASS: s00 read  addr=2000008 rdata=c0000208 rresp=OKAY
+PASS: s00 read  addr=300000c rdata=c000030c rresp=OKAY
+PASS: s00 read  addr=4000010 rdata=c0000410 rresp=OKAY
+PASS: s00 read  addr=5000014 rdata=c0000514 rresp=OKAY
+PASS: s00 read  addr=6000018 rdata=c0000618 rresp=OKAY
+PASS: s00 read  addr=700001c rdata=c000071c rresp=OKAY
+PASS: s00 read  addr=8000020 rdata=c0000820 rresp=OKAY
+PASS: s00 read  addr=9000024 rdata=c0000924 rresp=OKAY
+PASS: s00 read  addr=a000028 rdata=c0000a28 rresp=OKAY
+PASS: s00 read  addr=b00002c rdata=c0000b2c rresp=OKAY
+PASS: s00 read  addr=c000030 rdata=c0000c30 rresp=OKAY
+PASS: s00 read  addr=d000034 rdata=c0000d34 rresp=OKAY
+PASS: s00 read  addr=e000038 rdata=c0000e38 rresp=OKAY
+PASS: s00 read  addr=f00003c rdata=c0000f3c rresp=OKAY
+PASS: s00 read  addr=10000040 rdata=c0001040 rresp=OKAY
+PASS: s00 read  addr=11000044 rdata=c0001144 rresp=OKAY
+
+=== TEST: s01 writes to selected slaves ===
+PASS: s01 write addr=40 data=beefaa00 bresp=OKAY
+PASS: s01 write addr=5000044 data=beefaa05 bresp=OKAY
+PASS: s01 write addr=9000048 data=beefaa09 bresp=OKAY
+PASS: s01 write addr=d00004c data=beefaa0d bresp=OKAY
+PASS: s01 write addr=e000050 data=beefaa0e bresp=OKAY
+PASS: s01 write addr=11000054 data=beefaa11 bresp=OKAY
+
+=== TEST: s01 reads from selected slaves ===
+PASS: s01 read  addr=40 rdata=c0000040 rresp=OKAY
+PASS: s01 read  addr=7000044 rdata=c0000744 rresp=OKAY
+PASS: s01 read  addr=d000048 rdata=c0000d48 rresp=OKAY
+PASS: s01 read  addr=f00004c rdata=c0000f4c rresp=OKAY
+PASS: s01 read  addr=10000050 rdata=c0001050 rresp=OKAY
+
+=== TEST: s02 writes to selected slaves ===
+PASS: s02 write addr=2000050 data=cafe0002 bresp=OKAY
+PASS: s02 write addr=6000054 data=cafe0006 bresp=OKAY
+PASS: s02 write addr=b000058 data=cafe000b bresp=OKAY
+PASS: s02 write addr=1000005c data=cafe0010 bresp=OKAY
+PASS: s02 write addr=11000060 data=cafe0011 bresp=OKAY
+
+=== TEST: s02 reads from selected slaves ===
+PASS: s02 read  addr=2000050 rdata=c0000250 rresp=OKAY
+PASS: s02 read  addr=6000054 rdata=c0000654 rresp=OKAY
+PASS: s02 read  addr=b000058 rdata=c0000b58 rresp=OKAY
+PASS: s02 read  addr=d00005c rdata=c0000d5c rresp=OKAY
+PASS: s02 read  addr=e000060 rdata=c0000e60 rresp=OKAY
+PASS: s02 read  addr=11000064 rdata=c0001164 rresp=OKAY
+
+=== CHECK: M00-M13 mapped correctly, M14-M17 accessible ===
+
+============================================
+  SIMULATION COMPLETE
+  PASS : 58
+  FAIL : 0
+  RESULT : *** ALL TESTS PASSED ***
+============================================
+
+$finish called from file "../tb/tb_axi_interconnect_wrap_3x18.sv", line 2570.
+$finish at simulation time              6015000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 6015000 ps
+CPU Time:      0.170 seconds;       Data structure size:   0.0Mb
+Wed Oct  7 12:07:13 2026

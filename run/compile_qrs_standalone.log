@@ -1,0 +1,69 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Rocky Linux release 8.10 (Green Obsidian)' is not supported 
+  on 'x86_64' officially, assuming linux compatibility by default. Set 
+  VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+Command: vcs -full64 -sverilog -timescale=1ns/1ps -debug_access+all -kdb -top tb_ecg_wtsee_optimized_top \
+-o simv_qrs_standalone ../tb/tb_ecg_wtsee_optimized_top.v ../rtl/QRS/baseline_filter.v \
+../rtl/QRS/ecg_wtsee_v6_top.v ../rtl/QRS/first_difference.v ../rtl/QRS/icg_generic.v \
+../rtl/QRS/moving_sum12.v ../rtl/QRS/moving_sum20.v ../rtl/QRS/pow2_normalizer.v \
+../rtl/QRS/qrs_axi4_wrapper.v ../rtl/QRS/rr_classifier.v ../rtl/QRS/schmitt_peak_detector.v \
+../rtl/QRS/search_back.v ../rtl/QRS/shannon_lut12.v ../rtl/QRS/square10.v -l compile_qrs_standalone.log \
+
+                         Chronologic VCS (TM)
+         Version U-2023.03_Full64 -- Wed Oct  7 14:04:30 2026
+
+                    Copyright (c) 1991 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Parsing design file '../tb/tb_ecg_wtsee_optimized_top.v'
+Parsing design file '../rtl/QRS/baseline_filter.v'
+Parsing design file '../rtl/QRS/ecg_wtsee_v6_top.v'
+Parsing design file '../rtl/QRS/first_difference.v'
+Parsing design file '../rtl/QRS/icg_generic.v'
+Parsing design file '../rtl/QRS/moving_sum12.v'
+Parsing design file '../rtl/QRS/moving_sum20.v'
+Parsing design file '../rtl/QRS/pow2_normalizer.v'
+Parsing design file '../rtl/QRS/qrs_axi4_wrapper.v'
+Parsing design file '../rtl/QRS/rr_classifier.v'
+Parsing design file '../rtl/QRS/schmitt_peak_detector.v'
+Parsing design file '../rtl/QRS/search_back.v'
+Parsing design file '../rtl/QRS/shannon_lut12.v'
+Parsing design file '../rtl/QRS/square10.v'
+Top Level Modules:
+       tb_ecg_wtsee_optimized_top
+TimeScale is 1 ns / 1 ps
+Starting vcs inline pass...
+
+1 module and 0 UDP read.
+recompiling module tb_ecg_wtsee_optimized_top
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv_qrs_standalone ]; then chmod a-x ../simv_qrs_standalone; fi
+g++  -o ../simv_qrs_standalone      -rdynamic  -Wl,-rpath='$ORIGIN'/simv_qrs_standalone.daidir \
+-Wl,-rpath=./simv_qrs_standalone.daidir -Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib \
+-L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib  -Wl,-rpath-link=./  \
+/usr/lib64/libnuma.so.1   objs/amcQw_d.o   _210700_archive_1.so  SIM_l.o      rmapats_mop.o \
+rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o            -lvirsim -lerrorinf \
+-lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -luclinative /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_tls.o \
+-Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive        _vcs_pli_stub_.o   \
+/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_save_restore_new.o \
+/home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/pli.a -ldl \
+-lc -lm -lpthread -ldl 
+../simv_qrs_standalone up to date
+CPU time: .433 seconds to compile + .237 seconds to elab + .192 seconds to link
+Verdi KDB elaboration done and the database successfully generated: 0 error(s), 0 warning(s)

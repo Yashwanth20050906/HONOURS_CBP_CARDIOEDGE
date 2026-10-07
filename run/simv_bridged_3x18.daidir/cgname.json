@@ -1,0 +1,86 @@
+{
+    "std": [
+        "std",
+        "reYIK",
+        "module",
+        1
+    ],
+    "priority_encoder_0000": [
+        "priority_encoder_0000",
+        "VTikG",
+        "module",
+        2
+    ],
+    "axi4lite_slave_adapter": [
+        "axi4lite_slave_adapter",
+        "xseEc",
+        "module",
+        3
+    ],
+    "axi4_to_axi4lite_bridge": [
+        "axi4_to_axi4lite_bridge",
+        "xApWB",
+        "module",
+        4
+    ],
+    "axi_uart_top_0000": [
+        "axi_uart_top_0000",
+        "x5KIA",
+        "module",
+        5
+    ],
+    "spi_fifo": [
+        "spi_fifo",
+        "LJ0Ct",
+        "module",
+        6
+    ],
+    "axi_spi_top_0000": [
+        "axi_spi_top_0000",
+        "GZqS2",
+        "module",
+        7
+    ],
+    "fir_top": [
+        "fir_top",
+        "RgrQK",
+        "module",
+        8
+    ],
+    "adc_pkg": [
+        "adc_pkg",
+        "HI8NI",
+        "module",
+        9
+    ],
+    "gpio_bit": [
+        "gpio_bit",
+        "mHSCs",
+        "module",
+        10
+    ],
+    "gpio_axi": [
+        "gpio_axi",
+        "pwzws",
+        "module",
+        11
+    ],
+    "timer_axi": [
+        "timer_axi",
+        "aM9Lz",
+        "module",
+        12
+    ],
+    "tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top": [
+        "tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top",
+        "CjmRj",
+        "module",
+        13
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module",
+        14
+    ]
+}

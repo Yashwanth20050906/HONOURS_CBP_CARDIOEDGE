@@ -1,0 +1,162 @@
+0
+43
+-Mamsrun=
+-Masflags=
+-Mcc=gcc
+-Mcfl= -pipe -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include
+-Mcplusplus=g++
+-Mcrt0=
+-Mcrtn=
+-Mcsrc=
+-Mexternalobj=
+-Mldflags= -rdynamic
+-Mobjects= /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/libvirsim.so /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/liberrorinf.so /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/libsnpsmalloc.so /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/libvfs.so
+-Mout=simv_qrs_wrapper_tb
+-Msaverestoreobj=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_save_restore_new.o
+-Msyslibs=-ldl
+-Mvcsaceobjs=
+-Mxcflags= -pipe -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include
+-Mxllcflags=
+-full64
+-gen_obj
+-l
+-o simv_qrs_wrapper_tb
+-picarchive
+-sverilog
+-timescale=1ns/1ps
+-top
+/home/student/snps_tools_target/vcs/U-2023.03/linux64/bin/vcs1
+compile_qrs_wrapper_tb.log
+qrs_axi4_wrapper_tb
+simv_qrs_wrapper_tb
+../tb/qrs_axi4_wrapper_tb.sv
+../rtl/QRS/baseline_filter.v
+../rtl/QRS/ecg_wtsee_v6_top.v
+../rtl/QRS/first_difference.v
+../rtl/QRS/icg_generic.v
+../rtl/QRS/moving_sum12.v
+../rtl/QRS/moving_sum20.v
+../rtl/QRS/pow2_normalizer.v
+../rtl/QRS/qrs_axi4_wrapper.v
+../rtl/QRS/rr_classifier.v
+../rtl/QRS/schmitt_peak_detector.v
+../rtl/QRS/search_back.v
+../rtl/QRS/shannon_lut12.v
+../rtl/QRS/square10.v
+92
+which_declare=declare -f
+_CONDA_ROOT=/home/student/miniconda3
+_CONDA_EXE=/home/student/miniconda3/bin/conda
+_CE_M=
+_CE_CONDA=
+XMODIFIERS=@im=ibus
+XDG_VTNR=2
+XDG_SESSION_TYPE=wayland
+XDG_SESSION_ID=2
+XDG_SESSION_DESKTOP=gnome
+XDG_SEAT=seat0
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_MENU_PREFIX=gnome-
+XDG_DATA_DIRS=/home/student/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
+XDG_CURRENT_DESKTOP=GNOME
+XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.136KW3
+WAYLAND_DISPLAY=wayland-0
+VTE_VERSION=5204
+VMR_MODE_FLAG=64
+VERDI_HOME=/home/student/snps_tools_target/verdi/U-2023.03-SP1
+VCS_PATHMAP_PRELOAD_DONE=1
+VCS_MX_HOME_INTERNAL=1
+VCS_MODE_FLAG=64
+VCS_LOG_FILE=compile_qrs_wrapper_tb.log
+VCS_HOME=/home/student/snps_tools_target/vcs/U-2023.03
+VCS_EXEC_DONE=1
+VCS_DEPTH=0
+VCS_ARG_ADDED_FOR_TMP=1
+VCS_ARCH=linux64
+USERNAME=student
+UNAME=/bin/uname
+TOOL_HOME=/home/student/snps_tools_target/vcs/U-2023.03/linux64
+S_COLORS=auto
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+SNPS_VCS_CLANG_PATH=/home/student/snps_tools_target/vcs/U-2023.03/linux64/clang
+SNPS_INTERNAL_VCS_LINUX_OS=linux
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3512,unix/unix:/tmp/.ICE-unix/3512
+SCRNAME=vcs
+SCRIPT_NAME=vcs
+QT_IM_MODULE=ibus
+OVA_UUM=0
+MODULES_RUN_QUARANTINE=LD_LIBRARY_PATH LD_PRELOAD
+MODULES_CMD=/usr/share/Modules/libexec/modulecmd.tcl
+MODULESHOME=/usr/share/Modules
+MODULEPATH_modshare=/usr/share/Modules/modulefiles:2:/etc/modulefiles:2:/usr/share/modulefiles:2
+MODULEPATH=/etc/scl/modulefiles:/etc/scl/modulefiles:/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles
+MANAGERPID=3438
+LOADEDMODULES=
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+LC_ALL=C
+JOURNAL_STREAM=9:50890
+INVOCATION_ID=2e9a4ddea97b43268ceb79ec9f405f98
+HISTCONTROL=ignoredups
+GUESTFISH_RESTORE=\e[0m
+GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\] 
+GUESTFISH_OUTPUT=\e[0m
+GUESTFISH_INIT=\e[1;34m
+GNOME_TERMINAL_SERVICE=:1.97
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/5681a73e_4674_4572_8e87_74c3f35b3a81
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GIT_PAGER=cat
+GDM_LANG=en_IN.UTF-8
+GDMSESSION=gnome
+DESKTOP_SESSION=gnome
+DEBUGINFOD_URLS=https://debuginfod.centos.org/ 
+DBUS_STARTER_BUS_TYPE=session
+DBUS_STARTER_ADDRESS=unix:path=/run/user/1000/bus,guid=194b4ac9cbe2c3ef59af05766ac50a3a
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus,guid=194b4ac9cbe2c3ef59af05766ac50a3a
+CONDA_SHLVL=1
+CONDA_PYTHON_EXE=/home/student/miniconda3/bin/python
+CONDA_PROMPT_MODIFIER=(base) 
+CONDA_PREFIX=/home/student/miniconda3
+CONDA_EXE=/home/student/miniconda3/bin/conda
+CONDA_DEFAULT_ENV=base
+COLORTERM=truecolor
+BASH_FUNC_which%%=() {  ( alias;_ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@_}
+BASH_FUNC_switchml%%=() {  typeset swfound=1;_ if [ "${MODULES_USE_COMPAT_VERSION:-0}" = '1' ]; then_ typeset swname='main';_ if [ -e /usr/share/Modules/libexec/modulecmd.tcl ]; then_ typeset swfound=0;_ unset MODULES_USE_COMPAT_VERSION;_ fi;_ else_ typeset swname='compatibility';_ if [ -e /usr/share/Modules/libexec/modulecmd-compat ]; then_ typeset swfound=0;_ MODULES_USE_COMPAT_VERSION=1;_ export MODULES_USE_COMPAT_VERSION;_ fi;_ fi;_ if [ $swfound -eq 0 ]; then_ echo "Switching to Modules $swname version";_ source /usr/share/Modules/init/bash;_ else_ echo "Cannot switch to Modules $swname version, command not found";_ return 1;_ fi_}
+BASH_FUNC_scl%%=() {  if [ "$1" = "load" -o "$1" = "unload" ]; then_ eval "module $@";_ else_ /usr/bin/scl "$@";_ fi_}
+BASH_FUNC_module%%=() {  _module_raw "$@" 2>&1_}
+BASH_FUNC_ml%%=() {  module ml "$@"_}
+BASH_FUNC__module_raw%%=() {  unset _mlshdbg;_ if [ "${MODULES_SILENT_SHELL_DEBUG:-0}" = '1' ]; then_ case "$-" in _ *v*x*)_ set +vx;_ _mlshdbg='vx'_ ;;_ *v*)_ set +v;_ _mlshdbg='v'_ ;;_ *x*)_ set +x;_ _mlshdbg='x'_ ;;_ *)_ _mlshdbg=''_ ;;_ esac;_ fi;_ unset _mlre _mlIFS;_ if [ -n "${IFS+x}" ]; then_ _mlIFS=$IFS;_ fi;_ IFS=' ';_ for _mlv in ${MODULES_RUN_QUARANTINE:-};_ do_ if [ "${_mlv}" = "${_mlv##*[!A-Za-z0-9_]}" -a "${_mlv}" = "${_mlv#[0-9]}" ]; then_ if [ -n "`eval 'echo ${'$_mlv'+x}'`" ]; then_ _mlre="${_mlre:-}${_mlv}_modquar='`eval 'echo ${'$_mlv'}'`' ";_ fi;_ _mlrv="MODULES_RUNENV_${_mlv}";_ _mlre="${_mlre:-}${_mlv}='`eval 'echo ${'$_mlrv':-}'`' ";_ fi;_ done;_ if [ -n "${_mlre:-}" ]; then_ eval `eval ${_mlre} /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash '"$@"'`;_ else_ eval `/usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash "$@"`;_ fi;_ _mlstatus=$?;_ if [ -n "${_mlIFS+x}" ]; then_ IFS=$_mlIFS;_ else_ unset IFS;_ fi;_ unset _mlre _mlv _mlrv _mlIFS;_ if [ -n "${_mlshdbg:-}" ]; then_ set -$_mlshdbg;_ fi;_ unset _mlshdbg;_ return $_mlstatus_}
+ANTIGRAVITY_TRAJECTORY_ID=dfbdd29b-455f-4a57-834a-c92ce765496f
+ANTIGRAVITY_SOURCE_METADATA={"tool":{"conversationId":"41444bd6-8e0a-44ce-a95a-cb0dad7cd925", "stepIndex":1665, "toolCall":{"id":"call_869486", "name":"run_command", "argumentsJson":"{\"CommandLine\":\"export VCS_HOME=/home/student/snps_tools_target/vcs/U-2023.03\\nexport VERDI_HOME=/home/student/snps_tools_target/verdi/U-2023.03-SP1\\nexport PATH=$VCS_HOME/bin:$VERDI_HOME/bin:$PATH\\nexport SNPSLMD_LICENSE_FILE=27021@14.139.1.126\\nvcs -full64 -sverilog -timescale=1ns/1ps -top qrs_axi4_wrapper_tb -o simv_qrs_wrapper_tb ../tb/qrs_axi4_wrapper_tb.sv ../rtl/QRS/*.v -l compile_qrs_wrapper_tb.log\\n./simv_qrs_wrapper_tb -no_save -l sim_qrs_wrapper_tb.log\\n\",\"Cwd\":\"/home/student/Documents/HONOURS_CBP_CARDIOEDGE/run\",\"IsDaemon\":false,\"RunPersistent\":false,\"WaitMsBeforeAsync\":10000,\"toolAction\":\"Compiling and running qrs_axi4_wrapper_tb\",\"toolSummary\":\"Run qrs_axi4_wrapper_tb\"}", "thinkingSignature":"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"}}}
+ANTIGRAVITY_PROJECT_ID=default-cli-project
+ANTIGRAVITY_LS_VERSION=cli-1.3.0
+ANTIGRAVITY_LS_ADDRESS=localhost:36487
+ANTIGRAVITY_CSRF_TOKEN=f27de105-e6b5-4cf3-a5ab-f91c194f9ef1
+ANTIGRAVITY_CONVERSATION_ID=41444bd6-8e0a-44ce-a95a-cb0dad7cd925
+ANTIGRAVITY_APP_DATA_DIR=/home/student/.gemini/antigravity-cli
+ANTIGRAVITY_AGENTAPI_EXE=/home/student/.local/bin/agy
+ANTIGRAVITY_AGENT=1
+0
+0
+14
+1791113261 ../rtl/QRS/square10.v
+1791113261 ../rtl/QRS/shannon_lut12.v
+1791113261 ../rtl/QRS/search_back.v
+1791113261 ../rtl/QRS/schmitt_peak_detector.v
+1791113261 ../rtl/QRS/rr_classifier.v
+1791113261 ../rtl/QRS/qrs_axi4_wrapper.v
+1791113261 ../rtl/QRS/pow2_normalizer.v
+1791113261 ../rtl/QRS/moving_sum20.v
+1791113261 ../rtl/QRS/moving_sum12.v
+1791113261 ../rtl/QRS/icg_generic.v
+1791113261 ../rtl/QRS/first_difference.v
+1791276241 ../rtl/QRS/ecg_wtsee_v6_top.v
+1791113261 ../rtl/QRS/baseline_filter.v
+1791113261 ../tb/qrs_axi4_wrapper_tb.sv
+4
+1677385575 /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/libvirsim.so
+1677385060 /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/liberrorinf.so
+1677385018 /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/libsnpsmalloc.so
+1677385055 /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/libvfs.so
+1791362295 simv_qrs_wrapper_tb.daidir
+-1 partitionlib

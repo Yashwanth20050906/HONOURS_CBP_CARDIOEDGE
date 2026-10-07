@@ -1,0 +1,115 @@
+Command: /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run/./simv_bridged_3x18 -l sim_fixed.log
+Chronologic VCS simulator copyright 1991-2023
+Contains Synopsys proprietary information.
+Compiler version U-2023.03_Full64; Runtime version U-2023.03_Full64;  Oct  6 14:16 2026
+Addressing configuration for axi_interconnect instance tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top.dut.u_interconnect.axi_interconnect_inst
+ 0 ( 0): 40000000 / 12 -- 40000000-40000fff
+ 1 ( 0): 40012000 / 12 -- 40012000-40012fff
+ 2 ( 0): 40010000 / 12 -- 40010000-40010fff
+ 3 ( 0): 4000c000 / 12 -- 4000c000-4000cfff
+ 4 ( 0): 4000e000 / 12 -- 4000e000-4000efff
+ 5 ( 0): 40002000 / 12 -- 40002000-40002fff
+ 6 ( 0): 40004000 / 12 -- 40004000-40004fff
+
+==============================================
+ADC INTEGRATION TEST - M04 / AXI4-LITE
+==============================================
+
+TEST 1: RESET STATUS
+[ADC CHECK] addr=4000e004 data=00000004 PASS
+
+TEST 2: ENABLE + SOFTWARE START
+[ADC AXI] AW handshake addr=4000e000
+[ADC AXI] W handshake data=00000001
+[ADC WRITE] addr=4000e000 data=00000001 PASS
+[ADC AXI] AW handshake addr=4000e000
+[ADC AXI] W handshake data=00000003
+[ADC WRITE] addr=4000e000 data=00000003 PASS
+
+TEST 3: SAMPLE CAPTURE
+[ADC SAMPLE] sample=a55 CAPTURE COMPLETE
+[ADC CHECK] addr=4000e008 data=00000a55 PASS
+
+TEST 4: FIFO READ
+[ADC CHECK] addr=4000e00c data=00000a55 PASS
+
+TEST 5: SAMPLE IRQ
+[ADC AXI] AW handshake addr=4000e004
+[ADC AXI] W handshake data=00000002
+[ADC WRITE] addr=4000e004 data=00000002 PASS
+[ADC AXI] AW handshake addr=4000e010
+[ADC AXI] W handshake data=00000001
+[ADC WRITE] addr=4000e010 data=00000001 PASS
+[ADC AXI] AW handshake addr=4000e000
+[ADC AXI] W handshake data=00000002
+[ADC WRITE] addr=4000e000 data=00000002 PASS
+[ADC SAMPLE] sample=5aa CAPTURE COMPLETE
+[ADC IRQ] sample IRQ asserted PASS
+[ADC AXI] AW handshake addr=4000e004
+[ADC AXI] W handshake data=00000002
+[ADC WRITE] addr=4000e004 data=00000002 PASS
+[ADC AXI] AW handshake addr=4000e010
+[ADC AXI] W handshake data=00000000
+[ADC WRITE] addr=4000e010 data=00000000 PASS
+
+TEST 6: DISABLE
+[ADC AXI] AW handshake addr=4000e000
+[ADC AXI] W handshake data=00000000
+[ADC WRITE] addr=4000e000 data=00000000 PASS
+[ADC CHECK] addr=4000e000 data=00000000 PASS
+
+TEST 7: GPIO AXI INTEGRATION
+[ADC AXI] AW handshake addr=40002008
+[ADC AXI] W handshake data=000000ff
+[ADC WRITE] addr=40002008 data=000000ff PASS
+[ADC AXI] AW handshake addr=40002004
+[ADC AXI] W handshake data=000000a5
+[ADC WRITE] addr=40002004 data=000000a5 PASS
+[ADC CHECK] addr=40002004 data=000000a5 PASS
+[ADC AXI] AW handshake addr=40002020
+[ADC AXI] W handshake data=0000000f
+[ADC WRITE] addr=40002020 data=0000000f PASS
+[ADC CHECK] addr=40002004 data=000000af PASS
+[ADC AXI] AW handshake addr=40002024
+[ADC AXI] W handshake data=00000003
+[ADC WRITE] addr=40002024 data=00000003 PASS
+[ADC CHECK] addr=40002004 data=000000ac PASS
+[ADC AXI] AW handshake addr=40002028
+[ADC AXI] W handshake data=0000000f
+[ADC WRITE] addr=40002028 data=0000000f PASS
+[ADC CHECK] addr=40002004 data=000000a3 PASS
+[ADC AXI] AW handshake addr=40002008
+[ADC AXI] W handshake data=00000000
+[ADC WRITE] addr=40002008 data=00000000 PASS
+[ADC CHECK] addr=40002000 data=0000005a PASS
+
+TEST 8: TIMER AXI INTEGRATION
+[ADC AXI] AW handshake addr=40004004
+[ADC AXI] W handshake data=00000005
+[ADC WRITE] addr=40004004 data=00000005 PASS
+[ADC CHECK] addr=40004004 data=00000005 PASS
+[ADC AXI] AW handshake addr=40004018
+[ADC AXI] W handshake data=00000002
+[ADC WRITE] addr=40004018 data=00000002 PASS
+[ADC CHECK] addr=40004018 data=00000002 PASS
+[ADC AXI] AW handshake addr=40004010
+[ADC AXI] W handshake data=00000001
+[ADC WRITE] addr=40004010 data=00000001 PASS
+[ADC AXI] AW handshake addr=40004000
+[ADC AXI] W handshake data=00000001
+[ADC WRITE] addr=40004000 data=00000001 PASS
+[TIMER IRQ] integrated interrupt received PASS
+[ADC CHECK] addr=40004014 data=00000001 PASS
+[ADC AXI] AW handshake addr=40004014
+[ADC AXI] W handshake data=00000001
+[ADC WRITE] addr=40004014 data=00000001 PASS
+
+==============================================
+ADC INTEGRATION RESULT: PASS
+==============================================
+$finish called from file "../tb/tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top.sv", line 1060.
+$finish at simulation time              3700000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 3700000 ps
+CPU Time:      0.150 seconds;       Data structure size:   0.1Mb
+Tue Oct  6 14:16:26 2026

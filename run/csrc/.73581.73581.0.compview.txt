@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1791276375.621342185, "rt":2.40, "ut":0.59, "st":0.07}}
+{"vcselab":{"timestamp_begin":1791276378.093107541, "rt":2.67, "ut":0.17, "st":0.05}}
+{"link":{"timestamp_begin":1791276380.797216434, "rt":0.12, "ut":0.09, "st":0.03}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791276375.350521045}
+{"VCS_COMP_START_TIME": 1791276375.350521045}
+{"VCS_COMP_END_TIME": 1791276380.956423792}
+{"VCS_USER_OPTIONS": "-full64 -sverilog +define+SIMULATION +incdir+../rtl/uart/include +incdir+../rtl/spi/include -f filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f -top tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top -o simv_bridged_3x18 -l compile_fixed.log"}
+{"vcs1": {"peak_mem": 378656}}
+{"vcselab": {"peak_mem": 254096}}

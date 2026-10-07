@@ -301,10 +301,18 @@ module axi_uart_top (/*AUTOARG*/
               axi_rvalid_d    = 1'b1;
               read_state_d    = AckReadState;
             end
-            default: begin
-              axi_arready_d   = 1'b0;
+            UART_LCR: begin
+              axi_arready_d   = 1'b1;
+              axi_rdata_d     = uart_config_reg_int;
               axi_rresp_d     = 2'b0;
-              axi_rvalid_d    = 1'b0;
+              axi_rvalid_d    = 1'b1;
+              read_state_d    = AckReadState;
+            end
+            default: begin    // The case where the address is not present but we do not want the AXI bus to hang
+              axi_arready_d   = 1'b1;
+              axi_rdata_d     = {AXI_DATA_WIDTH{1'b0}};
+              axi_rresp_d     = 2'b0;
+              axi_rvalid_d    = 1'b1;
               read_state_d    = AckReadState;
             end
           endcase

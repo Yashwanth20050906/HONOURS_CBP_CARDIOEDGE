@@ -55,7 +55,7 @@ module ecg_wtsee_v6_top #(parameter FS=360)(
 
     // Keep original V6 width here.
     // moving_sum12 internally produces 18 bits.
-    wire [11:0] see_sum;
+    wire [17:0] see_sum;
 
     wire signed [12:0] dsee;
     wire [9:0] n2;

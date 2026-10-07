@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1791351890.625915847, "rt":20.23, "ut":5.90, "st":0.12}}
+{"vcselab":{"timestamp_begin":1791351910.912926660, "rt":2.67, "ut":0.22, "st":0.04}}
+{"link":{"timestamp_begin":1791351913.620630869, "rt":0.19, "ut":0.12, "st":0.07}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791351890.367994653}
+{"VCS_COMP_START_TIME": 1791351890.367994653}
+{"VCS_COMP_END_TIME": 1791351913.856440332}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -ntb_opts uvm -timescale=1ns/1ps -top tb_cardioedge_riscv_soc -f filelist_cardioedge_riscv_soc.f -l compile.log"}
+{"vcs1": {"peak_mem": 438452}}
+{"vcselab": {"peak_mem": 263148}}

@@ -1,0 +1,7 @@
+Command exited with non-zero status 255
+{"vcs1":{"timestamp_begin":1791357540.619768615, "rt":22.18, "ut":3.79, "st":0.24}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791357540.320022585}
+{"VCS_COMP_START_TIME": 1791357540.320022585}
+{"VCS_COMP_END_TIME": 1791357562.872155222}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -ntb_opts uvm -timescale=1ns/1ps -debug_access+all -kdb -f filelist_cardioedge_riscv_soc.f -l compile.log"}
+{"vcs1": {"peak_mem": 609352}}

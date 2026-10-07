@@ -1,0 +1,6 @@
+Command exited with non-zero status 255
+{"vcs1":{"timestamp_begin":1791337142.269981355, "rt":40.12, "ut":0.03, "st":0.02}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791337142.049810177}
+{"VCS_COMP_START_TIME": 1791337142.049810177}
+{"VCS_COMP_END_TIME": 1791337182.452286348}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -e test /dev/null -l test_lic.log"}

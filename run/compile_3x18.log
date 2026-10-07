@@ -1,0 +1,54 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Rocky Linux release 8.10 (Green Obsidian)' is not supported 
+  on 'x86_64' officially, assuming linux compatibility by default. Set 
+  VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+Command: vcs -full64 -sverilog -timescale=1ns/1ps -f filelist_axi_interconnect_wrap_3x18.f \
+-o simv_3x18 -l compile_3x18.log
+                         Chronologic VCS (TM)
+         Version U-2023.03_Full64 -- Wed Oct  7 12:07:04 2026
+
+                    Copyright (c) 1991 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Parsing design file '../rtl/interconnect/arbiter.v'
+Parsing design file '../rtl/interconnect/priority_encoder.v'
+Parsing design file '../rtl/interconnect/axi_interconnect.v'
+Parsing design file '../rtl/interconnect/axi_interconnect_wrap_3x18.v'
+Parsing design file '../tb/tb_axi_interconnect_wrap_3x18.sv'
+Top Level Modules:
+       tb_axi_interconnect_wrap_3x18
+TimeScale is 1 ns / 1 ps
+Starting vcs inline pass...
+
+2 modules and 0 UDP read.
+recompiling module priority_encoder
+recompiling module tb_axi_interconnect_wrap_3x18
+Both modules done.
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv_3x18 ]; then chmod a-x ../simv_3x18; fi
+g++  -o ../simv_3x18      -rdynamic  -Wl,-rpath='$ORIGIN'/simv_3x18.daidir -Wl,-rpath=./simv_3x18.daidir \
+-Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib -L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib \
+-Wl,-rpath-link=./  /usr/lib64/libnuma.so.1   objs/amcQw_d.o   _109948_archive_1.so \
+SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o \
+-lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -luclinative /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_tls.o \
+-Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive        _vcs_pli_stub_.o   \
+/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_save_restore_new.o \
+-ldl  -lc -lm -lpthread -ldl 
+../simv_3x18 up to date
+CPU time: .435 seconds to compile + .246 seconds to elab + .161 seconds to link

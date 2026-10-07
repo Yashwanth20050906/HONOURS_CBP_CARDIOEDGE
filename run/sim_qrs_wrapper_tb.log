@@ -1,0 +1,931 @@
+Command: /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run/./simv_qrs_wrapper_tb -no_save -l sim_qrs_wrapper_tb.log
+Chronologic VCS simulator copyright 1991-2023
+Contains Synopsys proprietary information.
+Compiler version U-2023.03_Full64; Runtime version U-2023.03_Full64;  Oct  7 14:08 2026
+
+==================================================
+          QRS AXI4 WRAPPER TESTBENCH
+==================================================
+
+[RESET] Reset asserted
+[RESET] Reset released
+
+==================================================
+TEST 1: CONTROL REGISTER
+==================================================
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001000
+Data    : 00000001
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+
+--------------------------------------------------
+AXI READ
+Address : 40001000
+--------------------------------------------------
+[READ] AR handshake successful
+[READ] RID   = 35
+[READ] RDATA = 00000001
+[READ] RRESP = 00
+[READ] RLAST = 1
+[READ] Response = OKAY
+PASS: CONTROL register = 00000001
+
+==================================================
+TEST 2: ECG INPUT REGISTER
+==================================================
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00001234
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+
+--------------------------------------------------
+AXI READ
+Address : 40001008
+--------------------------------------------------
+[READ] AR handshake successful
+[READ] RID   = 35
+[READ] RDATA = 00001234
+[READ] RRESP = 00
+[READ] RLAST = 1
+[READ] Response = OKAY
+PASS: ECG_INPUT register = 00001234
+
+==================================================
+TEST 3: ECG SAMPLE STREAM
+==================================================
+Sending 64 ECG samples...
+
+ECG SAMPLE [00] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [01] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [02] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [03] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[SCHMITT DEBUG] HIGH THRESHOLD CROSSED: time=365000 | sample=8 | data_in=914674 | th1=786432
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [04] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [05] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [06] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [07] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [08] =  12000  (0x2ee0)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00002ee0
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [09] =  -6000  (0xe890)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : ffffe890
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [10] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [11] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [12] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [13] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [14] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [15] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [16] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [17] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [18] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [19] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [20] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [21] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [22] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [23] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [24] =  12000  (0x2ee0)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00002ee0
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [25] =  -6000  (0xe890)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : ffffe890
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [26] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[SCHMITT DEBUG] time=1285000 | sample=100 | data_in=3953925 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=7442779
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [27] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [28] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [29] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [30] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [31] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [32] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [33] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [34] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [35] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [36] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [37] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [38] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [39] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [40] =  12000  (0x2ee0)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00002ee0
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [41] =  -6000  (0xe890)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : ffffe890
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [42] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [43] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [44] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [45] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [46] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [47] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [48] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [49] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [50] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [51] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[SCHMITT DEBUG] time=2285000 | sample=200 | data_in=3953925 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=7442779
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [52] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [53] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [54] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [55] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [56] =  12000  (0x2ee0)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00002ee0
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [57] =  -6000  (0xe890)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : ffffe890
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [58] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [59] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [60] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [61] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [62] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+ECG SAMPLE [63] =      0  (0x0000)
+
+--------------------------------------------------
+AXI WRITE
+Address : 40001008
+Data    : 00000000
+--------------------------------------------------
+[WRITE] AW handshake successful
+[WRITE] W handshake successful
+[WRITE] BID   = 2a
+[WRITE] BRESP = 00
+[WRITE] Response = OKAY
+
+ECG sample stream completed.
+
+Waiting for QRS pipeline...
+QRS pipeline wait completed.
+
+==================================================
+TEST 4: QRS STATUS / RESULT REGISTERS
+==================================================
+
+--------------------------------------------------
+AXI READ
+Address : 40001004
+--------------------------------------------------
+[READ] AR handshake successful
+[READ] RID   = 35
+[READ] RDATA = 00000001
+[READ] RRESP = 00
+[READ] RLAST = 1
+[READ] Response = OKAY
+STATUS       = 00000001
+
+--------------------------------------------------
+AXI READ
+Address : 4000100c
+--------------------------------------------------
+[READ] AR handshake successful
+[READ] RID   = 35
+[READ] RDATA = 00000000
+[READ] RRESP = 00
+[READ] RLAST = 1
+[READ] Response = OKAY
+RPEAK        = 00000000
+
+--------------------------------------------------
+AXI READ
+Address : 40001010
+--------------------------------------------------
+[READ] AR handshake successful
+[READ] RID   = 35
+[READ] RDATA = 00000000
+[READ] RRESP = 00
+[READ] RLAST = 1
+[READ] Response = OKAY
+RR_INTERVAL  = 00000000
+
+--------------------------------------------------
+AXI READ
+Address : 40001014
+--------------------------------------------------
+[READ] AR handshake successful
+[READ] RID   = 35
+[READ] RDATA = 00000000
+[READ] RRESP = 00
+[READ] RLAST = 1
+[READ] Response = OKAY
+BPM          = 00000000
+
+--------------------------------------------------
+AXI READ
+Address : 40001018
+--------------------------------------------------
+[READ] AR handshake successful
+[READ] RID   = 35
+[READ] RDATA = 00000000
+[READ] RRESP = 00
+[READ] RLAST = 1
+[READ] Response = OKAY
+RHYTHM_CLASS = 00000000
+
+==================================================
+       QRS AXI WRAPPER TESTBENCH PASS
+==================================================
+AXI write transactions : PASS
+AXI read transactions  : PASS
+Register access        : PASS
+ECG input transfer     : PASS
+QRS result registers   : READ SUCCESSFULLY
+
+The QRS AXI wrapper is functionally operational.
+==================================================
+
+Simulation completed.
+$finish called from file "../tb/qrs_axi4_wrapper_tb.sv", line 671.
+$finish at simulation time              3230000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 3230000 ps
+CPU Time:      0.150 seconds;       Data structure size:   0.0Mb
+Wed Oct  7 14:08:24 2026

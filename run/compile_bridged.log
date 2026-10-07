@@ -1,0 +1,56 @@
+Info: [VCS_SAVE_RESTORE_INFO] ASLR (Address Space Layout Randomization) is detected on the machine. To enable $save functionality, ASLR will be switched off and simv re-executed.
+Please use '-no_save' simv switch to avoid this.
+                         Chronologic VCS (TM)
+         Version U-2023.03_Full64 -- Sun Oct  4 18:51:23 2026
+
+                    Copyright (c) 1991 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Got SIGSEGV
+
+An unexpected termination has occurred in /home/student/snps_tools_target/vcs/U-2023.03/linux64/bin/vcs1 due to a signal: Segmentation fault
+Hostname vlsi115.vce.ac.in
+
+During setup for compilation 
+
+Command line: /home/student/snps_tools_target/vcs/U-2023.03/linux64/bin/vcs1 -sverilog +define+SIMULATION +incdir+../rtl/uart/include +incdir+../rtl/spi/include -f filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f -top tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top -o simv_bridged
+
+--- Stack trace follows:
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+0x0000155553ca2e1b in waitpid () from /lib64/libc.so.6
+#0  0x0000155553ca2e1b in waitpid () from /lib64/libc.so.6
+#1  0x0000155553bf67c7 in do_system () from /lib64/libc.so.6
+#2  0x00001555554b4349 in SNPSle_4f1eca636f186904 () from /home/student/snps_tools_target/vcs/U-2023.03/linux64/bin/../lib/libpreload.so
+#3  0x000000000991fc70 in tracker::StackAnnotator::getGdbOutput(char const*, char const*, char const*, char const*) ()
+#4  0x0000000009920280 in tracker::StackAnnotator::dumpStackByGdb(char const*, char const*, bool) ()
+#5  0x00000000099218aa in tracker::StackAnnotator::dumpProcessStack(unsigned int, char const*, char const*, bool) ()
+#6  0x0000000009912513 in ?? ()
+#7  0x0000000003146ca7 in stackTraceHandler ()
+#8  0x000000000314baad in SigHandler ()
+#9  0x0000000009525408 in ?? ()
+#10 <signal handler called>
+#11 0x0000155553c5795c in __strlen_evex () from /lib64/libc.so.6
+#12 0x0000000003198693 in radInitialize ()
+#13 0x0000000002d6abd0 in DoArguments ()
+#14 0x0000000002d99399 in ?? ()
+#15 0x0000000002759295 in main ()
+[Inferior 1 (process 57094) detached]
+
+Process VmPeak: 341436 kb, VmSize: 341400 kb
+System Free Memory: 3681600 kb, System Free Swap: 8163324 kb
+
+Completed context dump phase

@@ -1,0 +1,7 @@
+Command exited with non-zero status 255
+{"vcs1":{"timestamp_begin":1791362049.085622012, "rt":4.87, "ut":0.09, "st":0.04}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791362048.736025049}
+{"VCS_COMP_START_TIME": 1791362048.736025049}
+{"VCS_COMP_END_TIME": 1791362054.019803811}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -timescale=1ns/1ps -o simv_qrs_standalone ../tb/tb_ecg_wtsee_optimized_top.v ../rtl/QRS/baseline_filter.v ../rtl/QRS/ecg_wtsee_v6_top.v ../rtl/QRS/first_difference.v ../rtl/QRS/icg_generic.v ../rtl/QRS/moving_sum12.v ../rtl/QRS/moving_sum20.v ../rtl/QRS/pow2_normalizer.v ../rtl/QRS/qrs_axi4_wrapper.v ../rtl/QRS/rr_classifier.v ../rtl/QRS/schmitt_peak_detector.v ../rtl/QRS/search_back.v ../rtl/QRS/shannon_lut12.v ../rtl/QRS/square10.v -l compile_qrs_standalone.log"}
+{"vcs1": {"peak_mem": 358528}}

@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1791363268.390370432, "rt":5.75, "ut":0.19, "st":0.06}}
+{"vcselab":{"timestamp_begin":1791363274.226261755, "rt":10.70, "ut":0.16, "st":0.05}}
+{"link":{"timestamp_begin":1791363284.959903032, "rt":0.12, "ut":0.08, "st":0.03}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791363268.045724304}
+{"VCS_COMP_START_TIME": 1791363268.045724304}
+{"VCS_COMP_END_TIME": 1791363285.118192632}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -timescale=1ns/1ps -top qrs_control_experiments -o simv_qrs_exp qrs_control_experiments.sv ../rtl/QRS/baseline_filter.v ../rtl/QRS/ecg_wtsee_v6_top.v ../rtl/QRS/first_difference.v ../rtl/QRS/icg_generic.v ../rtl/QRS/moving_sum12.v ../rtl/QRS/moving_sum20.v ../rtl/QRS/pow2_normalizer.v ../rtl/QRS/qrs_axi4_wrapper.v ../rtl/QRS/rr_classifier.v ../rtl/QRS/schmitt_peak_detector.v ../rtl/QRS/search_back.v ../rtl/QRS/shannon_lut12.v ../rtl/QRS/square10.v -l compile_qrs_exp.log"}
+{"vcs1": {"peak_mem": 374424}}
+{"vcselab": {"peak_mem": 253816}}

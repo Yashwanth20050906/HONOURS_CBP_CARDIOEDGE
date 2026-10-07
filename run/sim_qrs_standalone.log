@@ -1,0 +1,694 @@
+Command: /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run/./simv_qrs_standalone -no_save -l sim_qrs_standalone.log
+Chronologic VCS simulator copyright 1991-2023
+Contains Synopsys proprietary information.
+Compiler version U-2023.03_Full64; Runtime version U-2023.03_Full64;  Oct  7 14:05 2026
+
+============================================================
+          WTSEE QRS STANDALONE VERIFICATION
+============================================================
+
+[TB] Applying reset...
+*Verdi* Loading libsscore_vcs202303.so
+FSDB Dumper for VCS, Release Verdi_U-2023.03-SP1, Linux x86_64/64bit, 05/28/2023
+(C) 1996 - 2023 by Synopsys, Inc.
+*Verdi* : Create FSDB file 'qrs_standalone.fsdb'
+*Verdi* : Begin traversing the scope (tb_ecg_wtsee_optimized_top), layer (0).
+*Verdi* : End of traversing.
+*Verdi* : Begin traversing the MDAs, layer (0).
+*Verdi* : Enable +mda and +packedmda dumping.
+*Verdi* : End of traversing the MDAs.
+[TB] Reset released.
+
+[TB] ECG input file opened successfully.
+
+[SCHMITT DEBUG] HIGH THRESHOLD CROSSED: time=235000 | sample=2 | data_in=1147490 | th1=786432
+[SCHMITT DEBUG] time=1215000 | sample=100 | data_in=11996476 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21436117
+[SCHMITT DEBUG] time=2215000 | sample=200 | data_in=19540276 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21436117
+[SCHMITT DEBUG] time=3215000 | sample=300 | data_in=12953776 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21436117
+[SCHMITT DEBUG] time=4215000 | sample=400 | data_in=13152118 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21436117
+[SCHMITT DEBUG] time=5215000 | sample=500 | data_in=19946067 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21742705
+[SCHMITT DEBUG] time=6215000 | sample=600 | data_in=17134320 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21742705
+[SCHMITT DEBUG] time=7215000 | sample=700 | data_in=9507992 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21742705
+[SCHMITT DEBUG] time=8215000 | sample=800 | data_in=19411938 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21742705
+[SCHMITT DEBUG] time=9215000 | sample=900 | data_in=10206964 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21742705
+[ECG] Samples processed = 1000 | Current sample = 82
+[SCHMITT DEBUG] time=10215000 | sample=1000 | data_in=12710745 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=21742705
+[SCHMITT DEBUG] time=11215000 | sample=1100 | data_in=22424602 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=22479722
+[SCHMITT DEBUG] time=12215000 | sample=1200 | data_in=13465632 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=22479722
+[SCHMITT DEBUG] time=13215000 | sample=1300 | data_in=11106817 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=22479722
+[SCHMITT DEBUG] time=14215000 | sample=1400 | data_in=23089063 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=15215000 | sample=1500 | data_in=10168890 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=16215000 | sample=1600 | data_in=9885470 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=17215000 | sample=1700 | data_in=22652753 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=18215000 | sample=1800 | data_in=12744852 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=19215000 | sample=1900 | data_in=11486689 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+[ECG] Samples processed = 2000 | Current sample = -57
+[SCHMITT DEBUG] time=20215000 | sample=2000 | data_in=21546031 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=21215000 | sample=2100 | data_in=11956688 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+
+============================================================
+ECG INPUT COMPLETE
+Total samples = 2200
+============================================================
+
+[TB] Waiting for QRS pipeline...
+[SCHMITT DEBUG] time=22215000 | sample=2200 | data_in=14961206 | min_peak=1048575 | th1=786432 | th2=524287 | state=1 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] LOW THRESHOLD CROSSED: time=22965000 | sample=2275 | data_in=502681 | th2=524287 | win_max=25227168
+[SCHMITT DEBUG] *** PEAK GENERATED *** time=22965000 | sample=2275 | PEAK=25227168 | hist_ptr=0 | refractory=90
+[SEARCH_BACK] SCHMITT PEAK : time=22975000 | since_peak=2275 | last_rr=90 | miss_thr=135
+[SEARCH_BACK] CONFIRMED PEAK -> r_peak=1
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 22985000
+Detection Count  : 1
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 0
+BPM              : 0
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+[SCHMITT DEBUG] time=23215000 | sample=2300 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=66 | win_max=25227168
+[SCHMITT DEBUG] time=24215000 | sample=2400 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=24345000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=25215000 | sample=2500 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=25255000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 25265000
+Detection Count  : 2
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 0
+BPM              : 0
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 25275000
+Result Number : 1
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=26215000 | sample=2600 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=26625000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=27215000 | sample=2700 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=27535000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 27545000
+Detection Count  : 3
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 27555000
+Result Number : 2
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=28215000 | sample=2800 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=28905000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=29215000 | sample=2900 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=29815000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 29825000
+Detection Count  : 4
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 29835000
+Result Number : 3
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=30215000 | sample=3000 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=31185000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=31215000 | sample=3100 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=32095000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 32105000
+Detection Count  : 5
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 32115000
+Result Number : 4
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=32215000 | sample=3200 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=33215000 | sample=3300 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=33465000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=34215000 | sample=3400 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=34375000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 34385000
+Detection Count  : 6
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 34395000
+Result Number : 5
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=35215000 | sample=3500 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=35745000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=36215000 | sample=3600 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=36655000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 36665000
+Detection Count  : 7
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 36675000
+Result Number : 6
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=37215000 | sample=3700 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=38025000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=38215000 | sample=3800 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=38935000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 38945000
+Detection Count  : 8
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 38955000
+Result Number : 7
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=39215000 | sample=3900 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=40215000 | sample=4000 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=40305000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=41215000 | sample=4100 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=41215000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 41225000
+Detection Count  : 9
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 41235000
+Result Number : 8
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=42215000 | sample=4200 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=42585000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=43215000 | sample=4300 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=43495000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 43505000
+Detection Count  : 10
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 43515000
+Result Number : 9
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=44215000 | sample=4400 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=44865000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=45215000 | sample=4500 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=45775000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 45785000
+Detection Count  : 11
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 45795000
+Result Number : 10
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=46215000 | sample=4600 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=47145000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=47215000 | sample=4700 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=48055000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 48065000
+Detection Count  : 12
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 48075000
+Result Number : 11
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=48215000 | sample=4800 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=49215000 | sample=4900 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=49425000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=50215000 | sample=5000 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=50335000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 50345000
+Detection Count  : 13
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 50355000
+Result Number : 12
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=51215000 | sample=5100 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=51705000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=52215000 | sample=5200 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=52615000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 52625000
+Detection Count  : 14
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 52635000
+Result Number : 13
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=53215000 | sample=5300 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=53985000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=54215000 | sample=5400 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=54895000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 54905000
+Detection Count  : 15
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 54915000
+Result Number : 14
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=55215000 | sample=5500 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=56215000 | sample=5600 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=56265000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SEARCH_BACK] FORCED PEAK : time=57175000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 57185000
+Detection Count  : 16
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 57195000
+Result Number : 15
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=57215000 | sample=5700 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=58215000 | sample=5800 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=58545000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=59215000 | sample=5900 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=59455000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 59465000
+Detection Count  : 17
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 59475000
+Result Number : 16
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=60215000 | sample=6000 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=60825000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=61215000 | sample=6100 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=61735000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 61745000
+Detection Count  : 18
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 61755000
+Result Number : 17
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=62215000 | sample=6200 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=63105000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=63215000 | sample=6300 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=64015000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 64025000
+Detection Count  : 19
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 64035000
+Result Number : 18
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=64215000 | sample=6400 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SCHMITT DEBUG] time=65215000 | sample=6500 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=65385000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=66215000 | sample=6600 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=66295000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 66305000
+Detection Count  : 20
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 66315000
+Result Number : 19
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=67215000 | sample=6700 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=67665000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=68215000 | sample=6800 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=68575000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 68585000
+Detection Count  : 21
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 68595000
+Result Number : 20
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=69215000 | sample=6900 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] STARTED : time=69945000 | since_peak=136 | miss_thr=135 | last_rr=90 | pee=0
+[SCHMITT DEBUG] time=70215000 | sample=7000 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+[SEARCH_BACK] FORCED PEAK : time=70855000 | since_peak=227 | sb_max=0
+
+------------------------------------------------------------
+R-PEAK DETECTED
+------------------------------------------------------------
+Simulation Time : 70865000
+Detection Count  : 22
+Approx Input Sample : 2200
+ECG Input        : 0
+RR Interval      : 228
+BPM              : 94
+Rhythm Class     : 00
+Result Valid     : 0
+------------------------------------------------------------
+
+
+**************** QRS RESULT ****************
+Time          : 70875000
+Result Number : 21
+R-Peak        : 0
+RR Interval   : 228
+BPM           : 94
+Rhythm Class  : 00
+*********************************************
+
+[SCHMITT DEBUG] time=71215000 | sample=7100 | data_in=0 | min_peak=1048575 | th1=786432 | th2=524287 | state=0 | refractory=0 | win_max=25227168
+
+============================================================
+             QRS VERIFICATION SUMMARY
+============================================================
+Input Samples       : 2200
+Detected R-Peaks    : 22
+Valid Results       : 21
+------------------------------------------------------------
+Expected R-Peaks:
+  Peak 1 : sample 220
+  Peak 2 : sample 580
+  Peak 3 : sample 940
+  Peak 4 : sample 1300
+  Peak 5 : sample 1660
+  Peak 6 : sample 2020
+============================================================
+QRS TEST : PASS
+Multiple R-peaks and valid QRS results were observed.
+============================================================
+
+$finish called from file "../tb/tb_ecg_wtsee_optimized_top.v", line 280.
+$finish at simulation time             72105000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 72105000 ps
+CPU Time:      0.240 seconds;       Data structure size:   0.0Mb
+Wed Oct  7 14:05:30 2026

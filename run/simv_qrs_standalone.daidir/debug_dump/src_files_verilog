@@ -1,0 +1,14 @@
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/baseline_filter.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/ecg_wtsee_v6_top.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/first_difference.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/icg_generic.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/moving_sum12.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/moving_sum20.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/pow2_normalizer.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/qrs_axi4_wrapper.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/rr_classifier.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/schmitt_peak_detector.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/search_back.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/shannon_lut12.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/rtl/QRS/square10.v
+/home/student/Documents/HONOURS_CBP_CARDIOEDGE/tb/tb_ecg_wtsee_optimized_top.v

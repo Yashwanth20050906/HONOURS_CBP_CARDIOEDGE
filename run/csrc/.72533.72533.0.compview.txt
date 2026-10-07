@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1791276278.134094895, "rt":5.14, "ut":0.68, "st":0.06}}
+{"vcselab":{"timestamp_begin":1791276283.327884371, "rt":3.78, "ut":0.16, "st":0.04}}
+{"link":{"timestamp_begin":1791276287.141444538, "rt":0.13, "ut":0.09, "st":0.04}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791276277.836828851}
+{"VCS_COMP_START_TIME": 1791276277.836828851}
+{"VCS_COMP_END_TIME": 1791276287.314495709}
+{"VCS_USER_OPTIONS": "-full64 -sverilog +define+SIMULATION +incdir+../rtl/uart/include +incdir+../rtl/spi/include +lint=TFIPC-L -f filelist_uart_qrs_spi_fir_adc_gpio_timer_integration_BRIDGED.f -top tb_soc_uart_qrs_spi_fir_adc_gpio_timer_top -o simv_bridged_3x18 -l compile_tfipc.log"}
+{"vcs1": {"peak_mem": 378692}}
+{"vcselab": {"peak_mem": 254100}}

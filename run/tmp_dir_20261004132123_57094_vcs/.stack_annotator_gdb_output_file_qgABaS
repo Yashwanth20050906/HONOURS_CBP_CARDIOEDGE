@@ -1,0 +1,20 @@
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+0x0000155553ca2e1b in waitpid () from /lib64/libc.so.6
+#0  0x0000155553ca2e1b in waitpid () from /lib64/libc.so.6
+#1  0x0000155553bf67c7 in do_system () from /lib64/libc.so.6
+#2  0x00001555554b4349 in SNPSle_4f1eca636f186904 () from /home/student/snps_tools_target/vcs/U-2023.03/linux64/bin/../lib/libpreload.so
+#3  0x000000000991fc70 in tracker::StackAnnotator::getGdbOutput(char const*, char const*, char const*, char const*) ()
+#4  0x0000000009920280 in tracker::StackAnnotator::dumpStackByGdb(char const*, char const*, bool) ()
+#5  0x00000000099218aa in tracker::StackAnnotator::dumpProcessStack(unsigned int, char const*, char const*, bool) ()
+#6  0x0000000009912513 in ?? ()
+#7  0x0000000003146ca7 in stackTraceHandler ()
+#8  0x000000000314baad in SigHandler ()
+#9  0x0000000009525408 in ?? ()
+#10 <signal handler called>
+#11 0x0000155553c5795c in __strlen_evex () from /lib64/libc.so.6
+#12 0x0000000003198693 in radInitialize ()
+#13 0x0000000002d6abd0 in DoArguments ()
+#14 0x0000000002d99399 in ?? ()
+#15 0x0000000002759295 in main ()
+[Inferior 1 (process 57094) detached]

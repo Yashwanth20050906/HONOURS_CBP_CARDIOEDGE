@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1791350732.960088107, "rt":12.73, "ut":7.85, "st":0.17}}
+Command exited with non-zero status 1
+{"vcselab":{"timestamp_begin":1791350745.738804023, "rt":2.49, "ut":0.17, "st":0.02}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791350732.691652153}
+{"VCS_COMP_START_TIME": 1791350732.691652153}
+{"VCS_COMP_END_TIME": 1791350748.239185919}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -ntb_opts uvm -timescale=1ns/1ps -top tb_cardioedge_riscv_soc -f filelist_cardioedge_riscv_soc.f -l compile.log"}
+{"vcs1": {"peak_mem": 435784}}
+{"vcselab": {"peak_mem": 228636}}

@@ -1,6 +1,6 @@
 # ============================================================
 # CARDIOEDGE - UART + QRS + SPI + FIR + ADC + GPIO + TIMER
-# Integrated AXI 3x14 SoC Verification
+# Integrated AXI 3x18 SoC Verification
 #
 # Run from:
 #   /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run
@@ -17,7 +17,7 @@
 # AXI INTERCONNECT
 # ============================================================
 ../rtl/interconnect/axi_interconnect.v
-../rtl/interconnect/axi_interconnect_wrap_3x14.v
+../rtl/interconnect/axi_interconnect_wrap_3x18.v
 ../rtl/interconnect/arbiter.v
 ../rtl/interconnect/priority_encoder.v
 
@@ -28,6 +28,7 @@
 # ============================================================
 ../rtl/common/axi4lite_slave_adapter.sv
 ../rtl/common/axi4_to_axi4lite_bridge.sv
+../rtl/common/axi_dummy_slave.sv
 
 # ============================================================
 # UART
