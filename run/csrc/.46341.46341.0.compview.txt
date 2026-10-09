@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1791525300.317575880, "rt":8.32, "ut":5.06, "st":0.12}}
+{"vcselab":{"timestamp_begin":1791525308.691427994, "rt":2.42, "ut":0.37, "st":0.05}}
+{"link":{"timestamp_begin":1791525311.143586808, "rt":0.17, "ut":0.10, "st":0.06}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1791525300.065038238}
+{"VCS_COMP_START_TIME": 1791525300.065038238}
+{"VCS_COMP_END_TIME": 1791525311.377344003}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -timescale=1ns/1ps -debug_access+all -f ../firmware/filelist_cardioedge_firmware.f -l compile_firmware_test.log -o simv_firmware"}
+{"vcs1": {"peak_mem": 435096}}
+{"vcselab": {"peak_mem": 279604}}

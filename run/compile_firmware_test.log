@@ -1,0 +1,345 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Rocky Linux release 8.10 (Green Obsidian)' is not supported 
+  on 'x86_64' officially, assuming linux compatibility by default. Set 
+  VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+Command: vcs -full64 -sverilog -timescale=1ns/1ps -debug_access+all -f ../firmware/filelist_cardioedge_firmware.f \
+-l compile_firmware_test.log -o simv_firmware
+                         Chronologic VCS (TM)
+         Version U-2023.03_Full64 -- Fri Oct  9 12:44:04 2026
+
+                    Copyright (c) 1991 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Parsing design file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/common_defines.vh'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/include/el2_def.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_pdef.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/include/el2_def.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/el2_assert.sv'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_mubi_pkg.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/common_defines.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_mubi_pkg.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_lockstep_pkg.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_lockstep_pkg.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/el2_lib.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lib/el2_lib.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lib/el2_lib.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lib/el2_lib.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lib/el2_lib.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/el2_mem_if.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lib/el2_mem_if.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/el2_prim_generic_buf.sv'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/el2_prim_buf.sv'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/beh_lib.sv'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/mem_lib.sv'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/ahb_to_axi4.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lib/ahb_to_axi4.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lib/axi4_to_ahb.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lib/axi4_to_ahb.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_mem.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_mem.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_pic_ctrl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_pic_ctrl.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/pic_map_auto.svh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_pic_ctrl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_dma_ctrl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_dma_ctrl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_pmp.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_pmp.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_aln_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_aln_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_compress_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_compress_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_ifc_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_ifc_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_bp_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_bp_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_ic_mem.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_ic_mem.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_ic_mem.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_ic_mem.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_mem_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_mem_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_iccm_mem.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu_iccm_mem.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/ifu/el2_ifu.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_decode_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_decode_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_gpr_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_gpr_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_ib_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_ib_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_pmp_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_pmp_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_tlu_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_tlu_ctl.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/design/include/el2_dec_csr_equ_m.svh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_tlu_ctl.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_tlu_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_trigger.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec_trigger.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dec/el2_dec.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/exu/el2_exu_alu_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/exu/el2_exu_alu_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/exu/el2_exu_mul_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/exu/el2_exu_mul_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/exu/el2_exu_div_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/exu/el2_exu_div_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/exu/el2_exu.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/exu/el2_exu.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_clkdomain.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_clkdomain.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_addrcheck.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_addrcheck.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_lsc_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_lsc_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_stbuf.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_stbuf.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_bus_buffer.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_bus_buffer.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_bus_intf.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_bus_intf.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_ecc.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_ecc.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_dccm_mem.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_dccm_mem.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_dccm_ctl.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_dccm_ctl.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_trigger.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/lsu/el2_lsu_trigger.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dbg/el2_dbg.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/dbg/el2_dbg.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dmi/dmi_mux.v'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dmi/dmi_wrapper.v'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dmi/dmi_jtag_to_core_sync.v'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/dmi/rvjtag_tap.v'
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_veer.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_veer.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_veer_lockstep.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_veer_lockstep.sv'.
+Parsing design file '../rtl/Cores-VeeR-EL2/design/el2_veer_wrapper.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/common_defines.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_veer_wrapper.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/Cores-VeeR-EL2/design/el2_veer_wrapper.sv'.
+Parsing design file '../rtl/interconnect/arbiter.v'
+Parsing design file '../rtl/interconnect/priority_encoder.v'
+Parsing design file '../rtl/interconnect/axi_interconnect.v'
+Parsing design file '../rtl/interconnect/axi_interconnect_wrap_3x18.v'
+Parsing design file '../rtl/common/axi4lite_slave_adapter.sv'
+Parsing design file '../rtl/common/axi4_to_axi4lite_bridge.sv'
+Parsing design file '../rtl/common/axi_dummy_slave.sv'
+Parsing design file '../rtl/riscv/axi_64to32_adapter.sv'
+Parsing design file '../rtl/riscv/axi_imem_slave.sv'
+Parsing design file '../rtl/riscv/axi_dmem_slave.sv'
+Parsing design file '../rtl/riscv/cardioedge_veer_wrapper.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/common_defines.vh'.
+Back to file '../rtl/riscv/cardioedge_veer_wrapper.sv'.
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/el2_param.vh'.
+Back to file '../rtl/riscv/cardioedge_veer_wrapper.sv'.
+Parsing design file '../rtl/uart/axi_internal_fifo.v'
+Parsing design file '../rtl/uart/uart_parity_bit_compute.v'
+Parsing design file '../rtl/uart/uart_receiver.v'
+Parsing design file '../rtl/uart/uart_transmitter.v'
+Parsing design file '../rtl/uart/uart_controller.v'
+Parsing design file '../rtl/uart/axi_uart_top.v'
+Parsing included file '../rtl/uart/include/axi_uart_defines.vh'.
+Back to file '../rtl/uart/axi_uart_top.v'.
+Parsing included file '../rtl/uart/include/axi_uart.vh'.
+Back to file '../rtl/uart/axi_uart_top.v'.
+Parsing design file '../rtl/gpio/gpio_bit.sv'
+Parsing design file '../rtl/gpio/gpio_wrapper.sv'
+Parsing design file '../rtl/gpio/gpio_regs.sv'
+Parsing design file '../rtl/gpio/gpio_axi.sv'
+Parsing design file '../rtl/timer/timer_core.sv'
+Parsing design file '../rtl/timer/timer_regs.sv'
+Parsing design file '../rtl/timer/timer_axi.sv'
+Parsing design file '../rtl/FIR/axis_fifo.v'
+Parsing design file '../rtl/FIR/fir_axi_lite.v'
+Parsing design file '../rtl/FIR/fir_dsp.v'
+Parsing design file '../rtl/FIR/fir_top.v'
+Parsing design file '../rtl/ADC/adc_pkg.sv'
+Parsing design file '../rtl/ADC/adc_fifo.sv'
+Parsing design file '../rtl/ADC/adc_sample_acquisition.sv'
+Parsing design file '../rtl/ADC/adc_sampling_scheduler.sv'
+Parsing design file '../rtl/ADC/adc_registers.sv'
+Parsing design file '../rtl/ADC/adc_axi_lite_slave.sv'
+Parsing design file '../rtl/ADC/adc_controller.sv'
+Parsing design file '../rtl/spi/ratio_clk.v'
+Parsing design file '../rtl/spi/spi_clk_gen.v'
+Parsing design file '../rtl/spi/spi_ctrl.v'
+Parsing design file '../rtl/spi/spi_exch_byte.v'
+Parsing design file '../rtl/spi/spi_fifo.v'
+Parsing design file '../rtl/spi/spi_valid_logic.v'
+Parsing design file '../rtl/spi/axi_spi_ctrl.v'
+Parsing design file '../rtl/spi/axi_spi_top.v'
+Parsing included file '../rtl/spi/include/axi_spi_defines.vh'.
+Back to file '../rtl/spi/axi_spi_top.v'.
+Parsing included file '../rtl/spi/include/axi_spi.vh'.
+Back to file '../rtl/spi/axi_spi_top.v'.
+Parsing design file '../rtl/QRS/baseline_filter.v'
+Parsing design file '../rtl/QRS/first_difference.v'
+Parsing design file '../rtl/QRS/icg_generic.v'
+Parsing design file '../rtl/QRS/moving_sum12.v'
+Parsing design file '../rtl/QRS/moving_sum20.v'
+Parsing design file '../rtl/QRS/pow2_normalizer.v'
+Parsing design file '../rtl/QRS/rr_classifier.v'
+Parsing design file '../rtl/QRS/schmitt_peak_detector.v'
+Parsing design file '../rtl/QRS/search_back.v'
+Parsing design file '../rtl/QRS/shannon_lut12.v'
+Parsing design file '../rtl/QRS/square10.v'
+Parsing design file '../rtl/QRS/ecg_wtsee_v6_top.v'
+Parsing design file '../rtl/QRS/qrs_axi4_wrapper.v'
+Parsing design file '../rtl/riscv/cardioedge_cpu_soc_top.sv'
+Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/common_defines.vh'.
+Back to file '../rtl/riscv/cardioedge_cpu_soc_top.sv'.
+Parsing design file '../firmware/tb_cardioedge_firmware.sv'
+Top Level Modules:
+       tb_cardioedge_firmware
+TimeScale is 1 ns / 1 ps
+
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2266
+"axi_uart_top u_uart( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m00_axi_awid),  .axi_awaddr_i (m00_axi_awaddr[4:0]),  .axi_awvalid_i (m00_axi_awvalid),  .axi_awready_o (m00_axi_awready),  .axi_wdata_i (m00_axi_wdata),  .axi_wstrb_i (m00_axi_wstrb),  .axi_wvalid_i (m00_axi_wvalid),  .axi_wready_o (m00_axi_wready),  .axi_bid_o (uart_bid_12),  .axi_bresp_o (m00_axi_bresp),  .axi_bvalid_o (m00_axi_bvalid),  .axi_bready_i (m00_axi_bready),  .axi_arid_i (m00_axi_arid),  .axi_araddr_i (m00_axi_araddr[4:0]),  .axi_arvalid_i (m00_axi_arvalid),  .axi_arready_o (m00_axi_arready),  .axi_rid_o (uart_rid_12),  .axi_rdata_o (m00_axi_rdata),  .axi_rresp_o (m00_axi_rresp),  .axi_rvalid_o (m00_axi_rvalid),  .axi_rready_i (m00_axi_rre ... "
+  The following 8-bit expression is connected to 12-bit port "axi_awid_i" of 
+  module "axi_uart_top", instance "u_uart".
+  Expression: m00_axi_awid
+  Instantiated module defined at: "../rtl/uart/axi_uart_top.v", 28
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2266
+"axi_uart_top u_uart( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m00_axi_awid),  .axi_awaddr_i (m00_axi_awaddr[4:0]),  .axi_awvalid_i (m00_axi_awvalid),  .axi_awready_o (m00_axi_awready),  .axi_wdata_i (m00_axi_wdata),  .axi_wstrb_i (m00_axi_wstrb),  .axi_wvalid_i (m00_axi_wvalid),  .axi_wready_o (m00_axi_wready),  .axi_bid_o (uart_bid_12),  .axi_bresp_o (m00_axi_bresp),  .axi_bvalid_o (m00_axi_bvalid),  .axi_bready_i (m00_axi_bready),  .axi_arid_i (m00_axi_arid),  .axi_araddr_i (m00_axi_araddr[4:0]),  .axi_arvalid_i (m00_axi_arvalid),  .axi_arready_o (m00_axi_arready),  .axi_rid_o (uart_rid_12),  .axi_rdata_o (m00_axi_rdata),  .axi_rresp_o (m00_axi_rresp),  .axi_rvalid_o (m00_axi_rvalid),  .axi_rready_i (m00_axi_rre ... "
+  The following 8-bit expression is connected to 12-bit port "axi_arid_i" of 
+  module "axi_uart_top", instance "u_uart".
+  Expression: m00_axi_arid
+  Instantiated module defined at: "../rtl/uart/axi_uart_top.v", 28
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2700
+"axi_spi_top u_spi( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m05_axi_awid),  .axi_awaddr_i (m05_axi_awaddr),  .axi_awvalid_i (m05_axi_awvalid),  .axi_awready_o (m05_axi_awready),  .axi_wdata_i (m05_axi_wdata),  .axi_wstrb_i (m05_axi_wstrb),  .axi_wvalid_i (m05_axi_wvalid),  .axi_wready_o (m05_axi_wready),  .axi_bid_o (spi_bid_12),  .axi_bresp_o (m05_axi_bresp),  .axi_bvalid_o (m05_axi_bvalid),  .axi_bready_i (m05_axi_bready),  .axi_arid_i (m05_axi_arid),  .axi_araddr_i (m05_axi_araddr),  .axi_arvalid_i (m05_axi_arvalid),  .axi_arready_o (m05_axi_arready),  .axi_rid_o (spi_rid_12),  .axi_rdata_o (m05_axi_rdata),  .axi_rresp_o (m05_axi_rresp),  .axi_rvalid_o (m05_axi_rvalid),  .axi_rready_i (m05_axi_rready),  .spi_cl ... "
+  The following 8-bit expression is connected to 12-bit port "axi_awid_i" of 
+  module "axi_spi_top", instance "u_spi".
+  Expression: m05_axi_awid
+  Instantiated module defined at: "../rtl/spi/axi_spi_top.v", 21
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2700
+"axi_spi_top u_spi( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m05_axi_awid),  .axi_awaddr_i (m05_axi_awaddr),  .axi_awvalid_i (m05_axi_awvalid),  .axi_awready_o (m05_axi_awready),  .axi_wdata_i (m05_axi_wdata),  .axi_wstrb_i (m05_axi_wstrb),  .axi_wvalid_i (m05_axi_wvalid),  .axi_wready_o (m05_axi_wready),  .axi_bid_o (spi_bid_12),  .axi_bresp_o (m05_axi_bresp),  .axi_bvalid_o (m05_axi_bvalid),  .axi_bready_i (m05_axi_bready),  .axi_arid_i (m05_axi_arid),  .axi_araddr_i (m05_axi_araddr),  .axi_arvalid_i (m05_axi_arvalid),  .axi_arready_o (m05_axi_arready),  .axi_rid_o (spi_rid_12),  .axi_rdata_o (m05_axi_rdata),  .axi_rresp_o (m05_axi_rresp),  .axi_rvalid_o (m05_axi_rvalid),  .axi_rready_i (m05_axi_rready),  .spi_cl ... "
+  The following 32-bit expression is connected to 7-bit port "axi_awaddr_i" of
+  module "axi_spi_top", instance "u_spi".
+  Expression: m05_axi_awaddr
+  Instantiated module defined at: "../rtl/spi/axi_spi_top.v", 21
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2700
+"axi_spi_top u_spi( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m05_axi_awid),  .axi_awaddr_i (m05_axi_awaddr),  .axi_awvalid_i (m05_axi_awvalid),  .axi_awready_o (m05_axi_awready),  .axi_wdata_i (m05_axi_wdata),  .axi_wstrb_i (m05_axi_wstrb),  .axi_wvalid_i (m05_axi_wvalid),  .axi_wready_o (m05_axi_wready),  .axi_bid_o (spi_bid_12),  .axi_bresp_o (m05_axi_bresp),  .axi_bvalid_o (m05_axi_bvalid),  .axi_bready_i (m05_axi_bready),  .axi_arid_i (m05_axi_arid),  .axi_araddr_i (m05_axi_araddr),  .axi_arvalid_i (m05_axi_arvalid),  .axi_arready_o (m05_axi_arready),  .axi_rid_o (spi_rid_12),  .axi_rdata_o (m05_axi_rdata),  .axi_rresp_o (m05_axi_rresp),  .axi_rvalid_o (m05_axi_rvalid),  .axi_rready_i (m05_axi_rready),  .spi_cl ... "
+  The following 8-bit expression is connected to 12-bit port "axi_arid_i" of 
+  module "axi_spi_top", instance "u_spi".
+  Expression: m05_axi_arid
+  Instantiated module defined at: "../rtl/spi/axi_spi_top.v", 21
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2700
+"axi_spi_top u_spi( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m05_axi_awid),  .axi_awaddr_i (m05_axi_awaddr),  .axi_awvalid_i (m05_axi_awvalid),  .axi_awready_o (m05_axi_awready),  .axi_wdata_i (m05_axi_wdata),  .axi_wstrb_i (m05_axi_wstrb),  .axi_wvalid_i (m05_axi_wvalid),  .axi_wready_o (m05_axi_wready),  .axi_bid_o (spi_bid_12),  .axi_bresp_o (m05_axi_bresp),  .axi_bvalid_o (m05_axi_bvalid),  .axi_bready_i (m05_axi_bready),  .axi_arid_i (m05_axi_arid),  .axi_araddr_i (m05_axi_araddr),  .axi_arvalid_i (m05_axi_arvalid),  .axi_arready_o (m05_axi_arready),  .axi_rid_o (spi_rid_12),  .axi_rdata_o (m05_axi_rdata),  .axi_rresp_o (m05_axi_rresp),  .axi_rvalid_o (m05_axi_rvalid),  .axi_rready_i (m05_axi_rready),  .spi_cl ... "
+  The following 32-bit expression is connected to 7-bit port "axi_araddr_i" of
+  module "axi_spi_top", instance "u_spi".
+  Expression: m05_axi_araddr
+  Instantiated module defined at: "../rtl/spi/axi_spi_top.v", 21
+  Use +lint=PCWM for more details.
+
+Notice: Ports coerced to inout, use -notice for details
+Starting vcs inline pass...
+
+58 modules and 0 UDP read.
+recompiling module tb_cardioedge_firmware
+	However, due to incremental compilation, only 1 module needs to be compiled. 
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv_firmware ]; then chmod a-x ../simv_firmware; fi
+g++  -o ../simv_firmware      -rdynamic  -Wl,-rpath='$ORIGIN'/simv_firmware.daidir \
+-Wl,-rpath=./simv_firmware.daidir -Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib \
+-L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib  -Wl,-rpath-link=./  \
+/usr/lib64/libnuma.so.1   objs/amcQw_d.o   _98306_archive_1.so _prev_archive_1.so \
+SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o \
+-lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -luclinative /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_tls.o \
+-Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive        _vcs_pli_stub_.o   \
+/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_save_restore_new.o \
+-ldl  -lc -lm -lpthread -ldl 
+../simv_firmware up to date
+CPU time: 5.353 seconds to compile + .439 seconds to elab + .197 seconds to link

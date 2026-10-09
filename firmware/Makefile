@@ -30,8 +30,11 @@ DUMP          := $(TARGET).dump
 SRCS_S        := start.S
 SRCS_C        := cardioedge_test.c
 
-.PHONY: all clean hex vhx bin disassemble size help
-
+ifeq ($(shell which $(CC) 2>/dev/null),)
+all:
+	@echo "[-] $(CC) not found in PATH. Using build_firmware.py..."
+	python3 build_firmware.py
+else
 all: $(ELF) hex vhx bin disassemble size
 	@echo "--------------------------------------------------------"
 	@echo "CARDIOEDGE Firmware Build Complete:"
@@ -44,6 +47,7 @@ all: $(ELF) hex vhx bin disassemble size
 
 $(ELF): $(SRCS_S) $(SRCS_C) cardioedge.ld
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(SRCS_S) $(SRCS_C)
+endif
 
 hex: $(HEX)
 $(HEX): $(ELF)

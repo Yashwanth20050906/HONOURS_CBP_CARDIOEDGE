@@ -31,13 +31,13 @@ TMPSPECENV=$(VCSTMPSPECENV)
 CC=$(TMPSPECENV) $(VCS_CC) $(TMPSPECARG)
 
 # C flags for compilation
-CFLAGS=$(STDLIB)-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include    
+CFLAGS=$(STDLIB)-w  -pipe -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include    
 
-CFLAGS_CG=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_CG=-w  -pipe -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
-CFLAGS_CG_CLIB=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_CG_CLIB=-w  -pipe -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
-CFLAGS_RMAR=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_RMAR=-w  -pipe -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
 ASFLAGS=(null)
 LIBS=
@@ -46,4 +46,4 @@ include filelist.hsopt
 
 
 rmapats.so: $(HSOPT_OBJS)
-	@$(VCS_CC) $(LDFLAGS) $(LIBS) -shared -o ./../simv.daidir/rmapats.so $(HSOPT_OBJS)
+	@$(VCS_CC) $(LDFLAGS) $(LIBS) -shared -o ./../simv_firmware.daidir/rmapats.so $(HSOPT_OBJS)

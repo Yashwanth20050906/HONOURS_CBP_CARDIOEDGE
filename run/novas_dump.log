@@ -162,26 +162,26 @@ maxproc		62999
 (Special)Runtime environment variables:
 
 Runtime environment variables:
-ANTIGRAVITY_CONVERSATION_ID=41444bd6-8e0a-44ce-a95a-cb0dad7cd925
+ANTIGRAVITY_CONVERSATION_ID=420bc369-f15e-4aba-bc57-4ae4eace23ff
 CONDA_SHLVL=1
 LD_LIBRARY_PATH=/opt/berkeleydb/lib:/opt/berkeleydb/lib:
 LS_COLORS=rs=0:di=38;5;33:ln=38;5;51:mh=00:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=01;05;37;41:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;40:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.zst=38;5;9:*.tzst=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.wim=38;5;9:*.swm=38;5;9:*.dwm=38;5;9:*.esd=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.mjpg=38;5;13:*.mjpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.m4a=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.oga=38;5;45:*.opus=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
 CONDA_EXE=/home/student/miniconda3/bin/conda
-ANTIGRAVITY_TRAJECTORY_ID=dfbdd29b-455f-4a57-834a-c92ce765496f
-ANTIGRAVITY_LS_ADDRESS=localhost:36487
+ANTIGRAVITY_TRAJECTORY_ID=52ac6a90-de28-416d-b17f-03883fe2b0e5
+ANTIGRAVITY_LS_ADDRESS=localhost:34833
 XDG_MENU_PREFIX=gnome-
 ANTIGRAVITY_APP_DATA_DIR=/home/student/.gemini/antigravity-cli
 MODULES_RUN_QUARANTINE=LD_LIBRARY_PATH LD_PRELOAD
+_=./simv_qrs_standalone
 LANG=en_IN.UTF-8
 GDM_LANG=en_IN.UTF-8
 HISTCONTROL=ignoredups
-ANTIGRAVITY_AGENTAPI_EXE=/home/student/.local/bin/agy
-MANAGERPID=3438
+ANTIGRAVITY_AGENTAPI_EXE=/home/student/.local/bin/agy.1791521828613191588.old
+MANAGERPID=3578
 DISPLAY=:0
 GUESTFISH_RESTORE=\e[0m
 HOSTNAME=vlsi115.vce.ac.in
-OLDPWD=/home/student/Documents/HONOURS_CBP_CARDIOEDGE/run
-INVOCATION_ID=2e9a4ddea97b43268ceb79ec9f405f98
+INVOCATION_ID=f33d8c4d744e49f2b1bf903b4fd45f31
 COLORTERM=truecolor
 GUESTFISH_INIT=\e[1;34m
 USERNAME=student
@@ -199,23 +199,23 @@ PAGER=cat
 GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\] 
 DESKTOP_SESSION=gnome
 WAYLAND_DISPLAY=wayland-0
-GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/5681a73e_4674_4572_8e87_74c3f35b3a81
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/47fe29e8_e302_4149_9b34_26453a624565
 PWD=/home/student/Documents/HONOURS_CBP_CARDIOEDGE/run
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 HOME=/home/student
 CONDA_PYTHON_EXE=/home/student/miniconda3/bin/python
-JOURNAL_STREAM=9:50890
+JOURNAL_STREAM=9:50122
 XDG_SESSION_TYPE=wayland
 XDG_DATA_DIRS=/home/student/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
 _CE_CONDA=
 XDG_SESSION_DESKTOP=gnome
 ANTIGRAVITY_PROJECT_ID=default-cli-project
 ANTIGRAVITY_AGENT=1
-DBUS_STARTER_ADDRESS=unix:path=/run/user/1000/bus,guid=194b4ac9cbe2c3ef59af05766ac50a3a
+DBUS_STARTER_ADDRESS=unix:path=/run/user/1000/bus,guid=d8477241a36d929e8429e1476ac86e06
 LOADEDMODULES=
 CONDA_PROMPT_MODIFIER=(base) 
 MAIL=/var/spool/mail/student
-ANTIGRAVITY_SOURCE_METADATA={"tool":{"conversationId":"41444bd6-8e0a-44ce-a95a-cb0dad7cd925", "stepIndex":1763, "toolCall":{"id":"call_930649", "name":"run_command", "argumentsJson":"{\"CommandLine\":\"cd /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run \\u0026\\u0026 ./simv_qrs_standalone | grep \\\"FORCED PEAK\\\" | head -n 10\",\"Cwd\":\"/home/student/Documents/HONOURS_CBP_CARDIOEDGE/run\",\"RequestedTerminalID\":\"\",\"RunPersistent\":false,\"WaitMsBeforeAsync\":5000,\"toolAction\":\"Checking if peaks 2-22 are forced peaks\",\"toolSummary\":\"Grep FORCED PEAK in standalone QRS log\"}", "thinkingSignature":"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"}}}
+ANTIGRAVITY_SOURCE_METADATA={"tool":{"conversationId":"420bc369-f15e-4aba-bc57-4ae4eace23ff","stepIndex":675,"toolCall":{"id":"call_653743","name":"run_command","argumentsJson":"{\"CommandLine\":\"./simv_qrs_standalone\",\"Cwd\":\"/home/student/Documents/HONOURS_CBP_CARDIOEDGE/run\",\"WaitMsBeforeAsync\":5000,\"toolAction\":\"Running standalone QRS test\",\"toolSummary\":\"Run simv_qrs_standalone\"}","thinkingSignature":"Et4BCtsBAWkUfRMtDJmT67nC2lPxZ0aICLIk3tOCfT80FpJAnTUdDNthAxkbKSE5A+qI9i4xzknoN+BMsUAUBFSxMU3AsCPClE+f4YJvnyhYMnr+vrfluF6EUY4MLP/0NmzKFvx88VRVYsPm0KwmcXTfUcbD3ktwpl/+qba3unjXbNhvXumpDxOs7xs9AP7H9q/9BSa+pyjj++uMrfj5tOoTvWzWJoG/Mee4i5gTY2NdR86pJQU8MkuxXJJgDXTmhwtF8fkxBI+jZLPsgjzqizFr7xzpCXpgJLVtvnHU0eWK"}}}
 _CONDA_ROOT=/home/student/miniconda3
 SHELL=/bin/bash
 VTE_VERSION=5204
@@ -224,27 +224,27 @@ QT_IM_MODULE=ibus
 XMODIFIERS=@im=ibus
 DBUS_STARTER_BUS_TYPE=session
 XDG_CURRENT_DESKTOP=GNOME
-GNOME_TERMINAL_SERVICE=:1.97
+GNOME_TERMINAL_SERVICE=:1.81
 XDG_SEAT=seat0
 SHLVL=3
 MANPATH=:
-ANTIGRAVITY_LS_VERSION=cli-1.3.0
+ANTIGRAVITY_LS_VERSION=cli-1.3.1
 MODULEPATH=/etc/scl/modulefiles:/etc/scl/modulefiles:/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles
 GDMSESSION=gnome
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 LOGNAME=student
-DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus,guid=194b4ac9cbe2c3ef59af05766ac50a3a
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus,guid=d8477241a36d929e8429e1476ac86e06
 XDG_RUNTIME_DIR=/run/user/1000
-XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.136KW3
+XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.STRXW3
 MODULEPATH_modshare=/usr/share/Modules/modulefiles:2:/etc/modulefiles:2:/usr/share/modulefiles:2
 PATH=/home/student/.gemini/antigravity-cli/bin:/home/student/.local/bin:/home/student/Documents/bin:/home/student/.local/bin:/home/student/.local/bin:/home/student/Documents/bin:/home/student/miniconda3/bin:/home/student/miniconda3/condabin:/home/student/.local/bin:/home/student/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin
 GUESTFISH_OUTPUT=\e[0m
-ANTIGRAVITY_CSRF_TOKEN=f27de105-e6b5-4cf3-a5ab-f91c194f9ef1
+ANTIGRAVITY_CSRF_TOKEN=5628479d-d5db-4e7b-88ae-446c98347a13
 DEBUGINFOD_URLS=https://debuginfod.centos.org/ 
 MODULESHOME=/usr/share/Modules
 CONDA_DEFAULT_ENV=base
 HISTSIZE=1000
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3512,unix/unix:/tmp/.ICE-unix/3512
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3630,unix/unix:/tmp/.ICE-unix/3630
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 GIT_PAGER=cat
 BASH_FUNC_which%%=() {  ( alias;
@@ -336,7 +336,6 @@ BASH_FUNC_scl%%=() {  if [ "$1" = "load" -o "$1" = "unload" ]; then
 }
 BASH_FUNC_ml%%=() {  module ml "$@"
 }
-_=./simv_qrs_standalone
 VCS_PATHMAP_PRELOAD_DONE=1
 VCS_STACK_EXEC=true
 VCS_EXEC_DONE=1
@@ -349,38 +348,38 @@ SPECMAN_OUTPUT_TO_TTY=1
 FLEXLM_BORROWFILE=/home/student/.vlsi115.vce.ac.in-borrow.txt
 Runtime command line arguments:
 argv[0]=./simv_qrs_standalone
-268 profile - 100
-          CPU/Mem usage: 0.020 sys,  0.150 user,  296.94M mem
-269 Elapsed time:    0:00:03    Wed Oct  7 14:17:29 2026
-270 User CPU time used: 0 seconds
-271 System CPU time used: 0 seconds
-272 pliAppInit
-273 [SC]Init: MemoryConsumed=0.00MB ElapsedTime=0hour 0min. 0sec.
-274 FSDB_GATE is set.
-275 FSDB_RTL is set.
-276 FSDB_ALIAS_ARRAY_ELEM is set to 4294967295.
-277 Enable Parallel Dumping.
-278 pliAppMiscSet: New Sim Round
-279 pliEntryInit
-280 LIBSSCORE=found /home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/lib/LINUXAMD64/libsscore_vcs202303.so through $NOVAS_HOME setting.
-281 FSDB Dumper for VCS, Release Verdi_U-2023.03-SP1, Linux x86_64/64bit, 05/28/2023
-282 (C) 1996 - 2023 by Synopsys, Inc.
-283 sps_call_fsdbDumpfile_main at 0 : ../tb/tb_ecg_wtsee_optimized_top.v(347)
-284 argv[0]: (qrs_standalone.fsdb)
-285 *Verdi* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
-286 *Verdi* : Create FSDB file 'qrs_standalone.fsdb'
-287 [spi_vcs_vd_ppi_create_root]: no upf option
-288 compile option from '/home/student/Documents/HONOURS_CBP_CARDIOEDGE/run/simv_qrs_standalone.daidir/vcs_rebuild'.
-289   "vcs '-full64' '-sverilog' '-timescale=1ns/1ps' '-debug_access+all' '-kdb' '-top' 'tb_ecg_wtsee_optimized_top' '-o' 'simv_qrs_standalone' '../tb/tb_ecg_wtsee_optimized_top.v' '../rtl/QRS/baseline_filter.v' '../rtl/QRS/ecg_wtsee_v6_top.v' '../rtl/QRS/first_difference.v' '../rtl/QRS/icg_generic.v' '../rtl/QRS/moving_sum12.v' '../rtl/QRS/moving_sum20.v' '../rtl/QRS/pow2_normalizer.v' '../rtl/QRS/qrs_axi4_wrapper.v' '../rtl/QRS/rr_classifier.v' '../rtl/QRS/schmitt_peak_detector.v' '../rtl/QRS/search_back.v' '../rtl/QRS/shannon_lut12.v' '../rtl/QRS/square10.v' '-l' 'compile_qrs_standalone.log' 2>&1"
-290 DVDI_is_vir_unload_enabled is enable
-291 FSDB_VCS_ENABLE_NATIVE_VC is enable
-292 sps_call_fsdbDumpvars_vd_main at 0 : ../tb/tb_ecg_wtsee_optimized_top.v(349)
-293 argv[0]: (0)
-294 argv[1]: (handle) tb_ecg_wtsee_optimized_top
-295 *Verdi* : Begin traversing the scope (tb_ecg_wtsee_optimized_top), layer (0).
-296 *Verdi* : End of traversing.
-297 pliAppHDL_DumpVarComplete traverse var: profile - 
-          CPU/Mem usage: 0.030 sys,  0.160 user,  396.48M mem
+267 profile - 100
+          CPU/Mem usage: 0.020 sys,  0.160 user,  296.94M mem
+268 Elapsed time:    0:00:04    Fri Oct  9 11:52:35 2026
+269 User CPU time used: 0 seconds
+270 System CPU time used: 0 seconds
+271 pliAppInit
+272 [SC]Init: MemoryConsumed=0.00MB ElapsedTime=0hour 0min. 0sec.
+273 FSDB_GATE is set.
+274 FSDB_RTL is set.
+275 FSDB_ALIAS_ARRAY_ELEM is set to 4294967295.
+276 Enable Parallel Dumping.
+277 pliAppMiscSet: New Sim Round
+278 pliEntryInit
+279 LIBSSCORE=found /home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/lib/LINUXAMD64/libsscore_vcs202303.so through $NOVAS_HOME setting.
+280 FSDB Dumper for VCS, Release Verdi_U-2023.03-SP1, Linux x86_64/64bit, 05/28/2023
+281 (C) 1996 - 2023 by Synopsys, Inc.
+282 sps_call_fsdbDumpfile_main at 0 : ../tb/tb_ecg_wtsee_optimized_top.v(347)
+283 argv[0]: (qrs_standalone.fsdb)
+284 *Verdi* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
+285 *Verdi* : Create FSDB file 'qrs_standalone.fsdb'
+286 [spi_vcs_vd_ppi_create_root]: no upf option
+287 compile option from '/home/student/Documents/HONOURS_CBP_CARDIOEDGE/run/simv_qrs_standalone.daidir/vcs_rebuild'.
+288   "vcs '-full64' '-sverilog' '-timescale=1ns/1ps' '-debug_access+all' '-kdb' '-top' 'tb_ecg_wtsee_optimized_top' '-o' 'simv_qrs_standalone' '../tb/tb_ecg_wtsee_optimized_top.v' '../rtl/QRS/baseline_filter.v' '../rtl/QRS/ecg_wtsee_v6_top.v' '../rtl/QRS/first_difference.v' '../rtl/QRS/icg_generic.v' '../rtl/QRS/moving_sum12.v' '../rtl/QRS/moving_sum20.v' '../rtl/QRS/pow2_normalizer.v' '../rtl/QRS/qrs_axi4_wrapper.v' '../rtl/QRS/rr_classifier.v' '../rtl/QRS/schmitt_peak_detector.v' '../rtl/QRS/search_back.v' '../rtl/QRS/shannon_lut12.v' '../rtl/QRS/square10.v' '-l' 'compile_qrs_standalone.log' 2>&1"
+289 DVDI_is_vir_unload_enabled is enable
+290 FSDB_VCS_ENABLE_NATIVE_VC is enable
+291 sps_call_fsdbDumpvars_vd_main at 0 : ../tb/tb_ecg_wtsee_optimized_top.v(349)
+292 argv[0]: (0)
+293 argv[1]: (handle) tb_ecg_wtsee_optimized_top
+294 *Verdi* : Begin traversing the scope (tb_ecg_wtsee_optimized_top), layer (0).
+295 *Verdi* : End of traversing.
+296 pliAppHDL_DumpVarComplete traverse var: profile - 
+          CPU/Mem usage: 0.020 sys,  0.160 user,  396.48M mem
                    incr: 0.000 sys,  0.000 user,  7.25M mem
                    accu: 0.000 sys,  0.000 user,  7.25M mem
               accu incr: 0.000 sys,  0.000 user,  7.25M mem
@@ -389,11 +388,11 @@ argv[0]=./simv_qrs_standalone
                  incr: 173 var,  133 idcode,  78 callback
                  accu: 173 var,  133 idcode,  78 callback
             accu incr: 173 var,  133 idcode,  78 callback
-298 Elapsed time:    0:00:03    Wed Oct  7 14:17:29 2026
-299 User CPU time used: 0 seconds
-300 System CPU time used: 0 seconds
-301 pliAppHDL_DumpVarComplete: profile - 
-          CPU/Mem usage: 0.030 sys,  0.160 user,  397.53M mem
+297 Elapsed time:    0:00:04    Fri Oct  9 11:52:35 2026
+298 User CPU time used: 0 seconds
+299 System CPU time used: 0 seconds
+300 pliAppHDL_DumpVarComplete: profile - 
+          CPU/Mem usage: 0.020 sys,  0.160 user,  397.53M mem
                    incr: 0.000 sys,  0.000 user,  1.05M mem
                    accu: 0.000 sys,  0.000 user,  8.31M mem
               accu incr: 0.000 sys,  0.000 user,  1.05M mem
@@ -402,63 +401,63 @@ argv[0]=./simv_qrs_standalone
                  incr: 0 var,  0 idcode,  0 callback
                  accu: 173 var,  133 idcode,  78 callback
             accu incr: 0 var,  0 idcode,  0 callback
-302 Elapsed time:    0:00:03    Wed Oct  7 14:17:29 2026
-303 User CPU time used: 0 seconds
-304 System CPU time used: 0 seconds
-305 sps_call_fsdbDumpMDA_vd_main at 0 : ../tb/tb_ecg_wtsee_optimized_top.v(354)
-306 *Verdi* : Begin traversing the MDAs, layer (0).
-307 *Verdi* : Enable +mda and +packedmda dumping.
-308 *Verdi* : End of traversing the MDAs.
-309 pliAppHDL_DumpVarComplete traverse var: profile - 
-          CPU/Mem usage: 0.030 sys,  0.160 user,  397.53M mem
-                   incr: 0.000 sys,  0.000 user,  0.00M mem
-                   accu: 0.000 sys,  0.000 user,  0.00M mem
-              accu incr: 0.000 sys,  0.000 user,  0.00M mem
+301 Elapsed time:    0:00:04    Fri Oct  9 11:52:35 2026
+302 User CPU time used: 0 seconds
+303 System CPU time used: 0 seconds
+304 sps_call_fsdbDumpMDA_vd_main at 0 : ../tb/tb_ecg_wtsee_optimized_top.v(354)
+305 *Verdi* : Begin traversing the MDAs, layer (0).
+306 *Verdi* : Enable +mda and +packedmda dumping.
+307 *Verdi* : End of traversing the MDAs.
+308 pliAppHDL_DumpVarComplete traverse var: profile - 
+          CPU/Mem usage: 0.020 sys,  0.170 user,  397.53M mem
+                   incr: 0.000 sys,  0.010 user,  0.00M mem
+                   accu: 0.000 sys,  0.010 user,  0.00M mem
+              accu incr: 0.000 sys,  0.010 user,  0.00M mem
 
           Count usage: 4359 var,  4319 idcode,  83 callback
                  incr: 4186 var,  4186 idcode,  5 callback
                  accu: 4186 var,  4186 idcode,  5 callback
             accu incr: 4186 var,  4186 idcode,  5 callback
-310 Elapsed time:    0:00:03    Wed Oct  7 14:17:29 2026
-311 User CPU time used: 0 seconds
-312 System CPU time used: 0 seconds
-313 pliAppHDL_DumpVarComplete: profile - 
-          CPU/Mem usage: 0.030 sys,  0.160 user,  397.53M mem
+309 Elapsed time:    0:00:04    Fri Oct  9 11:52:35 2026
+310 User CPU time used: 0 seconds
+311 System CPU time used: 0 seconds
+312 pliAppHDL_DumpVarComplete: profile - 
+          CPU/Mem usage: 0.020 sys,  0.170 user,  397.53M mem
                    incr: 0.000 sys,  0.000 user,  0.00M mem
-                   accu: 0.000 sys,  0.000 user,  0.00M mem
+                   accu: 0.000 sys,  0.010 user,  0.00M mem
               accu incr: 0.000 sys,  0.000 user,  0.00M mem
 
           Count usage: 4359 var,  4319 idcode,  83 callback
                  incr: 0 var,  0 idcode,  0 callback
                  accu: 4186 var,  4186 idcode,  5 callback
             accu incr: 0 var,  0 idcode,  0 callback
-314 Elapsed time:    0:00:03    Wed Oct  7 14:17:29 2026
-315 User CPU time used: 0 seconds
-316 System CPU time used: 0 seconds
-317 End of simulation at 72105000
-318 Memory usage: 398.582 M
-319 Maximum resident set size: 124 MB
-320 Hard page faults: 0
-321 Soft page faults: 13906
-322 Elapsed time:    0:00:04    Wed Oct  7 14:17:30 2026
-323 User CPU time used: 0 seconds
-324 System CPU time used: 0 seconds
-325 Begin FSDB profile info:
-326 FSDB Writer : bc1(14619) bcn(100102) mtf/stf(0/0)
-FSDB Writer elapsed time : flush(0.049207) io wait(0.000000) theadpool wait(0.000000)
+313 Elapsed time:    0:00:04    Fri Oct  9 11:52:35 2026
+314 User CPU time used: 0 seconds
+315 System CPU time used: 0 seconds
+316 End of simulation at 72105000
+317 Memory usage: 398.586 M
+318 Maximum resident set size: 427 MB
+319 Hard page faults: 83
+320 Soft page faults: 14024
+321 Elapsed time:    0:00:04    Fri Oct  9 11:52:35 2026
+322 User CPU time used: 0 seconds
+323 System CPU time used: 0 seconds
+324 Begin FSDB profile info:
+325 FSDB Writer : bc1(14619) bcn(100102) mtf/stf(0/0)
+FSDB Writer elapsed time : flush(0.049507) io wait(0.000000) theadpool wait(0.000000)
 FSDB Writer cpu time : MT Compression : 0
-327 End FSDB profile info
-328 FSDB closed. Name: qrs_standalone.fsdb Size: 94824
-329 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:64MB
-330                      - BlockUsed:1 Acquire:0 BufferUsed:1960999
-331                      - Flush:4 Expand:0 ProducerWait:0 ConsumerWait:0
-332                      - MainProducerTime:0.246179368 TotalConsumerTime:0.000000000
-333                      - ElapsedTime:0.317622000
-334 Producer   0 profile - BlockUsed:2 Acquire:0 BufferUsed:1960999
-335 Consumer   0 profile - Affinity:-1 CPUTime:0.000000000 LifeTime:0.000000000 (-nan%)
-336                      - BlockUsed:2 Acquire:0 BufferUsed:1960999
-337 SimExit
-338 Elapsed time:    0:00:04    Wed Oct  7 14:17:30 2026
-339 User CPU time used: 0 seconds
-340 System CPU time used: 0 seconds
-341 Sim process exit
+326 End FSDB profile info
+327 FSDB closed. Name: qrs_standalone.fsdb Size: 94824
+328 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:64MB
+329                      - BlockUsed:1 Acquire:0 BufferUsed:1960999
+330                      - Flush:4 Expand:0 ProducerWait:0 ConsumerWait:0
+331                      - MainProducerTime:0.238614373 TotalConsumerTime:0.000000000
+332                      - ElapsedTime:0.301312000
+333 Producer   0 profile - BlockUsed:2 Acquire:0 BufferUsed:1960999
+334 Consumer   0 profile - Affinity:-1 CPUTime:0.000000000 LifeTime:0.000000000 (-nan%)
+335                      - BlockUsed:2 Acquire:0 BufferUsed:1960999
+336 SimExit
+337 Elapsed time:    0:00:04    Fri Oct  9 11:52:35 2026
+338 User CPU time used: 0 seconds
+339 System CPU time used: 0 seconds
+340 Sim process exit

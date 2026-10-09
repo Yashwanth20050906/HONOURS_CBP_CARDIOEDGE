@@ -8,7 +8,7 @@ VSRC=..
 TARGET_ARCH=
 
 # Choose name of executable 
-PRODUCTBASE=$(VSRC)/simv
+PRODUCTBASE=$(VSRC)/simv_firmware
 
 PRODUCT=$(PRODUCTBASE)
 
@@ -39,7 +39,7 @@ STDLIB =
 STRIPFLAGS= 
 
 PRE_LDFLAGS= # Loader Flags
-LDFLAGS= -rdynamic  -Wl,-rpath='$$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir -Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib -L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib 
+LDFLAGS= -rdynamic  -Wl,-rpath='$$ORIGIN'/simv_firmware.daidir -Wl,-rpath=./simv_firmware.daidir -Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib -L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib 
 # Picarchive Flags
 PICLDFLAGS= -Wl,-rpath-link=./ 
 PIC_LD=ld
@@ -49,7 +49,7 @@ CRT0=
 # C run time startup
 CRTN=
 # Machine specific libraries
-SYSLIBS=/home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/pli.a -ldl  -lc -lm -lpthread -ldl
+SYSLIBS=-ldl  -lc -lm -lpthread -ldl
 
 # Default defines
 SHELL=/bin/sh
@@ -65,15 +65,15 @@ TMPSPECENV=$(VCSTMPSPECENV)
 CC=$(TMPSPECENV) $(VCS_CC) $(TMPSPECARG)
 
 # C flags for compilation
-CFLAGS=$(STDLIB)-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include   
+CFLAGS=$(STDLIB)-w  -pipe -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include   
 
-CFLAGS_O0=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O0  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_O0=-w  -pipe -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O0  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
-CFLAGS_CG=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_CG=-w  -pipe -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
-CFLAGS_CG_CLIB=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_CG_CLIB=-w  -pipe -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
-CFLAGS_RMAR=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_RMAR=-w  -pipe -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
 CFLAGS_CG+=$(STDLIB)
 CFLAGS_CG_CLIB+=$(STDLIB)

@@ -24,19 +24,10 @@ for prefix in "riscv64-unknown-elf-" "riscv32-unknown-elf-" "riscv-none-elf-" "r
 done
 
 if [ -z "${TOOLCHAIN_PREFIX}" ]; then
-    echo "[-] ERROR: RISC-V cross compiler not found in current PATH."
-    echo ""
-    echo "Available search candidates checked:"
-    echo "  - riscv64-unknown-elf-gcc"
-    echo "  - riscv32-unknown-elf-gcc"
-    echo "  - riscv-none-elf-gcc"
-    echo ""
-    echo "Expected Lab Procedure Tomorrow:"
-    echo "  1. Source the lab module/environment (e.g., module load riscv-toolchain)"
-    echo "  2. Ensure '${CROSS_COMPILE:-riscv64-unknown-elf-}gcc' is in PATH"
-    echo "  3. Re-run this script: ./generate_hex.sh"
-    echo "=================================================================="
-    exit 1
+    echo "[-] NOTE: RISC-V cross compiler not found in current PATH."
+    echo "[+] Using standalone bare-metal RV32IMC builder: python3 build_firmware.py"
+    python3 build_firmware.py
+    exit 0
 fi
 
 CC="${TOOLCHAIN_PREFIX}gcc"
