@@ -8,7 +8,7 @@ Disassembly of section .text:
    00000008:  00018137          lui sp, 0x18
    0000000c:  000141b7          lui gp, 0x14
    00000010:  80018193          addi gp, gp, -0x800
-   00000014:  239000ef          jal ra, main
+   00000014:  33d000ef          jal ra, main
 00000018 <halt_loop>:
    00000018:  10500073          wfi
    0000001c:  ffdff06f          j halt_loop
@@ -59,14 +59,14 @@ Disassembly of section .text:
    000000b0:  00912623          sw s1, 12(sp)
    000000b4:  00050413          mv s0, a0
    000000b8:  00001537          lui a0, 0x1
-   000000bc:  54a50513          addi a0, a0, 1354 # <str_0x>
+   000000bc:  68a50513          addi a0, a0, 1674 # <str_0x>
    000000c0:  f9dff0ef          jal ra, uart_puts
    000000c4:  01c00493          li s1, 28
 000000c8 <uart_puthex_loop>:
    000000c8:  00945533          srl a0, s0, s1
    000000cc:  00f57513          andi a0, a0, 0xF
    000000d0:  000012b7          lui t0, 0x1
-   000000d4:  54d28293          addi t0, t0, 1357 # <hex_chars>
+   000000d4:  68d28293          addi t0, t0, 1677 # <hex_chars>
    000000d8:  00a282b3          add t0, t0, a0
    000000dc:  0002c503          lbu a0, 0(t0)
    000000e0:  f65ff0ef          jal ra, uart_putc
@@ -121,7 +121,7 @@ Disassembly of section .text:
    0000018c:  00912623          sw s1, 12(sp)
    00000190:  00059a63          bnez a1, pct_calc
    00000194:  00001537          lui a0, 0x1
-   00000198:  50f50513          addi a0, a0, 1295 # <str_na>
+   00000198:  64f50513          addi a0, a0, 1615 # <str_na>
    0000019c:  ec1ff0ef          jal ra, uart_puts
    000001a0:  0440006f          j pct_done
 000001a4 <pct_calc>:
@@ -147,911 +147,973 @@ Disassembly of section .text:
    000001ec:  01412083          lw ra, 20(sp)
    000001f0:  01810113          addi sp, sp, 24
    000001f4:  00008067          ret
-000001f8 <test_uart>:
-   000001f8:  ff010113          addi sp, sp, -16
-   000001fc:  00112623          sw ra, 12(sp)
-   00000200:  00001537          lui a0, 0x1
-   00000204:  bb750513          addi a0, a0, -1097 # <str_uart_test>
-   00000208:  e55ff0ef          jal ra, uart_puts
-   0000020c:  e15ff0ef          jal ra, uart_init
-   00000210:  400002b7          lui t0, 0x40000
-   00000214:  00c2a303          lw t1, 12(t0)
-   00000218:  01f37393          andi t2, t1, 0x1F
-   0000021c:  00300e13          li t3, 3
-   00000220:  03c39c63          bne t2, t3, test_uart_fail
-   00000224:  0142a303          lw t1, 20(t0)
-   00000228:  02037393          andi t2, t1, 0x20
-   0000022c:  02038663          beqz t2, test_uart_fail
-   00000230:  000102b7          lui t0, 0x10
-   00000234:  00300313          li t1, 3
-   00000238:  0062a823          sw t1, 16(t0)
-   0000023c:  00001537          lui a0, 0x1
-   00000240:  bc250513          addi a0, a0, -1086 # <str_uart_pass>
-   00000244:  e19ff0ef          jal ra, uart_puts
-   00000248:  00100513          li a0, 1
-   0000024c:  00c12083          lw ra, 12(sp)
-   00000250:  01010113          addi sp, sp, 16
-   00000254:  00008067          ret
-00000258 <test_uart_fail>:
-   00000258:  00001537          lui a0, 0x1
-   0000025c:  bfb50513          addi a0, a0, -1029 # <str_uart_fail>
-   00000260:  dfdff0ef          jal ra, uart_puts
-   00000264:  00000513          li a0, 0
-   00000268:  00c12083          lw ra, 12(sp)
-   0000026c:  01010113          addi sp, sp, 16
-   00000270:  00008067          ret
-00000274 <test_gpio>:
-   00000274:  ff010113          addi sp, sp, -16
-   00000278:  00112623          sw ra, 12(sp)
-   0000027c:  00001537          lui a0, 0x1
-   00000280:  c1550513          addi a0, a0, -1003 # <str_gpio_test>
-   00000284:  dd9ff0ef          jal ra, uart_puts
-   00000288:  400022b7          lui t0, 0x40002
-   0000028c:  0ff00313          li t1, 0xFF
-   00000290:  0062a423          sw t1, 8(t0)
-   00000294:  0a500313          li t1, 0xA5
-   00000298:  0062a223          sw t1, 4(t0)
-   0000029c:  0042a383          lw t2, 4(t0)
-   000002a0:  0ff3f393          andi t2, t2, 0xFF
-   000002a4:  04639c63          bne t2, t1, test_gpio_fail
-   000002a8:  05a00313          li t1, 0x5A
-   000002ac:  0062a223          sw t1, 4(t0)
-   000002b0:  0042a383          lw t2, 4(t0)
-   000002b4:  0ff3f393          andi t2, t2, 0xFF
-   000002b8:  04639263          bne t2, t1, test_gpio_fail
-   000002bc:  00500313          li t1, 0x05
-   000002c0:  0262a023          sw t1, 32(t0)
-   000002c4:  0042a383          lw t2, 4(t0)
-   000002c8:  0ff3f393          andi t2, t2, 0xFF
-   000002cc:  05f00e13          li t3, 0x5F
-   000002d0:  03c39663          bne t2, t3, test_gpio_fail
-   000002d4:  000102b7          lui t0, 0x10
-   000002d8:  05f00313          li t1, 0x5F
-   000002dc:  0062aa23          sw t1, 20(t0)
-   000002e0:  00001537          lui a0, 0x1
-   000002e4:  c2050513          addi a0, a0, -992 # <str_gpio_pass>
-   000002e8:  d75ff0ef          jal ra, uart_puts
-   000002ec:  00100513          li a0, 1
-   000002f0:  00c12083          lw ra, 12(sp)
-   000002f4:  01010113          addi sp, sp, 16
-   000002f8:  00008067          ret
-000002fc <test_gpio_fail>:
-   000002fc:  00001537          lui a0, 0x1
-   00000300:  c5750513          addi a0, a0, -937 # <str_gpio_fail>
-   00000304:  d59ff0ef          jal ra, uart_puts
-   00000308:  00000513          li a0, 0
-   0000030c:  00c12083          lw ra, 12(sp)
-   00000310:  01010113          addi sp, sp, 16
-   00000314:  00008067          ret
-00000318 <test_timer>:
-   00000318:  ff010113          addi sp, sp, -16
-   0000031c:  00112623          sw ra, 12(sp)
-   00000320:  00001537          lui a0, 0x1
-   00000324:  c7150513          addi a0, a0, -911 # <str_timer_test>
-   00000328:  d35ff0ef          jal ra, uart_puts
-   0000032c:  400042b7          lui t0, 0x40004
-   00000330:  06400313          li t1, 100
-   00000334:  0062a223          sw t1, 4(t0)
-   00000338:  0042a383          lw t2, 4(t0)
-   0000033c:  04639063          bne t2, t1, test_timer_fail
-   00000340:  00300313          li t1, 3
-   00000344:  0062a023          sw t1, 0(t0)
-   00000348:  0002a383          lw t2, 0(t0)
-   0000034c:  02639863          bne t2, t1, test_timer_fail
-   00000350:  0002a023          sw zero, 0(t0)
-   00000354:  000102b7          lui t0, 0x10
-   00000358:  06400313          li t1, 100
-   0000035c:  0062ac23          sw t1, 24(t0)
-   00000360:  00001537          lui a0, 0x1
-   00000364:  c7d50513          addi a0, a0, -899 # <str_timer_pass>
-   00000368:  cf5ff0ef          jal ra, uart_puts
-   0000036c:  00100513          li a0, 1
-   00000370:  00c12083          lw ra, 12(sp)
-   00000374:  01010113          addi sp, sp, 16
-   00000378:  00008067          ret
-0000037c <test_timer_fail>:
-   0000037c:  00001537          lui a0, 0x1
-   00000380:  cb450513          addi a0, a0, -844 # <str_timer_fail>
-   00000384:  cd9ff0ef          jal ra, uart_puts
-   00000388:  00000513          li a0, 0
-   0000038c:  00c12083          lw ra, 12(sp)
-   00000390:  01010113          addi sp, sp, 16
-   00000394:  00008067          ret
-00000398 <test_adc>:
-   00000398:  ff010113          addi sp, sp, -16
-   0000039c:  00112623          sw ra, 12(sp)
-   000003a0:  00001537          lui a0, 0x1
-   000003a4:  ccf50513          addi a0, a0, -817 # <str_adc_test>
-   000003a8:  cb5ff0ef          jal ra, uart_puts
-   000003ac:  4000e2b7          lui t0, 0x4000E
-   000003b0:  00100313          li t1, 1
-   000003b4:  0062a023          sw t1, 0(t0)
-   000003b8:  0002a383          lw t2, 0(t0)
-   000003bc:  02639c63          bne t2, t1, test_adc_fail
-   000003c0:  0042ae03          lw t3, 4(t0)
-   000003c4:  004e7e93          andi t4, t3, 4
-   000003c8:  020e8663          beqz t4, test_adc_fail
-   000003cc:  0002a023          sw zero, 0(t0)
-   000003d0:  000102b7          lui t0, 0x10
-   000003d4:  01c2ae23          sw t3, 28(t0)
-   000003d8:  00001537          lui a0, 0x1
-   000003dc:  cd950513          addi a0, a0, -807 # <str_adc_pass>
-   000003e0:  c7dff0ef          jal ra, uart_puts
-   000003e4:  00100513          li a0, 1
-   000003e8:  00c12083          lw ra, 12(sp)
-   000003ec:  01010113          addi sp, sp, 16
-   000003f0:  00008067          ret
-000003f4 <test_adc_fail>:
-   000003f4:  00001537          lui a0, 0x1
-   000003f8:  d1a50513          addi a0, a0, -742 # <str_adc_fail>
-   000003fc:  c61ff0ef          jal ra, uart_puts
-   00000400:  00000513          li a0, 0
-   00000404:  00c12083          lw ra, 12(sp)
-   00000408:  01010113          addi sp, sp, 16
-   0000040c:  00008067          ret
-00000410 <test_fir>:
-   00000410:  ff010113          addi sp, sp, -16
-   00000414:  00112623          sw ra, 12(sp)
-   00000418:  00001537          lui a0, 0x1
-   0000041c:  d3350513          addi a0, a0, -717 # <str_fir_test>
-   00000420:  c3dff0ef          jal ra, uart_puts
-   00000424:  4000c2b7          lui t0, 0x4000C
-   00000428:  00100313          li t1, 1
-   0000042c:  0062a023          sw t1, 0(t0)
-   00000430:  0002a383          lw t2, 0(t0)
-   00000434:  02639c63          bne t2, t1, test_fir_fail
-   00000438:  10000313          li t1, 0x0100
-   0000043c:  0062a823          sw t1, 16(t0)
-   00000440:  0102a383          lw t2, 16(t0)
-   00000444:  02639463          bne t2, t1, test_fir_fail
-   00000448:  000102b7          lui t0, 0x10
-   0000044c:  0272a023          sw t2, 32(t0)
-   00000450:  00001537          lui a0, 0x1
-   00000454:  d3d50513          addi a0, a0, -707 # <str_fir_pass>
-   00000458:  c05ff0ef          jal ra, uart_puts
-   0000045c:  00100513          li a0, 1
-   00000460:  00c12083          lw ra, 12(sp)
-   00000464:  01010113          addi sp, sp, 16
-   00000468:  00008067          ret
-0000046c <test_fir_fail>:
-   0000046c:  00001537          lui a0, 0x1
-   00000470:  d7a50513          addi a0, a0, -646 # <str_fir_fail>
-   00000474:  be9ff0ef          jal ra, uart_puts
-   00000478:  00000513          li a0, 0
-   0000047c:  00c12083          lw ra, 12(sp)
-   00000480:  01010113          addi sp, sp, 16
-   00000484:  00008067          ret
-00000488 <test_spi>:
-   00000488:  ff010113          addi sp, sp, -16
-   0000048c:  00112623          sw ra, 12(sp)
-   00000490:  00001537          lui a0, 0x1
-   00000494:  d9350513          addi a0, a0, -621 # <str_spi_test>
-   00000498:  bc5ff0ef          jal ra, uart_puts
-   0000049c:  400102b7          lui t0, 0x40010
-   000004a0:  00a00313          li t1, 0x0A
-   000004a4:  0462a023          sw t1, 0x40(t0)
-   000004a8:  00600313          li t1, 0x06
-   000004ac:  0662a023          sw t1, 0x60(t0)
-   000004b0:  0602a383          lw t2, 0x60(t0)
-   000004b4:  04639263          bne t2, t1, test_spi_fail
-   000004b8:  0642ae03          lw t3, 0x64(t0)
-   000004bc:  004e7e93          andi t4, t3, 4
-   000004c0:  020e8c63          beqz t4, test_spi_fail
-   000004c4:  0042af03          lw t5, 4(t0)
-   000004c8:  61626fb7          lui t6, 0x61626
-   000004cc:  364f8f93          addi t6, t6, 0x364
-   000004d0:  03ff1463          bne t5, t6, test_spi_fail
-   000004d4:  000102b7          lui t0, 0x10
-   000004d8:  03c2a223          sw t3, 36(t0)
-   000004dc:  00001537          lui a0, 0x1
-   000004e0:  d9d50513          addi a0, a0, -611 # <str_spi_pass>
-   000004e4:  b79ff0ef          jal ra, uart_puts
-   000004e8:  00100513          li a0, 1
-   000004ec:  00c12083          lw ra, 12(sp)
-   000004f0:  01010113          addi sp, sp, 16
-   000004f4:  00008067          ret
-000004f8 <test_spi_fail>:
-   000004f8:  00001537          lui a0, 0x1
-   000004fc:  de050513          addi a0, a0, -544 # <str_spi_fail>
-   00000500:  b5dff0ef          jal ra, uart_puts
-   00000504:  00000513          li a0, 0
-   00000508:  00c12083          lw ra, 12(sp)
-   0000050c:  01010113          addi sp, sp, 16
-   00000510:  00008067          ret
-00000514 <run_ecg_analysis>:
-   00000514:  f8010113          addi sp, sp, -128
-   00000518:  06112e23          sw ra, 124(sp)
-   0000051c:  06812c23          sw s0, 120(sp)
-   00000520:  06912a23          sw s1, 116(sp)
-   00000524:  07212823          sw s2, 112(sp)
-   00000528:  07312623          sw s3, 108(sp)
-   0000052c:  07412423          sw s4, 104(sp)
-   00000530:  07512223          sw s5, 100(sp)
-   00000534:  00012023          sw zero, 0(sp)
-   00000538:  00012223          sw zero, 4(sp)
-   0000053c:  00012423          sw zero, 8(sp)
-   00000540:  00012623          sw zero, 12(sp)
-   00000544:  00012823          sw zero, 16(sp)
-   00000548:  00012a23          sw zero, 20(sp)
-   0000054c:  00012c23          sw zero, 24(sp)
-   00000550:  00012e23          sw zero, 28(sp)
-   00000554:  02012023          sw zero, 32(sp)
-   00000558:  02012223          sw zero, 36(sp)
-   0000055c:  02012423          sw zero, 40(sp)
-   00000560:  02012623          sw zero, 44(sp)
-   00000564:  02012823          sw zero, 48(sp)
+000001f8 <fw_mailbox_start>:
+   000001f8:  000102b7          lui t0, 0x10
+   000001fc:  06a2a023          sw a0, 96(t0)
+   00000200:  00100313          li t1, 1
+   00000204:  0662a223          sw t1, 100(t0)
+   00000208:  0602a423          sw zero, 104(t0)
+   0000020c:  00008067          ret
+00000210 <fw_mailbox_end>:
+   00000210:  000102b7          lui t0, 0x10
+   00000214:  06a2a423          sw a0, 104(t0)
+   00000218:  06b2a623          sw a1, 108(t0)
+   0000021c:  00300313          li t1, 3
+   00000220:  0662a223          sw t1, 100(t0)
+   00000224:  00008067          ret
+00000228 <test_uart>:
+   00000228:  ff010113          addi sp, sp, -16
+   0000022c:  00112623          sw ra, 12(sp)
+   00000230:  00500513          li a0, 5
+   00000234:  fc5ff0ef          jal ra, fw_mailbox_start
+   00000238:  00001537          lui a0, 0x1
+   0000023c:  cf750513          addi a0, a0, -777 # <str_uart_test>
+   00000240:  e1dff0ef          jal ra, uart_puts
+   00000244:  dddff0ef          jal ra, uart_init
+   00000248:  400002b7          lui t0, 0x40000
+   0000024c:  00c2a303          lw t1, 12(t0)
+   00000250:  01f37393          andi t2, t1, 0x1F
+   00000254:  00300e13          li t3, 3
+   00000258:  05c39263          bne t2, t3, test_uart_fail
+   0000025c:  0142a303          lw t1, 20(t0)
+   00000260:  02037393          andi t2, t1, 0x20
+   00000264:  02038c63          beqz t2, test_uart_fail
+   00000268:  000102b7          lui t0, 0x10
+   0000026c:  00300313          li t1, 3
+   00000270:  0062a823          sw t1, 16(t0)
+   00000274:  00100513          li a0, 1
+   00000278:  00300593          li a1, 3
+   0000027c:  f95ff0ef          jal ra, fw_mailbox_end
+   00000280:  00001537          lui a0, 0x1
+   00000284:  d0250513          addi a0, a0, -766 # <str_uart_pass>
+   00000288:  dd5ff0ef          jal ra, uart_puts
+   0000028c:  00100513          li a0, 1
+   00000290:  00c12083          lw ra, 12(sp)
+   00000294:  01010113          addi sp, sp, 16
+   00000298:  00008067          ret
+0000029c <test_uart_fail>:
+   0000029c:  00200513          li a0, 2
+   000002a0:  00000593          li a1, 0
+   000002a4:  f6dff0ef          jal ra, fw_mailbox_end
+   000002a8:  00001537          lui a0, 0x1
+   000002ac:  d3b50513          addi a0, a0, -709 # <str_uart_fail>
+   000002b0:  dadff0ef          jal ra, uart_puts
+   000002b4:  00000513          li a0, 0
+   000002b8:  00c12083          lw ra, 12(sp)
+   000002bc:  01010113          addi sp, sp, 16
+   000002c0:  00008067          ret
+000002c4 <test_gpio>:
+   000002c4:  ff010113          addi sp, sp, -16
+   000002c8:  00112623          sw ra, 12(sp)
+   000002cc:  00600513          li a0, 6
+   000002d0:  f29ff0ef          jal ra, fw_mailbox_start
+   000002d4:  00001537          lui a0, 0x1
+   000002d8:  d5550513          addi a0, a0, -683 # <str_gpio_test>
+   000002dc:  d81ff0ef          jal ra, uart_puts
+   000002e0:  400022b7          lui t0, 0x40002
+   000002e4:  0ff00313          li t1, 0xFF
+   000002e8:  0062a423          sw t1, 8(t0)
+   000002ec:  0a500313          li t1, 0xA5
+   000002f0:  0062a223          sw t1, 4(t0)
+   000002f4:  0042a383          lw t2, 4(t0)
+   000002f8:  0ff3f393          andi t2, t2, 0xFF
+   000002fc:  06639263          bne t2, t1, test_gpio_fail
+   00000300:  05a00313          li t1, 0x5A
+   00000304:  0062a223          sw t1, 4(t0)
+   00000308:  0042a383          lw t2, 4(t0)
+   0000030c:  0ff3f393          andi t2, t2, 0xFF
+   00000310:  04639863          bne t2, t1, test_gpio_fail
+   00000314:  00500313          li t1, 0x05
+   00000318:  0262a023          sw t1, 32(t0)
+   0000031c:  0042a383          lw t2, 4(t0)
+   00000320:  0ff3f393          andi t2, t2, 0xFF
+   00000324:  05f00e13          li t3, 0x5F
+   00000328:  03c39c63          bne t2, t3, test_gpio_fail
+   0000032c:  000102b7          lui t0, 0x10
+   00000330:  05f00313          li t1, 0x5F
+   00000334:  0062aa23          sw t1, 20(t0)
+   00000338:  00100513          li a0, 1
+   0000033c:  05f00593          li a1, 0x5F
+   00000340:  ed1ff0ef          jal ra, fw_mailbox_end
+   00000344:  00001537          lui a0, 0x1
+   00000348:  d6050513          addi a0, a0, -672 # <str_gpio_pass>
+   0000034c:  d11ff0ef          jal ra, uart_puts
+   00000350:  00100513          li a0, 1
+   00000354:  00c12083          lw ra, 12(sp)
+   00000358:  01010113          addi sp, sp, 16
+   0000035c:  00008067          ret
+00000360 <test_gpio_fail>:
+   00000360:  00200513          li a0, 2
+   00000364:  00000593          li a1, 0
+   00000368:  ea9ff0ef          jal ra, fw_mailbox_end
+   0000036c:  00001537          lui a0, 0x1
+   00000370:  d9750513          addi a0, a0, -617 # <str_gpio_fail>
+   00000374:  ce9ff0ef          jal ra, uart_puts
+   00000378:  00000513          li a0, 0
+   0000037c:  00c12083          lw ra, 12(sp)
+   00000380:  01010113          addi sp, sp, 16
+   00000384:  00008067          ret
+00000388 <test_timer>:
+   00000388:  ff010113          addi sp, sp, -16
+   0000038c:  00112623          sw ra, 12(sp)
+   00000390:  00700513          li a0, 7
+   00000394:  e65ff0ef          jal ra, fw_mailbox_start
+   00000398:  00001537          lui a0, 0x1
+   0000039c:  db150513          addi a0, a0, -591 # <str_timer_test>
+   000003a0:  cbdff0ef          jal ra, uart_puts
+   000003a4:  400042b7          lui t0, 0x40004
+   000003a8:  06400313          li t1, 100
+   000003ac:  0062a223          sw t1, 4(t0)
+   000003b0:  0042a383          lw t2, 4(t0)
+   000003b4:  04639663          bne t2, t1, test_timer_fail
+   000003b8:  00300313          li t1, 3
+   000003bc:  0062a023          sw t1, 0(t0)
+   000003c0:  0002a383          lw t2, 0(t0)
+   000003c4:  02639e63          bne t2, t1, test_timer_fail
+   000003c8:  0002a023          sw zero, 0(t0)
+   000003cc:  000102b7          lui t0, 0x10
+   000003d0:  06400313          li t1, 100
+   000003d4:  0062ac23          sw t1, 24(t0)
+   000003d8:  00100513          li a0, 1
+   000003dc:  06400593          li a1, 100
+   000003e0:  e31ff0ef          jal ra, fw_mailbox_end
+   000003e4:  00001537          lui a0, 0x1
+   000003e8:  dbd50513          addi a0, a0, -579 # <str_timer_pass>
+   000003ec:  c71ff0ef          jal ra, uart_puts
+   000003f0:  00100513          li a0, 1
+   000003f4:  00c12083          lw ra, 12(sp)
+   000003f8:  01010113          addi sp, sp, 16
+   000003fc:  00008067          ret
+00000400 <test_timer_fail>:
+   00000400:  00200513          li a0, 2
+   00000404:  00000593          li a1, 0
+   00000408:  e09ff0ef          jal ra, fw_mailbox_end
+   0000040c:  00001537          lui a0, 0x1
+   00000410:  df450513          addi a0, a0, -524 # <str_timer_fail>
+   00000414:  c49ff0ef          jal ra, uart_puts
+   00000418:  00000513          li a0, 0
+   0000041c:  00c12083          lw ra, 12(sp)
+   00000420:  01010113          addi sp, sp, 16
+   00000424:  00008067          ret
+00000428 <test_adc>:
+   00000428:  ff010113          addi sp, sp, -16
+   0000042c:  00112623          sw ra, 12(sp)
+   00000430:  00900513          li a0, 9
+   00000434:  dc5ff0ef          jal ra, fw_mailbox_start
+   00000438:  00001537          lui a0, 0x1
+   0000043c:  e0f50513          addi a0, a0, -497 # <str_adc_test>
+   00000440:  c1dff0ef          jal ra, uart_puts
+   00000444:  4000e2b7          lui t0, 0x4000E
+   00000448:  00100313          li t1, 1
+   0000044c:  0062a023          sw t1, 0(t0)
+   00000450:  0002a383          lw t2, 0(t0)
+   00000454:  04639263          bne t2, t1, test_adc_fail
+   00000458:  0042ae03          lw t3, 4(t0)
+   0000045c:  004e7e93          andi t4, t3, 4
+   00000460:  020e8c63          beqz t4, test_adc_fail
+   00000464:  0002a023          sw zero, 0(t0)
+   00000468:  000102b7          lui t0, 0x10
+   0000046c:  01c2ae23          sw t3, 28(t0)
+   00000470:  00100513          li a0, 1
+   00000474:  000e0593          mv a1, t3
+   00000478:  d99ff0ef          jal ra, fw_mailbox_end
+   0000047c:  00001537          lui a0, 0x1
+   00000480:  e1950513          addi a0, a0, -487 # <str_adc_pass>
+   00000484:  bd9ff0ef          jal ra, uart_puts
+   00000488:  00100513          li a0, 1
+   0000048c:  00c12083          lw ra, 12(sp)
+   00000490:  01010113          addi sp, sp, 16
+   00000494:  00008067          ret
+00000498 <test_adc_fail>:
+   00000498:  00200513          li a0, 2
+   0000049c:  00000593          li a1, 0
+   000004a0:  d71ff0ef          jal ra, fw_mailbox_end
+   000004a4:  00001537          lui a0, 0x1
+   000004a8:  e5a50513          addi a0, a0, -422 # <str_adc_fail>
+   000004ac:  bb1ff0ef          jal ra, uart_puts
+   000004b0:  00000513          li a0, 0
+   000004b4:  00c12083          lw ra, 12(sp)
+   000004b8:  01010113          addi sp, sp, 16
+   000004bc:  00008067          ret
+000004c0 <test_fir>:
+   000004c0:  ff010113          addi sp, sp, -16
+   000004c4:  00112623          sw ra, 12(sp)
+   000004c8:  00800513          li a0, 8
+   000004cc:  d2dff0ef          jal ra, fw_mailbox_start
+   000004d0:  00001537          lui a0, 0x1
+   000004d4:  e7350513          addi a0, a0, -397 # <str_fir_test>
+   000004d8:  b85ff0ef          jal ra, uart_puts
+   000004dc:  4000c2b7          lui t0, 0x4000C
+   000004e0:  00100313          li t1, 1
+   000004e4:  0062a023          sw t1, 0(t0)
+   000004e8:  0002a383          lw t2, 0(t0)
+   000004ec:  04639263          bne t2, t1, test_fir_fail
+   000004f0:  10000313          li t1, 0x0100
+   000004f4:  0062a823          sw t1, 16(t0)
+   000004f8:  0102a383          lw t2, 16(t0)
+   000004fc:  02639a63          bne t2, t1, test_fir_fail
+   00000500:  000102b7          lui t0, 0x10
+   00000504:  0272a023          sw t2, 32(t0)
+   00000508:  00100513          li a0, 1
+   0000050c:  00038593          mv a1, t2
+   00000510:  d01ff0ef          jal ra, fw_mailbox_end
+   00000514:  00001537          lui a0, 0x1
+   00000518:  e7d50513          addi a0, a0, -387 # <str_fir_pass>
+   0000051c:  b41ff0ef          jal ra, uart_puts
+   00000520:  00100513          li a0, 1
+   00000524:  00c12083          lw ra, 12(sp)
+   00000528:  01010113          addi sp, sp, 16
+   0000052c:  00008067          ret
+00000530 <test_fir_fail>:
+   00000530:  00200513          li a0, 2
+   00000534:  00000593          li a1, 0
+   00000538:  cd9ff0ef          jal ra, fw_mailbox_end
+   0000053c:  00001537          lui a0, 0x1
+   00000540:  eba50513          addi a0, a0, -326 # <str_fir_fail>
+   00000544:  b19ff0ef          jal ra, uart_puts
+   00000548:  00000513          li a0, 0
+   0000054c:  00c12083          lw ra, 12(sp)
+   00000550:  01010113          addi sp, sp, 16
+   00000554:  00008067          ret
+00000558 <test_spi>:
+   00000558:  ff010113          addi sp, sp, -16
+   0000055c:  00112623          sw ra, 12(sp)
+   00000560:  00a00513          li a0, 10
+   00000564:  c95ff0ef          jal ra, fw_mailbox_start
    00000568:  00001537          lui a0, 0x1
-   0000056c:  df950513          addi a0, a0, -519 # <str_app_hdr>
+   0000056c:  ed350513          addi a0, a0, -301 # <str_spi_test>
    00000570:  aedff0ef          jal ra, uart_puts
-   00000574:  000012b7          lui t0, 0x1
-   00000578:  55e28293          addi t0, t0, 1374 # <num_ecg_records>
-   0000057c:  0002a403          lw s0, 0(t0)
-   00000580:  00000493          li s1, 0
-00000584 <record_loop>:
-   00000584:  2c84d663          bge s1, s0, record_loop_done
-   00000588:  02912a23          sw s1, 52(sp)
-   0000058c:  000012b7          lui t0, 0x1
-   00000590:  56228293          addi t0, t0, 1378 # <ecg_records_table>
-   00000594:  02400313          li t1, 36
-   00000598:  026483b3          mul t2, s1, t1
-   0000059c:  00728933          add s2, t0, t2
-   000005a0:  03212c23          sw s2, 56(sp)
-   000005a4:  00892e03          lw t3, 8(s2)
-   000005a8:  03c12e23          sw t3, 60(sp)
-   000005ac:  00c92e03          lw t3, 12(s2)
-   000005b0:  05c12023          sw t3, 64(sp)
-   000005b4:  01092e03          lw t3, 16(s2)
-   000005b8:  05c12223          sw t3, 68(sp)
-   000005bc:  04012423          sw zero, 72(sp)
-   000005c0:  04012623          sw zero, 76(sp)
-   000005c4:  04012823          sw zero, 80(sp)
-   000005c8:  04012a23          sw zero, 84(sp)
-   000005cc:  04012c23          sw zero, 88(sp)
-   000005d0:  04012e23          sw zero, 92(sp)
-   000005d4:  400122b7          lui t0, 0x40012
-   000005d8:  0002a023          sw zero, 0(t0)
-   000005dc:  00100313          li t1, 1
-   000005e0:  0062a023          sw t1, 0(t0)
-   000005e4:  000102b7          lui t0, 0x10
-   000005e8:  0202a823          sw zero, 48(t0)
-   000005ec:  02092983          lw s3, 32(s2)
-   000005f0:  03c12a03          lw s4, 60(sp)
-   000005f4:  00000a93          li s5, 0
-000005f8 <sample_stream_loop>:
-   000005f8:  074adc63          bge s5, s4, sample_stream_done
-   000005fc:  00099503          lh a0, 0(s3)
-   00000600:  00298993          addi s3, s3, 2
-   00000604:  400122b7          lui t0, 0x40012
-   00000608:  00a2a423          sw a0, 8(t0)
-   0000060c:  000102b7          lui t0, 0x10
-   00000610:  0302a303          lw t1, 48(t0)
-   00000614:  05c12383          lw t2, 92(sp)
-   00000618:  0463f863          bleu t1, t2, sample_stream_step
-   0000061c:  04612e23          sw t1, 92(sp)
-   00000620:  04812e03          lw t3, 72(sp)
-   00000624:  001e0e13          addi t3, t3, 1
-   00000628:  05c12423          sw t3, 72(sp)
-   0000062c:  400122b7          lui t0, 0x40012
-   00000630:  0102a583          lw a1, 16(t0)
-   00000634:  0142a603          lw a2, 20(t0)
-   00000638:  0182a683          lw a3, 24(t0)
-   0000063c:  00069a63          bnez a3, beat_is_abnormal
-   00000640:  04c12e03          lw t3, 76(sp)
-   00000644:  001e0e13          addi t3, t3, 1
-   00000648:  05c12623          sw t3, 76(sp)
-   0000064c:  0100006f          j beat_matched_step
-00000650 <beat_is_abnormal>:
-   00000650:  05012e03          lw t3, 80(sp)
-   00000654:  001e0e13          addi t3, t3, 1
-   00000658:  05c12823          sw t3, 80(sp)
-0000065c <beat_matched_step>:
-   0000065c:  05812e03          lw t3, 88(sp)
-   00000660:  001e0e13          addi t3, t3, 1
-   00000664:  05c12c23          sw t3, 88(sp)
-00000668 <sample_stream_step>:
-   00000668:  001a8a93          addi s5, s5, 1
-   0000066c:  f8dff06f          j sample_stream_loop
-00000670 <sample_stream_done>:
-   00000670:  04012303          lw t1, 64(sp)
-   00000674:  04812383          lw t2, 72(sp)
-   00000678:  0063fa63          bleu t1, t2, check_missed_done
-   0000067c:  40730e33          sub t3, t1, t2
-   00000680:  00c12e83          lw t4, 12(sp)
-   00000684:  01ce8eb3          add t4, t4, t3
-   00000688:  01d12623          sw t4, 12(sp)
-0000068c <check_missed_done>:
-   0000068c:  05012e03          lw t3, 80(sp)
-   00000690:  01c03a33          snez s4, t3
-   00000694:  04412e83          lw t4, 68(sp)
-   00000698:  01da1e63          bne s4, t4, rec_eval_mismatch
-   0000069c:  02c12f03          lw t5, 44(sp)
-   000006a0:  001f0f13          addi t5, t5, 1
-   000006a4:  03e12623          sw t5, 44(sp)
-   000006a8:  00001ab7          lui s5, 0x1
-   000006ac:  055a8a93          addi s5, s5, 85 # <str_match>
-   000006b0:  0180006f          j rec_eval_accumulate
-000006b4 <rec_eval_mismatch>:
-   000006b4:  03012f03          lw t5, 48(sp)
-   000006b8:  001f0f13          addi t5, t5, 1
-   000006bc:  03e12823          sw t5, 48(sp)
-   000006c0:  00001ab7          lui s5, 0x1
-   000006c4:  05ca8a93          addi s5, s5, 92 # <str_mismatch>
-000006c8 <rec_eval_accumulate>:
-   000006c8:  00012303          lw t1, 0(sp)
-   000006cc:  04012383          lw t2, 64(sp)
-   000006d0:  00730333          add t1, t1, t2
-   000006d4:  00612023          sw t1, 0(sp)
-   000006d8:  00412303          lw t1, 4(sp)
-   000006dc:  04812383          lw t2, 72(sp)
-   000006e0:  00730333          add t1, t1, t2
-   000006e4:  00612223          sw t1, 4(sp)
-   000006e8:  00812303          lw t1, 8(sp)
-   000006ec:  05812383          lw t2, 88(sp)
-   000006f0:  00730333          add t1, t1, t2
-   000006f4:  00612423          sw t1, 8(sp)
-   000006f8:  01412303          lw t1, 20(sp)
-   000006fc:  04c12383          lw t2, 76(sp)
-   00000700:  00730333          add t1, t1, t2
-   00000704:  00612a23          sw t1, 20(sp)
-   00000708:  01812303          lw t1, 24(sp)
-   0000070c:  05012383          lw t2, 80(sp)
-   00000710:  00730333          add t1, t1, t2
-   00000714:  00612c23          sw t1, 24(sp)
-   00000718:  02012303          lw t1, 32(sp)
-   0000071c:  00130313          addi t1, t1, 1
-   00000720:  02612023          sw t1, 32(sp)
-   00000724:  000e8a63          beqz t4, acc_normal_record
-   00000728:  02812303          lw t1, 40(sp)
-   0000072c:  00130313          addi t1, t1, 1
-   00000730:  02612423          sw t1, 40(sp)
-   00000734:  0100006f          j print_record_report
-00000738 <acc_normal_record>:
-   00000738:  02412303          lw t1, 36(sp)
-   0000073c:  00130313          addi t1, t1, 1
-   00000740:  02612223          sw t1, 36(sp)
-00000744 <print_record_report>:
-   00000744:  00001537          lui a0, 0x1
-   00000748:  f3a50513          addi a0, a0, -198 # <str_rec_prefix>
-   0000074c:  911ff0ef          jal ra, uart_puts
-   00000750:  03412503          lw a0, 52(sp)
-   00000754:  00150513          addi a0, a0, 1
-   00000758:  9a9ff0ef          jal ra, uart_putdec
-   0000075c:  00001537          lui a0, 0x1
-   00000760:  f4450513          addi a0, a0, -188 # <str_rec_close>
-   00000764:  8f9ff0ef          jal ra, uart_puts
-   00000768:  03812f83          lw t6, 56(sp)
-   0000076c:  000fa503          lw a0, 0(t6)
-   00000770:  8edff0ef          jal ra, uart_puts
-   00000774:  00001537          lui a0, 0x1
-   00000778:  f4750513          addi a0, a0, -185 # <str_samples_proc>
-   0000077c:  8e1ff0ef          jal ra, uart_puts
-   00000780:  03c12503          lw a0, 60(sp)
-   00000784:  97dff0ef          jal ra, uart_putdec
-   00000788:  00001537          lui a0, 0x1
-   0000078c:  f6550513          addi a0, a0, -155 # <str_ref_beats>
-   00000790:  8cdff0ef          jal ra, uart_puts
-   00000794:  04012503          lw a0, 64(sp)
-   00000798:  969ff0ef          jal ra, uart_putdec
-   0000079c:  00001537          lui a0, 0x1
-   000007a0:  f8350513          addi a0, a0, -125 # <str_det_peaks>
-   000007a4:  8b9ff0ef          jal ra, uart_puts
-   000007a8:  04812503          lw a0, 72(sp)
-   000007ac:  955ff0ef          jal ra, uart_putdec
-   000007b0:  00001537          lui a0, 0x1
-   000007b4:  fa150513          addi a0, a0, -95 # <str_norm_beats>
-   000007b8:  8a5ff0ef          jal ra, uart_puts
-   000007bc:  04c12503          lw a0, 76(sp)
-   000007c0:  941ff0ef          jal ra, uart_putdec
-   000007c4:  00001537          lui a0, 0x1
-   000007c8:  fbf50513          addi a0, a0, -65 # <str_abn_beats>
-   000007cc:  891ff0ef          jal ra, uart_puts
-   000007d0:  05012503          lw a0, 80(sp)
-   000007d4:  92dff0ef          jal ra, uart_putdec
-   000007d8:  00001537          lui a0, 0x1
-   000007dc:  fdd50513          addi a0, a0, -35 # <str_unclass_beats>
-   000007e0:  87dff0ef          jal ra, uart_puts
-   000007e4:  05412503          lw a0, 84(sp)
-   000007e8:  919ff0ef          jal ra, uart_putdec
-   000007ec:  00001537          lui a0, 0x1
-   000007f0:  ffb50513          addi a0, a0, -5 # <str_ref_label>
-   000007f4:  869ff0ef          jal ra, uart_puts
-   000007f8:  03812f83          lw t6, 56(sp)
-   000007fc:  014fa503          lw a0, 20(t6)
-   00000800:  85dff0ef          jal ra, uart_puts
-   00000804:  00001537          lui a0, 0x1
-   00000808:  01950513          addi a0, a0, 25 # <str_pred_label>
-   0000080c:  851ff0ef          jal ra, uart_puts
-   00000810:  000a0a63          beqz s4, print_pred_normal
-   00000814:  00001537          lui a0, 0x1
-   00000818:  06d50513          addi a0, a0, 109 # <str_abnormal>
-   0000081c:  841ff0ef          jal ra, uart_puts
-   00000820:  0100006f          j print_rec_match_status
-00000824 <print_pred_normal>:
-   00000824:  00001537          lui a0, 0x1
-   00000828:  06650513          addi a0, a0, 102 # <str_normal>
-   0000082c:  831ff0ef          jal ra, uart_puts
-00000830 <print_rec_match_status>:
-   00000830:  00001537          lui a0, 0x1
-   00000834:  03750513          addi a0, a0, 55 # <str_rec_class>
-   00000838:  825ff0ef          jal ra, uart_puts
-   0000083c:  000a8513          mv a0, s5
-   00000840:  81dff0ef          jal ra, uart_puts
-   00000844:  03412483          lw s1, 52(sp)
-   00000848:  00148493          addi s1, s1, 1
-   0000084c:  d39ff06f          j record_loop
-00000850 <record_loop_done>:
-   00000850:  00001537          lui a0, 0x1
-   00000854:  07650513          addi a0, a0, 118 # <str_heartbeat_hdr>
-   00000858:  805ff0ef          jal ra, uart_puts
-   0000085c:  00012503          lw a0, 0(sp)
-   00000860:  8a1ff0ef          jal ra, uart_putdec
-   00000864:  00001537          lui a0, 0x1
-   00000868:  12750513          addi a0, a0, 295 # <str_hb_det>
-   0000086c:  ff0ff0ef          jal ra, uart_puts
-   00000870:  00412503          lw a0, 4(sp)
-   00000874:  88dff0ef          jal ra, uart_putdec
-   00000878:  00001537          lui a0, 0x1
-   0000087c:  14550513          addi a0, a0, 325 # <str_hb_match>
-   00000880:  fdcff0ef          jal ra, uart_puts
-   00000884:  00812503          lw a0, 8(sp)
-   00000888:  879ff0ef          jal ra, uart_putdec
-   0000088c:  00001537          lui a0, 0x1
-   00000890:  16350513          addi a0, a0, 355 # <str_hb_miss>
-   00000894:  fc8ff0ef          jal ra, uart_puts
-   00000898:  00c12503          lw a0, 12(sp)
-   0000089c:  865ff0ef          jal ra, uart_putdec
-   000008a0:  00001537          lui a0, 0x1
-   000008a4:  18150513          addi a0, a0, 385 # <str_hb_false>
-   000008a8:  fb4ff0ef          jal ra, uart_puts
-   000008ac:  01012503          lw a0, 16(sp)
-   000008b0:  851ff0ef          jal ra, uart_putdec
-   000008b4:  00001537          lui a0, 0x1
-   000008b8:  19f50513          addi a0, a0, 415 # <str_hb_norm>
-   000008bc:  fa0ff0ef          jal ra, uart_puts
-   000008c0:  01412503          lw a0, 20(sp)
-   000008c4:  83dff0ef          jal ra, uart_putdec
-   000008c8:  00001537          lui a0, 0x1
-   000008cc:  1bd50513          addi a0, a0, 445 # <str_hb_abn>
-   000008d0:  f8cff0ef          jal ra, uart_puts
-   000008d4:  01812503          lw a0, 24(sp)
-   000008d8:  829ff0ef          jal ra, uart_putdec
-   000008dc:  00001537          lui a0, 0x1
-   000008e0:  1db50513          addi a0, a0, 475 # <str_hb_unclass>
-   000008e4:  f78ff0ef          jal ra, uart_puts
-   000008e8:  01c12503          lw a0, 28(sp)
-   000008ec:  815ff0ef          jal ra, uart_putdec
-   000008f0:  00001537          lui a0, 0x1
-   000008f4:  54850513          addi a0, a0, 1352 # <str_nl>
+   00000574:  400102b7          lui t0, 0x40010
+   00000578:  00a00313          li t1, 0x0A
+   0000057c:  0462a023          sw t1, 0x40(t0)
+   00000580:  00600313          li t1, 0x06
+   00000584:  0662a023          sw t1, 0x60(t0)
+   00000588:  0602a383          lw t2, 0x60(t0)
+   0000058c:  04639863          bne t2, t1, test_spi_fail
+   00000590:  0642ae03          lw t3, 0x64(t0)
+   00000594:  004e7e93          andi t4, t3, 4
+   00000598:  040e8263          beqz t4, test_spi_fail
+   0000059c:  0042af03          lw t5, 4(t0)
+   000005a0:  61626fb7          lui t6, 0x61626
+   000005a4:  364f8f93          addi t6, t6, 0x364
+   000005a8:  03ff1a63          bne t5, t6, test_spi_fail
+   000005ac:  000102b7          lui t0, 0x10
+   000005b0:  03c2a223          sw t3, 36(t0)
+   000005b4:  00100513          li a0, 1
+   000005b8:  000e0593          mv a1, t3
+   000005bc:  c55ff0ef          jal ra, fw_mailbox_end
+   000005c0:  00001537          lui a0, 0x1
+   000005c4:  edd50513          addi a0, a0, -291 # <str_spi_pass>
+   000005c8:  a95ff0ef          jal ra, uart_puts
+   000005cc:  00100513          li a0, 1
+   000005d0:  00c12083          lw ra, 12(sp)
+   000005d4:  01010113          addi sp, sp, 16
+   000005d8:  00008067          ret
+000005dc <test_spi_fail>:
+   000005dc:  00200513          li a0, 2
+   000005e0:  00000593          li a1, 0
+   000005e4:  c2dff0ef          jal ra, fw_mailbox_end
+   000005e8:  00001537          lui a0, 0x1
+   000005ec:  f2050513          addi a0, a0, -224 # <str_spi_fail>
+   000005f0:  a6dff0ef          jal ra, uart_puts
+   000005f4:  00000513          li a0, 0
+   000005f8:  00c12083          lw ra, 12(sp)
+   000005fc:  01010113          addi sp, sp, 16
+   00000600:  00008067          ret
+00000604 <run_ecg_analysis>:
+   00000604:  f8010113          addi sp, sp, -128
+   00000608:  06112e23          sw ra, 124(sp)
+   0000060c:  06812c23          sw s0, 120(sp)
+   00000610:  06912a23          sw s1, 116(sp)
+   00000614:  07212823          sw s2, 112(sp)
+   00000618:  07312623          sw s3, 108(sp)
+   0000061c:  07412423          sw s4, 104(sp)
+   00000620:  07512223          sw s5, 100(sp)
+   00000624:  00b00513          li a0, 11
+   00000628:  bd1ff0ef          jal ra, fw_mailbox_start
+   0000062c:  00012023          sw zero, 0(sp)
+   00000630:  00012223          sw zero, 4(sp)
+   00000634:  00012423          sw zero, 8(sp)
+   00000638:  00012623          sw zero, 12(sp)
+   0000063c:  00012823          sw zero, 16(sp)
+   00000640:  00012a23          sw zero, 20(sp)
+   00000644:  00012c23          sw zero, 24(sp)
+   00000648:  00012e23          sw zero, 28(sp)
+   0000064c:  02012023          sw zero, 32(sp)
+   00000650:  02012223          sw zero, 36(sp)
+   00000654:  02012423          sw zero, 40(sp)
+   00000658:  02012623          sw zero, 44(sp)
+   0000065c:  02012823          sw zero, 48(sp)
+   00000660:  00001537          lui a0, 0x1
+   00000664:  f3950513          addi a0, a0, -199 # <str_app_hdr>
+   00000668:  9f5ff0ef          jal ra, uart_puts
+   0000066c:  000012b7          lui t0, 0x1
+   00000670:  69e28293          addi t0, t0, 1694 # <num_ecg_records>
+   00000674:  0002a403          lw s0, 0(t0)
+   00000678:  00000493          li s1, 0
+0000067c <record_loop>:
+   0000067c:  2c84d663          bge s1, s0, record_loop_done
+   00000680:  02912a23          sw s1, 52(sp)
+   00000684:  000012b7          lui t0, 0x1
+   00000688:  6a228293          addi t0, t0, 1698 # <ecg_records_table>
+   0000068c:  02400313          li t1, 36
+   00000690:  026483b3          mul t2, s1, t1
+   00000694:  00728933          add s2, t0, t2
+   00000698:  03212c23          sw s2, 56(sp)
+   0000069c:  00892e03          lw t3, 8(s2)
+   000006a0:  03c12e23          sw t3, 60(sp)
+   000006a4:  00c92e03          lw t3, 12(s2)
+   000006a8:  05c12023          sw t3, 64(sp)
+   000006ac:  01092e03          lw t3, 16(s2)
+   000006b0:  05c12223          sw t3, 68(sp)
+   000006b4:  04012423          sw zero, 72(sp)
+   000006b8:  04012623          sw zero, 76(sp)
+   000006bc:  04012823          sw zero, 80(sp)
+   000006c0:  04012a23          sw zero, 84(sp)
+   000006c4:  04012c23          sw zero, 88(sp)
+   000006c8:  04012e23          sw zero, 92(sp)
+   000006cc:  400122b7          lui t0, 0x40012
+   000006d0:  0002a023          sw zero, 0(t0)
+   000006d4:  00100313          li t1, 1
+   000006d8:  0062a023          sw t1, 0(t0)
+   000006dc:  000102b7          lui t0, 0x10
+   000006e0:  0202a823          sw zero, 48(t0)
+   000006e4:  02092983          lw s3, 32(s2)
+   000006e8:  03c12a03          lw s4, 60(sp)
+   000006ec:  00000a93          li s5, 0
+000006f0 <sample_stream_loop>:
+   000006f0:  074adc63          bge s5, s4, sample_stream_done
+   000006f4:  00099503          lh a0, 0(s3)
+   000006f8:  00298993          addi s3, s3, 2
+   000006fc:  400122b7          lui t0, 0x40012
+   00000700:  00a2a423          sw a0, 8(t0)
+   00000704:  000102b7          lui t0, 0x10
+   00000708:  0302a303          lw t1, 48(t0)
+   0000070c:  05c12383          lw t2, 92(sp)
+   00000710:  0463f863          bleu t1, t2, sample_stream_step
+   00000714:  04612e23          sw t1, 92(sp)
+   00000718:  04812e03          lw t3, 72(sp)
+   0000071c:  001e0e13          addi t3, t3, 1
+   00000720:  05c12423          sw t3, 72(sp)
+   00000724:  400122b7          lui t0, 0x40012
+   00000728:  0102a583          lw a1, 16(t0)
+   0000072c:  0142a603          lw a2, 20(t0)
+   00000730:  0182a683          lw a3, 24(t0)
+   00000734:  00069a63          bnez a3, beat_is_abnormal
+   00000738:  04c12e03          lw t3, 76(sp)
+   0000073c:  001e0e13          addi t3, t3, 1
+   00000740:  05c12623          sw t3, 76(sp)
+   00000744:  0100006f          j beat_matched_step
+00000748 <beat_is_abnormal>:
+   00000748:  05012e03          lw t3, 80(sp)
+   0000074c:  001e0e13          addi t3, t3, 1
+   00000750:  05c12823          sw t3, 80(sp)
+00000754 <beat_matched_step>:
+   00000754:  05812e03          lw t3, 88(sp)
+   00000758:  001e0e13          addi t3, t3, 1
+   0000075c:  05c12c23          sw t3, 88(sp)
+00000760 <sample_stream_step>:
+   00000760:  001a8a93          addi s5, s5, 1
+   00000764:  f8dff06f          j sample_stream_loop
+00000768 <sample_stream_done>:
+   00000768:  04012303          lw t1, 64(sp)
+   0000076c:  04812383          lw t2, 72(sp)
+   00000770:  0063fa63          bleu t1, t2, check_missed_done
+   00000774:  40730e33          sub t3, t1, t2
+   00000778:  00c12e83          lw t4, 12(sp)
+   0000077c:  01ce8eb3          add t4, t4, t3
+   00000780:  01d12623          sw t4, 12(sp)
+00000784 <check_missed_done>:
+   00000784:  05012e03          lw t3, 80(sp)
+   00000788:  01c03a33          snez s4, t3
+   0000078c:  04412e83          lw t4, 68(sp)
+   00000790:  01da1e63          bne s4, t4, rec_eval_mismatch
+   00000794:  02c12f03          lw t5, 44(sp)
+   00000798:  001f0f13          addi t5, t5, 1
+   0000079c:  03e12623          sw t5, 44(sp)
+   000007a0:  00001ab7          lui s5, 0x1
+   000007a4:  195a8a93          addi s5, s5, 405 # <str_match>
+   000007a8:  0180006f          j rec_eval_accumulate
+000007ac <rec_eval_mismatch>:
+   000007ac:  03012f03          lw t5, 48(sp)
+   000007b0:  001f0f13          addi t5, t5, 1
+   000007b4:  03e12823          sw t5, 48(sp)
+   000007b8:  00001ab7          lui s5, 0x1
+   000007bc:  19ca8a93          addi s5, s5, 412 # <str_mismatch>
+000007c0 <rec_eval_accumulate>:
+   000007c0:  00012303          lw t1, 0(sp)
+   000007c4:  04012383          lw t2, 64(sp)
+   000007c8:  00730333          add t1, t1, t2
+   000007cc:  00612023          sw t1, 0(sp)
+   000007d0:  00412303          lw t1, 4(sp)
+   000007d4:  04812383          lw t2, 72(sp)
+   000007d8:  00730333          add t1, t1, t2
+   000007dc:  00612223          sw t1, 4(sp)
+   000007e0:  00812303          lw t1, 8(sp)
+   000007e4:  05812383          lw t2, 88(sp)
+   000007e8:  00730333          add t1, t1, t2
+   000007ec:  00612423          sw t1, 8(sp)
+   000007f0:  01412303          lw t1, 20(sp)
+   000007f4:  04c12383          lw t2, 76(sp)
+   000007f8:  00730333          add t1, t1, t2
+   000007fc:  00612a23          sw t1, 20(sp)
+   00000800:  01812303          lw t1, 24(sp)
+   00000804:  05012383          lw t2, 80(sp)
+   00000808:  00730333          add t1, t1, t2
+   0000080c:  00612c23          sw t1, 24(sp)
+   00000810:  02012303          lw t1, 32(sp)
+   00000814:  00130313          addi t1, t1, 1
+   00000818:  02612023          sw t1, 32(sp)
+   0000081c:  000e8a63          beqz t4, acc_normal_record
+   00000820:  02812303          lw t1, 40(sp)
+   00000824:  00130313          addi t1, t1, 1
+   00000828:  02612423          sw t1, 40(sp)
+   0000082c:  0100006f          j print_record_report
+00000830 <acc_normal_record>:
+   00000830:  02412303          lw t1, 36(sp)
+   00000834:  00130313          addi t1, t1, 1
+   00000838:  02612223          sw t1, 36(sp)
+0000083c <print_record_report>:
+   0000083c:  00001537          lui a0, 0x1
+   00000840:  07a50513          addi a0, a0, 122 # <str_rec_prefix>
+   00000844:  819ff0ef          jal ra, uart_puts
+   00000848:  03412503          lw a0, 52(sp)
+   0000084c:  00150513          addi a0, a0, 1
+   00000850:  8b1ff0ef          jal ra, uart_putdec
+   00000854:  00001537          lui a0, 0x1
+   00000858:  08450513          addi a0, a0, 132 # <str_rec_close>
+   0000085c:  801ff0ef          jal ra, uart_puts
+   00000860:  03812f83          lw t6, 56(sp)
+   00000864:  000fa503          lw a0, 0(t6)
+   00000868:  ff4ff0ef          jal ra, uart_puts
+   0000086c:  00001537          lui a0, 0x1
+   00000870:  08750513          addi a0, a0, 135 # <str_samples_proc>
+   00000874:  fe8ff0ef          jal ra, uart_puts
+   00000878:  03c12503          lw a0, 60(sp)
+   0000087c:  885ff0ef          jal ra, uart_putdec
+   00000880:  00001537          lui a0, 0x1
+   00000884:  0a550513          addi a0, a0, 165 # <str_ref_beats>
+   00000888:  fd4ff0ef          jal ra, uart_puts
+   0000088c:  04012503          lw a0, 64(sp)
+   00000890:  871ff0ef          jal ra, uart_putdec
+   00000894:  00001537          lui a0, 0x1
+   00000898:  0c350513          addi a0, a0, 195 # <str_det_peaks>
+   0000089c:  fc0ff0ef          jal ra, uart_puts
+   000008a0:  04812503          lw a0, 72(sp)
+   000008a4:  85dff0ef          jal ra, uart_putdec
+   000008a8:  00001537          lui a0, 0x1
+   000008ac:  0e150513          addi a0, a0, 225 # <str_norm_beats>
+   000008b0:  facff0ef          jal ra, uart_puts
+   000008b4:  04c12503          lw a0, 76(sp)
+   000008b8:  849ff0ef          jal ra, uart_putdec
+   000008bc:  00001537          lui a0, 0x1
+   000008c0:  0ff50513          addi a0, a0, 255 # <str_abn_beats>
+   000008c4:  f98ff0ef          jal ra, uart_puts
+   000008c8:  05012503          lw a0, 80(sp)
+   000008cc:  835ff0ef          jal ra, uart_putdec
+   000008d0:  00001537          lui a0, 0x1
+   000008d4:  11d50513          addi a0, a0, 285 # <str_unclass_beats>
+   000008d8:  f84ff0ef          jal ra, uart_puts
+   000008dc:  05412503          lw a0, 84(sp)
+   000008e0:  821ff0ef          jal ra, uart_putdec
+   000008e4:  00001537          lui a0, 0x1
+   000008e8:  13b50513          addi a0, a0, 315 # <str_ref_label>
+   000008ec:  f70ff0ef          jal ra, uart_puts
+   000008f0:  03812f83          lw t6, 56(sp)
+   000008f4:  014fa503          lw a0, 20(t6)
    000008f8:  f64ff0ef          jal ra, uart_puts
    000008fc:  00001537          lui a0, 0x1
-   00000900:  1f950513          addi a0, a0, 505 # <str_hb_sens>
+   00000900:  15950513          addi a0, a0, 345 # <str_pred_label>
    00000904:  f58ff0ef          jal ra, uart_puts
-   00000908:  00812503          lw a0, 8(sp)
-   0000090c:  00012583          lw a1, 0(sp)
-   00000910:  871ff0ef          jal ra, uart_print_pct
-   00000914:  00001537          lui a0, 0x1
-   00000918:  21750513          addi a0, a0, 535 # <str_hb_prec>
-   0000091c:  f40ff0ef          jal ra, uart_puts
-   00000920:  00812503          lw a0, 8(sp)
-   00000924:  00412583          lw a1, 4(sp)
-   00000928:  859ff0ef          jal ra, uart_print_pct
-   0000092c:  00001537          lui a0, 0x1
-   00000930:  23550513          addi a0, a0, 565 # <str_hb_f1>
-   00000934:  f28ff0ef          jal ra, uart_puts
-   00000938:  00812283          lw t0, 8(sp)
-   0000093c:  00200313          li t1, 2
-   00000940:  02628533          mul a0, t0, t1
-   00000944:  00c12383          lw t2, 12(sp)
-   00000948:  01012e03          lw t3, 16(sp)
-   0000094c:  007505b3          add a1, a0, t2
-   00000950:  01c585b3          add a1, a1, t3
-   00000954:  82dff0ef          jal ra, uart_print_pct
-   00000958:  00001537          lui a0, 0x1
-   0000095c:  25350513          addi a0, a0, 595 # <str_hb_acc>
-   00000960:  efcff0ef          jal ra, uart_puts
-   00000964:  00812503          lw a0, 8(sp)
-   00000968:  00c12383          lw t2, 12(sp)
-   0000096c:  01012e03          lw t3, 16(sp)
-   00000970:  007505b3          add a1, a0, t2
-   00000974:  01c585b3          add a1, a1, t3
-   00000978:  809ff0ef          jal ra, uart_print_pct
-   0000097c:  00001537          lui a0, 0x1
-   00000980:  27150513          addi a0, a0, 625 # <str_record_hdr>
-   00000984:  ed8ff0ef          jal ra, uart_puts
-   00000988:  02012503          lw a0, 32(sp)
-   0000098c:  f74ff0ef          jal ra, uart_putdec
-   00000990:  00001537          lui a0, 0x1
-   00000994:  31f50513          addi a0, a0, 799 # <str_rec_norm_tot>
-   00000998:  ec4ff0ef          jal ra, uart_puts
-   0000099c:  02412503          lw a0, 36(sp)
-   000009a0:  f60ff0ef          jal ra, uart_putdec
-   000009a4:  00001537          lui a0, 0x1
-   000009a8:  33d50513          addi a0, a0, 829 # <str_rec_abn_tot>
-   000009ac:  eb0ff0ef          jal ra, uart_puts
-   000009b0:  02812503          lw a0, 40(sp)
-   000009b4:  f4cff0ef          jal ra, uart_putdec
-   000009b8:  00001537          lui a0, 0x1
-   000009bc:  35b50513          addi a0, a0, 859 # <str_rec_unclass_tot>
-   000009c0:  e9cff0ef          jal ra, uart_puts
-   000009c4:  00000513          li a0, 0
-   000009c8:  f38ff0ef          jal ra, uart_putdec
-   000009cc:  00001537          lui a0, 0x1
-   000009d0:  37950513          addi a0, a0, 889 # <str_rec_corr>
-   000009d4:  e88ff0ef          jal ra, uart_puts
-   000009d8:  02c12503          lw a0, 44(sp)
-   000009dc:  f24ff0ef          jal ra, uart_putdec
-   000009e0:  00001537          lui a0, 0x1
-   000009e4:  39750513          addi a0, a0, 919 # <str_rec_incorr>
-   000009e8:  e74ff0ef          jal ra, uart_puts
-   000009ec:  03012503          lw a0, 48(sp)
-   000009f0:  f10ff0ef          jal ra, uart_putdec
+   00000908:  000a0a63          beqz s4, print_pred_normal
+   0000090c:  00001537          lui a0, 0x1
+   00000910:  1ad50513          addi a0, a0, 429 # <str_abnormal>
+   00000914:  f48ff0ef          jal ra, uart_puts
+   00000918:  0100006f          j print_rec_match_status
+0000091c <print_pred_normal>:
+   0000091c:  00001537          lui a0, 0x1
+   00000920:  1a650513          addi a0, a0, 422 # <str_normal>
+   00000924:  f38ff0ef          jal ra, uart_puts
+00000928 <print_rec_match_status>:
+   00000928:  00001537          lui a0, 0x1
+   0000092c:  17750513          addi a0, a0, 375 # <str_rec_class>
+   00000930:  f2cff0ef          jal ra, uart_puts
+   00000934:  000a8513          mv a0, s5
+   00000938:  f24ff0ef          jal ra, uart_puts
+   0000093c:  03412483          lw s1, 52(sp)
+   00000940:  00148493          addi s1, s1, 1
+   00000944:  d39ff06f          j record_loop
+00000948 <record_loop_done>:
+   00000948:  00001537          lui a0, 0x1
+   0000094c:  1b650513          addi a0, a0, 438 # <str_heartbeat_hdr>
+   00000950:  f0cff0ef          jal ra, uart_puts
+   00000954:  00012503          lw a0, 0(sp)
+   00000958:  fa8ff0ef          jal ra, uart_putdec
+   0000095c:  00001537          lui a0, 0x1
+   00000960:  26750513          addi a0, a0, 615 # <str_hb_det>
+   00000964:  ef8ff0ef          jal ra, uart_puts
+   00000968:  00412503          lw a0, 4(sp)
+   0000096c:  f94ff0ef          jal ra, uart_putdec
+   00000970:  00001537          lui a0, 0x1
+   00000974:  28550513          addi a0, a0, 645 # <str_hb_match>
+   00000978:  ee4ff0ef          jal ra, uart_puts
+   0000097c:  00812503          lw a0, 8(sp)
+   00000980:  f80ff0ef          jal ra, uart_putdec
+   00000984:  00001537          lui a0, 0x1
+   00000988:  2a350513          addi a0, a0, 675 # <str_hb_miss>
+   0000098c:  ed0ff0ef          jal ra, uart_puts
+   00000990:  00c12503          lw a0, 12(sp)
+   00000994:  f6cff0ef          jal ra, uart_putdec
+   00000998:  00001537          lui a0, 0x1
+   0000099c:  2c150513          addi a0, a0, 705 # <str_hb_false>
+   000009a0:  ebcff0ef          jal ra, uart_puts
+   000009a4:  01012503          lw a0, 16(sp)
+   000009a8:  f58ff0ef          jal ra, uart_putdec
+   000009ac:  00001537          lui a0, 0x1
+   000009b0:  2df50513          addi a0, a0, 735 # <str_hb_norm>
+   000009b4:  ea8ff0ef          jal ra, uart_puts
+   000009b8:  01412503          lw a0, 20(sp)
+   000009bc:  f44ff0ef          jal ra, uart_putdec
+   000009c0:  00001537          lui a0, 0x1
+   000009c4:  2fd50513          addi a0, a0, 765 # <str_hb_abn>
+   000009c8:  e94ff0ef          jal ra, uart_puts
+   000009cc:  01812503          lw a0, 24(sp)
+   000009d0:  f30ff0ef          jal ra, uart_putdec
+   000009d4:  00001537          lui a0, 0x1
+   000009d8:  31b50513          addi a0, a0, 795 # <str_hb_unclass>
+   000009dc:  e80ff0ef          jal ra, uart_puts
+   000009e0:  01c12503          lw a0, 28(sp)
+   000009e4:  f1cff0ef          jal ra, uart_putdec
+   000009e8:  00001537          lui a0, 0x1
+   000009ec:  68850513          addi a0, a0, 1672 # <str_nl>
+   000009f0:  e6cff0ef          jal ra, uart_puts
    000009f4:  00001537          lui a0, 0x1
-   000009f8:  54850513          addi a0, a0, 1352 # <str_nl>
+   000009f8:  33950513          addi a0, a0, 825 # <str_hb_sens>
    000009fc:  e60ff0ef          jal ra, uart_puts
-   00000a00:  00001537          lui a0, 0x1
-   00000a04:  3b550513          addi a0, a0, 949 # <str_rec_acc>
-   00000a08:  e54ff0ef          jal ra, uart_puts
-   00000a0c:  02c12503          lw a0, 44(sp)
-   00000a10:  02012583          lw a1, 32(sp)
-   00000a14:  f6cff0ef          jal ra, uart_print_pct
-   00000a18:  00001537          lui a0, 0x1
-   00000a1c:  3d350513          addi a0, a0, 979 # <str_app_sum_hdr>
-   00000a20:  e3cff0ef          jal ra, uart_puts
-   00000a24:  00100513          li a0, 1
-   00000a28:  06412a83          lw s5, 100(sp)
-   00000a2c:  06812a03          lw s4, 104(sp)
-   00000a30:  06c12983          lw s3, 108(sp)
-   00000a34:  07012903          lw s2, 112(sp)
-   00000a38:  07412483          lw s1, 116(sp)
-   00000a3c:  07812403          lw s0, 120(sp)
-   00000a40:  07c12083          lw ra, 124(sp)
-   00000a44:  08010113          addi sp, sp, 128
-   00000a48:  00008067          ret
-00000a4c <main>:
-   00000a4c:  fe810113          addi sp, sp, -24
-   00000a50:  00112a23          sw ra, 20(sp)
-   00000a54:  00812823          sw s0, 16(sp)
-   00000a58:  00100413          li s0, 1
-   00000a5c:  dc4ff0ef          jal ra, uart_init
-   00000a60:  00001537          lui a0, 0x1
-   00000a64:  ae450513          addi a0, a0, -1308 # <str_header>
-   00000a68:  df4ff0ef          jal ra, uart_puts
-   00000a6c:  f8cff0ef          jal ra, test_uart
-   00000a70:  00a47433          and s0, s0, a0
-   00000a74:  801ff0ef          jal ra, test_gpio
-   00000a78:  00a47433          and s0, s0, a0
-   00000a7c:  89dff0ef          jal ra, test_timer
-   00000a80:  00a47433          and s0, s0, a0
-   00000a84:  915ff0ef          jal ra, test_adc
-   00000a88:  00a47433          and s0, s0, a0
-   00000a8c:  985ff0ef          jal ra, test_fir
-   00000a90:  00a47433          and s0, s0, a0
-   00000a94:  9f5ff0ef          jal ra, test_spi
-   00000a98:  00a47433          and s0, s0, a0
-   00000a9c:  a79ff0ef          jal ra, run_ecg_analysis
-   00000aa0:  00a47433          and s0, s0, a0
-   00000aa4:  00001537          lui a0, 0x1
-   00000aa8:  54850513          addi a0, a0, 1352 # <str_nl>
-   00000aac:  db0ff0ef          jal ra, uart_puts
-   00000ab0:  00040a63          beqz s0, main_failed
-   00000ab4:  00001537          lui a0, 0x1
-   00000ab8:  51450513          addi a0, a0, 1300 # <str_all_passed>
-   00000abc:  da0ff0ef          jal ra, uart_puts
-   00000ac0:  0100006f          j main_done
-00000ac4 <main_failed>:
+   00000a00:  00812503          lw a0, 8(sp)
+   00000a04:  00012583          lw a1, 0(sp)
+   00000a08:  f78ff0ef          jal ra, uart_print_pct
+   00000a0c:  00001537          lui a0, 0x1
+   00000a10:  35750513          addi a0, a0, 855 # <str_hb_prec>
+   00000a14:  e48ff0ef          jal ra, uart_puts
+   00000a18:  00812503          lw a0, 8(sp)
+   00000a1c:  00412583          lw a1, 4(sp)
+   00000a20:  f60ff0ef          jal ra, uart_print_pct
+   00000a24:  00001537          lui a0, 0x1
+   00000a28:  37550513          addi a0, a0, 885 # <str_hb_f1>
+   00000a2c:  e30ff0ef          jal ra, uart_puts
+   00000a30:  00812283          lw t0, 8(sp)
+   00000a34:  00200313          li t1, 2
+   00000a38:  02628533          mul a0, t0, t1
+   00000a3c:  00c12383          lw t2, 12(sp)
+   00000a40:  01012e03          lw t3, 16(sp)
+   00000a44:  007505b3          add a1, a0, t2
+   00000a48:  01c585b3          add a1, a1, t3
+   00000a4c:  f34ff0ef          jal ra, uart_print_pct
+   00000a50:  00001537          lui a0, 0x1
+   00000a54:  39350513          addi a0, a0, 915 # <str_hb_acc>
+   00000a58:  e04ff0ef          jal ra, uart_puts
+   00000a5c:  00812503          lw a0, 8(sp)
+   00000a60:  00c12383          lw t2, 12(sp)
+   00000a64:  01012e03          lw t3, 16(sp)
+   00000a68:  007505b3          add a1, a0, t2
+   00000a6c:  01c585b3          add a1, a1, t3
+   00000a70:  f10ff0ef          jal ra, uart_print_pct
+   00000a74:  00001537          lui a0, 0x1
+   00000a78:  3b150513          addi a0, a0, 945 # <str_record_hdr>
+   00000a7c:  de0ff0ef          jal ra, uart_puts
+   00000a80:  02012503          lw a0, 32(sp)
+   00000a84:  e7cff0ef          jal ra, uart_putdec
+   00000a88:  00001537          lui a0, 0x1
+   00000a8c:  45f50513          addi a0, a0, 1119 # <str_rec_norm_tot>
+   00000a90:  dccff0ef          jal ra, uart_puts
+   00000a94:  02412503          lw a0, 36(sp)
+   00000a98:  e68ff0ef          jal ra, uart_putdec
+   00000a9c:  00001537          lui a0, 0x1
+   00000aa0:  47d50513          addi a0, a0, 1149 # <str_rec_abn_tot>
+   00000aa4:  db8ff0ef          jal ra, uart_puts
+   00000aa8:  02812503          lw a0, 40(sp)
+   00000aac:  e54ff0ef          jal ra, uart_putdec
+   00000ab0:  00001537          lui a0, 0x1
+   00000ab4:  49b50513          addi a0, a0, 1179 # <str_rec_unclass_tot>
+   00000ab8:  da4ff0ef          jal ra, uart_puts
+   00000abc:  00000513          li a0, 0
+   00000ac0:  e40ff0ef          jal ra, uart_putdec
    00000ac4:  00001537          lui a0, 0x1
-   00000ac8:  52650513          addi a0, a0, 1318 # <str_some_failed>
+   00000ac8:  4b950513          addi a0, a0, 1209 # <str_rec_corr>
    00000acc:  d90ff0ef          jal ra, uart_puts
-00000ad0 <main_done>:
-   00000ad0:  00001537          lui a0, 0x1
-   00000ad4:  53950513          addi a0, a0, 1337 # <str_complete>
-   00000ad8:  d84ff0ef          jal ra, uart_puts
-00000adc <main_spin>:
-   00000adc:  00000013          nop
-   00000ae0:  ffdff06f          j main_spin
-00000ae4 <str_header>:
-   00000ae4:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n CARDIOEDGE RISC-V SOC FIRMWARE BOOT\n============================================================\nCPU STARTED\n\n--- PERIPHERAL INTEGRATION TESTS ---\n"
-00000bb7 <str_uart_test>:
-   00000bb7:  55 41 52 54 20 54 45 53 54 0a 00  .data .string "UART TEST\n"
-00000bc2 <str_uart_pass>:
-   00000bc2:  20 20 50 41 53 53 3a 20 55 41 52 54 20 63 6f 6e  .data .string "  PASS: UART configured 8N1, TX holding empty confirmed\n"
-00000bfb <str_uart_fail>:
-   00000bfb:  20 20 46 41 49 4c 3a 20 55 41 52 54 20 74 65 73  .data .string "  FAIL: UART test failed\n"
-00000c15 <str_gpio_test>:
-   00000c15:  47 50 49 4f 20 54 45 53 54 0a 00  .data .string "GPIO TEST\n"
-00000c20 <str_gpio_pass>:
-   00000c20:  20 20 50 41 53 53 3a 20 47 50 49 4f 20 44 49 52  .data .string "  PASS: GPIO DIR=0xFF, DATA_O write/readback verified\n"
-00000c57 <str_gpio_fail>:
-   00000c57:  20 20 46 41 49 4c 3a 20 47 50 49 4f 20 74 65 73  .data .string "  FAIL: GPIO test failed\n"
-00000c71 <str_timer_test>:
-   00000c71:  54 49 4d 45 52 20 54 45 53 54 0a 00  .data .string "TIMER TEST\n"
-00000c7d <str_timer_pass>:
-   00000c7d:  20 20 50 41 53 53 3a 20 54 49 4d 45 52 20 4c 4f  .data .string "  PASS: TIMER LOAD=100 and CTRL enable/start verified\n"
-00000cb4 <str_timer_fail>:
-   00000cb4:  20 20 46 41 49 4c 3a 20 54 49 4d 45 52 20 74 65  .data .string "  FAIL: TIMER test failed\n"
-00000ccf <str_adc_test>:
-   00000ccf:  41 44 43 20 54 45 53 54 0a 00     .data .string "ADC TEST\n"
-00000cd9 <str_adc_pass>:
-   00000cd9:  20 20 50 41 53 53 3a 20 41 44 43 20 73 63 68 65  .data .string "  PASS: ADC scheduler enabled, STATUS empty flag=0x04 confirmed\n"
-00000d1a <str_adc_fail>:
-   00000d1a:  20 20 46 41 49 4c 3a 20 41 44 43 20 74 65 73 74  .data .string "  FAIL: ADC test failed\n"
-00000d33 <str_fir_test>:
-   00000d33:  46 49 52 20 54 45 53 54 0a 00     .data .string "FIR TEST\n"
-00000d3d <str_fir_pass>:
-   00000d3d:  20 20 50 41 53 53 3a 20 46 49 52 20 65 6e 61 62  .data .string "  PASS: FIR enable=1, Tap0=0x0100 latched, AXI-Stream ready\n"
-00000d7a <str_fir_fail>:
-   00000d7a:  20 20 46 41 49 4c 3a 20 46 49 52 20 74 65 73 74  .data .string "  FAIL: FIR test failed\n"
-00000d93 <str_spi_test>:
-   00000d93:  53 50 49 20 54 45 53 54 0a 00     .data .string "SPI TEST\n"
-00000d9d <str_spi_pass>:
-   00000d9d:  20 20 50 41 53 53 3a 20 53 50 49 20 43 52 2f 53  .data .string "  PASS: SPI CR/SR verified, unmapped response 0x61626364 verified\n"
-00000de0 <str_spi_fail>:
-   00000de0:  20 20 46 41 49 4c 3a 20 53 50 49 20 74 65 73 74  .data .string "  FAIL: SPI test failed\n"
-00000df9 <str_app_hdr>:
-   00000df9:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n CARDIOEDGE ECG ANALYSIS APPLICATION\n============================================================\n CPU       : VeeR EL2 RV32IMC\n DATASET   : MIT-BIH ARRHYTHMIA & CLINICAL VALIDATION\n RECORDS   : 4\n------------------------------------------------------------\n"
-00000f3a <str_rec_prefix>:
-   00000f3a:  0a 5b 52 45 43 4f 52 44 20 00     .data .string "\n[RECORD "
-00000f44 <str_rec_close>:
-   00000f44:  5d 20 00                          .data .string "] "
-00000f47 <str_samples_proc>:
-   00000f47:  0a 20 20 53 61 6d 70 6c 65 73 20 70 72 6f 63 65  .data .string "\n  Samples processed       : "
-00000f65 <str_ref_beats>:
-   00000f65:  0a 20 20 52 65 66 65 72 65 6e 63 65 20 62 65 61  .data .string "\n  Reference beats         : "
-00000f83 <str_det_peaks>:
-   00000f83:  0a 20 20 44 65 74 65 63 74 65 64 20 52 2d 70 65  .data .string "\n  Detected R-peaks        : "
-00000fa1 <str_norm_beats>:
-   00000fa1:  0a 20 20 4e 6f 72 6d 61 6c 20 62 65 61 74 73 20  .data .string "\n  Normal beats            : "
-00000fbf <str_abn_beats>:
-   00000fbf:  0a 20 20 41 62 6e 6f 72 6d 61 6c 20 62 65 61 74  .data .string "\n  Abnormal beats          : "
-00000fdd <str_unclass_beats>:
-   00000fdd:  0a 20 20 55 6e 63 6c 61 73 73 69 66 69 65 64 20  .data .string "\n  Unclassified beats      : "
-00000ffb <str_ref_label>:
-   00000ffb:  0a 20 20 52 65 66 65 72 65 6e 63 65 20 72 65 63  .data .string "\n  Reference record label  : "
-00001019 <str_pred_label>:
-   00001019:  0a 20 20 50 72 65 64 69 63 74 65 64 20 72 65 63  .data .string "\n  Predicted record label  : "
-00001037 <str_rec_class>:
-   00001037:  0a 20 20 52 65 63 6f 72 64 20 63 6c 61 73 73 69  .data .string "\n  Record classification   : "
-00001055 <str_match>:
-   00001055:  4d 41 54 43 48 0a 00              .data .string "MATCH\n"
-0000105c <str_mismatch>:
-   0000105c:  4d 49 53 4d 41 54 43 48 0a 00     .data .string "MISMATCH\n"
-00001066 <str_normal>:
-   00001066:  4e 4f 52 4d 41 4c 00              .data .string "NORMAL"
-0000106d <str_abnormal>:
-   0000106d:  41 42 4e 4f 52 4d 41 4c 00        .data .string "ABNORMAL"
-00001076 <str_heartbeat_hdr>:
-   00001076:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n HEARTBEAT-LEVEL SUMMARY\n============================================================\nReference beats           : "
-00001127 <str_hb_det>:
-   00001127:  0a 44 65 74 65 63 74 65 64 20 52 2d 70 65 61 6b  .data .string "\nDetected R-peaks          : "
-00001145 <str_hb_match>:
-   00001145:  0a 4d 61 74 63 68 65 64 20 64 65 74 65 63 74 69  .data .string "\nMatched detections        : "
-00001163 <str_hb_miss>:
-   00001163:  0a 4d 69 73 73 65 64 20 64 65 74 65 63 74 69 6f  .data .string "\nMissed detections         : "
-00001181 <str_hb_false>:
-   00001181:  0a 46 61 6c 73 65 20 64 65 74 65 63 74 69 6f 6e  .data .string "\nFalse detections          : "
-0000119f <str_hb_norm>:
-   0000119f:  0a 4e 6f 72 6d 61 6c 20 62 65 61 74 73 20 20 20  .data .string "\nNormal beats              : "
-000011bd <str_hb_abn>:
-   000011bd:  0a 41 62 6e 6f 72 6d 61 6c 20 62 65 61 74 73 20  .data .string "\nAbnormal beats            : "
-000011db <str_hb_unclass>:
-   000011db:  0a 55 6e 63 6c 61 73 73 69 66 69 65 64 20 62 65  .data .string "\nUnclassified beats        : "
-000011f9 <str_hb_sens>:
-   000011f9:  0a 53 65 6e 73 69 74 69 76 69 74 79 20 28 52 65  .data .string "\nSensitivity (Recall)      : "
-00001217 <str_hb_prec>:
-   00001217:  0a 50 72 65 63 69 73 69 6f 6e 20 28 2b 50 29 20  .data .string "\nPrecision (+P)            : "
-00001235 <str_hb_f1>:
-   00001235:  0a 46 31 20 53 63 6f 72 65 20 20 20 20 20 20 20  .data .string "\nF1 Score                  : "
-00001253 <str_hb_acc>:
-   00001253:  0a 48 65 61 72 74 62 65 61 74 20 41 63 63 75 72  .data .string "\nHeartbeat Accuracy        : "
-00001271 <str_record_hdr>:
-   00001271:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n RECORD-LEVEL SUMMARY\n============================================================\nTotal records processed   : "
-0000131f <str_rec_norm_tot>:
-   0000131f:  0a 4e 6f 72 6d 61 6c 20 72 65 63 6f 72 64 73 20  .data .string "\nNormal records            : "
-0000133d <str_rec_abn_tot>:
-   0000133d:  0a 41 62 6e 6f 72 6d 61 6c 20 72 65 63 6f 72 64  .data .string "\nAbnormal records          : "
-0000135b <str_rec_unclass_tot>:
-   0000135b:  0a 55 6e 63 6c 61 73 73 69 66 69 65 64 20 72 65  .data .string "\nUnclassified records      : "
-00001379 <str_rec_corr>:
-   00001379:  0a 43 6f 72 72 65 63 74 20 70 72 65 64 69 63 74  .data .string "\nCorrect predictions       : "
-00001397 <str_rec_incorr>:
-   00001397:  0a 49 6e 63 6f 72 72 65 63 74 20 70 72 65 64 69  .data .string "\nIncorrect predictions     : "
-000013b5 <str_rec_acc>:
-   000013b5:  0a 52 65 63 6f 72 64 2d 6c 65 76 65 6c 20 61 63  .data .string "\nRecord-level accuracy     : "
-000013d3 <str_app_sum_hdr>:
-   000013d3:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n CARDIOEDGE APPLICATION SUMMARY\n============================================================\nDataset processing        : PASS\nFirmware execution        : PASS\nClassification evaluation : PASS\n============================================================\n"
-0000150f <str_na>:
-   0000150f:  4e 2f 41 0a 00                    .data .string "N/A\n"
-00001514 <str_all_passed>:
-   00001514:  41 4c 4c 20 54 45 53 54 53 20 50 41 53 53 45 44  .data .string "ALL TESTS PASSED\n"
-00001526 <str_some_failed>:
-   00001526:  53 4f 4d 45 20 54 45 53 54 53 20 46 41 49 4c 45  .data .string "SOME TESTS FAILED\n"
-00001539 <str_complete>:
-   00001539:  54 45 53 54 20 43 4f 4d 50 4c 45 54 45 0a 00  .data .string "TEST COMPLETE\n"
-00001548 <str_nl>:
-   00001548:  0a 00                             .data .string "\n"
-0000154a <str_0x>:
-   0000154a:  30 78 00                          .data .string "0x"
-0000154d <hex_chars>:
-   0000154d:  30 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46  .data .string "0123456789ABCDEF"
-0000155e <num_ecg_records>:
-   0000155e:  04 00 00 00                       .data .word 4
-00001562 <ecg_records_table>:
-   00001562:  f2 15 00 00                       .data .word str_id_REC_NSR_01
-   00001566:  fd 15 00 00                       .data .word str_desc_REC_NSR_01
-   0000156a:  d0 02 00 00                       .data .word 720
-   0000156e:  02 00 00 00                       .data .word 2
-   00001572:  00 00 00 00                       .data .word 0
-   00001576:  20 16 00 00                       .data .word str_label_REC_NSR_01
-   0000157a:  27 16 00 00                       .data .word ref_peaks_REC_NSR_01
-   0000157e:  2f 16 00 00                       .data .word ref_types_REC_NSR_01
-   00001582:  37 16 00 00                       .data .word samples_REC_NSR_01
-   00001586:  d7 1b 00 00                       .data .word str_id_REC_BRADY_02
-   0000158a:  e4 1b 00 00                       .data .word str_desc_REC_BRADY_02
-   0000158e:  84 03 00 00                       .data .word 900
-   00001592:  02 00 00 00                       .data .word 2
-   00001596:  01 00 00 00                       .data .word 1
-   0000159a:  ff 1b 00 00                       .data .word str_label_REC_BRADY_02
-   0000159e:  08 1c 00 00                       .data .word ref_peaks_REC_BRADY_02
-   000015a2:  10 1c 00 00                       .data .word ref_types_REC_BRADY_02
-   000015a6:  18 1c 00 00                       .data .word samples_REC_BRADY_02
-   000015aa:  20 23 00 00                       .data .word str_id_REC_TACHY_03
-   000015ae:  2d 23 00 00                       .data .word str_desc_REC_TACHY_03
-   000015b2:  58 02 00 00                       .data .word 600
-   000015b6:  03 00 00 00                       .data .word 3
-   000015ba:  01 00 00 00                       .data .word 1
-   000015be:  49 23 00 00                       .data .word str_label_REC_TACHY_03
-   000015c2:  52 23 00 00                       .data .word ref_peaks_REC_TACHY_03
-   000015c6:  5e 23 00 00                       .data .word ref_types_REC_TACHY_03
-   000015ca:  6a 23 00 00                       .data .word samples_REC_TACHY_03
-   000015ce:  1a 28 00 00                       .data .word str_id_REC_ARRHY_04
-   000015d2:  27 28 00 00                       .data .word str_desc_REC_ARRHY_04
-   000015d6:  84 03 00 00                       .data .word 900
-   000015da:  03 00 00 00                       .data .word 3
-   000015de:  01 00 00 00                       .data .word 1
-   000015e2:  59 28 00 00                       .data .word str_label_REC_ARRHY_04
-   000015e6:  62 28 00 00                       .data .word ref_peaks_REC_ARRHY_04
-   000015ea:  6e 28 00 00                       .data .word ref_types_REC_ARRHY_04
-   000015ee:  7a 28 00 00                       .data .word samples_REC_ARRHY_04
-000015f2 <str_id_REC_NSR_01>:
-   000015f2:  52 45 43 5f 4e 53 52 5f 30 31 00  .data .string "REC_NSR_01"
-000015fd <str_desc_REC_NSR_01>:
-   000015fd:  4e 6f 72 6d 61 6c 20 53 69 6e 75 73 20 52 68 79  .data .string "Normal Sinus Rhythm (NSR) - 60 BPM"
-00001620 <str_label_REC_NSR_01>:
-   00001620:  4e 4f 52 4d 41 4c 00              .data .string "NORMAL"
-00001627 <ref_peaks_REC_NSR_01>:
-   00001627:  dc 00 00 00 44 02 00 00           .data .word 220, 580
-0000162f <ref_types_REC_NSR_01>:
-   0000162f:  00 00 00 00 00 00 00 00           .data .word 0, 0
-00001637 <samples_REC_NSR_01>:
-   00001637:  f2 ff f5 ff f9 ff fd ff 00 00 04 00 08 00 0b 00  .data .short -14, -11, -7, -3, 0, 4, 8, 11
-   00001647:  0f 00 12 00 16 00 1a 00 1d 00 21 00 25 00 0b 00  .data .short 15, 18, 22, 26, 29, 33, 37, 11
-   00001657:  0f 00 12 00 16 00 1a 00 1d 00 21 00 24 00 28 00  .data .short 15, 18, 22, 26, 29, 33, 36, 40
-   00001667:  2b 00 2e 00 32 00 35 00 39 00 1f 00 23 00 26 00  .data .short 43, 46, 50, 53, 57, 31, 35, 38
-   00001677:  29 00 2c 00 30 00 33 00 36 00 39 00 3d 00 40 00  .data .short 41, 44, 48, 51, 54, 57, 61, 64
-   00001687:  43 00 46 00 49 00 4c 00 32 00 35 00 38 00 3b 00  .data .short 67, 70, 73, 76, 50, 53, 56, 59
-   00001697:  3e 00 41 00 44 00 47 00 49 00 4c 00 4f 00 52 00  .data .short 62, 65, 68, 71, 73, 76, 79, 82
-   000016a7:  54 00 57 00 3c 00 3f 00 42 00 44 00 47 00 49 00  .data .short 84, 87, 60, 63, 66, 68, 71, 73
-   000016b7:  4b 00 4e 00 50 00 52 00 55 00 57 00 59 00 5b 00  .data .short 75, 78, 80, 82, 85, 87, 89, 91
-   000016c7:  5d 00 42 00 44 00 47 00 48 00 4a 00 4c 00 4e 00  .data .short 93, 66, 68, 71, 72, 74, 76, 78
-   000016d7:  50 00 52 00 54 00 55 00 57 00 59 00 5a 00 3f 00  .data .short 80, 82, 84, 85, 87, 89, 90, 63
-   000016e7:  41 00 42 00 44 00 45 00 46 00 48 00 49 00 4b 00  .data .short 65, 66, 68, 69, 70, 72, 73, 75
-   000016f7:  4c 00 4d 00 4e 00 50 00 51 00 52 00 36 00 37 00  .data .short 76, 77, 78, 80, 81, 82, 54, 55
-   00001707:  38 00 39 00 3a 00 3b 00 3c 00 3d 00 3e 00 3f 00  .data .short 56, 57, 58, 59, 60, 61, 62, 63
-   00001717:  40 00 40 00 41 00 42 00 26 00 26 00 27 00 28 00  .data .short 64, 64, 65, 66, 38, 38, 39, 40
-   00001727:  29 00 29 00 2a 00 2a 00 2b 00 2b 00 2c 00 2d 00  .data .short 41, 41, 42, 42, 43, 43, 44, 45
-   00001737:  2d 00 2e 00 2e 00 12 00 12 00 12 00 13 00 13 00  .data .short 45, 46, 46, 18, 18, 18, 19, 19
-   00001747:  14 00 14 00 14 00 15 00 15 00 15 00 16 00 16 00  .data .short 20, 20, 20, 21, 21, 21, 22, 22
-   00001757:  17 00 fa ff fa ff fb ff fb ff fb ff fc ff fd ff  .data .short 23, -6, -6, -5, -5, -5, -4, -3
-   00001767:  fd ff fd ff fe ff fe ff fe ff ff ff ff ff 00 00  .data .short -3, -3, -2, -2, -2, -1, -1, 0
-   00001777:  e3 ff e3 ff e4 ff e4 ff e4 ff e5 ff e5 ff e6 ff  .data .short -29, -29, -28, -28, -28, -27, -27, -26
-   00001787:  e6 ff e6 ff e7 ff e7 ff e8 ff e8 ff cc ff cc ff  .data .short -26, -26, -25, -25, -24, -24, -52, -52
-   00001797:  cd ff ce ff ce ff cf ff cf ff d0 ff d1 ff d2 ff  .data .short -51, -50, -50, -49, -49, -48, -47, -46
-   000017a7:  d2 ff d3 ff d4 ff d5 ff d5 ff b9 ff ba ff bb ff  .data .short -46, -45, -44, -43, -43, -71, -70, -69
-   000017b7:  bc ff bd ff be ff bf ff c0 ff c1 ff c2 ff c3 ff  .data .short -68, -67, -66, -65, -64, -63, -62, -61
-   000017c7:  c4 ff c5 ff c7 ff ab ff ac ff ad ff af ff b0 ff  .data .short -60, -59, -57, -85, -84, -83, -81, -80
-   000017d7:  b2 ff b3 ff b4 ff b6 ff b7 ff b9 ff bb ff bc ff  .data .short -78, -77, -76, -74, -73, -71, -69, -68
-   000017e7:  be ff cc fd 58 fb 52 0d 70 32 12 10 a4 f8 56 fd  .data .short -66, -564, -1192, 3410, 12912, 4114, -1884, -682
-   000017f7:  b0 ff b1 ff b4 ff b6 ff b8 ff ba ff bc ff be ff  .data .short -80, -79, -76, -74, -72, -70, -68, -66
-   00001807:  a3 ff a6 ff a8 ff aa ff ad ff af ff b1 ff b4 ff  .data .short -93, -90, -88, -86, -83, -81, -79, -76
-   00001817:  b6 ff b9 ff bc ff be ff c1 ff c3 ff c6 ff ac ff  .data .short -74, -71, -68, -66, -63, -61, -58, -84
-   00001827:  af ff b1 ff b4 ff b7 ff ba ff bd ff c0 ff c3 ff  .data .short -81, -79, -76, -73, -70, -67, -64, -61
-   00001837:  c6 ff c9 ff cc ff cf ff d2 ff b8 ff bb ff bf ff  .data .short -58, -55, -52, -49, -46, -72, -69, -65
-   00001847:  c2 ff c5 ff c8 ff cc ff cf ff d2 ff d5 ff d9 ff  .data .short -62, -59, -56, -52, -49, -46, -43, -39
-   00001857:  dc ff e0 ff e3 ff e6 ff cd ff d0 ff d4 ff d7 ff  .data .short -36, -32, -29, -26, -51, -48, -44, -41
-   00001867:  db ff de ff e2 ff e6 ff e9 ff ed ff f0 ff f4 ff  .data .short -37, -34, -30, -26, -23, -19, -16, -12
-   00001877:  f8 ff fb ff e2 ff e6 ff e9 ff ed ff f0 ff f4 ff  .data .short -8, -5, -30, -26, -23, -19, -16, -12
-   00001887:  f8 ff fb ff ff ff 03 00 06 00 09 00 0d 00 11 00  .data .short -8, -5, -1, 3, 6, 9, 13, 17
-   00001897:  14 00 fb ff ff ff 02 00 06 00 09 00 0d 00 11 00  .data .short 20, -5, -1, 2, 6, 9, 13, 17
-   000018a7:  14 00 18 00 1c 00 1f 00 23 00 26 00 2a 00 11 00  .data .short 20, 24, 28, 31, 35, 38, 42, 17
-   000018b7:  14 00 18 00 1b 00 1f 00 22 00 25 00 29 00 2c 00  .data .short 20, 24, 27, 31, 34, 37, 41, 44
-   000018c7:  30 00 33 00 37 00 3a 00 3d 00 40 00 27 00 2a 00  .data .short 48, 51, 55, 58, 61, 64, 39, 42
-   000018d7:  2d 00 30 00 34 00 37 00 3a 00 3d 00 40 00 43 00  .data .short 45, 48, 52, 55, 58, 61, 64, 67
-   000018e7:  46 00 49 00 4c 00 4f 00 35 00 38 00 3b 00 3e 00  .data .short 70, 73, 76, 79, 53, 56, 59, 62
-   000018f7:  40 00 43 00 46 00 49 00 4b 00 4e 00 50 00 53 00  .data .short 64, 67, 70, 73, 75, 78, 80, 83
-   00001907:  56 00 58 00 5b 00 40 00 42 00 45 00 47 00 49 00  .data .short 86, 88, 91, 64, 66, 69, 71, 73
-   00001917:  4c 00 4e 00 50 00 52 00 54 00 56 00 58 00 5b 00  .data .short 76, 78, 80, 82, 84, 86, 88, 91
-   00001927:  5c 00 41 00 43 00 45 00 47 00 49 00 4b 00 4c 00  .data .short 92, 65, 67, 69, 71, 73, 75, 76
-   00001937:  4e 00 50 00 51 00 53 00 55 00 56 00 58 00 59 00  .data .short 78, 80, 81, 83, 85, 86, 88, 89
-   00001947:  3d 00 3f 00 40 00 42 00 43 00 44 00 45 00 47 00  .data .short 61, 63, 64, 66, 67, 68, 69, 71
-   00001957:  48 00 49 00 4a 00 4b 00 4c 00 4d 00 31 00 32 00  .data .short 72, 73, 74, 75, 76, 77, 49, 50
-   00001967:  33 00 34 00 35 00 36 00 37 00 37 00 38 00 39 00  .data .short 51, 52, 53, 54, 55, 55, 56, 57
-   00001977:  3a 00 3a 00 3b 00 3c 00 3d 00 20 00 21 00 21 00  .data .short 58, 58, 59, 60, 61, 32, 33, 33
-   00001987:  22 00 22 00 23 00 24 00 24 00 25 00 25 00 26 00  .data .short 34, 34, 35, 36, 36, 37, 37, 38
-   00001997:  26 00 26 00 27 00 0a 00 0b 00 0b 00 0b 00 0c 00  .data .short 38, 38, 39, 10, 11, 11, 11, 12
-   000019a7:  0c 00 0c 00 0d 00 0d 00 0e 00 0e 00 0e 00 0f 00  .data .short 12, 12, 13, 13, 14, 14, 14, 15
-   000019b7:  0f 00 0f 00 f3 ff f4 ff f4 ff f4 ff f5 ff f5 ff  .data .short 15, 15, -13, -12, -12, -12, -11, -11
-   000019c7:  f5 ff f6 ff f6 ff f7 ff f7 ff f7 ff f8 ff f8 ff  .data .short -11, -10, -10, -9, -9, -9, -8, -8
-   000019d7:  db ff dc ff dc ff dd ff dd ff dd ff de ff de ff  .data .short -37, -36, -36, -35, -35, -35, -34, -34
-   000019e7:  df ff df ff e0 ff e0 ff e1 ff e2 ff e2 ff c6 ff  .data .short -33, -33, -32, -32, -31, -30, -30, -58
-   000019f7:  c6 ff c7 ff c8 ff c9 ff c9 ff ca ff cb ff cc ff  .data .short -58, -57, -56, -55, -55, -54, -53, -52
-   00001a07:  cc ff cd ff ce ff cf ff d0 ff b4 ff b5 ff b6 ff  .data .short -52, -51, -50, -49, -48, -76, -75, -74
-   00001a17:  b7 ff b8 ff b9 ff ba ff bb ff bc ff be ff bf ff  .data .short -73, -72, -71, -70, -69, -68, -66, -65
-   00001a27:  c0 ff c1 ff c3 ff c4 ff a9 ff aa ff ab ff ad ff  .data .short -64, -63, -61, -60, -87, -86, -85, -83
-   00001a37:  ae ff b0 ff b2 ff b3 ff b5 ff b7 ff b8 ff ba ff  .data .short -82, -80, -78, -77, -75, -73, -72, -70
-   00001a47:  bc ff be ff a3 ff a5 ff a7 ff a8 ff ab ff ad ff  .data .short -68, -66, -93, -91, -89, -88, -85, -83
-   00001a57:  af ff b1 ff b3 ff b5 ff b7 ff ba ff bc ff be ff  .data .short -81, -79, -77, -75, -73, -70, -68, -66
-   00001a67:  c1 ff a6 ff a8 ff ab ff ad ff b0 ff b3 ff b5 ff  .data .short -63, -90, -88, -85, -83, -80, -77, -75
-   00001a77:  b8 ff ba ff bd ff c0 ff c3 ff c5 ff c8 ff ae ff  .data .short -72, -70, -67, -64, -61, -59, -56, -82
-   00001a87:  b1 ff b4 ff b7 ff ba ff bd ff c0 ff c3 ff c6 ff  .data .short -79, -76, -73, -70, -67, -64, -61, -58
-   00001a97:  c9 ff cc ff cf ff d3 ff d6 ff d9 ff bf ff c3 ff  .data .short -55, -52, -49, -45, -42, -39, -65, -61
-   00001aa7:  c6 ff c9 ff cc ff d0 ff d3 ff d7 ff da ff de ff  .data .short -58, -55, -52, -48, -45, -41, -38, -34
-   00001ab7:  e1 ff f0 fd 9c fb 97 0d 9a 32 3d 10 d1 f8 85 fd  .data .short -31, -528, -1124, 3479, 12954, 4157, -1839, -635
-   00001ac7:  e0 ff e4 ff e7 ff eb ff ef ff f2 ff f6 ff fa ff  .data .short -32, -28, -25, -21, -17, -14, -10, -6
-   00001ad7:  fd ff 01 00 04 00 eb ff ef ff f2 ff f6 ff fa ff  .data .short -3, 1, 4, -21, -17, -14, -10, -6
-   00001ae7:  fd ff 00 00 04 00 08 00 0b 00 0f 00 13 00 16 00  .data .short -3, 0, 4, 8, 11, 15, 19, 22
-   00001af7:  1a 00 00 00 04 00 08 00 0b 00 0f 00 13 00 16 00  .data .short 26, 0, 4, 8, 11, 15, 19, 22
-   00001b07:  1a 00 1d 00 21 00 25 00 28 00 2c 00 2f 00 33 00  .data .short 26, 29, 33, 37, 40, 44, 47, 51
-   00001b17:  19 00 1c 00 20 00 23 00 27 00 2a 00 2e 00 31 00  .data .short 25, 28, 32, 35, 39, 42, 46, 49
-   00001b27:  34 00 37 00 3b 00 3e 00 41 00 44 00 2b 00 2e 00  .data .short 52, 55, 59, 62, 65, 68, 43, 46
-   00001b37:  31 00 34 00 37 00 3a 00 3d 00 40 00 43 00 46 00  .data .short 49, 52, 55, 58, 61, 64, 67, 70
-   00001b47:  49 00 4c 00 4f 00 52 00 54 00 3a 00 3d 00 40 00  .data .short 73, 76, 79, 82, 84, 58, 61, 64
-   00001b57:  42 00 45 00 47 00 4a 00 4d 00 4f 00 52 00 54 00  .data .short 66, 69, 71, 74, 77, 79, 82, 84
-   00001b67:  56 00 59 00 5b 00 40 00 43 00 45 00 47 00 49 00  .data .short 86, 89, 91, 64, 67, 69, 71, 73
-   00001b77:  4b 00 4d 00 4f 00 52 00 53 00 55 00 57 00 59 00  .data .short 75, 77, 79, 82, 83, 85, 87, 89
-   00001b87:  5b 00 5d 00 42 00 43 00 45 00 47 00 48 00 4a 00  .data .short 91, 93, 66, 67, 69, 71, 72, 74
-   00001b97:  4c 00 4d 00 4f 00 50 00 51 00 53 00 54 00 56 00  .data .short 76, 77, 79, 80, 81, 83, 84, 86
-   00001ba7:  3a 00 3b 00 3c 00 3e 00 3f 00 40 00 41 00 42 00  .data .short 58, 59, 60, 62, 63, 64, 65, 66
-   00001bb7:  43 00 44 00 45 00 46 00 47 00 48 00 49 00 2d 00  .data .short 67, 68, 69, 70, 71, 72, 73, 45
-   00001bc7:  2e 00 2e 00 2f 00 30 00 31 00 31 00 32 00 33 00  .data .short 46, 46, 47, 48, 49, 49, 50, 51
-00001bd7 <str_id_REC_BRADY_02>:
-   00001bd7:  52 45 43 5f 42 52 41 44 59 5f 30 32 00  .data .string "REC_BRADY_02"
-00001be4 <str_desc_REC_BRADY_02>:
-   00001be4:  53 69 6e 75 73 20 42 72 61 64 79 63 61 72 64 69  .data .string "Sinus Bradycardia - 45 BPM"
-00001bff <str_label_REC_BRADY_02>:
-   00001bff:  41 42 4e 4f 52 4d 41 4c 00        .data .string "ABNORMAL"
-00001c08 <ref_peaks_REC_BRADY_02>:
-   00001c08:  c8 00 00 00 a8 02 00 00           .data .word 200, 680
-00001c10 <ref_types_REC_BRADY_02>:
-   00001c10:  00 00 00 00 01 00 00 00           .data .word 0, 1
-00001c18 <samples_REC_BRADY_02>:
-   00001c18:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001c28:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001c38:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001c48:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001c58:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001c68:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001c78:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001c88:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001c98:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001ca8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001cb8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001cc8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001cd8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001ce8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001cf8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001d08:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001d18:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001d28:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001d38:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001d48:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00000ad0:  02c12503          lw a0, 44(sp)
+   00000ad4:  e2cff0ef          jal ra, uart_putdec
+   00000ad8:  00001537          lui a0, 0x1
+   00000adc:  4d750513          addi a0, a0, 1239 # <str_rec_incorr>
+   00000ae0:  d7cff0ef          jal ra, uart_puts
+   00000ae4:  03012503          lw a0, 48(sp)
+   00000ae8:  e18ff0ef          jal ra, uart_putdec
+   00000aec:  00001537          lui a0, 0x1
+   00000af0:  68850513          addi a0, a0, 1672 # <str_nl>
+   00000af4:  d68ff0ef          jal ra, uart_puts
+   00000af8:  00001537          lui a0, 0x1
+   00000afc:  4f550513          addi a0, a0, 1269 # <str_rec_acc>
+   00000b00:  d5cff0ef          jal ra, uart_puts
+   00000b04:  02c12503          lw a0, 44(sp)
+   00000b08:  02012583          lw a1, 32(sp)
+   00000b0c:  e74ff0ef          jal ra, uart_print_pct
+   00000b10:  00001537          lui a0, 0x1
+   00000b14:  51350513          addi a0, a0, 1299 # <str_app_sum_hdr>
+   00000b18:  d44ff0ef          jal ra, uart_puts
+   00000b1c:  00100513          li a0, 1
+   00000b20:  00100593          li a1, 1
+   00000b24:  eecff0ef          jal ra, fw_mailbox_end
+   00000b28:  00100513          li a0, 1
+   00000b2c:  06412a83          lw s5, 100(sp)
+   00000b30:  06812a03          lw s4, 104(sp)
+   00000b34:  06c12983          lw s3, 108(sp)
+   00000b38:  07012903          lw s2, 112(sp)
+   00000b3c:  07412483          lw s1, 116(sp)
+   00000b40:  07812403          lw s0, 120(sp)
+   00000b44:  07c12083          lw ra, 124(sp)
+   00000b48:  08010113          addi sp, sp, 128
+   00000b4c:  00008067          ret
+00000b50 <main>:
+   00000b50:  fe810113          addi sp, sp, -24
+   00000b54:  00112a23          sw ra, 20(sp)
+   00000b58:  00812823          sw s0, 16(sp)
+   00000b5c:  00100513          li a0, 1
+   00000b60:  e98ff0ef          jal ra, fw_mailbox_start
+   00000b64:  00100413          li s0, 1
+   00000b68:  cb8ff0ef          jal ra, uart_init
+   00000b6c:  00001537          lui a0, 0x1
+   00000b70:  c2450513          addi a0, a0, -988 # <str_header>
+   00000b74:  ce8ff0ef          jal ra, uart_puts
+   00000b78:  00100513          li a0, 1
+   00000b7c:  0000d5b7          li a1, 0xCAFE
+   00000b80:  afe58593          li a1, 0xCAFE
+   00000b84:  e8cff0ef          jal ra, fw_mailbox_end
+   00000b88:  ea0ff0ef          jal ra, test_uart
+   00000b8c:  00a47433          and s0, s0, a0
+   00000b90:  f34ff0ef          jal ra, test_gpio
+   00000b94:  00a47433          and s0, s0, a0
+   00000b98:  ff0ff0ef          jal ra, test_timer
+   00000b9c:  00a47433          and s0, s0, a0
+   00000ba0:  889ff0ef          jal ra, test_adc
+   00000ba4:  00a47433          and s0, s0, a0
+   00000ba8:  919ff0ef          jal ra, test_fir
+   00000bac:  00a47433          and s0, s0, a0
+   00000bb0:  9a9ff0ef          jal ra, test_spi
+   00000bb4:  00a47433          and s0, s0, a0
+   00000bb8:  a4dff0ef          jal ra, run_ecg_analysis
+   00000bbc:  00a47433          and s0, s0, a0
+   00000bc0:  01200513          li a0, 18
+   00000bc4:  e34ff0ef          jal ra, fw_mailbox_start
+   00000bc8:  00001537          lui a0, 0x1
+   00000bcc:  68850513          addi a0, a0, 1672 # <str_nl>
+   00000bd0:  c8cff0ef          jal ra, uart_puts
+   00000bd4:  02040263          beqz s0, main_failed
+   00000bd8:  00001537          lui a0, 0x1
+   00000bdc:  65450513          addi a0, a0, 1620 # <str_all_passed>
+   00000be0:  c7cff0ef          jal ra, uart_puts
+   00000be4:  00100513          li a0, 1
+   00000be8:  55aa35b7          lui a1, 0x55AA3
+   00000bec:  3cc58593          addi a1, a1, 0x3CC
+   00000bf0:  e20ff0ef          jal ra, fw_mailbox_end
+   00000bf4:  01c0006f          j main_done
+00000bf8 <main_failed>:
+   00000bf8:  00001537          lui a0, 0x1
+   00000bfc:  66650513          addi a0, a0, 1638 # <str_some_failed>
+   00000c00:  c5cff0ef          jal ra, uart_puts
+   00000c04:  00200513          li a0, 2
+   00000c08:  00000593          li a1, 0
+   00000c0c:  e04ff0ef          jal ra, fw_mailbox_end
+00000c10 <main_done>:
+   00000c10:  00001537          lui a0, 0x1
+   00000c14:  67950513          addi a0, a0, 1657 # <str_complete>
+   00000c18:  c44ff0ef          jal ra, uart_puts
+00000c1c <main_spin>:
+   00000c1c:  00000013          nop
+   00000c20:  ffdff06f          j main_spin
+00000c24 <str_header>:
+   00000c24:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n CARDIOEDGE RISC-V SOC FIRMWARE BOOT\n============================================================\nCPU STARTED\n\n--- PERIPHERAL INTEGRATION TESTS ---\n"
+00000cf7 <str_uart_test>:
+   00000cf7:  55 41 52 54 20 54 45 53 54 0a 00  .data .string "UART TEST\n"
+00000d02 <str_uart_pass>:
+   00000d02:  20 20 50 41 53 53 3a 20 55 41 52 54 20 63 6f 6e  .data .string "  PASS: UART configured 8N1, TX holding empty confirmed\n"
+00000d3b <str_uart_fail>:
+   00000d3b:  20 20 46 41 49 4c 3a 20 55 41 52 54 20 74 65 73  .data .string "  FAIL: UART test failed\n"
+00000d55 <str_gpio_test>:
+   00000d55:  47 50 49 4f 20 54 45 53 54 0a 00  .data .string "GPIO TEST\n"
+00000d60 <str_gpio_pass>:
+   00000d60:  20 20 50 41 53 53 3a 20 47 50 49 4f 20 44 49 52  .data .string "  PASS: GPIO DIR=0xFF, DATA_O write/readback verified\n"
+00000d97 <str_gpio_fail>:
+   00000d97:  20 20 46 41 49 4c 3a 20 47 50 49 4f 20 74 65 73  .data .string "  FAIL: GPIO test failed\n"
+00000db1 <str_timer_test>:
+   00000db1:  54 49 4d 45 52 20 54 45 53 54 0a 00  .data .string "TIMER TEST\n"
+00000dbd <str_timer_pass>:
+   00000dbd:  20 20 50 41 53 53 3a 20 54 49 4d 45 52 20 4c 4f  .data .string "  PASS: TIMER LOAD=100 and CTRL enable/start verified\n"
+00000df4 <str_timer_fail>:
+   00000df4:  20 20 46 41 49 4c 3a 20 54 49 4d 45 52 20 74 65  .data .string "  FAIL: TIMER test failed\n"
+00000e0f <str_adc_test>:
+   00000e0f:  41 44 43 20 54 45 53 54 0a 00     .data .string "ADC TEST\n"
+00000e19 <str_adc_pass>:
+   00000e19:  20 20 50 41 53 53 3a 20 41 44 43 20 73 63 68 65  .data .string "  PASS: ADC scheduler enabled, STATUS empty flag=0x04 confirmed\n"
+00000e5a <str_adc_fail>:
+   00000e5a:  20 20 46 41 49 4c 3a 20 41 44 43 20 74 65 73 74  .data .string "  FAIL: ADC test failed\n"
+00000e73 <str_fir_test>:
+   00000e73:  46 49 52 20 54 45 53 54 0a 00     .data .string "FIR TEST\n"
+00000e7d <str_fir_pass>:
+   00000e7d:  20 20 50 41 53 53 3a 20 46 49 52 20 65 6e 61 62  .data .string "  PASS: FIR enable=1, Tap0=0x0100 latched, AXI-Stream ready\n"
+00000eba <str_fir_fail>:
+   00000eba:  20 20 46 41 49 4c 3a 20 46 49 52 20 74 65 73 74  .data .string "  FAIL: FIR test failed\n"
+00000ed3 <str_spi_test>:
+   00000ed3:  53 50 49 20 54 45 53 54 0a 00     .data .string "SPI TEST\n"
+00000edd <str_spi_pass>:
+   00000edd:  20 20 50 41 53 53 3a 20 53 50 49 20 43 52 2f 53  .data .string "  PASS: SPI CR/SR verified, unmapped response 0x61626364 verified\n"
+00000f20 <str_spi_fail>:
+   00000f20:  20 20 46 41 49 4c 3a 20 53 50 49 20 74 65 73 74  .data .string "  FAIL: SPI test failed\n"
+00000f39 <str_app_hdr>:
+   00000f39:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n CARDIOEDGE ECG ANALYSIS APPLICATION\n============================================================\n CPU       : VeeR EL2 RV32IMC\n DATASET   : MIT-BIH ARRHYTHMIA & CLINICAL VALIDATION\n RECORDS   : 4\n------------------------------------------------------------\n"
+0000107a <str_rec_prefix>:
+   0000107a:  0a 5b 52 45 43 4f 52 44 20 00     .data .string "\n[RECORD "
+00001084 <str_rec_close>:
+   00001084:  5d 20 00                          .data .string "] "
+00001087 <str_samples_proc>:
+   00001087:  0a 20 20 53 61 6d 70 6c 65 73 20 70 72 6f 63 65  .data .string "\n  Samples processed       : "
+000010a5 <str_ref_beats>:
+   000010a5:  0a 20 20 52 65 66 65 72 65 6e 63 65 20 62 65 61  .data .string "\n  Reference beats         : "
+000010c3 <str_det_peaks>:
+   000010c3:  0a 20 20 44 65 74 65 63 74 65 64 20 52 2d 70 65  .data .string "\n  Detected R-peaks        : "
+000010e1 <str_norm_beats>:
+   000010e1:  0a 20 20 4e 6f 72 6d 61 6c 20 62 65 61 74 73 20  .data .string "\n  Normal beats            : "
+000010ff <str_abn_beats>:
+   000010ff:  0a 20 20 41 62 6e 6f 72 6d 61 6c 20 62 65 61 74  .data .string "\n  Abnormal beats          : "
+0000111d <str_unclass_beats>:
+   0000111d:  0a 20 20 55 6e 63 6c 61 73 73 69 66 69 65 64 20  .data .string "\n  Unclassified beats      : "
+0000113b <str_ref_label>:
+   0000113b:  0a 20 20 52 65 66 65 72 65 6e 63 65 20 72 65 63  .data .string "\n  Reference record label  : "
+00001159 <str_pred_label>:
+   00001159:  0a 20 20 50 72 65 64 69 63 74 65 64 20 72 65 63  .data .string "\n  Predicted record label  : "
+00001177 <str_rec_class>:
+   00001177:  0a 20 20 52 65 63 6f 72 64 20 63 6c 61 73 73 69  .data .string "\n  Record classification   : "
+00001195 <str_match>:
+   00001195:  4d 41 54 43 48 0a 00              .data .string "MATCH\n"
+0000119c <str_mismatch>:
+   0000119c:  4d 49 53 4d 41 54 43 48 0a 00     .data .string "MISMATCH\n"
+000011a6 <str_normal>:
+   000011a6:  4e 4f 52 4d 41 4c 00              .data .string "NORMAL"
+000011ad <str_abnormal>:
+   000011ad:  41 42 4e 4f 52 4d 41 4c 00        .data .string "ABNORMAL"
+000011b6 <str_heartbeat_hdr>:
+   000011b6:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n HEARTBEAT-LEVEL SUMMARY\n============================================================\nReference beats           : "
+00001267 <str_hb_det>:
+   00001267:  0a 44 65 74 65 63 74 65 64 20 52 2d 70 65 61 6b  .data .string "\nDetected R-peaks          : "
+00001285 <str_hb_match>:
+   00001285:  0a 4d 61 74 63 68 65 64 20 64 65 74 65 63 74 69  .data .string "\nMatched detections        : "
+000012a3 <str_hb_miss>:
+   000012a3:  0a 4d 69 73 73 65 64 20 64 65 74 65 63 74 69 6f  .data .string "\nMissed detections         : "
+000012c1 <str_hb_false>:
+   000012c1:  0a 46 61 6c 73 65 20 64 65 74 65 63 74 69 6f 6e  .data .string "\nFalse detections          : "
+000012df <str_hb_norm>:
+   000012df:  0a 4e 6f 72 6d 61 6c 20 62 65 61 74 73 20 20 20  .data .string "\nNormal beats              : "
+000012fd <str_hb_abn>:
+   000012fd:  0a 41 62 6e 6f 72 6d 61 6c 20 62 65 61 74 73 20  .data .string "\nAbnormal beats            : "
+0000131b <str_hb_unclass>:
+   0000131b:  0a 55 6e 63 6c 61 73 73 69 66 69 65 64 20 62 65  .data .string "\nUnclassified beats        : "
+00001339 <str_hb_sens>:
+   00001339:  0a 53 65 6e 73 69 74 69 76 69 74 79 20 28 52 65  .data .string "\nSensitivity (Recall)      : "
+00001357 <str_hb_prec>:
+   00001357:  0a 50 72 65 63 69 73 69 6f 6e 20 28 2b 50 29 20  .data .string "\nPrecision (+P)            : "
+00001375 <str_hb_f1>:
+   00001375:  0a 46 31 20 53 63 6f 72 65 20 20 20 20 20 20 20  .data .string "\nF1 Score                  : "
+00001393 <str_hb_acc>:
+   00001393:  0a 48 65 61 72 74 62 65 61 74 20 41 63 63 75 72  .data .string "\nHeartbeat Accuracy        : "
+000013b1 <str_record_hdr>:
+   000013b1:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n RECORD-LEVEL SUMMARY\n============================================================\nTotal records processed   : "
+0000145f <str_rec_norm_tot>:
+   0000145f:  0a 4e 6f 72 6d 61 6c 20 72 65 63 6f 72 64 73 20  .data .string "\nNormal records            : "
+0000147d <str_rec_abn_tot>:
+   0000147d:  0a 41 62 6e 6f 72 6d 61 6c 20 72 65 63 6f 72 64  .data .string "\nAbnormal records          : "
+0000149b <str_rec_unclass_tot>:
+   0000149b:  0a 55 6e 63 6c 61 73 73 69 66 69 65 64 20 72 65  .data .string "\nUnclassified records      : "
+000014b9 <str_rec_corr>:
+   000014b9:  0a 43 6f 72 72 65 63 74 20 70 72 65 64 69 63 74  .data .string "\nCorrect predictions       : "
+000014d7 <str_rec_incorr>:
+   000014d7:  0a 49 6e 63 6f 72 72 65 63 74 20 70 72 65 64 69  .data .string "\nIncorrect predictions     : "
+000014f5 <str_rec_acc>:
+   000014f5:  0a 52 65 63 6f 72 64 2d 6c 65 76 65 6c 20 61 63  .data .string "\nRecord-level accuracy     : "
+00001513 <str_app_sum_hdr>:
+   00001513:  0a 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  .data .string "\n============================================================\n CARDIOEDGE APPLICATION SUMMARY\n============================================================\nDataset processing        : PASS\nFirmware execution        : PASS\nClassification evaluation : PASS\n============================================================\n"
+0000164f <str_na>:
+   0000164f:  4e 2f 41 0a 00                    .data .string "N/A\n"
+00001654 <str_all_passed>:
+   00001654:  41 4c 4c 20 54 45 53 54 53 20 50 41 53 53 45 44  .data .string "ALL TESTS PASSED\n"
+00001666 <str_some_failed>:
+   00001666:  53 4f 4d 45 20 54 45 53 54 53 20 46 41 49 4c 45  .data .string "SOME TESTS FAILED\n"
+00001679 <str_complete>:
+   00001679:  54 45 53 54 20 43 4f 4d 50 4c 45 54 45 0a 00  .data .string "TEST COMPLETE\n"
+00001688 <str_nl>:
+   00001688:  0a 00                             .data .string "\n"
+0000168a <str_0x>:
+   0000168a:  30 78 00                          .data .string "0x"
+0000168d <hex_chars>:
+   0000168d:  30 31 32 33 34 35 36 37 38 39 41 42 43 44 45 46  .data .string "0123456789ABCDEF"
+0000169e <num_ecg_records>:
+   0000169e:  04 00 00 00                       .data .word 4
+000016a2 <ecg_records_table>:
+   000016a2:  32 17 00 00                       .data .word str_id_REC_NSR_01
+   000016a6:  3d 17 00 00                       .data .word str_desc_REC_NSR_01
+   000016aa:  d0 02 00 00                       .data .word 720
+   000016ae:  02 00 00 00                       .data .word 2
+   000016b2:  00 00 00 00                       .data .word 0
+   000016b6:  60 17 00 00                       .data .word str_label_REC_NSR_01
+   000016ba:  67 17 00 00                       .data .word ref_peaks_REC_NSR_01
+   000016be:  6f 17 00 00                       .data .word ref_types_REC_NSR_01
+   000016c2:  77 17 00 00                       .data .word samples_REC_NSR_01
+   000016c6:  17 1d 00 00                       .data .word str_id_REC_BRADY_02
+   000016ca:  24 1d 00 00                       .data .word str_desc_REC_BRADY_02
+   000016ce:  84 03 00 00                       .data .word 900
+   000016d2:  02 00 00 00                       .data .word 2
+   000016d6:  01 00 00 00                       .data .word 1
+   000016da:  3f 1d 00 00                       .data .word str_label_REC_BRADY_02
+   000016de:  48 1d 00 00                       .data .word ref_peaks_REC_BRADY_02
+   000016e2:  50 1d 00 00                       .data .word ref_types_REC_BRADY_02
+   000016e6:  58 1d 00 00                       .data .word samples_REC_BRADY_02
+   000016ea:  60 24 00 00                       .data .word str_id_REC_TACHY_03
+   000016ee:  6d 24 00 00                       .data .word str_desc_REC_TACHY_03
+   000016f2:  58 02 00 00                       .data .word 600
+   000016f6:  03 00 00 00                       .data .word 3
+   000016fa:  01 00 00 00                       .data .word 1
+   000016fe:  89 24 00 00                       .data .word str_label_REC_TACHY_03
+   00001702:  92 24 00 00                       .data .word ref_peaks_REC_TACHY_03
+   00001706:  9e 24 00 00                       .data .word ref_types_REC_TACHY_03
+   0000170a:  aa 24 00 00                       .data .word samples_REC_TACHY_03
+   0000170e:  5a 29 00 00                       .data .word str_id_REC_ARRHY_04
+   00001712:  67 29 00 00                       .data .word str_desc_REC_ARRHY_04
+   00001716:  84 03 00 00                       .data .word 900
+   0000171a:  03 00 00 00                       .data .word 3
+   0000171e:  01 00 00 00                       .data .word 1
+   00001722:  99 29 00 00                       .data .word str_label_REC_ARRHY_04
+   00001726:  a2 29 00 00                       .data .word ref_peaks_REC_ARRHY_04
+   0000172a:  ae 29 00 00                       .data .word ref_types_REC_ARRHY_04
+   0000172e:  ba 29 00 00                       .data .word samples_REC_ARRHY_04
+00001732 <str_id_REC_NSR_01>:
+   00001732:  52 45 43 5f 4e 53 52 5f 30 31 00  .data .string "REC_NSR_01"
+0000173d <str_desc_REC_NSR_01>:
+   0000173d:  4e 6f 72 6d 61 6c 20 53 69 6e 75 73 20 52 68 79  .data .string "Normal Sinus Rhythm (NSR) - 60 BPM"
+00001760 <str_label_REC_NSR_01>:
+   00001760:  4e 4f 52 4d 41 4c 00              .data .string "NORMAL"
+00001767 <ref_peaks_REC_NSR_01>:
+   00001767:  dc 00 00 00 44 02 00 00           .data .word 220, 580
+0000176f <ref_types_REC_NSR_01>:
+   0000176f:  00 00 00 00 00 00 00 00           .data .word 0, 0
+00001777 <samples_REC_NSR_01>:
+   00001777:  f2 ff f5 ff f9 ff fd ff 00 00 04 00 08 00 0b 00  .data .short -14, -11, -7, -3, 0, 4, 8, 11
+   00001787:  0f 00 12 00 16 00 1a 00 1d 00 21 00 25 00 0b 00  .data .short 15, 18, 22, 26, 29, 33, 37, 11
+   00001797:  0f 00 12 00 16 00 1a 00 1d 00 21 00 24 00 28 00  .data .short 15, 18, 22, 26, 29, 33, 36, 40
+   000017a7:  2b 00 2e 00 32 00 35 00 39 00 1f 00 23 00 26 00  .data .short 43, 46, 50, 53, 57, 31, 35, 38
+   000017b7:  29 00 2c 00 30 00 33 00 36 00 39 00 3d 00 40 00  .data .short 41, 44, 48, 51, 54, 57, 61, 64
+   000017c7:  43 00 46 00 49 00 4c 00 32 00 35 00 38 00 3b 00  .data .short 67, 70, 73, 76, 50, 53, 56, 59
+   000017d7:  3e 00 41 00 44 00 47 00 49 00 4c 00 4f 00 52 00  .data .short 62, 65, 68, 71, 73, 76, 79, 82
+   000017e7:  54 00 57 00 3c 00 3f 00 42 00 44 00 47 00 49 00  .data .short 84, 87, 60, 63, 66, 68, 71, 73
+   000017f7:  4b 00 4e 00 50 00 52 00 55 00 57 00 59 00 5b 00  .data .short 75, 78, 80, 82, 85, 87, 89, 91
+   00001807:  5d 00 42 00 44 00 47 00 48 00 4a 00 4c 00 4e 00  .data .short 93, 66, 68, 71, 72, 74, 76, 78
+   00001817:  50 00 52 00 54 00 55 00 57 00 59 00 5a 00 3f 00  .data .short 80, 82, 84, 85, 87, 89, 90, 63
+   00001827:  41 00 42 00 44 00 45 00 46 00 48 00 49 00 4b 00  .data .short 65, 66, 68, 69, 70, 72, 73, 75
+   00001837:  4c 00 4d 00 4e 00 50 00 51 00 52 00 36 00 37 00  .data .short 76, 77, 78, 80, 81, 82, 54, 55
+   00001847:  38 00 39 00 3a 00 3b 00 3c 00 3d 00 3e 00 3f 00  .data .short 56, 57, 58, 59, 60, 61, 62, 63
+   00001857:  40 00 40 00 41 00 42 00 26 00 26 00 27 00 28 00  .data .short 64, 64, 65, 66, 38, 38, 39, 40
+   00001867:  29 00 29 00 2a 00 2a 00 2b 00 2b 00 2c 00 2d 00  .data .short 41, 41, 42, 42, 43, 43, 44, 45
+   00001877:  2d 00 2e 00 2e 00 12 00 12 00 12 00 13 00 13 00  .data .short 45, 46, 46, 18, 18, 18, 19, 19
+   00001887:  14 00 14 00 14 00 15 00 15 00 15 00 16 00 16 00  .data .short 20, 20, 20, 21, 21, 21, 22, 22
+   00001897:  17 00 fa ff fa ff fb ff fb ff fb ff fc ff fd ff  .data .short 23, -6, -6, -5, -5, -5, -4, -3
+   000018a7:  fd ff fd ff fe ff fe ff fe ff ff ff ff ff 00 00  .data .short -3, -3, -2, -2, -2, -1, -1, 0
+   000018b7:  e3 ff e3 ff e4 ff e4 ff e4 ff e5 ff e5 ff e6 ff  .data .short -29, -29, -28, -28, -28, -27, -27, -26
+   000018c7:  e6 ff e6 ff e7 ff e7 ff e8 ff e8 ff cc ff cc ff  .data .short -26, -26, -25, -25, -24, -24, -52, -52
+   000018d7:  cd ff ce ff ce ff cf ff cf ff d0 ff d1 ff d2 ff  .data .short -51, -50, -50, -49, -49, -48, -47, -46
+   000018e7:  d2 ff d3 ff d4 ff d5 ff d5 ff b9 ff ba ff bb ff  .data .short -46, -45, -44, -43, -43, -71, -70, -69
+   000018f7:  bc ff bd ff be ff bf ff c0 ff c1 ff c2 ff c3 ff  .data .short -68, -67, -66, -65, -64, -63, -62, -61
+   00001907:  c4 ff c5 ff c7 ff ab ff ac ff ad ff af ff b0 ff  .data .short -60, -59, -57, -85, -84, -83, -81, -80
+   00001917:  b2 ff b3 ff b4 ff b6 ff b7 ff b9 ff bb ff bc ff  .data .short -78, -77, -76, -74, -73, -71, -69, -68
+   00001927:  be ff cc fd 58 fb 52 0d 70 32 12 10 a4 f8 56 fd  .data .short -66, -564, -1192, 3410, 12912, 4114, -1884, -682
+   00001937:  b0 ff b1 ff b4 ff b6 ff b8 ff ba ff bc ff be ff  .data .short -80, -79, -76, -74, -72, -70, -68, -66
+   00001947:  a3 ff a6 ff a8 ff aa ff ad ff af ff b1 ff b4 ff  .data .short -93, -90, -88, -86, -83, -81, -79, -76
+   00001957:  b6 ff b9 ff bc ff be ff c1 ff c3 ff c6 ff ac ff  .data .short -74, -71, -68, -66, -63, -61, -58, -84
+   00001967:  af ff b1 ff b4 ff b7 ff ba ff bd ff c0 ff c3 ff  .data .short -81, -79, -76, -73, -70, -67, -64, -61
+   00001977:  c6 ff c9 ff cc ff cf ff d2 ff b8 ff bb ff bf ff  .data .short -58, -55, -52, -49, -46, -72, -69, -65
+   00001987:  c2 ff c5 ff c8 ff cc ff cf ff d2 ff d5 ff d9 ff  .data .short -62, -59, -56, -52, -49, -46, -43, -39
+   00001997:  dc ff e0 ff e3 ff e6 ff cd ff d0 ff d4 ff d7 ff  .data .short -36, -32, -29, -26, -51, -48, -44, -41
+   000019a7:  db ff de ff e2 ff e6 ff e9 ff ed ff f0 ff f4 ff  .data .short -37, -34, -30, -26, -23, -19, -16, -12
+   000019b7:  f8 ff fb ff e2 ff e6 ff e9 ff ed ff f0 ff f4 ff  .data .short -8, -5, -30, -26, -23, -19, -16, -12
+   000019c7:  f8 ff fb ff ff ff 03 00 06 00 09 00 0d 00 11 00  .data .short -8, -5, -1, 3, 6, 9, 13, 17
+   000019d7:  14 00 fb ff ff ff 02 00 06 00 09 00 0d 00 11 00  .data .short 20, -5, -1, 2, 6, 9, 13, 17
+   000019e7:  14 00 18 00 1c 00 1f 00 23 00 26 00 2a 00 11 00  .data .short 20, 24, 28, 31, 35, 38, 42, 17
+   000019f7:  14 00 18 00 1b 00 1f 00 22 00 25 00 29 00 2c 00  .data .short 20, 24, 27, 31, 34, 37, 41, 44
+   00001a07:  30 00 33 00 37 00 3a 00 3d 00 40 00 27 00 2a 00  .data .short 48, 51, 55, 58, 61, 64, 39, 42
+   00001a17:  2d 00 30 00 34 00 37 00 3a 00 3d 00 40 00 43 00  .data .short 45, 48, 52, 55, 58, 61, 64, 67
+   00001a27:  46 00 49 00 4c 00 4f 00 35 00 38 00 3b 00 3e 00  .data .short 70, 73, 76, 79, 53, 56, 59, 62
+   00001a37:  40 00 43 00 46 00 49 00 4b 00 4e 00 50 00 53 00  .data .short 64, 67, 70, 73, 75, 78, 80, 83
+   00001a47:  56 00 58 00 5b 00 40 00 42 00 45 00 47 00 49 00  .data .short 86, 88, 91, 64, 66, 69, 71, 73
+   00001a57:  4c 00 4e 00 50 00 52 00 54 00 56 00 58 00 5b 00  .data .short 76, 78, 80, 82, 84, 86, 88, 91
+   00001a67:  5c 00 41 00 43 00 45 00 47 00 49 00 4b 00 4c 00  .data .short 92, 65, 67, 69, 71, 73, 75, 76
+   00001a77:  4e 00 50 00 51 00 53 00 55 00 56 00 58 00 59 00  .data .short 78, 80, 81, 83, 85, 86, 88, 89
+   00001a87:  3d 00 3f 00 40 00 42 00 43 00 44 00 45 00 47 00  .data .short 61, 63, 64, 66, 67, 68, 69, 71
+   00001a97:  48 00 49 00 4a 00 4b 00 4c 00 4d 00 31 00 32 00  .data .short 72, 73, 74, 75, 76, 77, 49, 50
+   00001aa7:  33 00 34 00 35 00 36 00 37 00 37 00 38 00 39 00  .data .short 51, 52, 53, 54, 55, 55, 56, 57
+   00001ab7:  3a 00 3a 00 3b 00 3c 00 3d 00 20 00 21 00 21 00  .data .short 58, 58, 59, 60, 61, 32, 33, 33
+   00001ac7:  22 00 22 00 23 00 24 00 24 00 25 00 25 00 26 00  .data .short 34, 34, 35, 36, 36, 37, 37, 38
+   00001ad7:  26 00 26 00 27 00 0a 00 0b 00 0b 00 0b 00 0c 00  .data .short 38, 38, 39, 10, 11, 11, 11, 12
+   00001ae7:  0c 00 0c 00 0d 00 0d 00 0e 00 0e 00 0e 00 0f 00  .data .short 12, 12, 13, 13, 14, 14, 14, 15
+   00001af7:  0f 00 0f 00 f3 ff f4 ff f4 ff f4 ff f5 ff f5 ff  .data .short 15, 15, -13, -12, -12, -12, -11, -11
+   00001b07:  f5 ff f6 ff f6 ff f7 ff f7 ff f7 ff f8 ff f8 ff  .data .short -11, -10, -10, -9, -9, -9, -8, -8
+   00001b17:  db ff dc ff dc ff dd ff dd ff dd ff de ff de ff  .data .short -37, -36, -36, -35, -35, -35, -34, -34
+   00001b27:  df ff df ff e0 ff e0 ff e1 ff e2 ff e2 ff c6 ff  .data .short -33, -33, -32, -32, -31, -30, -30, -58
+   00001b37:  c6 ff c7 ff c8 ff c9 ff c9 ff ca ff cb ff cc ff  .data .short -58, -57, -56, -55, -55, -54, -53, -52
+   00001b47:  cc ff cd ff ce ff cf ff d0 ff b4 ff b5 ff b6 ff  .data .short -52, -51, -50, -49, -48, -76, -75, -74
+   00001b57:  b7 ff b8 ff b9 ff ba ff bb ff bc ff be ff bf ff  .data .short -73, -72, -71, -70, -69, -68, -66, -65
+   00001b67:  c0 ff c1 ff c3 ff c4 ff a9 ff aa ff ab ff ad ff  .data .short -64, -63, -61, -60, -87, -86, -85, -83
+   00001b77:  ae ff b0 ff b2 ff b3 ff b5 ff b7 ff b8 ff ba ff  .data .short -82, -80, -78, -77, -75, -73, -72, -70
+   00001b87:  bc ff be ff a3 ff a5 ff a7 ff a8 ff ab ff ad ff  .data .short -68, -66, -93, -91, -89, -88, -85, -83
+   00001b97:  af ff b1 ff b3 ff b5 ff b7 ff ba ff bc ff be ff  .data .short -81, -79, -77, -75, -73, -70, -68, -66
+   00001ba7:  c1 ff a6 ff a8 ff ab ff ad ff b0 ff b3 ff b5 ff  .data .short -63, -90, -88, -85, -83, -80, -77, -75
+   00001bb7:  b8 ff ba ff bd ff c0 ff c3 ff c5 ff c8 ff ae ff  .data .short -72, -70, -67, -64, -61, -59, -56, -82
+   00001bc7:  b1 ff b4 ff b7 ff ba ff bd ff c0 ff c3 ff c6 ff  .data .short -79, -76, -73, -70, -67, -64, -61, -58
+   00001bd7:  c9 ff cc ff cf ff d3 ff d6 ff d9 ff bf ff c3 ff  .data .short -55, -52, -49, -45, -42, -39, -65, -61
+   00001be7:  c6 ff c9 ff cc ff d0 ff d3 ff d7 ff da ff de ff  .data .short -58, -55, -52, -48, -45, -41, -38, -34
+   00001bf7:  e1 ff f0 fd 9c fb 97 0d 9a 32 3d 10 d1 f8 85 fd  .data .short -31, -528, -1124, 3479, 12954, 4157, -1839, -635
+   00001c07:  e0 ff e4 ff e7 ff eb ff ef ff f2 ff f6 ff fa ff  .data .short -32, -28, -25, -21, -17, -14, -10, -6
+   00001c17:  fd ff 01 00 04 00 eb ff ef ff f2 ff f6 ff fa ff  .data .short -3, 1, 4, -21, -17, -14, -10, -6
+   00001c27:  fd ff 00 00 04 00 08 00 0b 00 0f 00 13 00 16 00  .data .short -3, 0, 4, 8, 11, 15, 19, 22
+   00001c37:  1a 00 00 00 04 00 08 00 0b 00 0f 00 13 00 16 00  .data .short 26, 0, 4, 8, 11, 15, 19, 22
+   00001c47:  1a 00 1d 00 21 00 25 00 28 00 2c 00 2f 00 33 00  .data .short 26, 29, 33, 37, 40, 44, 47, 51
+   00001c57:  19 00 1c 00 20 00 23 00 27 00 2a 00 2e 00 31 00  .data .short 25, 28, 32, 35, 39, 42, 46, 49
+   00001c67:  34 00 37 00 3b 00 3e 00 41 00 44 00 2b 00 2e 00  .data .short 52, 55, 59, 62, 65, 68, 43, 46
+   00001c77:  31 00 34 00 37 00 3a 00 3d 00 40 00 43 00 46 00  .data .short 49, 52, 55, 58, 61, 64, 67, 70
+   00001c87:  49 00 4c 00 4f 00 52 00 54 00 3a 00 3d 00 40 00  .data .short 73, 76, 79, 82, 84, 58, 61, 64
+   00001c97:  42 00 45 00 47 00 4a 00 4d 00 4f 00 52 00 54 00  .data .short 66, 69, 71, 74, 77, 79, 82, 84
+   00001ca7:  56 00 59 00 5b 00 40 00 43 00 45 00 47 00 49 00  .data .short 86, 89, 91, 64, 67, 69, 71, 73
+   00001cb7:  4b 00 4d 00 4f 00 52 00 53 00 55 00 57 00 59 00  .data .short 75, 77, 79, 82, 83, 85, 87, 89
+   00001cc7:  5b 00 5d 00 42 00 43 00 45 00 47 00 48 00 4a 00  .data .short 91, 93, 66, 67, 69, 71, 72, 74
+   00001cd7:  4c 00 4d 00 4f 00 50 00 51 00 53 00 54 00 56 00  .data .short 76, 77, 79, 80, 81, 83, 84, 86
+   00001ce7:  3a 00 3b 00 3c 00 3e 00 3f 00 40 00 41 00 42 00  .data .short 58, 59, 60, 62, 63, 64, 65, 66
+   00001cf7:  43 00 44 00 45 00 46 00 47 00 48 00 49 00 2d 00  .data .short 67, 68, 69, 70, 71, 72, 73, 45
+   00001d07:  2e 00 2e 00 2f 00 30 00 31 00 31 00 32 00 33 00  .data .short 46, 46, 47, 48, 49, 49, 50, 51
+00001d17 <str_id_REC_BRADY_02>:
+   00001d17:  52 45 43 5f 42 52 41 44 59 5f 30 32 00  .data .string "REC_BRADY_02"
+00001d24 <str_desc_REC_BRADY_02>:
+   00001d24:  53 69 6e 75 73 20 42 72 61 64 79 63 61 72 64 69  .data .string "Sinus Bradycardia - 45 BPM"
+00001d3f <str_label_REC_BRADY_02>:
+   00001d3f:  41 42 4e 4f 52 4d 41 4c 00        .data .string "ABNORMAL"
+00001d48 <ref_peaks_REC_BRADY_02>:
+   00001d48:  c8 00 00 00 a8 02 00 00           .data .word 200, 680
+00001d50 <ref_types_REC_BRADY_02>:
+   00001d50:  00 00 00 00 01 00 00 00           .data .word 0, 1
+00001d58 <samples_REC_BRADY_02>:
    00001d58:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00001d68:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001d78:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
-   00001d88:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
-   00001d98:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
-   00001da8:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
-   00001db8:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
-   00001dc8:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
+   00001d78:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00001d88:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00001d98:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00001da8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00001db8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00001dc8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00001dd8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00001de8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00001df8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1066,12 +1128,12 @@ Disassembly of section .text:
    00001e88:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00001e98:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00001ea8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001eb8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001ec8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001ed8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001ee8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001ef8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00001f08:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00001eb8:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
+   00001ec8:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
+   00001ed8:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
+   00001ee8:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
+   00001ef8:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
+   00001f08:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
    00001f18:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00001f28:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00001f38:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1106,12 +1168,12 @@ Disassembly of section .text:
    00002108:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002118:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002128:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002138:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
-   00002148:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
-   00002158:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
-   00002168:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
-   00002178:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
-   00002188:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
+   00002138:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002148:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002158:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002168:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002178:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002188:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002198:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000021a8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000021b8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1126,51 +1188,51 @@ Disassembly of section .text:
    00002248:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002258:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002268:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002278:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002288:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002298:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000022a8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000022b8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000022c8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002278:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
+   00002288:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
+   00002298:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
+   000022a8:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
+   000022b8:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
+   000022c8:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
    000022d8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000022e8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000022f8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002308:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002318:  b5 ff b5 ff b5 ff b5 ff           .data .short -75, -75, -75, -75
-00002320 <str_id_REC_TACHY_03>:
-   00002320:  52 45 43 5f 54 41 43 48 59 5f 30 33 00  .data .string "REC_TACHY_03"
-0000232d <str_desc_REC_TACHY_03>:
-   0000232d:  53 69 6e 75 73 20 54 61 63 68 79 63 61 72 64 69  .data .string "Sinus Tachycardia - 120 BPM"
-00002349 <str_label_REC_TACHY_03>:
-   00002349:  41 42 4e 4f 52 4d 41 4c 00        .data .string "ABNORMAL"
-00002352 <ref_peaks_REC_TACHY_03>:
-   00002352:  a0 00 00 00 54 01 00 00 08 02 00 00  .data .word 160, 340, 520
-0000235e <ref_types_REC_TACHY_03>:
-   0000235e:  00 00 00 00 02 00 00 00 02 00 00 00  .data .word 0, 2, 2
-0000236a <samples_REC_TACHY_03>:
-   0000236a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000237a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000238a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000239a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000023aa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000023ba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000023ca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000023da:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000023ea:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000023fa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000240a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000241a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000242a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000243a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000244a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000245a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000246a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000247a:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
-   0000248a:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
-   0000249a:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
-   000024aa:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
-   000024ba:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
-   000024ca:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
+   00002318:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002328:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002338:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002348:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002358:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002368:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002378:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002388:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002398:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000023a8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000023b8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000023c8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000023d8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000023e8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000023f8:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002408:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002418:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002428:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002438:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002448:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002458:  b5 ff b5 ff b5 ff b5 ff           .data .short -75, -75, -75, -75
+00002460 <str_id_REC_TACHY_03>:
+   00002460:  52 45 43 5f 54 41 43 48 59 5f 30 33 00  .data .string "REC_TACHY_03"
+0000246d <str_desc_REC_TACHY_03>:
+   0000246d:  53 69 6e 75 73 20 54 61 63 68 79 63 61 72 64 69  .data .string "Sinus Tachycardia - 120 BPM"
+00002489 <str_label_REC_TACHY_03>:
+   00002489:  41 42 4e 4f 52 4d 41 4c 00        .data .string "ABNORMAL"
+00002492 <ref_peaks_REC_TACHY_03>:
+   00002492:  a0 00 00 00 54 01 00 00 08 02 00 00  .data .word 160, 340, 520
+0000249e <ref_types_REC_TACHY_03>:
+   0000249e:  00 00 00 00 02 00 00 00 02 00 00 00  .data .word 0, 2, 2
+000024aa <samples_REC_TACHY_03>:
+   000024aa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000024ba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000024ca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000024da:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000024ea:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000024fa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1185,14 +1247,14 @@ Disassembly of section .text:
    0000258a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000259a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000025aa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000025ba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000025ca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000025da:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000025ea:  c4 ff c5 ff c7 ff ab ff ac ff ad ff af ff b0 ff  .data .short -60, -59, -57, -85, -84, -83, -81, -80
-   000025fa:  b2 ff b3 ff b4 ff b6 ff b7 ff b9 ff bb ff bc ff  .data .short -78, -77, -76, -74, -73, -71, -69, -68
-   0000260a:  be ff cc fd 58 fb 52 0d 70 32 12 10 a4 f8 56 fd  .data .short -66, -564, -1192, 3410, 12912, 4114, -1884, -682
-   0000261a:  b0 ff b1 ff b4 ff b6 ff b8 ff ba ff bc ff be ff  .data .short -80, -79, -76, -74, -72, -70, -68, -66
-   0000262a:  a3 ff a6 ff a8 ff aa ff ad ff af ff b1 ff b4 ff  .data .short -93, -90, -88, -86, -83, -81, -79, -76
+   000025ba:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
+   000025ca:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
+   000025da:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
+   000025ea:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
+   000025fa:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
+   0000260a:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
+   0000261a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000262a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000263a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000264a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000265a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1208,14 +1270,14 @@ Disassembly of section .text:
    000026fa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000270a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000271a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000272a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000273a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000274a:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
-   0000275a:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
-   0000276a:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
-   0000277a:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
-   0000278a:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
-   0000279a:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
+   0000272a:  c4 ff c5 ff c7 ff ab ff ac ff ad ff af ff b0 ff  .data .short -60, -59, -57, -85, -84, -83, -81, -80
+   0000273a:  b2 ff b3 ff b4 ff b6 ff b7 ff b9 ff bb ff bc ff  .data .short -78, -77, -76, -74, -73, -71, -69, -68
+   0000274a:  be ff cc fd 58 fb 52 0d 70 32 12 10 a4 f8 56 fd  .data .short -66, -564, -1192, 3410, 12912, 4114, -1884, -682
+   0000275a:  b0 ff b1 ff b4 ff b6 ff b8 ff ba ff bc ff be ff  .data .short -80, -79, -76, -74, -72, -70, -68, -66
+   0000276a:  a3 ff a6 ff a8 ff aa ff ad ff af ff b1 ff b4 ff  .data .short -93, -90, -88, -86, -83, -81, -79, -76
+   0000277a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000278a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000279a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000027aa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000027ba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000027ca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1223,24 +1285,19 @@ Disassembly of section .text:
    000027ea:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000027fa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000280a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-0000281a <str_id_REC_ARRHY_04>:
-   0000281a:  52 45 43 5f 41 52 52 48 59 5f 30 34 00  .data .string "REC_ARRHY_04"
-00002827 <str_desc_REC_ARRHY_04>:
-   00002827:  56 65 6e 74 72 69 63 75 6c 61 72 20 41 72 72 68  .data .string "Ventricular Arrhythmia (PVC + Compensatory Pause)"
-00002859 <str_label_REC_ARRHY_04>:
-   00002859:  41 42 4e 4f 52 4d 41 4c 00        .data .string "ABNORMAL"
-00002862 <ref_peaks_REC_ARRHY_04>:
-   00002862:  b4 00 00 00 68 01 00 00 2a 03 00 00  .data .word 180, 360, 810
-0000286e <ref_types_REC_ARRHY_04>:
-   0000286e:  00 00 00 00 03 00 00 00 01 00 00 00  .data .word 0, 3, 1
-0000287a <samples_REC_ARRHY_04>:
+   0000281a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000282a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000283a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000284a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000285a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000286a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000287a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000288a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000289a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000028aa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000028ba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000028ca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000028da:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000288a:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
+   0000289a:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
+   000028aa:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
+   000028ba:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
+   000028ca:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
+   000028da:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
    000028ea:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    000028fa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000290a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1248,17 +1305,22 @@ Disassembly of section .text:
    0000292a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000293a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    0000294a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000295a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000296a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000297a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000298a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   0000299a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000029aa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   000029ba:  c4 ff c5 ff c7 ff ab ff ac ff ad ff af ff b0 ff  .data .short -60, -59, -57, -85, -84, -83, -81, -80
-   000029ca:  b2 ff b3 ff b4 ff b6 ff b7 ff b9 ff bb ff bc ff  .data .short -78, -77, -76, -74, -73, -71, -69, -68
-   000029da:  be ff cc fd 58 fb 52 0d 70 32 12 10 a4 f8 56 fd  .data .short -66, -564, -1192, 3410, 12912, 4114, -1884, -682
-   000029ea:  b0 ff b1 ff b4 ff b6 ff b8 ff ba ff bc ff be ff  .data .short -80, -79, -76, -74, -72, -70, -68, -66
-   000029fa:  a3 ff a6 ff a8 ff aa ff ad ff af ff b1 ff b4 ff  .data .short -93, -90, -88, -86, -83, -81, -79, -76
+0000295a <str_id_REC_ARRHY_04>:
+   0000295a:  52 45 43 5f 41 52 52 48 59 5f 30 34 00  .data .string "REC_ARRHY_04"
+00002967 <str_desc_REC_ARRHY_04>:
+   00002967:  56 65 6e 74 72 69 63 75 6c 61 72 20 41 72 72 68  .data .string "Ventricular Arrhythmia (PVC + Compensatory Pause)"
+00002999 <str_label_REC_ARRHY_04>:
+   00002999:  41 42 4e 4f 52 4d 41 4c 00        .data .string "ABNORMAL"
+000029a2 <ref_peaks_REC_ARRHY_04>:
+   000029a2:  b4 00 00 00 68 01 00 00 2a 03 00 00  .data .word 180, 360, 810
+000029ae <ref_types_REC_ARRHY_04>:
+   000029ae:  00 00 00 00 03 00 00 00 01 00 00 00  .data .word 0, 3, 1
+000029ba <samples_REC_ARRHY_04>:
+   000029ba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000029ca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000029da:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000029ea:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000029fa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002a0a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002a1a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002a2a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1274,14 +1336,14 @@ Disassembly of section .text:
    00002aca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002ada:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002aea:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002afa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002b0a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002b1a:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
-   00002b2a:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
-   00002b3a:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
-   00002b4a:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
-   00002b5a:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
-   00002b6a:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
+   00002afa:  c4 ff c5 ff c7 ff ab ff ac ff ad ff af ff b0 ff  .data .short -60, -59, -57, -85, -84, -83, -81, -80
+   00002b0a:  b2 ff b3 ff b4 ff b6 ff b7 ff b9 ff bb ff bc ff  .data .short -78, -77, -76, -74, -73, -71, -69, -68
+   00002b1a:  be ff cc fd 58 fb 52 0d 70 32 12 10 a4 f8 56 fd  .data .short -66, -564, -1192, 3410, 12912, 4114, -1884, -682
+   00002b2a:  b0 ff b1 ff b4 ff b6 ff b8 ff ba ff bc ff be ff  .data .short -80, -79, -76, -74, -72, -70, -68, -66
+   00002b3a:  a3 ff a6 ff a8 ff aa ff ad ff af ff b1 ff b4 ff  .data .short -93, -90, -88, -86, -83, -81, -79, -76
+   00002b4a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002b5a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002b6a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002b7a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002b8a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002b9a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1296,12 +1358,12 @@ Disassembly of section .text:
    00002c2a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002c3a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002c4a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002c5a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002c6a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002c7a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002c8a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002c9a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002caa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002c5a:  b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff c7 ff ab ff  .data .short -75, -75, -75, -75, -60, -59, -57, -85
+   00002c6a:  ac ff ad ff af ff b0 ff b2 ff b3 ff b4 ff b6 ff  .data .short -84, -83, -81, -80, -78, -77, -76, -74
+   00002c7a:  b7 ff b9 ff bb ff bc ff be ff cc fd 58 fb 52 0d  .data .short -73, -71, -69, -68, -66, -564, -1192, 3410
+   00002c8a:  70 32 12 10 a4 f8 56 fd b0 ff b1 ff b4 ff b6 ff  .data .short 12912, 4114, -1884, -682, -80, -79, -76, -74
+   00002c9a:  b8 ff ba ff bc ff be ff a3 ff a6 ff a8 ff aa ff  .data .short -72, -70, -68, -66, -93, -90, -88, -86
+   00002caa:  ad ff af ff b1 ff b4 ff b5 ff b5 ff b5 ff b5 ff  .data .short -83, -81, -79, -76, -75, -75, -75, -75
    00002cba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002cca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002cda:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1332,12 +1394,12 @@ Disassembly of section .text:
    00002e6a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002e7a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002e8a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002e9a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff  .data .short -75, -75, -75, -75, -75, -75, -60, -59
-   00002eaa:  c7 ff ab ff ac ff ad ff af ff b0 ff b2 ff b3 ff  .data .short -57, -85, -84, -83, -81, -80, -78, -77
-   00002eba:  b4 ff b6 ff b7 ff b9 ff bb ff bc ff be ff cc fd  .data .short -76, -74, -73, -71, -69, -68, -66, -564
-   00002eca:  58 fb 52 0d 70 32 12 10 a4 f8 56 fd b0 ff b1 ff  .data .short -1192, 3410, 12912, 4114, -1884, -682, -80, -79
-   00002eda:  b4 ff b6 ff b8 ff ba ff bc ff be ff a3 ff a6 ff  .data .short -76, -74, -72, -70, -68, -66, -93, -90
-   00002eea:  a8 ff aa ff ad ff af ff b1 ff b4 ff b5 ff b5 ff  .data .short -88, -86, -83, -81, -79, -76, -75, -75
+   00002e9a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002eaa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002eba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002eca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002eda:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002eea:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002efa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002f0a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002f1a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
@@ -1346,4 +1408,24 @@ Disassembly of section .text:
    00002f4a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002f5a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
    00002f6a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
-   00002f7a:  b5 ff b5 ff b5 ff b5 ff           .data .short -75, -75, -75, -75
+   00002f7a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002f8a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002f9a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002faa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002fba:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002fca:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   00002fda:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff c4 ff c5 ff  .data .short -75, -75, -75, -75, -75, -75, -60, -59
+   00002fea:  c7 ff ab ff ac ff ad ff af ff b0 ff b2 ff b3 ff  .data .short -57, -85, -84, -83, -81, -80, -78, -77
+   00002ffa:  b4 ff b6 ff b7 ff b9 ff bb ff bc ff be ff cc fd  .data .short -76, -74, -73, -71, -69, -68, -66, -564
+   0000300a:  58 fb 52 0d 70 32 12 10 a4 f8 56 fd b0 ff b1 ff  .data .short -1192, 3410, 12912, 4114, -1884, -682, -80, -79
+   0000301a:  b4 ff b6 ff b8 ff ba ff bc ff be ff a3 ff a6 ff  .data .short -76, -74, -72, -70, -68, -66, -93, -90
+   0000302a:  a8 ff aa ff ad ff af ff b1 ff b4 ff b5 ff b5 ff  .data .short -88, -86, -83, -81, -79, -76, -75, -75
+   0000303a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000304a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000305a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000306a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000307a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000308a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   0000309a:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000030aa:  b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff b5 ff  .data .short -75, -75, -75, -75, -75, -75, -75, -75
+   000030ba:  b5 ff b5 ff b5 ff b5 ff           .data .short -75, -75, -75, -75

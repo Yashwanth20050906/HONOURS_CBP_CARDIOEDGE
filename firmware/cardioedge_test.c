@@ -182,6 +182,36 @@ typedef unsigned long      uintptr_t;
 #define DMEM_SIG_QRS         (DMEM_BASE + 0x28)
 
 /* ----------------------------------------------------------------------------
+ * DMEM Firmware Mailbox (0x00010060 - 0x0001006C) for Real-Time Verdi Tracing
+ * ---------------------------------------------------------------------------- */
+#define FW_MAILBOX_TEST_ID   (DMEM_BASE + 0x60) /* Current Running Test ID (1-18) */
+#define FW_MAILBOX_STATE     (DMEM_BASE + 0x64) /* 0=IDLE, 1=RUNNING, 2=CHECKING, 3=DONE */
+#define FW_MAILBOX_STATUS    (DMEM_BASE + 0x68) /* 0=INIT, 1=PASS, 2=FAIL, 3=BLOCKED */
+#define FW_MAILBOX_EXTRA     (DMEM_BASE + 0x6C) /* Extra telemetry / heart rate / count */
+
+#define FW_STATE_IDLE        0
+#define FW_STATE_RUNNING     1
+#define FW_STATE_CHECKING    2
+#define FW_STATE_DONE        3
+
+#define FW_STATUS_INIT       0
+#define FW_STATUS_PASS       1
+#define FW_STATUS_FAIL       2
+#define FW_STATUS_BLOCKED    3
+
+static inline void fw_mailbox_start(uint32_t test_id) {
+    REG32(FW_MAILBOX_TEST_ID) = test_id;
+    REG32(FW_MAILBOX_STATE)   = FW_STATE_RUNNING;
+    REG32(FW_MAILBOX_STATUS)  = FW_STATUS_INIT;
+}
+
+static inline void fw_mailbox_end(uint32_t status, uint32_t extra) {
+    REG32(FW_MAILBOX_STATUS)  = status;
+    REG32(FW_MAILBOX_EXTRA)   = extra;
+    REG32(FW_MAILBOX_STATE)   = FW_STATE_DONE;
+}
+
+/* ----------------------------------------------------------------------------
  * Clinical ECG Test Samples (32-sample excerpt around clinical R-peak from tb/ecg_input.txt)
  * ---------------------------------------------------------------------------- */
 static const int16_t clinical_ecg_qrs_vector[32] = {
@@ -416,6 +446,7 @@ uint32_t qrs_read_rhythm(void) {
  * ============================================================================ */
 
 int test_uart(void) {
+    fw_mailbox_start(5);
     uart_puts("UART TEST\n");
     uart_init();
     
@@ -425,6 +456,7 @@ int test_uart(void) {
         uart_puts("  FAIL: UART LCR readback mismatch (got ");
         uart_puthex(lcr);
         uart_puts(")\n");
+        fw_mailbox_end(FW_STATUS_FAIL, lcr);
         return 0;
     }
     
@@ -434,6 +466,7 @@ int test_uart(void) {
         uart_puts("  FAIL: UART LSR THRE not set (got ");
         uart_puthex(lsr);
         uart_puts(")\n");
+        fw_mailbox_end(FW_STATUS_FAIL, lsr);
         return 0;
     }
 
@@ -441,10 +474,12 @@ int test_uart(void) {
     REG32(DMEM_SIG_UART) = lcr;
 
     uart_puts("  PASS: UART configured 8N1, TX holding empty confirmed\n");
+    fw_mailbox_end(FW_STATUS_PASS, lcr);
     return 1;
 }
 
 int test_gpio(void) {
+    fw_mailbox_start(6);
     uart_puts("GPIO TEST\n");
     gpio_init();
 
@@ -455,6 +490,7 @@ int test_gpio(void) {
         uart_puts("  FAIL: GPIO readback mismatch for 0xA5 (got ");
         uart_puthex(r1);
         uart_puts(")\n");
+        fw_mailbox_end(FW_STATUS_FAIL, r1);
         return 0;
     }
 
@@ -465,6 +501,7 @@ int test_gpio(void) {
         uart_puts("  FAIL: GPIO readback mismatch for 0x5A (got ");
         uart_puthex(r2);
         uart_puts(")\n");
+        fw_mailbox_end(FW_STATUS_FAIL, r2);
         return 0;
     }
 
@@ -475,6 +512,7 @@ int test_gpio(void) {
         uart_puts("  FAIL: GPIO SET_O failed (got ");
         uart_puthex(r3);
         uart_puts(")\n");
+        fw_mailbox_end(FW_STATUS_FAIL, r3);
         return 0;
     }
 
@@ -482,10 +520,12 @@ int test_gpio(void) {
     REG32(DMEM_SIG_GPIO) = 0xA5;
 
     uart_puts("  PASS: GPIO DIR=0xFF, DATA_O write/readback verified\n");
+    fw_mailbox_end(FW_STATUS_PASS, 0xA5);
     return 1;
 }
 
 int test_timer(void) {
+    fw_mailbox_start(7);
     uart_puts("TIMER TEST\n");
     timer_init();
 
@@ -496,6 +536,7 @@ int test_timer(void) {
         uart_puts("  FAIL: TIMER LOAD readback mismatch (got ");
         uart_puthex(load_rb);
         uart_puts(")\n");
+        fw_mailbox_end(FW_STATUS_FAIL, load_rb);
         return 0;
     }
 
@@ -504,6 +545,7 @@ int test_timer(void) {
     uint32_t ctrl_rb = REG32(TIMER_REG_CTRL);
     if ((ctrl_rb & TIMER_CTRL_EN) == 0) {
         uart_puts("  FAIL: TIMER CTRL enable bit not set\n");
+        fw_mailbox_end(FW_STATUS_FAIL, ctrl_rb);
         return 0;
     }
 
@@ -519,10 +561,12 @@ int test_timer(void) {
     REG32(DMEM_SIG_TIMER) = load_rb;
 
     uart_puts("  PASS: TIMER LOAD=100 and CTRL enable/start verified\n");
+    fw_mailbox_end(FW_STATUS_PASS, load_rb);
     return 1;
 }
 
 int test_adc(void) {
+    fw_mailbox_start(9);
     uart_puts("ADC TEST\n");
     
     /* Enable ADC scheduler */
@@ -530,6 +574,7 @@ int test_adc(void) {
     uint32_t ctrl = REG32(ADC_REG_CTRL);
     if ((ctrl & ADC_CTRL_ENABLE) == 0) {
         uart_puts("  FAIL: ADC CTRL enable failed\n");
+        fw_mailbox_end(FW_STATUS_FAIL, ctrl);
         return 0;
     }
 
@@ -537,6 +582,7 @@ int test_adc(void) {
     uint32_t status = adc_get_status();
     if ((status & ADC_STAT_FEMPTY) == 0) {
         uart_puts("  FAIL: ADC STATUS bit 2 (FIFO Empty) expected\n");
+        fw_mailbox_end(FW_STATUS_FAIL, status);
         return 0;
     }
 
@@ -548,10 +594,12 @@ int test_adc(void) {
     REG32(DMEM_SIG_ADC) = status;
 
     uart_puts("  PASS: ADC scheduler enabled, STATUS empty flag=0x04 confirmed\n");
+    fw_mailbox_end(FW_STATUS_PASS, status);
     return 1;
 }
 
 int test_fir(void) {
+    fw_mailbox_start(8);
     uart_puts("FIR TEST\n");
     
     /* FIR AXI4-Lite Control & Coefficient Configuration */
@@ -559,6 +607,7 @@ int test_fir(void) {
     uint32_t ctrl = REG32(FIR_REG_CTRL);
     if ((ctrl & 0x01) == 0) {
         uart_puts("  FAIL: FIR CTRL enable failed\n");
+        fw_mailbox_end(FW_STATUS_FAIL, ctrl);
         return 0;
     }
 
@@ -569,6 +618,7 @@ int test_fir(void) {
         uart_puts("  FAIL: FIR Tap 0 readback mismatch (got ");
         uart_puthex(coeff0);
         uart_puts(")\n");
+        fw_mailbox_end(FW_STATUS_FAIL, coeff0);
         return 0;
     }
 
@@ -583,10 +633,12 @@ int test_fir(void) {
     REG32(DMEM_SIG_FIR) = ctrl;
 
     uart_puts("  PASS: FIR enable=1, Tap0=0x0100 latched, AXI-Stream ready\n");
+    fw_mailbox_end(FW_STATUS_PASS, ctrl);
     return 1;
 }
 
 int test_spi(void) {
+    fw_mailbox_start(10);
     uart_puts("SPI TEST\n");
     
     /* Initialize SPI IP */
@@ -598,6 +650,7 @@ int test_spi(void) {
         uart_puts("  FAIL: SPI CR enable bit not set (got ");
         uart_puthex(cr);
         uart_puts(")\n");
+        fw_mailbox_end(FW_STATUS_FAIL, cr);
         return 0;
     }
 
@@ -605,6 +658,7 @@ int test_spi(void) {
     uint32_t sr = spi_get_status();
     if ((sr & SPI_SR_TX_EMPTY) == 0) {
         uart_puts("  FAIL: SPI SR TX empty flag not asserted\n");
+        fw_mailbox_end(FW_STATUS_FAIL, sr);
         return 0;
     }
 
@@ -615,10 +669,12 @@ int test_spi(void) {
     REG32(DMEM_SIG_SPI) = unmapped;
 
     uart_puts("  PASS: SPI CR/SR verified, unmapped response 0x61626364 verified\n");
+    fw_mailbox_end(FW_STATUS_PASS, unmapped);
     return 1;
 }
 
 int test_qrs(void) {
+    fw_mailbox_start(11);
     uart_puts("QRS TEST\n");
     
     /* Enable QRS WTSEE detector core */
@@ -626,6 +682,7 @@ int test_qrs(void) {
     uint32_t status = qrs_get_status();
     if ((status & QRS_STAT_ACTIVE) == 0) {
         uart_puts("  FAIL: QRS STATUS active flag not set\n");
+        fw_mailbox_end(FW_STATUS_FAIL, status);
         return 0;
     }
 
@@ -638,6 +695,7 @@ int test_qrs(void) {
     int16_t last_sample_rb = (int16_t)(REG32(QRS_REG_ECG_INPUT) & 0xFFFF);
     if (last_sample_rb != clinical_ecg_qrs_vector[31]) {
         uart_puts("  FAIL: QRS ECG_INPUT readback mismatch\n");
+        fw_mailbox_end(FW_STATUS_FAIL, (uint32_t)(uint16_t)last_sample_rb);
         return 0;
     }
 
@@ -649,6 +707,7 @@ int test_qrs(void) {
     REG32(DMEM_SIG_QRS) = status;
 
     uart_puts("  PASS: QRS enabled, 32 clinical ECG samples streamed to 0x40012008\n");
+    fw_mailbox_end(FW_STATUS_PASS, status);
     return 1;
 }
 
@@ -673,6 +732,9 @@ void _start(void) {
 int main(void) {
     int all_passed = 1;
 
+    /* TC-01: RISC-V Boot Bring-Up */
+    fw_mailbox_start(1);
+
     /* Initialize UART first for test telemetry */
     uart_init();
 
@@ -680,32 +742,39 @@ int main(void) {
     uart_puts("=================\n\n");
     uart_puts("CPU STARTED\n\n");
 
-    /* 1. UART Peripheral Test */
+    fw_mailbox_end(FW_STATUS_PASS, 0xCAFE);
+
+    /* 1. UART Peripheral Test (TC-05) */
     if (!test_uart())  all_passed = 0;
 
-    /* 2. GPIO Peripheral Test */
+    /* 2. GPIO Peripheral Test (TC-06) */
     if (!test_gpio())  all_passed = 0;
 
-    /* 3. TIMER Peripheral Test */
+    /* 3. TIMER Peripheral Test (TC-07) */
     if (!test_timer()) all_passed = 0;
 
-    /* 4. ADC Peripheral Test */
+    /* 4. ADC Peripheral Test (TC-09) */
     if (!test_adc())   all_passed = 0;
 
-    /* 5. FIR Filter Engine Test */
+    /* 5. FIR Filter Engine Test (TC-08) */
     if (!test_fir())   all_passed = 0;
 
-    /* 6. SPI Controller Test */
+    /* 6. SPI Controller Test (TC-10) */
     if (!test_spi())   all_passed = 0;
 
-    /* 7. QRS Peak Detector Test */
+    /* 7. QRS Peak Detector Test (TC-11) */
     if (!test_qrs())   all_passed = 0;
+
+    /* TC-18: Full Regression Complete */
+    fw_mailbox_start(18);
 
     uart_puts("\n");
     if (all_passed) {
         uart_puts("ALL TESTS PASSED\n");
+        fw_mailbox_end(FW_STATUS_PASS, 0x55AA33CC);
     } else {
         uart_puts("SOME TESTS FAILED\n");
+        fw_mailbox_end(FW_STATUS_FAIL, 0xDEADBEEF);
     }
     uart_puts("TEST COMPLETE\n");
 

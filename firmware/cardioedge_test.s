@@ -187,12 +187,35 @@ pct_done:
     ret
 
 /* ----------------------------------------------------------------------------
- * Test 1: UART Integration Test
+ * Firmware Mailbox Helpers: Base 0x00010000, Mailbox at 0x60, 0x64, 0x68, 0x6C
+ * ---------------------------------------------------------------------------- */
+    .globl fw_mailbox_start
+fw_mailbox_start:
+    lui t0, 0x10
+    sw a0, 96(t0)       # 0x00010060 = test_id
+    li t1, 1            # 1 = RUNNING
+    sw t1, 100(t0)      # 0x00010064 = state
+    sw zero, 104(t0)    # 0x00010068 = status (INIT)
+    ret
+
+    .globl fw_mailbox_end
+fw_mailbox_end:
+    lui t0, 0x10
+    sw a0, 104(t0)      # 0x00010068 = status (1=PASS, 2=FAIL)
+    sw a1, 108(t0)      # 0x0001006C = extra telemetry
+    li t1, 3            # 3 = DONE
+    sw t1, 100(t0)      # 0x00010064 = state
+    ret
+
+/* ----------------------------------------------------------------------------
+ * Test 1: UART Integration Test (TC-05)
  * ---------------------------------------------------------------------------- */
     .globl test_uart
 test_uart:
     addi sp, sp, -16
     sw ra, 12(sp)
+    li a0, 5
+    jal ra, fw_mailbox_start
     la a0, str_uart_test
     jal ra, uart_puts
     jal ra, uart_init
@@ -207,6 +230,9 @@ test_uart:
     lui t0, 0x10
     li t1, 3
     sw t1, 16(t0)       # DMEM[0x00010010]
+    li a0, 1
+    li a1, 3
+    jal ra, fw_mailbox_end
     la a0, str_uart_pass
     jal ra, uart_puts
     li a0, 1
@@ -214,6 +240,9 @@ test_uart:
     addi sp, sp, 16
     ret
 test_uart_fail:
+    li a0, 2
+    li a1, 0
+    jal ra, fw_mailbox_end
     la a0, str_uart_fail
     jal ra, uart_puts
     li a0, 0
@@ -222,12 +251,14 @@ test_uart_fail:
     ret
 
 /* ----------------------------------------------------------------------------
- * Test 2: GPIO Peripheral Test
+ * Test 2: GPIO Peripheral Test (TC-06)
  * ---------------------------------------------------------------------------- */
     .globl test_gpio
 test_gpio:
     addi sp, sp, -16
     sw ra, 12(sp)
+    li a0, 6
+    jal ra, fw_mailbox_start
     la a0, str_gpio_test
     jal ra, uart_puts
     lui t0, 0x40002     # GPIO Base
@@ -252,6 +283,9 @@ test_gpio:
     lui t0, 0x10
     li t1, 0x5F
     sw t1, 20(t0)       # DMEM[0x00010014]
+    li a0, 1
+    li a1, 0x5F
+    jal ra, fw_mailbox_end
     la a0, str_gpio_pass
     jal ra, uart_puts
     li a0, 1
@@ -259,6 +293,9 @@ test_gpio:
     addi sp, sp, 16
     ret
 test_gpio_fail:
+    li a0, 2
+    li a1, 0
+    jal ra, fw_mailbox_end
     la a0, str_gpio_fail
     jal ra, uart_puts
     li a0, 0
@@ -267,12 +304,14 @@ test_gpio_fail:
     ret
 
 /* ----------------------------------------------------------------------------
- * Test 3: TIMER Peripheral Test
+ * Test 3: TIMER Peripheral Test (TC-07)
  * ---------------------------------------------------------------------------- */
     .globl test_timer
 test_timer:
     addi sp, sp, -16
     sw ra, 12(sp)
+    li a0, 7
+    jal ra, fw_mailbox_start
     la a0, str_timer_test
     jal ra, uart_puts
     lui t0, 0x40004     # TIMER Base
@@ -288,6 +327,9 @@ test_timer:
     lui t0, 0x10
     li t1, 100
     sw t1, 24(t0)       # DMEM[0x00010018]
+    li a0, 1
+    li a1, 100
+    jal ra, fw_mailbox_end
     la a0, str_timer_pass
     jal ra, uart_puts
     li a0, 1
@@ -295,6 +337,9 @@ test_timer:
     addi sp, sp, 16
     ret
 test_timer_fail:
+    li a0, 2
+    li a1, 0
+    jal ra, fw_mailbox_end
     la a0, str_timer_fail
     jal ra, uart_puts
     li a0, 0
@@ -303,12 +348,14 @@ test_timer_fail:
     ret
 
 /* ----------------------------------------------------------------------------
- * Test 4: ADC Peripheral Test
+ * Test 4: ADC Peripheral Test (TC-09)
  * ---------------------------------------------------------------------------- */
     .globl test_adc
 test_adc:
     addi sp, sp, -16
     sw ra, 12(sp)
+    li a0, 9
+    jal ra, fw_mailbox_start
     la a0, str_adc_test
     jal ra, uart_puts
     lui t0, 0x4000E     # ADC Base
@@ -322,6 +369,9 @@ test_adc:
     sw zero, 0(t0)      # Disable ADC
     lui t0, 0x10
     sw t3, 28(t0)       # DMEM[0x0001001C]
+    li a0, 1
+    mv a1, t3
+    jal ra, fw_mailbox_end
     la a0, str_adc_pass
     jal ra, uart_puts
     li a0, 1
@@ -329,6 +379,9 @@ test_adc:
     addi sp, sp, 16
     ret
 test_adc_fail:
+    li a0, 2
+    li a1, 0
+    jal ra, fw_mailbox_end
     la a0, str_adc_fail
     jal ra, uart_puts
     li a0, 0
@@ -337,12 +390,14 @@ test_adc_fail:
     ret
 
 /* ----------------------------------------------------------------------------
- * Test 5: FIR Filter Engine Test
+ * Test 5: FIR Filter Engine Test (TC-08)
  * ---------------------------------------------------------------------------- */
     .globl test_fir
 test_fir:
     addi sp, sp, -16
     sw ra, 12(sp)
+    li a0, 8
+    jal ra, fw_mailbox_start
     la a0, str_fir_test
     jal ra, uart_puts
     lui t0, 0x4000C     # FIR Base
@@ -356,6 +411,9 @@ test_fir:
     bne t2, t1, test_fir_fail
     lui t0, 0x10
     sw t2, 32(t0)       # DMEM[0x00010020]
+    li a0, 1
+    mv a1, t2
+    jal ra, fw_mailbox_end
     la a0, str_fir_pass
     jal ra, uart_puts
     li a0, 1
@@ -363,6 +421,9 @@ test_fir:
     addi sp, sp, 16
     ret
 test_fir_fail:
+    li a0, 2
+    li a1, 0
+    jal ra, fw_mailbox_end
     la a0, str_fir_fail
     jal ra, uart_puts
     li a0, 0
@@ -371,12 +432,14 @@ test_fir_fail:
     ret
 
 /* ----------------------------------------------------------------------------
- * Test 6: SPI Controller Test
+ * Test 6: SPI Controller Test (TC-10)
  * ---------------------------------------------------------------------------- */
     .globl test_spi
 test_spi:
     addi sp, sp, -16
     sw ra, 12(sp)
+    li a0, 10
+    jal ra, fw_mailbox_start
     la a0, str_spi_test
     jal ra, uart_puts
     lui t0, 0x40010     # SPI Base
@@ -395,6 +458,9 @@ test_spi:
     bne t5, t6, test_spi_fail
     lui t0, 0x10
     sw t3, 36(t0)       # DMEM[0x00010024]
+    li a0, 1
+    mv a1, t3
+    jal ra, fw_mailbox_end
     la a0, str_spi_pass
     jal ra, uart_puts
     li a0, 1
@@ -402,6 +468,9 @@ test_spi:
     addi sp, sp, 16
     ret
 test_spi_fail:
+    li a0, 2
+    li a1, 0
+    jal ra, fw_mailbox_end
     la a0, str_spi_fail
     jal ra, uart_puts
     li a0, 0
@@ -423,6 +492,10 @@ run_ecg_analysis:
     sw s3, 108(sp)
     sw s4, 104(sp)
     sw s5, 100(sp)
+
+    # TC-11 QRS Mailbox Start
+    li a0, 11
+    jal ra, fw_mailbox_start
 
     # Initialize Global Evaluation Counters on Stack
     sw zero, 0(sp)      # tot_ref_beats = 0
@@ -812,6 +885,11 @@ record_loop_done:
     la a0, str_app_sum_hdr
     jal ra, uart_puts
 
+    # TC-11/12 QRS Mailbox End
+    li a0, 1
+    li a1, 1
+    jal ra, fw_mailbox_end
+
     # Return success (1)
     li a0, 1
     lw s5, 100(sp)
@@ -833,12 +911,20 @@ main:
     sw ra, 20(sp)
     sw s0, 16(sp)
 
+    # TC-01 Boot Mailbox Start
+    li a0, 1
+    jal ra, fw_mailbox_start
+
     li s0, 1
 
     jal ra, uart_init
 
     la a0, str_header
     jal ra, uart_puts
+
+    li a0, 1
+    li a1, 0xCAFE
+    jal ra, fw_mailbox_end
 
     # Phase 1: Hardware Peripheral Integration Tests
     jal ra, test_uart
@@ -863,17 +949,28 @@ main:
     jal ra, run_ecg_analysis
     and s0, s0, a0
 
+    # TC-18 Regression Complete Mailbox Start
+    li a0, 18
+    jal ra, fw_mailbox_start
+
     la a0, str_nl
     jal ra, uart_puts
 
     beqz s0, main_failed
     la a0, str_all_passed
     jal ra, uart_puts
+    li a0, 1
+    lui a1, 0x55AA3
+    addi a1, a1, 0x3CC  # 0x55AA33CC
+    jal ra, fw_mailbox_end
     j main_done
 
 main_failed:
     la a0, str_some_failed
     jal ra, uart_puts
+    li a0, 2
+    li a1, 0
+    jal ra, fw_mailbox_end
 
 main_done:
     la a0, str_complete
