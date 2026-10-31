@@ -1,2 +1,3 @@
 Command Line: /home/student/snps_tools_target/verdi/U-2023.03-SP1/platform/LINUXAMD64/bin/Novas -dbdir simv_comprehensive.daidir -ssf cardioedge_regression.fsdb -sswr cardioedge_wave.rc
-uname(Linux vlsi87.vce.ac.in 4.18.0-553.el8_10.x86_64 #1 SMP Fri May 24 13:05:10 UTC 2024 x86_64)
+uname(Linux vlsi38.vce.ac.in 4.18.0-553.el8_10.x86_64 #1 SMP Fri May 24 13:05:10 UTC 2024 x86_64)
+au time 1691.028284 12.206521 15.981367 delta 391077888 391077888 total 962158592 962158592

@@ -1,0 +1,7 @@
+Command exited with non-zero status 255
+{"vcs1":{"timestamp_begin":1793444142.803266274, "rt":2.03, "ut":0.52, "st":0.04}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1793444142.567171898}
+{"VCS_COMP_START_TIME": 1793444142.567171898}
+{"VCS_COMP_END_TIME": 1793444144.857584508}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -ntb_opts uvm-1.2 -f cardioedge_all_vips_compile.f"}
+{"vcs1": {"peak_mem": 395748}}
