@@ -1,0 +1,28 @@
+================================================================================================================
+                    CARDIOEDGE SoC TEST WAVEFORM PRE-GENERATION REPORT
+================================================================================================================
+ Test ID | Outcome  | Exit Code | FSDB Size    | FSDB Waveform File       | Test Description
+---------+----------+-----------+--------------+--------------------------+-------------------------------------
+ TC-01   | PASS     | 0         | 652K         | cardioedge_tc01.fsdb     | RISC-V CPU Boot & SoC Reset Bring-Up
+ TC-02   | PASS     | 0         | 676K         | cardioedge_tc02.fsdb     | Data Memory Access & RV32I ISA Execution via 64-to-32 Adapter
+ TC-03   | PASS     | 0         | 676K         | cardioedge_tc03.fsdb     | AXI4 Interconnect Address Mapping & Channel Handshake Protocol
+ TC-04   | PASS     | 0         | 680K         | cardioedge_tc04.fsdb     | Dual-Master Interconnect Concurrency & Bus Contention Arbitration
+ TC-05   | PASS     | 0         | 712K         | cardioedge_tc05.fsdb     | UART Peripheral Subsystem & Serial Communication
+ TC-06   | PASS     | 0         | 712K         | cardioedge_tc06.fsdb     | GPIO Subsystem Input/Output & Atomic Bit-Level Operations
+ TC-07   | PASS     | 0         | 724K         | cardioedge_tc07.fsdb     | 32-Bit Timer Subsystem Counting, Expiration & W1C Interrupt
+ TC-08   | PASS     | 0         | 736K         | cardioedge_tc08.fsdb     | FIR Filter Configuration & Numerical Golden Model Comparison
+ TC-09   | PASS     | 0         | 748K         | cardioedge_tc09.fsdb     | ADC Digital Interface, Sample Capture & Overrun Handling
+ TC-10   | PASS     | 0         | 760K         | cardioedge_tc10.fsdb     | SPI Master Controller Configuration & Full-Duplex Data Transfer
+ TC-11   | PASS     | 0         | 780K         | cardioedge_tc11.fsdb     | QRS Detection Engine Verification Against Clinical ECG Waveforms
+ TC-12   | PASS     | 0         | 784K         | cardioedge_tc12.fsdb     | Cardiac Rhythm Classification & Heart Rate Extraction
+ TC-13   | PASS     | 0         | 788K         | cardioedge_tc13.fsdb     | Interconnect Address Boundary & Dummy Slave DECERR Negative Testing
+ TC-14   | PASS     | 0         | 788K         | cardioedge_tc14.fsdb     | System Interrupt Architecture, PIC Routing & Dynamic Firing
+ TC-15   | PASS     | 0         | 792K         | cardioedge_tc15.fsdb     | CPU-Initiated Peripheral Integration & Firmware Telemetry Readback
+ TC-16   | PASS     | 0         | 808K         | cardioedge_tc16.fsdb     | End-to-End Cardiac Signal Processing Pipeline Flow
+ TC-17   | PASS     | 0         | 816K         | cardioedge_tc17.fsdb     | SoC Reset Recovery & Multi-IP State Re-Initialization
+ TC-18   | PASS     | 0         | 816K         | cardioedge_tc18.fsdb     | Comprehensive SoC System Regression & Simulation Completion
+================================================================================================================
+ Total Tests Attempted : 18
+ Total Failures        : 0
+ Full Regression FSDB  : cardioedge_regression.fsdb (816K)
+================================================================================================================

@@ -1,0 +1,183 @@
+Magic 271485
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 28 1400 850 380 120
+
+; File list:
+openDirFile -d / "" "cardioedge_tc06.fsdb"
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+windowTimeUnit 1ps
+
+; toolbar current search type
+curSTATUS ByChange
+
+; user define markers for each test case
+userMarker 0 "TC-01: CPU Boot & Reset" ID_GREEN5 1
+userMarker 1970000 "TC-02: Memory & ISA" ID_GREEN5 1
+userMarker 17550000 "TC-03: AXI Mapping & Handshakes" ID_GREEN5 1
+userMarker 18570000 "TC-04: Master Arbitration" ID_GREEN5 1
+userMarker 19590000 "TC-05: UART Subsystem" ID_GREEN5 1
+userMarker 41370000 "TC-06: GPIO Subsystem" ID_GREEN5 1
+userMarker 41590000 "TC-07: 32-Bit Timer" ID_GREEN5 1
+userMarker 49030000 "TC-08: FIR Golden Model" ID_GREEN5 1
+userMarker 58090000 "TC-09: ADC Interface & Overrun" ID_GREEN5 1
+userMarker 64930000 "TC-10: SPI Master Loopback" ID_GREEN5 1
+userMarker 73390000 "TC-11: QRS Detection Engine" ID_GREEN5 1
+userMarker 84750000 "TC-12: Rhythm & Heart Rate" ID_GREEN5 1
+userMarker 85170000 "TC-13: Dummy Slave DECERR" ID_GREEN5 1
+userMarker 89970000 "TC-14: Interrupts & PIC" ID_GREEN5 1
+userMarker 90010000 "TC-15: Firmware Telemetry" ID_GREEN5 1
+userMarker 90050000 "TC-16: End-to-End Pipeline" ID_GREEN5 1
+userMarker 97690000 "TC-17: Reset Recovery" ID_GREEN5 1
+userMarker 98330000 "TC-18: Regression Scorecard" ID_GREEN5 1
+
+addGroup "G1: TC-01..TC-18 Test Markers & C Mailbox"
+activeDirFile "" "cardioedge_tc06.fsdb"
+addSignal -h 15 -UNSIGNED -DEC /tb_cardioedge_comprehensive_soc/test_id[31:0]
+addSignal -h 15 -ASCII /tb_cardioedge_comprehensive_soc/test_name[255:0]
+addSignal -h 15 -ASCII /tb_cardioedge_comprehensive_soc/test_state[63:0]
+addSignal -h 15 -UNSIGNED -BIN /tb_cardioedge_comprehensive_soc/test_status[1:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/test_start_marker
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/test_done_marker
+addSignal -h 15 -UNSIGNED -DEC /tb_cardioedge_comprehensive_soc/fw_test_id[31:0]
+addSignal -h 15 -ASCII /tb_cardioedge_comprehensive_soc/fw_test_state[63:0]
+addSignal -h 15 -UNSIGNED -BIN /tb_cardioedge_comprehensive_soc/fw_test_status[1:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/fw_start_marker
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/fw_done_marker
+addSignal -h 15 -ASCII /tb_cardioedge_comprehensive_soc/overall_test_state[63:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/fw_extra_telemetry[31:0]
+
+addGroup "G2: SoC Clocks & Reset (TC-01, TC-17)"
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/clk
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/rst_n
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/rst
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/aresetn
+
+addGroup "G3: VeeR EL2 CPU Core & ISA (TC-01, TC-02, TC-15, TC-17)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/u_veer/rvtop/veer/dec/dec_i0_pc_d[31:1]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/ifu64_araddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/ifu64_arvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/ifu64_arready
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/lsu64_awaddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/lsu64_awvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/lsu64_awready
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/lsu64_wdata[63:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/lsu64_wvalid
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/lsu64_araddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/lsu64_arvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/lsu64_arready
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/lsu64_rdata[63:0]
+
+addGroup "G4: AXI Interconnect S00 (IFU) & S01 (LSU) (TC-03, TC-04)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/s00_axi_araddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s00_axi_arvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s00_axi_arready
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/s00_axi_rdata[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s00_axi_rvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s00_axi_rready
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/s01_axi_awaddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_awvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_awready
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/s01_axi_wdata[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_wvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_wready
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_bvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_bready
+addSignal -h 15 -UNSIGNED -BIN /tb_cardioedge_comprehensive_soc/dut/s01_axi_bresp[1:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/s01_axi_araddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_arvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_arready
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/s01_axi_rdata[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_rvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/s01_axi_rready
+
+addGroup "G5: IMEM & DMEM Memory Slaves (TC-01, TC-02, TC-15)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m07_axi_araddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/m07_axi_arvalid
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m07_axi_rdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m08_axi_awaddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/m08_axi_awvalid
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m08_axi_wdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m08_axi_araddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/m08_axi_arvalid
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m08_axi_rdata[31:0]
+
+addGroup "G6: UART Peripheral (TC-05)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m00_axi_awaddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m00_axi_wdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m00_axi_araddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m00_axi_rdata[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/uart_tx_o
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/uart_rx_i
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/uart_irq
+
+addGroup "G7: GPIO Subsystem (TC-06)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m01_axi_awaddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m01_axi_wdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m01_axi_araddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m01_axi_rdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/gpio_io[7:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/gpio_irq
+
+addGroup "G8: 32-Bit Timer (TC-07)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m02_axi_awaddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m02_axi_wdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m02_axi_araddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m02_axi_rdata[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/timer_irq
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/timer_pwm_o
+
+addGroup "G9: 32-Tap FIR Filter (TC-08)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m03_axi_awaddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m03_axi_wdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/fir_s_axis_tdata[15:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/fir_s_axis_tvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/fir_s_axis_tready
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/fir_m_axis_tdata[39:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/fir_m_axis_tvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/fir_m_axis_tready
+
+addGroup "G10: ADC Controller (TC-09)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m04_axi_awaddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m04_axi_wdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/adc_sample_in[11:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/adc_sample_valid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/adc_irq_sample
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/adc_irq_overrun
+
+addGroup "G11: SPI Master (TC-10)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m05_axi_awaddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m05_axi_wdata[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/spi_clk_o
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/spi_cs_n_o
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/spi_mosi_o
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/spi_miso_i
+
+addGroup "G12: QRS Detection & Rhythm Accelerator (TC-11, TC-12)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m06_axi_awaddr[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m06_axi_wdata[31:0]
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/u_qrs/ecg_sample_reg[15:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/u_qrs/ecg_valid_pulse
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/u_qrs/rpeak
+addSignal -h 15 -UNSIGNED -DEC /tb_cardioedge_comprehensive_soc/dut/u_qrs/rr_interval[15:0]
+addSignal -h 15 -UNSIGNED -DEC /tb_cardioedge_comprehensive_soc/dut/u_qrs/bpm[15:0]
+addSignal -h 15 -UNSIGNED -BIN /tb_cardioedge_comprehensive_soc/dut/u_qrs/rhythm_class[1:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/u_qrs/result_valid
+
+addGroup "G13: Dummy Slaves & DECERR Bus Protection (TC-13)"
+addSignal -h 15 -UNSIGNED -HEX /tb_cardioedge_comprehensive_soc/dut/m09_axi_awaddr[31:0]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/m09_axi_awvalid
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/m09_axi_awready
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/dut/m09_axi_bvalid
+addSignal -h 15 -UNSIGNED -BIN /tb_cardioedge_comprehensive_soc/dut/m09_axi_bresp[1:0]
+
+addGroup "G14: VeeR PIC Interrupt Controller (TC-14)"
+addSignal -h 15 -UNSIGNED -BIN /tb_cardioedge_comprehensive_soc/dut/u_veer/extintsrc_req[5:1]
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/uart_irq
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/gpio_irq
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/timer_irq
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/adc_irq_sample
+addSignal -h 15 /tb_cardioedge_comprehensive_soc/adc_irq_overrun

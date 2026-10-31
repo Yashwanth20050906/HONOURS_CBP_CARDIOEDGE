@@ -1,0 +1,2 @@
+uart_rx_i,output,1
+uart_tx_o,input,1
