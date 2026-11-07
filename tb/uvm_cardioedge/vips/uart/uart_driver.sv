@@ -25,6 +25,7 @@ class uart_driver extends uvm_driver #(uart_item);
             `uvm_fatal("UART_DRV_NOVIF", {"Virtual interface vif must be set for ", get_full_name(), ".vif"});
         end
         void'(uvm_config_db#(time)::get(this, "", "baud_period", baud_period));
+        `uvm_info("UART_DRV", "[UART VIF] Virtual interface connected: vif != null", UVM_LOW)
     endfunction
 
     virtual task run_phase(uvm_phase phase);
@@ -39,6 +40,8 @@ class uart_driver extends uvm_driver #(uart_item);
         forever begin
             seq_item_port.get_next_item(req);
 
+            `uvm_info("UART_DRV", $sformatf("[UART DRIVER] Transaction received: trans_id=%0d, data=0x%02h", req.trans_id, req.data), UVM_LOW)
+
             // Wait idle delay before start bit
             if (req.delay_bauds > 0) begin
                 repeat (req.delay_bauds) #(baud_period);
@@ -46,8 +49,8 @@ class uart_driver extends uvm_driver #(uart_item);
 
             num_driven++;
             req.timestamp = $time;
-            `uvm_info("UART_DRV", $sformatf("Transmitting byte #%0d to DUT: 0x%02h ('%c')",
-                      num_driven, req.data, (req.data >= 32 && req.data <= 126) ? req.data : 8'h2E), UVM_MEDIUM)
+            `uvm_info("UART_DRV", $sformatf("[UART DRIVER] TX signal driven: data=0x%02h on vif.uart_rx_i (baud_period=%0t)",
+                      req.data, baud_period), UVM_LOW)
 
             // 1. Start bit (logic 0)
             vif.uart_rx_i <= 1'b0;

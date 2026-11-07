@@ -8,6 +8,30 @@
 `define ADC_SEQUENCE_SV
 
 // ----------------------------------------------------------------------------
+// Dedicated Synchronization ADC Sequence (Test sample: 12'h7A5)
+// ----------------------------------------------------------------------------
+class adc_sync_sequence extends uvm_sequence #(adc_item);
+
+    `uvm_object_utils(adc_sync_sequence)
+
+    function new(string name = "adc_sync_sequence");
+        super.new(name);
+    endfunction
+
+    virtual task body();
+        adc_item item = adc_item::type_id::create("adc_sync_item");
+        start_item(item);
+        item.sample_in    = 12'h7A5; // Required sample 12'h7A5
+        item.sample_valid = 1'b1;
+        item.delay_cycles = 4;
+        item.sample_id    = 1;
+        `uvm_info("ADC_SEQ", $sformatf("[ADC SEQUENCE] Transaction generated: ID=%0d, sample=0x%03h, valid=%0b", item.sample_id, item.sample_in, item.sample_valid), UVM_LOW)
+        finish_item(item);
+    endtask
+
+endclass : adc_sync_sequence
+
+// ----------------------------------------------------------------------------
 // Base ADC Sequence
 // ----------------------------------------------------------------------------
 class adc_base_sequence extends uvm_sequence #(adc_item);

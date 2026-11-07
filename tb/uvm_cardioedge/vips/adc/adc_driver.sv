@@ -23,6 +23,7 @@ class adc_driver extends uvm_driver #(adc_item);
         if (!uvm_config_db#(virtual adc_if)::get(this, "", "vif", vif)) begin
             `uvm_fatal("ADC_DRV_NOVIF", {"Virtual interface vif must be set for ", get_full_name(), ".vif"});
         end
+        `uvm_info("ADC_DRV", "[ADC VIF] Virtual interface connected: vif != null", UVM_NONE)
     endfunction
 
     virtual task run_phase(uvm_phase phase);
@@ -31,13 +32,15 @@ class adc_driver extends uvm_driver #(adc_item);
         vif.sample_valid <= 1'b0;
 
         // Wait for system reset release
-        `uvm_info("ADC_DRV", "Waiting for reset release (rst_n == 1)...", UVM_MEDIUM)
+        `uvm_info("ADC_DRV", "Waiting for reset release (rst_n == 1)...", UVM_NONE)
         wait (vif.rst_n === 1'b1);
         @(posedge vif.clk);
-        `uvm_info("ADC_DRV", "Reset released. Starting ADC sample driving loop.", UVM_MEDIUM)
+        `uvm_info("ADC_DRV", "Reset released. Starting ADC sample driving loop.", UVM_NONE)
 
         forever begin
             seq_item_port.get_next_item(req);
+
+            `uvm_info("ADC_DRV", $sformatf("[ADC DRIVER] Transaction received: ID=%0d, sample=0x%03h, valid=%0b", req.sample_id, req.sample_in, req.sample_valid), UVM_NONE)
 
             // Wait inter-sample delay
             if (req.delay_cycles > 0) begin
@@ -52,8 +55,8 @@ class adc_driver extends uvm_driver #(adc_item);
             req.timestamp    = $time;
             num_driven++;
 
-            `uvm_info("ADC_DRV", $sformatf("Driving ADC sample #%0d: 0x%03h (%0d), valid=%0b",
-                      num_driven, req.sample_in, req.sample_in, req.sample_valid), UVM_HIGH)
+            `uvm_info("ADC_DRV", $sformatf("[ADC DRIVER] ADC sample driven: sample_in=0x%03h (%0d), valid=%0b",
+                      req.sample_in, req.sample_in, req.sample_valid), UVM_NONE)
 
             @(posedge vif.clk);
             // Deassert valid after one clock cycle

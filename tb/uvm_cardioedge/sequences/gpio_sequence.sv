@@ -8,6 +8,37 @@
 `define GPIO_SEQUENCE_SV
 
 // ----------------------------------------------------------------------------
+// Dedicated Synchronization GPIO Sequence (Patterns: 8'h00, 8'hFF, 8'hA5)
+// ----------------------------------------------------------------------------
+class gpio_sync_sequence extends uvm_sequence #(gpio_item);
+
+    logic [7:0] sync_patterns[] = '{8'h00, 8'hFF, 8'hA5};
+
+    `uvm_object_utils(gpio_sync_sequence)
+
+    function new(string name = "gpio_sync_sequence");
+        super.new(name);
+    endfunction
+
+    virtual task body();
+        `uvm_info("GPIO_SEQ", $sformatf("Starting GPIO Synchronization Sequence (%0d patterns)", sync_patterns.size()), UVM_LOW)
+        for (int p = 0; p < sync_patterns.size(); p++) begin
+            gpio_item item = gpio_item::type_id::create($sformatf("gpio_sync_%0d", p));
+            start_item(item);
+            item.gpio_in      = {24'h0, sync_patterns[p]};
+            item.gpio_drv_en  = 8'hFF;
+            item.delay_cycles = 2;
+            item.hold_cycles  = 4;
+            item.trans_id     = p + 1;
+            `uvm_info("GPIO_SEQ", $sformatf("[GPIO SEQUENCE] Transaction generated: ID=%0d, pattern=0x%02h", item.trans_id, sync_patterns[p]), UVM_LOW)
+            finish_item(item);
+        end
+        `uvm_info("GPIO_SEQ", "Completed GPIO Synchronization Sequence", UVM_LOW)
+    endtask
+
+endclass : gpio_sync_sequence
+
+// ----------------------------------------------------------------------------
 // Base GPIO Sequence
 // ----------------------------------------------------------------------------
 class gpio_base_sequence extends uvm_sequence #(gpio_item);

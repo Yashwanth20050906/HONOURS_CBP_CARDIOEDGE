@@ -8,6 +8,29 @@
 `define UART_SEQUENCE_SV
 
 // ----------------------------------------------------------------------------
+// Dedicated Synchronization UART Sequence (Test byte: 8'h55)
+// ----------------------------------------------------------------------------
+class uart_sync_sequence extends uvm_sequence #(uart_item);
+
+    `uvm_object_utils(uart_sync_sequence)
+
+    function new(string name = "uart_sync_sequence");
+        super.new(name);
+    endfunction
+
+    virtual task body();
+        uart_item item = uart_item::type_id::create("uart_sync_item");
+        start_item(item);
+        item.data        = 8'h55; // Alternating 01010101 test byte
+        item.delay_bauds = 1;
+        item.trans_id    = 1;
+        `uvm_info("UART_SEQ", $sformatf("[UART SEQUENCE] Transaction generated: trans_id=%0d, data=0x%02h", item.trans_id, item.data), UVM_LOW)
+        finish_item(item);
+    endtask
+
+endclass : uart_sync_sequence
+
+// ----------------------------------------------------------------------------
 // Base UART Byte Sequence
 // ----------------------------------------------------------------------------
 class uart_base_sequence extends uvm_sequence #(uart_item);
@@ -23,6 +46,8 @@ class uart_base_sequence extends uvm_sequence #(uart_item);
         start_item(item);
         item.data        = 8'h55; // Alternating 01010101
         item.delay_bauds = 1;
+        item.trans_id    = 1;
+        `uvm_info("UART_SEQ", $sformatf("[UART SEQUENCE] Transaction generated: trans_id=%0d, data=0x%02h", item.trans_id, item.data), UVM_LOW)
         finish_item(item);
     endtask
 

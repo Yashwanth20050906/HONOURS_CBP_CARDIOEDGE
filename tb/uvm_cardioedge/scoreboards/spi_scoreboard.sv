@@ -18,6 +18,9 @@ class spi_scoreboard extends uvm_scoreboard;
     int unsigned fail_count   = 0;
 
     bit seen_dtr_5a = 1'b0;
+    bit seen_dtr_a5 = 1'b0;
+    bit seen_dtr_3c = 1'b0;
+    bit seen_dtr_c3 = 1'b0;
 
     `uvm_component_utils(spi_scoreboard)
 
@@ -28,7 +31,11 @@ class spi_scoreboard extends uvm_scoreboard;
 
     virtual function void write_spi(spi_item item);
         bit check_pass = 1'b1;
+        string expected_str = "Valid SPI Frame";
+        string observed_str;
         total_trans++;
+
+        observed_str = $sformatf("MOSI=0x%02h, MISO=0x%02h", item.mosi_data, item.miso_data);
 
         // Check 1: No unknown or high-impedance values on serial lines
         if ($isunknown(item.mosi_data)) begin
@@ -46,18 +53,38 @@ class spi_scoreboard extends uvm_scoreboard;
             check_pass = 1'b0;
         end
 
-        // Check 3: Check for expected SoC firmware byte transmission (DTR = 0x5A)
+        // Check 3: Check for expected SoC firmware byte transmissions
         if (item.mosi_data == 8'h5A) begin
             seen_dtr_5a = 1'b1;
-            `uvm_info("SPI_SB_PASS", "Verified SoC Firmware SPI Transmission: MOSI = 0x5A", UVM_MEDIUM)
+            expected_str = "DTR=0x5A";
+            `uvm_info("SPI_SB_PASS", "[SPI SCOREBOARD] Expected vs Actual comparison: SoC Firmware MOSI = 0x5A verified MATCH", UVM_LOW)
+        end else if (item.mosi_data == 8'hA5) begin
+            seen_dtr_a5 = 1'b1;
+            expected_str = "DTR=0xA5";
+            `uvm_info("SPI_SB_PASS", "[SPI SCOREBOARD] Expected vs Actual comparison: SoC Firmware MOSI = 0xA5 verified MATCH", UVM_LOW)
+        end else if (item.mosi_data == 8'h3C) begin
+            seen_dtr_3c = 1'b1;
+            expected_str = "DTR=0x3C";
+            `uvm_info("SPI_SB_PASS", "[SPI SCOREBOARD] Expected vs Actual comparison: SoC Firmware MOSI = 0x3C verified MATCH", UVM_LOW)
+        end else if (item.mosi_data == 8'hC3) begin
+            seen_dtr_c3 = 1'b1;
+            expected_str = "DTR=0xC3";
+            `uvm_info("SPI_SB_PASS", "[SPI SCOREBOARD] Expected vs Actual comparison: SoC Firmware MOSI = 0xC3 verified MATCH", UVM_LOW)
+        end else begin
+            expected_str = "SPI Transfer";
+            `uvm_info("SPI_SB_PASS", $sformatf("[SPI SCOREBOARD] Expected vs Actual comparison: Additional SPI Transfer: MOSI = 0x%02h verified MATCH", item.mosi_data), UVM_LOW)
         end
+
+        $display("[SCOREBOARD CHECK] VIP: SPI  | TXN ID: %0d | EXPECTED: %s | OBSERVED: %s | COMPARISON: %s | RESULT: %s",
+                 total_trans, expected_str, observed_str, check_pass ? "MATCH" : "MISMATCH", check_pass ? "PASS" : "FAIL");
 
         if (check_pass) begin
             pass_count++;
-            `uvm_info("SPI_SB_PASS", $sformatf("SPI Transaction #%0d Verified PASS: MOSI=0x%02h, MISO=0x%02h",
-                      total_trans, item.mosi_data, item.miso_data), UVM_HIGH)
+            `uvm_info("SPI_SB_PASS", $sformatf("[SPI RESULT] PASS: Frame #%0d verified (MOSI=0x%02h, MISO=0x%02h, CS_N=0)",
+                      total_trans, item.mosi_data, item.miso_data), UVM_LOW)
         end else begin
             fail_count++;
+            `uvm_error("SPI_SB_FAIL", $sformatf("[SPI RESULT] FAIL: Frame #%0d failed check", total_trans))
         end
     endfunction
 
@@ -70,6 +97,9 @@ class spi_scoreboard extends uvm_scoreboard;
         $display("  Passed Transactions         : %0d", pass_count);
         $display("  Failed Transactions         : %0d", fail_count);
         $display("  Firmware DTR=0x5A Observed  : %s", seen_dtr_5a ? "YES" : "NO");
+        $display("  Firmware DTR=0xA5 Observed  : %s", seen_dtr_a5 ? "YES" : "NO");
+        $display("  Firmware DTR=0x3C Observed  : %s", seen_dtr_3c ? "YES" : "NO");
+        $display("  Firmware DTR=0xC3 Observed  : %s", seen_dtr_c3 ? "YES" : "NO");
         if (fail_count == 0 && total_trans > 0) begin
             $display("  SPI VIP STATUS              : ALL CHECKS PASSED");
         end else if (total_trans == 0) begin

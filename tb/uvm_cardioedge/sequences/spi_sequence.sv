@@ -8,6 +8,35 @@
 `define SPI_SEQUENCE_SV
 
 // ----------------------------------------------------------------------------
+// Dedicated Synchronization SPI Sequence (Responder byte: 8'h5A, 8'hA5)
+// ----------------------------------------------------------------------------
+class spi_sync_sequence extends uvm_sequence #(spi_item);
+
+    logic [7:0] sync_resp_bytes[] = '{8'h5A, 8'hA5, 8'h3C, 8'hC3};
+
+    `uvm_object_utils(spi_sync_sequence)
+
+    function new(string name = "spi_sync_sequence");
+        super.new(name);
+    endfunction
+
+    virtual task body();
+        `uvm_info("SPI_SEQ", $sformatf("Starting SPI Synchronization Sequence (%0d frames)", sync_resp_bytes.size()), UVM_LOW)
+        for (int i = 0; i < sync_resp_bytes.size(); i++) begin
+            spi_item item = spi_item::type_id::create($sformatf("spi_sync_item_%0d", i));
+            start_item(item);
+            item.miso_data    = sync_resp_bytes[i];
+            item.delay_cycles = 0;
+            item.trans_id     = i + 1;
+            `uvm_info("SPI_SEQ", $sformatf("[SPI SEQUENCE] Transaction generated: ID=%0d, miso_data=0x%02h", item.trans_id, item.miso_data), UVM_LOW)
+            finish_item(item);
+        end
+        `uvm_info("SPI_SEQ", "Completed SPI Synchronization Sequence", UVM_LOW)
+    endtask
+
+endclass : spi_sync_sequence
+
+// ----------------------------------------------------------------------------
 // Base SPI Slave Response Sequence
 // ----------------------------------------------------------------------------
 class spi_base_sequence extends uvm_sequence #(spi_item);

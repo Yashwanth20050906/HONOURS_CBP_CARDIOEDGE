@@ -23,6 +23,7 @@ class gpio_driver extends uvm_driver #(gpio_item);
         if (!uvm_config_db#(virtual gpio_if)::get(this, "", "vif", vif)) begin
             `uvm_fatal("GPIO_DRV_NOVIF", {"Virtual interface vif must be set for ", get_full_name(), ".vif"});
         end
+        `uvm_info("GPIO_DRV", "[GPIO VIF] Virtual interface connected: vif != null", UVM_LOW)
     endfunction
 
     virtual task run_phase(uvm_phase phase);
@@ -38,6 +39,8 @@ class gpio_driver extends uvm_driver #(gpio_item);
         forever begin
             seq_item_port.get_next_item(req);
 
+            `uvm_info("GPIO_DRV", $sformatf("[GPIO DRIVER] Transaction received: ID=%0d, pattern=0x%02h", req.trans_id, req.gpio_in[7:0]), UVM_LOW)
+
             // Wait inter-transaction delay
             if (req.delay_cycles > 0) begin
                 repeat (req.delay_cycles) @(posedge vif.clk);
@@ -51,8 +54,8 @@ class gpio_driver extends uvm_driver #(gpio_item);
             req.timestamp    = $time;
             num_driven++;
 
-            `uvm_info("GPIO_DRV", $sformatf("Driving GPIO stimulus #%0d: IN=0x%02h, DRV_EN=0x%02h",
-                      num_driven, req.gpio_in[7:0], req.gpio_drv_en), UVM_HIGH)
+            `uvm_info("GPIO_DRV", $sformatf("[GPIO DRIVER] GPIO input driven: IN=0x%02h, DRV_EN=0x%02h",
+                      req.gpio_in[7:0], req.gpio_drv_en), UVM_LOW)
 
             // Hold stimulus for requested cycles
             if (req.hold_cycles > 0) begin

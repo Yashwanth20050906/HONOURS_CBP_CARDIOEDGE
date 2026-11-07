@@ -8,7 +8,7 @@ VSRC=..
 TARGET_ARCH=
 
 # Choose name of executable 
-PRODUCTBASE=$(VSRC)/simv_comprehensive
+PRODUCTBASE=$(VSRC)/simv_uvm_18
 
 PRODUCT=$(PRODUCTBASE)
 
@@ -39,7 +39,7 @@ STDLIB =
 STRIPFLAGS= 
 
 PRE_LDFLAGS= # Loader Flags
-LDFLAGS= -rdynamic  -Wl,-rpath='$$ORIGIN'/simv_comprehensive.daidir -Wl,-rpath=./simv_comprehensive.daidir -Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib -L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib 
+LDFLAGS= -rdynamic  -Wl,-rpath='$$ORIGIN'/simv_uvm_18.daidir -Wl,-rpath=./simv_uvm_18.daidir -Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib -L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib 
 # Picarchive Flags
 PICLDFLAGS= -Wl,-rpath-link=./ 
 PIC_LD=ld
@@ -49,7 +49,7 @@ CRT0=
 # C run time startup
 CRTN=
 # Machine specific libraries
-SYSLIBS=/home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/pli.a -ldl  -lc -lm -lpthread -ldl
+SYSLIBS=/home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/pli.a -ldl -lm  -lc -lpthread -ldl
 
 # Default defines
 SHELL=/bin/sh
@@ -65,15 +65,15 @@ TMPSPECENV=$(VCSTMPSPECENV)
 CC=$(TMPSPECENV) $(VCS_CC) $(TMPSPECARG)
 
 # C flags for compilation
-CFLAGS=$(STDLIB)-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include   
+CFLAGS=$(STDLIB)-w  -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -O -I/home/student/snps_tools_target/vcs/U-2023.03/include   
 
-CFLAGS_O0=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O0  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_O0=-w  -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O0  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
-CFLAGS_CG=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_CG=-w  -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
-CFLAGS_CG_CLIB=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_CG_CLIB=-w  -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
-CFLAGS_RMAR=-w  -pipe -DVCS -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
+CFLAGS_RMAR=-w  -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/home/student/snps_tools_target/vcs/U-2023.03/include -O  -fno-strict-aliasing -fno-optimize-sibling-calls   
 
 CFLAGS_CG+=$(STDLIB)
 CFLAGS_CG_CLIB+=$(STDLIB)
@@ -81,7 +81,7 @@ CFLAGS_O0+=$(STDLIB)
 LD_PARTIAL_LOADER=ld
 # Partial linking
 LD_PARTIAL=$(LD_PARTIAL_LOADER) -r -o
-LIBS=-lvirsim -lerrorinf -lsnpsmalloc -lvfs 
+LIBS=-lvirsim -lerrorinf -lsnpsmalloc -lvfs /home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/pli.a 
 # Note: if make gives you errors about include, either get gmake, or
 # replace the following line with the contents of the file filelist,
 # EACH TIME IT CHANGES
@@ -104,7 +104,6 @@ clobber : clean
 picclean : 
 	rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
 	@rm -f $(PRODUCT).daidir/_[0-9]*_archive_*.so 2>/dev/null
-	@rm -f $(DPI_OBJS)
 
 product_clean_order : 
 	@$(MAKE) -f Makefile --no-print-directory picclean

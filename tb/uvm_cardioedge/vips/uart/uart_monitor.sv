@@ -21,12 +21,16 @@ class uart_monitor extends uvm_monitor;
         ap = new("ap", this);
     endfunction
 
-    virtual function void build_phase(uvm_phase phase);
+    function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        if (!uvm_config_db#(virtual uart_if)::get(this, "", "vif", vif)) begin
-            `uvm_fatal("UART_MON_NOVIF", {"Virtual interface vif must be set for ", get_full_name(), ".vif"});
+
+        if (!uvm_config_db#(virtual uart_if)::get(
+                this, "", "vif", vif)) begin
+            `uvm_fatal("UART_MON",
+                       "Failed to retrieve UART virtual interface")
         end
         void'(uvm_config_db#(time)::get(this, "", "baud_period", baud_period));
+        `uvm_info("UART_MON", "[UART VIF] Virtual interface connected: vif != null", UVM_LOW)
     endfunction
 
     virtual task run_phase(uvm_phase phase);
@@ -40,6 +44,8 @@ class uart_monitor extends uvm_monitor;
         forever begin
             // 1. Wait for Start bit falling edge
             @(negedge vif.uart_tx_o);
+
+            `uvm_info("UART_MON", "[UART DUT] Response observed: Serial transmission start bit detected on uart_tx_o", UVM_LOW)
 
             // 2. Sample at mid-point of start bit to filter glitches
             #(baud_period / 2);
@@ -71,8 +77,13 @@ class uart_monitor extends uvm_monitor;
             item.timestamp = $time;
             item.trans_id  = num_monitored;
 
-            `uvm_info("UART_MON", $sformatf("Monitored SoC Character #%0d: 0x%02h ('%c') at %0t",
-                      num_monitored, item.data, (item.data >= 32 && item.data <= 126) ? item.data : 8'h2E, item.timestamp), UVM_MEDIUM)
+            `uvm_info("UART_MON", $sformatf("[UART MONITOR] Transaction captured: ID=%0d, data=0x%02h ('%c') at %0t",
+                      num_monitored, item.data, (item.data >= 32 && item.data <= 126) ? item.data : 8'h2E, item.timestamp), UVM_LOW)
+            `uvm_info("UART_MON", $sformatf("Observed UART character = 0x%02h ('%c')",
+                      item.data, (item.data >= 32 && item.data <= 126) ? item.data : 8'h2E), UVM_MEDIUM)
+
+            $display("[LIVE MONITOR] UART | TIME: %0t | TXN ID: %0d | DIRECTION: DUT_TX | OBSERVED DATA: 0x%02h ('%c') | STATUS: 8N1 OK (IRQ=%0b)",
+                     item.timestamp, num_monitored, item.data, (item.data >= 32 && item.data <= 126) ? item.data : 8'h2E, vif.uart_irq);
 
             ap.write(item);
         end

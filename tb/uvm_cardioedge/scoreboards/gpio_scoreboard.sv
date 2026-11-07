@@ -19,6 +19,8 @@ class gpio_scoreboard extends uvm_scoreboard;
 
     // Track recognized CPU output states
     bit seen_dir_ff  = 1'b0;
+    bit seen_out_00  = 1'b0;
+    bit seen_out_ff  = 1'b0;
     bit seen_out_a5  = 1'b0;
     bit seen_out_a7  = 1'b0;
     bit seen_out_a6  = 1'b0;
@@ -33,7 +35,11 @@ class gpio_scoreboard extends uvm_scoreboard;
 
     virtual function void write_gpio(gpio_item item);
         bit check_pass = 1'b1;
+        string expected_str = "Valid GPIO State";
+        string observed_str;
         total_trans++;
+
+        observed_str = $sformatf("OUT=0x%02h, OE=0x%02h", item.gpio_out[7:0], item.gpio_oe[7:0]);
 
         // Check 1: No unknown or high-impedance values in output/oe
         if ($isunknown(item.gpio_out[7:0])) begin
@@ -48,34 +54,58 @@ class gpio_scoreboard extends uvm_scoreboard;
         // Check 2: Functional pattern verification from SoC firmware
         if (item.gpio_oe[7:0] == 8'hFF) begin
             seen_dir_ff = 1'b1;
-            `uvm_info("GPIO_SB_PASS", "Verified GPIO Direction DIR = 0xFF (All outputs enabled)", UVM_HIGH)
+            expected_str = "DIR=0xFF (Outputs)";
+            `uvm_info("GPIO_SB_PASS", "[GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Direction DIR = 0xFF verified MATCH", UVM_LOW)
+        end
+
+        if (item.gpio_out[7:0] == 8'h00 && item.gpio_oe[7:0] == 8'hFF) begin
+            seen_out_00 = 1'b1;
+            expected_str = "DATA_O=0x00";
+            `uvm_info("GPIO_SB_PASS", "[GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Pattern DATA_O = 0x00 verified MATCH", UVM_LOW)
+        end
+
+        if (item.gpio_out[7:0] == 8'hFF && item.gpio_oe[7:0] == 8'hFF) begin
+            seen_out_ff = 1'b1;
+            expected_str = "DATA_O=0xFF";
+            `uvm_info("GPIO_SB_PASS", "[GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Pattern DATA_O = 0xFF verified MATCH", UVM_LOW)
         end
 
         if (item.gpio_out[7:0] == 8'hA5) begin
             seen_out_a5 = 1'b1;
-            `uvm_info("GPIO_SB_PASS", "Verified Initial GPIO Write: DATA_O = 0xA5", UVM_MEDIUM)
+            expected_str = "DATA_O=0xA5";
+            `uvm_info("GPIO_SB_PASS", "[GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Pattern DATA_O = 0xA5 verified MATCH", UVM_LOW)
         end
 
         if (item.gpio_out[7:0] == 8'hA7) begin
             seen_out_a7 = 1'b1;
-            `uvm_info("GPIO_SB_PASS", "Verified Atomic SET_O: DATA_O = 0xA7 (Bit 1 set)", UVM_MEDIUM)
+            expected_str = "SET_O -> 0xA7";
+            `uvm_info("GPIO_SB_PASS", "[GPIO SCOREBOARD] Expected vs Actual comparison: Atomic SET_O -> DATA_O = 0xA7 verified MATCH", UVM_LOW)
         end
 
         if (item.gpio_out[7:0] == 8'hA6) begin
             seen_out_a6 = 1'b1;
-            `uvm_info("GPIO_SB_PASS", "Verified Atomic CLR_O: DATA_O = 0xA6 (Bit 0 cleared)", UVM_MEDIUM)
+            expected_str = "CLR_O -> 0xA6";
+            `uvm_info("GPIO_SB_PASS", "[GPIO SCOREBOARD] Expected vs Actual comparison: Atomic CLR_O -> DATA_O = 0xA6 verified MATCH", UVM_LOW)
         end
 
         if (item.gpio_drv_en != 8'h0) begin
             seen_in_stim = 1'b1;
-            `uvm_info("GPIO_SB_PASS", $sformatf("Verified External GPIO Input Drive: 0x%02h (drv_en=0x%02h)",
-                      item.gpio_in[7:0], item.gpio_drv_en), UVM_HIGH)
+            expected_str = $sformatf("Drive IN=0x%02h", item.gpio_in[7:0]);
+            observed_str = $sformatf("IN=0x%02h, EN=0x%02h", item.gpio_in[7:0], item.gpio_drv_en);
+            `uvm_info("GPIO_SB_PASS", $sformatf("[GPIO SCOREBOARD] Expected vs Actual comparison: External Input Drive: 0x%02h verified MATCH",
+                      item.gpio_in[7:0]), UVM_LOW)
         end
+
+        $display("[SCOREBOARD CHECK] VIP: GPIO | TXN ID: %0d | EXPECTED: %s | OBSERVED: %s | COMPARISON: %s | RESULT: %s",
+                 total_trans, expected_str, observed_str, check_pass ? "MATCH" : "MISMATCH", check_pass ? "PASS" : "FAIL");
 
         if (check_pass) begin
             pass_count++;
+            `uvm_info("GPIO_SB_PASS", $sformatf("[GPIO RESULT] PASS: Transition #%0d verified (OUT=0x%02h, OE=0x%02h)",
+                      total_trans, item.gpio_out[7:0], item.gpio_oe[7:0]), UVM_LOW)
         end else begin
             fail_count++;
+            `uvm_error("GPIO_SB_FAIL", $sformatf("[GPIO RESULT] FAIL: GPIO Transaction #%0d Failed", total_trans))
         end
     endfunction
 

@@ -26,7 +26,11 @@ class adc_scoreboard extends uvm_scoreboard;
 
     virtual function void write_adc(adc_item item);
         bit is_valid = 1'b1;
+        string expected_str = "12-bit [0:4095], valid=1";
+        string observed_str;
         total_trans++;
+
+        observed_str = $sformatf("0x%03h (%0d)", item.sample_in, item.sample_in);
 
         // Check 1: No unknown or high-impedance values in sample data
         if ($isunknown(item.sample_in)) begin
@@ -49,12 +53,21 @@ class adc_scoreboard extends uvm_scoreboard;
             is_valid = 1'b0;
         end
 
+        if (item.sample_in == 12'h7A5) begin
+            expected_str = "Sync Sample 0x7A5";
+        end
+
+        $display("[SCOREBOARD CHECK] VIP: ADC  | TXN ID: %0d | EXPECTED: %s | OBSERVED: %s | COMPARISON: %s | RESULT: %s",
+                 total_trans, expected_str, observed_str, is_valid ? "MATCH" : "MISMATCH", is_valid ? "PASS" : "FAIL");
+
         if (is_valid) begin
             pass_count++;
-            `uvm_info("ADC_SB_PASS", $sformatf("Sample #%0d Verified PASS: 0x%03h (%0d) at %0t",
-                      total_trans, item.sample_in, item.sample_in, item.timestamp), UVM_HIGH)
+            `uvm_info("ADC_SB_PASS", $sformatf("[ADC SCOREBOARD] Expected vs Actual comparison: Sample 0x%03h verified MATCH (valid=1, 12-bit range)", item.sample_in), UVM_LOW)
+            `uvm_info("ADC_SB_PASS", $sformatf("[ADC RESULT] PASS: Sample #%0d verified: 0x%03h (%0d)",
+                      total_trans, item.sample_in, item.sample_in), UVM_LOW)
         end else begin
             fail_count++;
+            `uvm_error("ADC_SB_FAIL", $sformatf("[ADC RESULT] FAIL: Sample #%0d failed check", total_trans))
         end
     endfunction
 

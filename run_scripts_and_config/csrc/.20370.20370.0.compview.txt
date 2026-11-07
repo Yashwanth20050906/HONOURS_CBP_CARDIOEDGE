@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1794031872.334681430, "rt":13.56, "ut":12.90, "st":0.29}}
+{"vcselab":{"timestamp_begin":1794031885.929781417, "rt":1.42, "ut":0.29, "st":0.04}}
+{"link":{"timestamp_begin":1794031887.373412480, "rt":0.32, "ut":0.19, "st":0.11}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1794031872.081603787}
+{"VCS_COMP_START_TIME": 1794031872.081603787}
+{"VCS_COMP_END_TIME": 1794031887.745554904}
+{"VCS_USER_OPTIONS": "-full64 -sverilog -ntb_opts uvm-1.2 -timescale=1ns/1ps -debug_access+all -kdb -P /home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/novas.tab /home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/pli.a -f cardioedge_uvm_compile.f -top tb_cardioedge_uvm_soc -o simv_vip_sync -l compile_vip_sync.log"}
+{"vcs1": {"peak_mem": 618140}}
+{"vcselab": {"peak_mem": 279640}}

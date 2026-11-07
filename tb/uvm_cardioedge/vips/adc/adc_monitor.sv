@@ -20,11 +20,15 @@ class adc_monitor extends uvm_monitor;
         ap = new("ap", this);
     endfunction
 
-    virtual function void build_phase(uvm_phase phase);
+    function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        if (!uvm_config_db#(virtual adc_if)::get(this, "", "vif", vif)) begin
-            `uvm_fatal("ADC_MON_NOVIF", {"Virtual interface vif must be set for ", get_full_name(), ".vif"});
+
+        if (!uvm_config_db#(virtual adc_if)::get(
+                this, "", "vif", vif)) begin
+            `uvm_fatal("ADC_MON",
+                       "Failed to retrieve ADC virtual interface")
         end
+        `uvm_info("ADC_MON", "[ADC VIF] Virtual interface connected: vif != null", UVM_LOW)
     endfunction
 
     virtual task run_phase(uvm_phase phase);
@@ -44,8 +48,15 @@ class adc_monitor extends uvm_monitor;
                 num_monitored++;
                 item.sample_id    = num_monitored;
 
-                `uvm_info("ADC_MON", $sformatf("Monitored ADC Sample #%0d: data=0x%03h (%0d) at %0t",
-                          num_monitored, item.sample_in, item.sample_in, item.timestamp), UVM_MEDIUM)
+                `uvm_info("ADC_MON", $sformatf("[ADC DUT] Sample response observed: DUT ADC received sample 0x%03h, valid=%0b, irq_sample=%0b",
+                          vif.sample_in, vif.sample_valid, vif.irq_sample), UVM_LOW)
+                `uvm_info("ADC_MON", $sformatf("[ADC MONITOR] Transaction captured: ID=%0d, sample=0x%03h (%0d) at %0t",
+                          num_monitored, item.sample_in, item.sample_in, item.timestamp), UVM_LOW)
+                `uvm_info("ADC_MON", $sformatf("Observed ADC sample = 0x%03h",
+                          item.sample_in), UVM_MEDIUM)
+
+                $display("[LIVE MONITOR] ADC  | TIME: %0t | TXN ID: %0d | SAMPLE: 0x%03h (%0d) | VALID: %0b | DUT STATUS: irq_sample=%0b, irq_overrun=%0b",
+                         item.timestamp, num_monitored, item.sample_in, item.sample_in, item.sample_valid, vif.irq_sample, vif.irq_overrun);
 
                 ap.write(item);
             end

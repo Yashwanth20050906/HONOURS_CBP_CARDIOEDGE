@@ -6,9 +6,9 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
 Command: vcs -full64 -sverilog -ntb_opts uvm -timescale=1ns/1ps -debug_access+all \
--kdb -f cardioedge_all_vips_compile.f -l compile.log
+-kdb -f cardioedge_uvm_compile.f -l compile.log
                          Chronologic VCS (TM)
-         Version U-2023.03_Full64 -- Sat Oct 31 17:26:56 2026
+         Version U-2023.03_Full64 -- Sat Nov  7 14:13:53 2026
 
                     Copyright (c) 1991 - 2023 Synopsys, Inc.
    This software and the associated documentation are proprietary to Synopsys,
@@ -566,130 +566,210 @@ Parsing design file '../rtl/QRS/qrs_axi4_wrapper.v'
 Parsing design file '../rtl/riscv/cardioedge_cpu_soc_top.sv'
 Parsing included file '../rtl/Cores-VeeR-EL2/configs/snapshots/cardioedge/common_defines.vh'.
 Back to file '../rtl/riscv/cardioedge_cpu_soc_top.sv'.
-Parsing design file '../tb/adc_uvm_tb/adc_if.sv'
-Parsing design file '../tb/gpio_uvm_tb/gpio_if.sv'
-Parsing design file '../tb/spi_uvm_tb/spi_if.sv'
-Parsing design file '../tb/uart_uvm_tb/uart_if.sv'
-Parsing design file '../tb/adc_uvm_tb/adc_pkguvm.sv'
+Parsing design file '../tb/uvm_cardioedge/vips/adc/adc_if.sv'
+Parsing design file '../tb/uvm_cardioedge/vips/gpio/gpio_if.sv'
+Parsing design file '../tb/uvm_cardioedge/vips/spi/spi_if.sv'
+Parsing design file '../tb/uvm_cardioedge/vips/uart/uart_if.sv'
+Parsing design file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'
 Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing included file '../tb/adc_uvm_tb/adc_item.sv'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing included file '../tb/adc_uvm_tb/adc_sequencer.sv'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing included file '../tb/adc_uvm_tb/adc_driver.sv'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing included file '../tb/adc_uvm_tb/adc_monitor.sv'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing included file '../tb/adc_uvm_tb/adc_agent.sv'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing included file '../tb/adc_uvm_tb/adc_scoreboard.sv'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing included file '../tb/adc_uvm_tb/adc_env.sv'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing included file '../tb/adc_uvm_tb/adc_test.sv'.
-Back to file '../tb/adc_uvm_tb/adc_pkguvm.sv'.
-Parsing design file '../tb/gpio_uvm_tb/gpio_pkg.sv'
+Back to file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/adc/adc_item.sv'.
+Back to file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/adc/adc_sequencer.sv'.
+Back to file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/adc/adc_driver.sv'.
+Back to file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/adc/adc_monitor.sv'.
+Back to file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/adc/adc_agent.sv'.
+Back to file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'.
+Parsing included file '../tb/uvm_cardioedge/scoreboards/adc_scoreboard.sv'.
+Back to file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'.
+Parsing included file '../tb/uvm_cardioedge/sequences/adc_sequence.sv'.
+Back to file '../tb/uvm_cardioedge/vips/adc/adc_pkguvm.sv'.
+Parsing design file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'
 Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing included file '../tb/gpio_uvm_tb/gpio_item.sv'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing included file '../tb/gpio_uvm_tb/gpio_sequencer.sv'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing included file '../tb/gpio_uvm_tb/gpio_driver.sv'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing included file '../tb/gpio_uvm_tb/gpio_monitor.sv'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing included file '../tb/gpio_uvm_tb/gpio_agent.sv'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing included file '../tb/gpio_uvm_tb/gpio_scoreboard.sv'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing included file '../tb/gpio_uvm_tb/gpio_env.sv'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing included file '../tb/gpio_uvm_tb/gpio_test.sv'.
-Back to file '../tb/gpio_uvm_tb/gpio_pkg.sv'.
-Parsing design file '../tb/spi_uvm_tb/spi_pkg.sv'
+Back to file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/gpio/gpio_item.sv'.
+Back to file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/gpio/gpio_sequencer.sv'.
+Back to file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/gpio/gpio_driver.sv'.
+Back to file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv'.
+Back to file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/gpio/gpio_agent.sv'.
+Back to file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv'.
+Back to file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/sequences/gpio_sequence.sv'.
+Back to file '../tb/uvm_cardioedge/vips/gpio/gpio_pkg.sv'.
+Parsing design file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'
 Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing included file '../tb/spi_uvm_tb/spi_item.sv'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing included file '../tb/spi_uvm_tb/spi_sequencer.sv'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing included file '../tb/spi_uvm_tb/spi_driver.sv'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing included file '../tb/spi_uvm_tb/spi_monitor.sv'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing included file '../tb/spi_uvm_tb/spi_agent.sv'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing included file '../tb/spi_uvm_tb/spi_scoreboard.sv'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing included file '../tb/spi_uvm_tb/spi_env.sv'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing included file '../tb/spi_uvm_tb/spi_test.sv'.
-Back to file '../tb/spi_uvm_tb/spi_pkg.sv'.
-Parsing design file '../tb/uart_uvm_tb/uart_pkg.sv'
+Back to file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/spi/spi_item.sv'.
+Back to file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/spi/spi_sequencer.sv'.
+Back to file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/spi/spi_driver.sv'.
+Back to file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/spi/spi_monitor.sv'.
+Back to file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/spi/spi_agent.sv'.
+Back to file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/scoreboards/spi_scoreboard.sv'.
+Back to file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/sequences/spi_sequence.sv'.
+Back to file '../tb/uvm_cardioedge/vips/spi/spi_pkg.sv'.
+Parsing design file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'
 Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing included file '../tb/uart_uvm_tb/uart_item.sv'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing included file '../tb/uart_uvm_tb/uart_sequencer.sv'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing included file '../tb/uart_uvm_tb/uart_driver.sv'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing included file '../tb/uart_uvm_tb/uart_monitor.sv'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing included file '../tb/uart_uvm_tb/uart_agent.sv'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing included file '../tb/uart_uvm_tb/uart_scoreboard.sv'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing included file '../tb/uart_uvm_tb/uart_env.sv'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing included file '../tb/uart_uvm_tb/uart_test.sv'.
-Back to file '../tb/uart_uvm_tb/uart_pkg.sv'.
-Parsing design file '../tb/tb_cardioedge_comprehensive_soc.sv'
+Back to file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/uart/uart_item.sv'.
+Back to file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/uart/uart_sequencer.sv'.
+Back to file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/uart/uart_driver.sv'.
+Back to file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/uart/uart_monitor.sv'.
+Back to file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/vips/uart/uart_agent.sv'.
+Back to file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/scoreboards/uart_scoreboard.sv'.
+Back to file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'.
+Parsing included file '../tb/uvm_cardioedge/sequences/uart_sequence.sv'.
+Back to file '../tb/uvm_cardioedge/vips/uart/uart_pkg.sv'.
+Parsing design file '../tb/uvm_cardioedge/cardioedge_virtual_sequencer.sv'
+Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
+Back to file '../tb/uvm_cardioedge/cardioedge_virtual_sequencer.sv'.
+Parsing design file '../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv'
+
+Note-[SV-LCM-PPWI] Package previously wildcard imported
+../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv, 10
+$unit
+  Package 'uvm_pkg' already wildcard imported. 
+  Ignoring uvm_pkg::*
+  See the SystemVerilog LRM(1800-2005), section 19.2.1.
+
+Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
+Back to file '../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv'.
+Parsing design file '../tb/uvm_cardioedge/cardioedge_env.sv'
+
+Note-[SV-LCM-PPWI] Package previously wildcard imported
+../tb/uvm_cardioedge/cardioedge_env.sv, 10
+$unit
+  Package 'uvm_pkg' already wildcard imported. 
+  Ignoring uvm_pkg::*
+  See the SystemVerilog LRM(1800-2005), section 19.2.1.
+
+Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
+Back to file '../tb/uvm_cardioedge/cardioedge_env.sv'.
+Parsing design file '../tb/uvm_cardioedge/cardioedge_uvm_test.sv'
+
+Note-[SV-LCM-PPWI] Package previously wildcard imported
+../tb/uvm_cardioedge/cardioedge_uvm_test.sv, 10
+$unit
+  Package 'uvm_pkg' already wildcard imported. 
+  Ignoring uvm_pkg::*
+  See the SystemVerilog LRM(1800-2005), section 19.2.1.
+
+Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
+Back to file '../tb/uvm_cardioedge/cardioedge_uvm_test.sv'.
+Parsing design file '../tb/uvm_cardioedge/tb_cardioedge_uvm_soc.sv'
+
+Note-[SV-LCM-PPWI] Package previously wildcard imported
+../tb/uvm_cardioedge/tb_cardioedge_uvm_soc.sv, 10
+$unit
+  Package 'uvm_pkg' already wildcard imported. 
+  Ignoring uvm_pkg::*
+  See the SystemVerilog LRM(1800-2005), section 19.2.1.
+
+Parsing included file '/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm/uvm_macros.svh'.
+Back to file '../tb/uvm_cardioedge/tb_cardioedge_uvm_soc.sv'.
 Top Level Modules:
        uvm_custom_install_verdi_recording
-       tb_cardioedge_comprehensive_soc
+       tb_cardioedge_uvm_soc
 TimeScale is 1 ns / 1 ps
 
-Error-[MFNF] Member not found
-../tb/adc_uvm_tb/adc_driver.sv, 14
-"this.vif."
-  Could not find member 'clk' in interface 'adc_if', at 
-  "../tb/adc_uvm_tb/adc_if.sv", 1.
-  Instance stack trace:
-      adc_pkguvm  ../tb/adc_uvm_tb/adc_pkguvm.sv, 1
-  
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2266
+"axi_uart_top u_uart( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m00_axi_awid),  .axi_awaddr_i (m00_axi_awaddr[4:0]),  .axi_awvalid_i (m00_axi_awvalid),  .axi_awready_o (m00_axi_awready),  .axi_wdata_i (m00_axi_wdata),  .axi_wstrb_i (m00_axi_wstrb),  .axi_wvalid_i (m00_axi_wvalid),  .axi_wready_o (m00_axi_wready),  .axi_bid_o (uart_bid_12),  .axi_bresp_o (m00_axi_bresp),  .axi_bvalid_o (m00_axi_bvalid),  .axi_bready_i (m00_axi_bready),  .axi_arid_i (m00_axi_arid),  .axi_araddr_i (m00_axi_araddr[4:0]),  .axi_arvalid_i (m00_axi_arvalid),  .axi_arready_o (m00_axi_arready),  .axi_rid_o (uart_rid_12),  .axi_rdata_o (m00_axi_rdata),  .axi_rresp_o (m00_axi_rresp),  .axi_rvalid_o (m00_axi_rvalid),  .axi_rready_i (m00_axi_rre ... "
+  The following 8-bit expression is connected to 12-bit port "axi_awid_i" of 
+  module "axi_uart_top", instance "u_uart".
+  Expression: m00_axi_awid
+  Instantiated module defined at: "../rtl/uart/axi_uart_top.v", 28
+  Use +lint=PCWM for more details.
 
 
-Error-[MFNF] Member not found
-../tb/gpio_uvm_tb/gpio_driver.sv, 14
-"this.vif."
-  Could not find member 'clk' in interface 'gpio_if', at 
-  "../tb/gpio_uvm_tb/gpio_if.sv", 1.
-  Instance stack trace:
-      gpio_pkg  ../tb/gpio_uvm_tb/gpio_pkg.sv, 1
-  
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2266
+"axi_uart_top u_uart( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m00_axi_awid),  .axi_awaddr_i (m00_axi_awaddr[4:0]),  .axi_awvalid_i (m00_axi_awvalid),  .axi_awready_o (m00_axi_awready),  .axi_wdata_i (m00_axi_wdata),  .axi_wstrb_i (m00_axi_wstrb),  .axi_wvalid_i (m00_axi_wvalid),  .axi_wready_o (m00_axi_wready),  .axi_bid_o (uart_bid_12),  .axi_bresp_o (m00_axi_bresp),  .axi_bvalid_o (m00_axi_bvalid),  .axi_bready_i (m00_axi_bready),  .axi_arid_i (m00_axi_arid),  .axi_araddr_i (m00_axi_araddr[4:0]),  .axi_arvalid_i (m00_axi_arvalid),  .axi_arready_o (m00_axi_arready),  .axi_rid_o (uart_rid_12),  .axi_rdata_o (m00_axi_rdata),  .axi_rresp_o (m00_axi_rresp),  .axi_rvalid_o (m00_axi_rvalid),  .axi_rready_i (m00_axi_rre ... "
+  The following 8-bit expression is connected to 12-bit port "axi_arid_i" of 
+  module "axi_uart_top", instance "u_uart".
+  Expression: m00_axi_arid
+  Instantiated module defined at: "../rtl/uart/axi_uart_top.v", 28
+  Use +lint=PCWM for more details.
 
 
-Error-[MFNF] Member not found
-../tb/spi_uvm_tb/spi_driver.sv, 14
-"this.vif."
-  Could not find member 'clk' in interface 'spi_if', at 
-  "../tb/spi_uvm_tb/spi_if.sv", 1.
-  Instance stack trace:
-      spi_pkg  ../tb/spi_uvm_tb/spi_pkg.sv, 1
-  
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2700
+"axi_spi_top u_spi( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m05_axi_awid),  .axi_awaddr_i (m05_axi_awaddr),  .axi_awvalid_i (m05_axi_awvalid),  .axi_awready_o (m05_axi_awready),  .axi_wdata_i (m05_axi_wdata),  .axi_wstrb_i (m05_axi_wstrb),  .axi_wvalid_i (m05_axi_wvalid),  .axi_wready_o (m05_axi_wready),  .axi_bid_o (spi_bid_12),  .axi_bresp_o (m05_axi_bresp),  .axi_bvalid_o (m05_axi_bvalid),  .axi_bready_i (m05_axi_bready),  .axi_arid_i (m05_axi_arid),  .axi_araddr_i (m05_axi_araddr),  .axi_arvalid_i (m05_axi_arvalid),  .axi_arready_o (m05_axi_arready),  .axi_rid_o (spi_rid_12),  .axi_rdata_o (m05_axi_rdata),  .axi_rresp_o (m05_axi_rresp),  .axi_rvalid_o (m05_axi_rvalid),  .axi_rready_i (m05_axi_rready),  .spi_cl ... "
+  The following 8-bit expression is connected to 12-bit port "axi_awid_i" of 
+  module "axi_spi_top", instance "u_spi".
+  Expression: m05_axi_awid
+  Instantiated module defined at: "../rtl/spi/axi_spi_top.v", 21
+  Use +lint=PCWM for more details.
 
 
-Error-[MFNF] Member not found
-../tb/uart_uvm_tb/uart_driver.sv, 14
-"this.vif."
-  Could not find member 'clk' in interface 'uart_if', at 
-  "../tb/uart_uvm_tb/uart_if.sv", 1.
-  Instance stack trace:
-      uart_pkg  ../tb/uart_uvm_tb/uart_pkg.sv, 1
-  
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2700
+"axi_spi_top u_spi( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m05_axi_awid),  .axi_awaddr_i (m05_axi_awaddr),  .axi_awvalid_i (m05_axi_awvalid),  .axi_awready_o (m05_axi_awready),  .axi_wdata_i (m05_axi_wdata),  .axi_wstrb_i (m05_axi_wstrb),  .axi_wvalid_i (m05_axi_wvalid),  .axi_wready_o (m05_axi_wready),  .axi_bid_o (spi_bid_12),  .axi_bresp_o (m05_axi_bresp),  .axi_bvalid_o (m05_axi_bvalid),  .axi_bready_i (m05_axi_bready),  .axi_arid_i (m05_axi_arid),  .axi_araddr_i (m05_axi_araddr),  .axi_arvalid_i (m05_axi_arvalid),  .axi_arready_o (m05_axi_arready),  .axi_rid_o (spi_rid_12),  .axi_rdata_o (m05_axi_rdata),  .axi_rresp_o (m05_axi_rresp),  .axi_rvalid_o (m05_axi_rvalid),  .axi_rready_i (m05_axi_rready),  .spi_cl ... "
+  The following 32-bit expression is connected to 7-bit port "axi_awaddr_i" of
+  module "axi_spi_top", instance "u_spi".
+  Expression: m05_axi_awaddr
+  Instantiated module defined at: "../rtl/spi/axi_spi_top.v", 21
+  Use +lint=PCWM for more details.
 
-4 errors
-CPU time: 1.983 seconds to compile
+
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2700
+"axi_spi_top u_spi( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m05_axi_awid),  .axi_awaddr_i (m05_axi_awaddr),  .axi_awvalid_i (m05_axi_awvalid),  .axi_awready_o (m05_axi_awready),  .axi_wdata_i (m05_axi_wdata),  .axi_wstrb_i (m05_axi_wstrb),  .axi_wvalid_i (m05_axi_wvalid),  .axi_wready_o (m05_axi_wready),  .axi_bid_o (spi_bid_12),  .axi_bresp_o (m05_axi_bresp),  .axi_bvalid_o (m05_axi_bvalid),  .axi_bready_i (m05_axi_bready),  .axi_arid_i (m05_axi_arid),  .axi_araddr_i (m05_axi_araddr),  .axi_arvalid_i (m05_axi_arvalid),  .axi_arready_o (m05_axi_arready),  .axi_rid_o (spi_rid_12),  .axi_rdata_o (m05_axi_rdata),  .axi_rresp_o (m05_axi_rresp),  .axi_rvalid_o (m05_axi_rvalid),  .axi_rready_i (m05_axi_rready),  .spi_cl ... "
+  The following 8-bit expression is connected to 12-bit port "axi_arid_i" of 
+  module "axi_spi_top", instance "u_spi".
+  Expression: m05_axi_arid
+  Instantiated module defined at: "../rtl/spi/axi_spi_top.v", 21
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+../rtl/riscv/cardioedge_cpu_soc_top.sv, 2700
+"axi_spi_top u_spi( .fixed_clk_i (clk),  .axi_aclk_i (clk),  .axi_aresetn_i (aresetn),  .axi_awid_i (m05_axi_awid),  .axi_awaddr_i (m05_axi_awaddr),  .axi_awvalid_i (m05_axi_awvalid),  .axi_awready_o (m05_axi_awready),  .axi_wdata_i (m05_axi_wdata),  .axi_wstrb_i (m05_axi_wstrb),  .axi_wvalid_i (m05_axi_wvalid),  .axi_wready_o (m05_axi_wready),  .axi_bid_o (spi_bid_12),  .axi_bresp_o (m05_axi_bresp),  .axi_bvalid_o (m05_axi_bvalid),  .axi_bready_i (m05_axi_bready),  .axi_arid_i (m05_axi_arid),  .axi_araddr_i (m05_axi_araddr),  .axi_arvalid_i (m05_axi_arvalid),  .axi_arready_o (m05_axi_arready),  .axi_rid_o (spi_rid_12),  .axi_rdata_o (m05_axi_rdata),  .axi_rresp_o (m05_axi_rresp),  .axi_rvalid_o (m05_axi_rvalid),  .axi_rready_i (m05_axi_rready),  .spi_cl ... "
+  The following 32-bit expression is connected to 7-bit port "axi_araddr_i" of
+  module "axi_spi_top", instance "u_spi".
+  Expression: m05_axi_araddr
+  Instantiated module defined at: "../rtl/spi/axi_spi_top.v", 21
+  Use +lint=PCWM for more details.
+
+Notice: Ports coerced to inout, use -notice for details
+Starting vcs inline pass...
+
+73 modules and 0 UDP read.
+recompiling package vcs_paramclassrepository
+recompiling module uvm_custom_install_verdi_recording
+recompiling package adc_pkguvm
+3 of 73 modules done
+	However, due to incremental compilation, only 3 modules need to be compiled. 
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv ]; then chmod a-x ../simv; fi
+g++  -o ../simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir \
+-Wl,-rpath=/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib -L/home/student/snps_tools_target/vcs/U-2023.03/linux64/lib \
+-Wl,-rpath-link=./  /usr/lib64/libnuma.so.1 uvm_dpi.o uvm_verdi_dpi.o   objs/amcQw_d.o \
+_10300_archive_1.so _prev_archive_1.so  SIM_l.o      rmapats_mop.o rmapats.o rmar.o \
+rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o            -lvirsim -lerrorinf -lsnpsmalloc \
+-lvfs    -lvcsnew -lsimprofile -luclinative /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_tls.o \
+-Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive       ./../simv.daidir/vc_hdrs.o \
+_vcs_pli_stub_.o   /home/student/snps_tools_target/vcs/U-2023.03/linux64/lib/vcs_save_restore_new.o \
+/home/student/snps_tools_target/verdi/U-2023.03-SP1/share/PLI/VCS/LINUX64/pli.a -ldl \
+-lc -lm -lpthread -ldl 
+../simv up to date
+CPU time: 9.811 seconds to compile + .308 seconds to elab + .332 seconds to link
+Verdi KDB elaboration done and the database successfully generated: 0 error(s), 0 warning(s)

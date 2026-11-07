@@ -20,11 +20,15 @@ class gpio_monitor extends uvm_monitor;
         ap = new("ap", this);
     endfunction
 
-    virtual function void build_phase(uvm_phase phase);
+    function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        if (!uvm_config_db#(virtual gpio_if)::get(this, "", "vif", vif)) begin
-            `uvm_fatal("GPIO_MON_NOVIF", {"Virtual interface vif must be set for ", get_full_name(), ".vif"});
+
+        if (!uvm_config_db#(virtual gpio_if)::get(
+                this, "", "vif", vif)) begin
+            `uvm_fatal("GPIO_MON",
+                       "Failed to retrieve GPIO virtual interface")
         end
+        `uvm_info("GPIO_MON", "[GPIO VIF] Virtual interface connected: vif != null", UVM_LOW)
     endfunction
 
     virtual task run_phase(uvm_phase phase);
@@ -58,8 +62,15 @@ class gpio_monitor extends uvm_monitor;
                     prev_oe  = vif.gpio_oe;
                     prev_in  = vif.gpio_in;
 
-                    `uvm_info("GPIO_MON", $sformatf("Monitored GPIO Change #%0d: OUT=0x%02h, OE=0x%02h, IN=0x%02h, IRQ=%0b at %0t",
-                              num_monitored, item.gpio_out[7:0], item.gpio_oe[7:0], item.gpio_in[7:0], item.gpio_irq, item.timestamp), UVM_MEDIUM)
+                    `uvm_info("GPIO_MON", $sformatf("[GPIO DUT] GPIO output observed: OUT=0x%02h, OE=0x%02h, IRQ=%0b",
+                              item.gpio_out[7:0], item.gpio_oe[7:0], item.gpio_irq), UVM_LOW)
+                    `uvm_info("GPIO_MON", $sformatf("[GPIO MONITOR] Transaction captured: ID=%0d, OUT=0x%02h, OE=0x%02h, IN=0x%02h at %0t",
+                              num_monitored, item.gpio_out[7:0], item.gpio_oe[7:0], item.gpio_in[7:0], item.timestamp), UVM_LOW)
+                    `uvm_info("GPIO_MON", $sformatf("Observed GPIO pattern = OUT: 0x%02h, OE: 0x%02h",
+                              item.gpio_out[7:0], item.gpio_oe[7:0]), UVM_MEDIUM)
+
+                    $display("[LIVE MONITOR] GPIO | TIME: %0t | TXN ID: %0d | GPIO IN: 0x%02h | GPIO OUT: 0x%02h | GPIO DIR: 0x%02h | STATUS: DRV_EN=0x%02h, IRQ=%0b",
+                             item.timestamp, num_monitored, item.gpio_in[7:0], item.gpio_out[7:0], item.gpio_oe[7:0], item.gpio_drv_en, item.gpio_irq);
 
                     ap.write(item);
                 end

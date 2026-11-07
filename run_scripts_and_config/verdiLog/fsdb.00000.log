@@ -1,7 +1,7 @@
 #######################################################################################
 # fsdb.xxxxx.log : log primitive debug message of FSDB Reader
 # This is for R&D to analyze when there are issues happening when FSDB reading
-# The corresponding FSDB file is /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run_scripts_and_config/cardioedge_regression.fsdb
+# The corresponding FSDB file is /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run_scripts_and_config/cardioedge_vip_sync.fsdb
 #######################################################################################
 [BASIC]Reader version : Chronologic Simulation VCS Release U-2023.03_Full64
 [BASIC]simulator version : Chronologic Simulation VCS Release U-2023.03_Full64

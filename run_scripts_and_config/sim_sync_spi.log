@@ -1,0 +1,375 @@
+Command: /home/student/Documents/HONOURS_CBP_CARDIOEDGE/run_scripts_and_config/./simv_vip_sync -no_save +SYNC_VIP=SPI -l sim_sync_spi.log
+Chronologic VCS simulator copyright 1991-2023
+Contains Synopsys proprietary information.
+Compiler version U-2023.03_Full64; Runtime version U-2023.03_Full64;  Nov  7 12:56 2026
+UVM_INFO /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm-1.2/base/uvm_root.svh(402) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2.Synopsys
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+Addressing configuration for axi_interconnect instance tb_cardioedge_uvm_soc.dut.u_interconnect.axi_interconnect_inst
+ 0 ( 0): 40000000 / 12 -- 40000000-40000fff
+ 1 ( 0): 40002000 / 12 -- 40002000-40002fff
+ 2 ( 0): 40004000 / 12 -- 40004000-40004fff
+ 3 ( 0): 4000c000 / 12 -- 4000c000-4000cfff
+ 4 ( 0): 4000e000 / 12 -- 4000e000-4000efff
+ 5 ( 0): 40010000 / 12 -- 40010000-40010fff
+ 6 ( 0): 40012000 / 12 -- 40012000-40012fff
+ 7 ( 0): 00000000 / 16 -- 00000000-0000ffff
+ 8 ( 0): 00010000 / 16 -- 00010000-0001ffff
+ 9 ( 0): 40006000 / 12 -- 40006000-40006fff
+10 ( 0): 40008000 / 12 -- 40008000-40008fff
+11 ( 0): 4000a000 / 12 -- 4000a000-4000afff
+12 ( 0): 40014000 / 12 -- 40014000-40014fff
+13 ( 0): 40016000 / 12 -- 40016000-40016fff
+14 ( 0): 40018000 / 12 -- 40018000-40018fff
+15 ( 0): 4001a000 / 12 -- 4001a000-4001afff
+16 ( 0): 4001c000 / 12 -- 4001c000-4001cfff
+17 ( 0): 4001e000 / 12 -- 4001e000-4001efff
+[FSDB CONFIG] Initializing Verdi FSDB dump to 'cardioedge_vip_sync.fsdb'...
+*Verdi* Loading libsscore_vcs202303.so
+FSDB Dumper for VCS, Release Verdi_U-2023.03-SP1, Linux x86_64/64bit, 05/28/2023
+(C) 1996 - 2023 by Synopsys, Inc.
+*Verdi* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
+*Verdi* : Create FSDB file 'cardioedge_vip_sync.fsdb'
+*Verdi* : Begin traversing the scope (tb_cardioedge_uvm_soc), layer (0).
+*Verdi* : Enable +all dumping.
+*Verdi* : End of traversing.
+*Verdi* : Begin traversing the MDAs, layer (0).
+*Verdi* : Enable +mda and +packedmda dumping.
+*Verdi* : End of traversing the MDAs.
+[UVM TB BOOT] Comprehensive 134-instruction verification program preloaded into IMEM.
+============================================================
+   STARTING CARDIOEDGE SOC UVM VERIFICATION TESTBENCH       
+============================================================
+UVM_INFO @ 0.00 ns: reporter [RNTST] Running test cardioedge_uvm_test...
+UVM_INFO ../tb/uvm_cardioedge/cardioedge_uvm_test.sv(28) @ 0.00 ns: uvm_test_top [uvm_test_top] [TEST CONFIG] Synchronization mode configured to: SPI
+UVM_INFO ../tb/uvm_cardioedge/vips/adc/adc_driver.sv(26) @ 0.00 ns: uvm_test_top.env.adc_agent_h.drv [ADC_DRV] [ADC VIF] Virtual interface connected: vif != null
+UVM_INFO ../tb/uvm_cardioedge/vips/adc/adc_monitor.sv(28) @ 0.00 ns: uvm_test_top.env.adc_agent_h.mon [ADC_MON] [ADC VIF] Virtual interface connected: vif != null
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_driver.sv(26) @ 0.00 ns: uvm_test_top.env.gpio_agent_h.drv [GPIO_DRV] [GPIO VIF] Virtual interface connected: vif != null
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(28) @ 0.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO VIF] Virtual interface connected: vif != null
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(26) @ 0.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] [SPI VIF] Virtual interface connected: vif != null
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_monitor.sv(28) @ 0.00 ns: uvm_test_top.env.spi_agent_h.mon [SPI_MON] [SPI VIF] Virtual interface connected: vif != null
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_driver.sv(28) @ 0.00 ns: uvm_test_top.env.uart_agent_h.drv [UART_DRV] [UART VIF] Virtual interface connected: vif != null
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(30) @ 0.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] [UART VIF] Virtual interface connected: vif != null
+UVM_INFO ../tb/uvm_cardioedge/cardioedge_uvm_test.sv(34) @ 0.00 ns: uvm_test_top [uvm_test_top] Printing UVM Component Hierarchy Topology:
+UVM_INFO /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm-1.2/base/uvm_root.svh(589) @ 0.00 ns: reporter [UVMTOP] UVM testbench topology:
+----------------------------------------------------------------------
+Name                         Type                          Size  Value
+----------------------------------------------------------------------
+uvm_test_top                 cardioedge_uvm_test           -     @358 
+  env                        cardioedge_env                -     @377 
+    adc_agent_h              adc_agent                     -     @386 
+      drv                    adc_driver                    -     @655 
+        rsp_port             uvm_analysis_port             -     @674 
+        seq_item_port        uvm_seq_item_pull_port        -     @664 
+      mon                    adc_monitor                   -     @636 
+        ap                   uvm_analysis_port             -     @645 
+      seqr                   adc_sequencer                 -     @684 
+        rsp_export           uvm_analysis_export           -     @693 
+        seq_item_export      uvm_seq_item_pull_imp         -     @811 
+        arbitration_queue    array                         0     -    
+        lock_queue           array                         0     -    
+        num_last_reqs        integral                      32    'd1  
+        num_last_rsps        integral                      32    'd1  
+    adc_sb                   adc_scoreboard                -     @422 
+      item_collected_export  uvm_analysis_imp_adc          -     @431 
+    gpio_agent_h             gpio_agent                    -     @395 
+      drv                    gpio_driver                   -     @852 
+        rsp_port             uvm_analysis_port             -     @871 
+        seq_item_port        uvm_seq_item_pull_port        -     @861 
+      mon                    gpio_monitor                  -     @833 
+        ap                   uvm_analysis_port             -     @842 
+      seqr                   gpio_sequencer                -     @881 
+        rsp_export           uvm_analysis_export           -     @890 
+        seq_item_export      uvm_seq_item_pull_imp         -     @1008
+        arbitration_queue    array                         0     -    
+        lock_queue           array                         0     -    
+        num_last_reqs        integral                      32    'd1  
+        num_last_rsps        integral                      32    'd1  
+    gpio_sb                  gpio_scoreboard               -     @441 
+      item_collected_export  uvm_analysis_imp_gpio         -     @450 
+    spi_agent_h              spi_agent                     -     @404 
+      drv                    spi_driver                    -     @1049
+        rsp_port             uvm_analysis_port             -     @1068
+        seq_item_port        uvm_seq_item_pull_port        -     @1058
+      mon                    spi_monitor                   -     @1030
+        ap                   uvm_analysis_port             -     @1039
+      seqr                   spi_sequencer                 -     @1078
+        rsp_export           uvm_analysis_export           -     @1087
+        seq_item_export      uvm_seq_item_pull_imp         -     @1205
+        arbitration_queue    array                         0     -    
+        lock_queue           array                         0     -    
+        num_last_reqs        integral                      32    'd1  
+        num_last_rsps        integral                      32    'd1  
+    spi_sb                   spi_scoreboard                -     @460 
+      item_collected_export  uvm_analysis_imp_spi          -     @469 
+    uart_agent_h             uart_agent                    -     @413 
+      drv                    uart_driver                   -     @1246
+        rsp_port             uvm_analysis_port             -     @1265
+        seq_item_port        uvm_seq_item_pull_port        -     @1255
+      mon                    uart_monitor                  -     @1227
+        ap                   uvm_analysis_port             -     @1236
+      seqr                   uart_sequencer                -     @1275
+        rsp_export           uvm_analysis_export           -     @1284
+        seq_item_export      uvm_seq_item_pull_imp         -     @1402
+        arbitration_queue    array                         0     -    
+        lock_queue           array                         0     -    
+        num_last_reqs        integral                      32    'd1  
+        num_last_rsps        integral                      32    'd1  
+    uart_sb                  uart_scoreboard               -     @479 
+      item_collected_export  uvm_analysis_imp_uart         -     @488 
+    vseqr                    cardioedge_virtual_sequencer  -     @498 
+      rsp_export             uvm_analysis_export           -     @507 
+      seq_item_export        uvm_seq_item_pull_imp         -     @625 
+      arbitration_queue      array                         0     -    
+      lock_queue             array                         0     -    
+      num_last_reqs          integral                      32    'd1  
+      num_last_rsps          integral                      32    'd1  
+----------------------------------------------------------------------
+
+UVM_INFO ../tb/uvm_cardioedge/vips/adc/adc_driver.sv(35) @ 0.00 ns: uvm_test_top.env.adc_agent_h.drv [ADC_DRV] Waiting for reset release (rst_n == 1)...
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_driver.sv(34) @ 0.00 ns: uvm_test_top.env.gpio_agent_h.drv [GPIO_DRV] Waiting for reset release (rst_n == 1)...
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(35) @ 0.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] Waiting for reset release (rst_n == 1)...
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_driver.sv(35) @ 0.00 ns: uvm_test_top.env.uart_agent_h.drv [UART_DRV] Waiting for reset release (rst_n == 1)...
+
+===============================================================
+              CARDIOEDGE UVM LIVE MONITOR OUTPUT               
+===============================================================
+
+UVM_INFO ../tb/uvm_cardioedge/cardioedge_uvm_test.sv(45) @ 0.00 ns: uvm_test_top [uvm_test_top] Starting cardioedge_virtual_sequence on virtual sequencer...
+UVM_INFO ../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv(39) @ 0.00 ns: uvm_test_top.env.vseqr@@vseq [VIRT_SEQ] ============================================================
+UVM_INFO ../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv(40) @ 0.00 ns: uvm_test_top.env.vseqr@@vseq [VIRT_SEQ]  Starting CARDIOEDGE Virtual Sequence [TARGET: SPI]
+UVM_INFO ../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv(41) @ 0.00 ns: uvm_test_top.env.vseqr@@vseq [VIRT_SEQ]  Coordinating: ADC VIP + GPIO VIP + SPI VIP + UART VIP      
+UVM_INFO ../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv(42) @ 0.00 ns: uvm_test_top.env.vseqr@@vseq [VIRT_SEQ] ============================================================
+[UVM TB] Reset released (rst_n = 1). CPU starting execution.
+UVM_INFO ../tb/uvm_cardioedge/vips/adc/adc_driver.sv(38) @ 210.00 ns: uvm_test_top.env.adc_agent_h.drv [ADC_DRV] Reset released. Starting ADC sample driving loop.
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_driver.sv(37) @ 210.00 ns: uvm_test_top.env.gpio_agent_h.drv [GPIO_DRV] Reset released. Starting GPIO stimulus driving loop.
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(38) @ 210.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] Reset released. SPI Slave responder active.
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_driver.sv(38) @ 210.00 ns: uvm_test_top.env.uart_agent_h.drv [UART_DRV] Reset released. UART Transmitter active (baud_period = 1280.00 ns)
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(62) @ 230.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO DUT] GPIO output observed: OUT=0x00, OE=0x00, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(64) @ 230.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO MONITOR] Transaction captured: ID=1, OUT=0x00, OE=0x00, IN=0x00 at 230.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(66) @ 230.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] Observed GPIO pattern = OUT: 0x00, OE: 0x00
+[LIVE MONITOR] GPIO | TIME: 230.00 ns | TXN ID: 1 | GPIO IN: 0x00 | GPIO OUT: 0x00 | GPIO DIR: 0x00 | STATUS: DRV_EN=0x00, IRQ=0
+[SCOREBOARD CHECK] VIP: GPIO | TXN ID: 1 | EXPECTED: Valid GPIO State | OBSERVED: OUT=0x00, OE=0x00 | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(104) @ 230.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO RESULT] PASS: Transition #1 verified (OUT=0x00, OE=0x00)
+UVM_INFO ../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv(60) @ 5000.00 ns: uvm_test_top.env.vseqr@@vseq [VIRT_SEQ] [INDIVIDUAL] Starting SPI VIP Slave Responder Sequence...
+UVM_INFO ../tb/uvm_cardioedge/sequences/spi_sequence.sv(24) @ 5000.00 ns: uvm_test_top.env.spi_agent_h.seqr@@spi_sync_seq [SPI_SEQ] Starting SPI Synchronization Sequence (4 frames)
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(45) @ 25770.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] [UART DUT] Response observed: Serial transmission start bit detected on uart_tx_o
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(62) @ 32530.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO DUT] GPIO output observed: OUT=0x00, OE=0xff, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(64) @ 32530.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO MONITOR] Transaction captured: ID=2, OUT=0x00, OE=0xff, IN=0x00 at 32530.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(66) @ 32530.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] Observed GPIO pattern = OUT: 0x00, OE: 0xff
+[LIVE MONITOR] GPIO | TIME: 32530.00 ns | TXN ID: 2 | GPIO IN: 0x00 | GPIO OUT: 0x00 | GPIO DIR: 0xff | STATUS: DRV_EN=0x00, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(58) @ 32530.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Direction DIR = 0xFF verified MATCH
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(64) @ 32530.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Pattern DATA_O = 0x00 verified MATCH
+[SCOREBOARD CHECK] VIP: GPIO | TXN ID: 2 | EXPECTED: DATA_O=0x00 | OBSERVED: OUT=0x00, OE=0xff | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(104) @ 32530.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO RESULT] PASS: Transition #2 verified (OUT=0x00, OE=0xff)
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(62) @ 35650.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO DUT] GPIO output observed: OUT=0xff, OE=0xff, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(64) @ 35650.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO MONITOR] Transaction captured: ID=3, OUT=0xff, OE=0xff, IN=0x00 at 35650.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(66) @ 35650.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] Observed GPIO pattern = OUT: 0xff, OE: 0xff
+[LIVE MONITOR] GPIO | TIME: 35650.00 ns | TXN ID: 3 | GPIO IN: 0x00 | GPIO OUT: 0xff | GPIO DIR: 0xff | STATUS: DRV_EN=0x00, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(58) @ 35650.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Direction DIR = 0xFF verified MATCH
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(70) @ 35650.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Pattern DATA_O = 0xFF verified MATCH
+[SCOREBOARD CHECK] VIP: GPIO | TXN ID: 3 | EXPECTED: DATA_O=0xFF | OBSERVED: OUT=0xff, OE=0xff | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(104) @ 35650.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO RESULT] PASS: Transition #3 verified (OUT=0xff, OE=0xff)
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(62) @ 37210.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO DUT] GPIO output observed: OUT=0xa5, OE=0xff, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(64) @ 37210.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO MONITOR] Transaction captured: ID=4, OUT=0xa5, OE=0xff, IN=0x00 at 37210.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(66) @ 37210.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] Observed GPIO pattern = OUT: 0xa5, OE: 0xff
+[LIVE MONITOR] GPIO | TIME: 37210.00 ns | TXN ID: 4 | GPIO IN: 0x00 | GPIO OUT: 0xa5 | GPIO DIR: 0xff | STATUS: DRV_EN=0x00, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(58) @ 37210.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Direction DIR = 0xFF verified MATCH
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(76) @ 37210.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Pattern DATA_O = 0xA5 verified MATCH
+[SCOREBOARD CHECK] VIP: GPIO | TXN ID: 4 | EXPECTED: DATA_O=0xA5 | OBSERVED: OUT=0xa5, OE=0xff | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(104) @ 37210.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO RESULT] PASS: Transition #4 verified (OUT=0xa5, OE=0xff)
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(77) @ 38570.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] [UART MONITOR] Transaction captured: ID=1, data=0x43 ('C') at 38570.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(79) @ 38570.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] Observed UART character = 0x43 ('C')
+[LIVE MONITOR] UART | TIME: 38570.00 ns | TXN ID: 1 | DIRECTION: DUT_TX | OBSERVED DATA: 0x43 ('C') | STATUS: 8N1 OK (IRQ=0)
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/uart_scoreboard.sv(50) @ 38570.00 ns: uvm_test_top.env.uart_sb [UART_SB_PASS] [UART SCOREBOARD] Expected vs Actual comparison: Character 'C' (0x43) matched
+[SCOREBOARD CHECK] VIP: UART | TXN ID: 1 | EXPECTED: 'C' (0x43) | OBSERVED: 0x43 ('C') | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/uart_scoreboard.sv(71) @ 38570.00 ns: uvm_test_top.env.uart_sb [UART_SB_PASS] [UART RESULT] PASS: UART Transaction #1 Verified: 0x43 ('C')
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(45) @ 38830.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] [UART DUT] Response observed: Serial transmission start bit detected on uart_tx_o
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(62) @ 40550.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO DUT] GPIO output observed: OUT=0xa7, OE=0xff, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(64) @ 40550.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO MONITOR] Transaction captured: ID=5, OUT=0xa7, OE=0xff, IN=0x00 at 40550.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(66) @ 40550.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] Observed GPIO pattern = OUT: 0xa7, OE: 0xff
+[LIVE MONITOR] GPIO | TIME: 40550.00 ns | TXN ID: 5 | GPIO IN: 0x00 | GPIO OUT: 0xa7 | GPIO DIR: 0xff | STATUS: DRV_EN=0x00, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(58) @ 40550.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Direction DIR = 0xFF verified MATCH
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(82) @ 40550.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: Atomic SET_O -> DATA_O = 0xA7 verified MATCH
+[SCOREBOARD CHECK] VIP: GPIO | TXN ID: 5 | EXPECTED: SET_O -> 0xA7 | OBSERVED: OUT=0xa7, OE=0xff | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(104) @ 40550.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO RESULT] PASS: Transition #5 verified (OUT=0xa7, OE=0xff)
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(62) @ 43890.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO DUT] GPIO output observed: OUT=0xa6, OE=0xff, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(64) @ 43890.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] [GPIO MONITOR] Transaction captured: ID=6, OUT=0xa6, OE=0xff, IN=0x00 at 43890.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/gpio/gpio_monitor.sv(66) @ 43890.00 ns: uvm_test_top.env.gpio_agent_h.mon [GPIO_MON] Observed GPIO pattern = OUT: 0xa6, OE: 0xff
+[LIVE MONITOR] GPIO | TIME: 43890.00 ns | TXN ID: 6 | GPIO IN: 0x00 | GPIO OUT: 0xa6 | GPIO DIR: 0xff | STATUS: DRV_EN=0x00, IRQ=0
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(58) @ 43890.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: GPIO Direction DIR = 0xFF verified MATCH
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(88) @ 43890.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO SCOREBOARD] Expected vs Actual comparison: Atomic CLR_O -> DATA_O = 0xA6 verified MATCH
+[SCOREBOARD CHECK] VIP: GPIO | TXN ID: 6 | EXPECTED: CLR_O -> 0xA6 | OBSERVED: OUT=0xa6, OE=0xff | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/gpio_scoreboard.sv(104) @ 43890.00 ns: uvm_test_top.env.gpio_sb [GPIO_SB_PASS] [GPIO RESULT] PASS: Transition #6 verified (OUT=0xa6, OE=0xff)
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(77) @ 51630.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] [UART MONITOR] Transaction captured: ID=2, data=0x41 ('A') at 51630.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(79) @ 51630.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] Observed UART character = 0x41 ('A')
+[LIVE MONITOR] UART | TIME: 51630.00 ns | TXN ID: 2 | DIRECTION: DUT_TX | OBSERVED DATA: 0x41 ('A') | STATUS: 8N1 OK (IRQ=0)
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/uart_scoreboard.sv(54) @ 51630.00 ns: uvm_test_top.env.uart_sb [UART_SB_PASS] [UART SCOREBOARD] Expected vs Actual comparison: Character 'A' (0x41) matched
+[SCOREBOARD CHECK] VIP: UART | TXN ID: 2 | EXPECTED: 'A' (0x41) | OBSERVED: 0x41 ('A') | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/uart_scoreboard.sv(71) @ 51630.00 ns: uvm_test_top.env.uart_sb [UART_SB_PASS] [UART RESULT] PASS: UART Transaction #2 Verified: 0x41 ('A')
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(45) @ 51890.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] [UART DUT] Response observed: Serial transmission start bit detected on uart_tx_o
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(77) @ 64690.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] [UART MONITOR] Transaction captured: ID=3, data=0x55 ('U') at 64690.00 ns
+UVM_INFO ../tb/uvm_cardioedge/vips/uart/uart_monitor.sv(79) @ 64690.00 ns: uvm_test_top.env.uart_agent_h.mon [UART_MON] Observed UART character = 0x55 ('U')
+[LIVE MONITOR] UART | TIME: 64690.00 ns | TXN ID: 3 | DIRECTION: DUT_TX | OBSERVED DATA: 0x55 ('U') | STATUS: 8N1 OK (IRQ=0)
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/uart_scoreboard.sv(58) @ 64690.00 ns: uvm_test_top.env.uart_sb [UART_SB_PASS] [UART SCOREBOARD] Expected vs Actual comparison: Character 0x55 ('U') matched
+[SCOREBOARD CHECK] VIP: UART | TXN ID: 3 | EXPECTED: 'U' (0x55) | OBSERVED: 0x55 ('U') | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/uart_scoreboard.sv(71) @ 64690.00 ns: uvm_test_top.env.uart_sb [UART_SB_PASS] [UART RESULT] PASS: UART Transaction #3 Verified: 0x55 ('U')
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_monitor.sv(45) @ 75890.00 ns: uvm_test_top.env.spi_agent_h.mon [SPI_MON] [SPI DUT] Response observed: SoC Master asserted CS_N=0, initiating transfer
+UVM_INFO ../tb/uvm_cardioedge/sequences/spi_sequence.sv(31) @ 75890.00 ns: uvm_test_top.env.spi_agent_h.seqr@@spi_sync_seq [SPI_SEQ] [SPI SEQUENCE] Transaction generated: ID=1, miso_data=0x5a
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(51) @ 75890.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] [SPI DRIVER] Transaction received: ID=1, miso_data=0x5a
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(56) @ 75890.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] [SPI DRIVER] SPI signals driven: responder active, MISO=0x5a
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_monitor.sv(71) @ 82330.00 ns: uvm_test_top.env.spi_agent_h.mon [SPI_MON] [SPI MONITOR] Transaction captured: ID=1, MOSI(DUT)=0x5a, MISO(VIP)=0x5a [75890.00 ns - 82330.00 ns]
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_monitor.sv(73) @ 82330.00 ns: uvm_test_top.env.spi_agent_h.mon [SPI_MON] Observed SPI transfer = MOSI: 0x5a, MISO: 0x5a
+[LIVE MONITOR] SPI  | TIME: 82330.00 ns | TXN ID: 1 | CS: 0 | MOSI: 0x5a | MISO: 0x5a | STATUS: 8-BIT MODE 0 FRAME [75890.00 ns - 82330.00 ns]
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/spi_scoreboard.sv(60) @ 82330.00 ns: uvm_test_top.env.spi_sb [SPI_SB_PASS] [SPI SCOREBOARD] Expected vs Actual comparison: SoC Firmware MOSI = 0x5A verified MATCH
+[SCOREBOARD CHECK] VIP: SPI  | TXN ID: 1 | EXPECTED: DTR=0x5A | OBSERVED: MOSI=0x5a, MISO=0x5a | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/spi_scoreboard.sv(83) @ 82330.00 ns: uvm_test_top.env.spi_sb [SPI_SB_PASS] [SPI RESULT] PASS: Frame #1 verified (MOSI=0x5a, MISO=0x5a, CS_N=0)
+UVM_INFO ../tb/uvm_cardioedge/sequences/spi_sequence.sv(31) @ 82650.00 ns: uvm_test_top.env.spi_agent_h.seqr@@spi_sync_seq [SPI_SEQ] [SPI SEQUENCE] Transaction generated: ID=2, miso_data=0xa5
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(51) @ 82650.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] [SPI DRIVER] Transaction received: ID=2, miso_data=0xa5
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(56) @ 82650.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] [SPI DRIVER] SPI signals driven: responder active, MISO=0xa5
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_monitor.sv(45) @ 108670.00 ns: uvm_test_top.env.spi_agent_h.mon [SPI_MON] [SPI DUT] Response observed: SoC Master asserted CS_N=0, initiating transfer
+UVM_INFO ../tb/uvm_cardioedge/sequences/spi_sequence.sv(31) @ 110930.00 ns: uvm_test_top.env.spi_agent_h.seqr@@spi_sync_seq [SPI_SEQ] [SPI SEQUENCE] Transaction generated: ID=3, miso_data=0x3c
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(51) @ 110930.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] [SPI DRIVER] Transaction received: ID=3, miso_data=0x3c
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_driver.sv(56) @ 110930.00 ns: uvm_test_top.env.spi_agent_h.drv [SPI_DRV] [SPI DRIVER] SPI signals driven: responder active, MISO=0x3c
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_monitor.sv(71) @ 115090.00 ns: uvm_test_top.env.spi_agent_h.mon [SPI_MON] [SPI MONITOR] Transaction captured: ID=2, MOSI(DUT)=0xa5, MISO(VIP)=0x9e [108670.00 ns - 115090.00 ns]
+UVM_INFO ../tb/uvm_cardioedge/vips/spi/spi_monitor.sv(73) @ 115090.00 ns: uvm_test_top.env.spi_agent_h.mon [SPI_MON] Observed SPI transfer = MOSI: 0xa5, MISO: 0x9e
+[LIVE MONITOR] SPI  | TIME: 115090.00 ns | TXN ID: 2 | CS: 0 | MOSI: 0xa5 | MISO: 0x9e | STATUS: 8-BIT MODE 0 FRAME [108670.00 ns - 115090.00 ns]
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/spi_scoreboard.sv(64) @ 115090.00 ns: uvm_test_top.env.spi_sb [SPI_SB_PASS] [SPI SCOREBOARD] Expected vs Actual comparison: SoC Firmware MOSI = 0xA5 verified MATCH
+[SCOREBOARD CHECK] VIP: SPI  | TXN ID: 2 | EXPECTED: DTR=0xA5 | OBSERVED: MOSI=0xa5, MISO=0x9e | COMPARISON:    MATCH | RESULT: PASS
+UVM_INFO ../tb/uvm_cardioedge/scoreboards/spi_scoreboard.sv(83) @ 115090.00 ns: uvm_test_top.env.spi_sb [SPI_SB_PASS] [SPI RESULT] PASS: Frame #2 verified (MOSI=0xa5, MISO=0x9e, CS_N=0)
+UVM_INFO ../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv(122) @ 125000.00 ns: uvm_test_top.env.vseqr@@vseq [VIRT_SEQ] ============================================================
+UVM_INFO ../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv(123) @ 125000.00 ns: uvm_test_top.env.vseqr@@vseq [VIRT_SEQ]  CARDIOEDGE Multi-VIP Virtual Sequence Completed Successfully
+UVM_INFO ../tb/uvm_cardioedge/sequences/cardioedge_virtual_sequence.sv(124) @ 125000.00 ns: uvm_test_top.env.vseqr@@vseq [VIRT_SEQ] ============================================================
+UVM_INFO ../tb/uvm_cardioedge/cardioedge_uvm_test.sv(50) @ 125000.00 ns: uvm_test_top [uvm_test_top] cardioedge_virtual_sequence execution completed.
+UVM_INFO /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm-1.2/base/uvm_objection.svh(1276) @ 127000.00 ns: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+------------------------------------------------------------
+                ADC SCOREBOARD SUMMARY                      
+------------------------------------------------------------
+  Total Samples Checked : 0
+  Passed Transactions   : 0
+  Failed Transactions   : 0
+  ADC VIP STATUS        : WARNING (No transactions checked)
+------------------------------------------------------------
+------------------------------------------------------------
+               GPIO SCOREBOARD SUMMARY                      
+------------------------------------------------------------
+  Total Transitions Monitored : 6
+  Passed Checks               : 6
+  Failed Checks               : 0
+  Firmware DIR=0xFF Observed  : YES
+  Firmware DATA=0xA5 Observed : YES
+  Firmware SET=0xA7 Observed  : YES
+  Firmware CLR=0xA6 Observed  : YES
+  External Input Observed     :  NO
+  GPIO VIP STATUS             : ALL CHECKS PASSED
+------------------------------------------------------------
+------------------------------------------------------------
+                SPI SCOREBOARD SUMMARY                      
+------------------------------------------------------------
+  Total SPI Transactions      : 2
+  Passed Transactions         : 2
+  Failed Transactions         : 0
+  Firmware DTR=0x5A Observed  : YES
+  Firmware DTR=0xA5 Observed  : YES
+  Firmware DTR=0x3C Observed  :  NO
+  Firmware DTR=0xC3 Observed  :  NO
+  SPI VIP STATUS              : ALL CHECKS PASSED
+------------------------------------------------------------
+------------------------------------------------------------
+               UART SCOREBOARD SUMMARY                      
+------------------------------------------------------------
+  Total UART Characters       : 3
+  Passed Characters           : 3
+  Failed Characters           : 0
+  Firmware 'C' (0x43) Seen    : YES
+  Firmware 'A' (0x41) Seen    : YES
+  UART VIP STATUS             : ALL CHECKS PASSED
+------------------------------------------------------------
+
+========== CARDIOEDGE VIP SYNCHRONIZATION ==========
+
+[SPI]
+[SPI SEQUENCE] Transaction generated
+[SPI DRIVER] Transaction received
+[SPI VIF] Virtual interface connected
+[SPI DRIVER] SPI signals driven
+[SPI DUT] Response observed
+[SPI MONITOR] Transaction captured
+[SPI SCOREBOARD] Expected vs Actual comparison
+[SPI RESULT] PASS
+
+===============================================================
+             CARDIOEDGE FOUR-VIP RESULTS                       
+===============================================================
+VIP  | MONITOR COUNT | PASS COUNT | FAIL COUNT | RESULT
+---------------------------------------------------------------
+UART | 3             | 3          | 0          | PASS
+GPIO | 6             | 6          | 0          | PASS
+SPI  | 2             | 2          | 0          | PASS
+ADC  | 0             | 0          | 0          | FAIL
+---------------------------------------------------------------
+TOTAL| 11            | 11         | 0          | 3/4 PASSED
+===============================================================
+
+====================================================
+INDIVIDUAL VIP SYNCHRONIZATION RESULT: SPI
+====================================================
+SPI  : PASS
+
+TOTAL VIPs PASSED : 1/1
+TOTAL VIPs FAILED : 0/1
+====================================================
+
+UVM_INFO /home/student/snps_tools_target/vcs/U-2023.03/etc/uvm-1.2/base/uvm_report_server.svh(904) @ 127000.00 ns: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :  101
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[ADC_DRV]     3
+[ADC_MON]     1
+[GPIO_DRV]     3
+[GPIO_MON]    19
+[GPIO_SB_PASS]    16
+[RNTST]     1
+[SPI_DRV]     9
+[SPI_MON]     7
+[SPI_SB_PASS]     4
+[SPI_SEQ]     4
+[TEST_DONE]     1
+[UART_DRV]     3
+[UART_MON]    10
+[UART_SB_PASS]     6
+[UVM/RELNOTES]     1
+[UVMTOP]     1
+[VIRT_SEQ]     8
+[uvm_test_top]     4
+
+$finish called from file "/home/student/snps_tools_target/vcs/U-2023.03/etc/uvm-1.2/base/uvm_root.svh", line 527.
+$finish at simulation time         127000.00 ns
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 127000000 ps
+CPU Time:      0.560 seconds;       Data structure size:   1.8Mb
+Sat Nov  7 12:56:34 2026

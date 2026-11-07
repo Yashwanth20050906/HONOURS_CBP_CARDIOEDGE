@@ -23,6 +23,7 @@ class spi_driver extends uvm_driver #(spi_item);
         if (!uvm_config_db#(virtual spi_if)::get(this, "", "vif", vif)) begin
             `uvm_fatal("SPI_DRV_NOVIF", {"Virtual interface vif must be set for ", get_full_name(), ".vif"});
         end
+        `uvm_info("SPI_DRV", "[SPI VIF] Virtual interface connected: vif != null", UVM_LOW)
     endfunction
 
     virtual task run_phase(uvm_phase phase);
@@ -46,25 +47,44 @@ class spi_driver extends uvm_driver #(spi_item);
             resp_byte = has_item ? req.miso_data : 8'hA5;
             num_driven++;
 
-            `uvm_info("SPI_DRV", $sformatf("SPI Master activated CS_N=0. Responder driving MISO=0x%02h", resp_byte), UVM_HIGH)
+            if (has_item) begin
+                `uvm_info("SPI_DRV", $sformatf("[SPI DRIVER] Transaction received: ID=%0d, miso_data=0x%02h", req.trans_id, req.miso_data), UVM_LOW)
+            end else begin
+                `uvm_info("SPI_DRV", $sformatf("[SPI DRIVER] Transaction received: (default responder) miso_data=0x%02h", resp_byte), UVM_LOW)
+            end
 
-            // Shift 8 bits onto MISO
-            for (int b = 7; b >= 0; b--) begin
-                vif.spi_miso_i <= resp_byte[b];
-                // Wait for master clock edge or CS deassertion
-                @(posedge vif.spi_clk_o or negedge vif.spi_clk_o or posedge vif.spi_cs_n_o);
+            `uvm_info("SPI_DRV", $sformatf("[SPI DRIVER] SPI signals driven: responder active, MISO=0x%02h", resp_byte), UVM_LOW)
+
+            // Mode 0: bit 7 must be driven and stable before the first rising clock edge
+            vif.spi_miso_i <= resp_byte[7];
+
+            // For subsequent bits 6 down to 0, drive on falling edges (negedge spi_clk_o)
+            for (int b = 6; b >= 0; b--) begin
+                @(negedge vif.spi_clk_o or posedge vif.spi_cs_n_o);
                 if (vif.spi_cs_n_o === 1'b1) break;
+                vif.spi_miso_i <= resp_byte[b];
             end
 
-            // Wait for chip select release
-            if (vif.spi_cs_n_o === 1'b0) begin
-                wait (vif.spi_cs_n_o === 1'b1);
-            end
-            vif.spi_miso_i <= 1'b0;
+            // Wait for the final rising edge of the 8th bit
+            @(posedge vif.spi_clk_o or posedge vif.spi_cs_n_o);
 
             if (has_item) begin
                 req.end_time = $time;
                 seq_item_port.item_done();
+            end
+
+            // When CS_N is deasserted, release MISO
+            if (vif.spi_cs_n_o === 1'b1) begin
+                vif.spi_miso_i <= 1'b0;
+            end else begin
+                // Wait until CS_N goes high or next transaction edge
+                fork
+                    wait (vif.spi_cs_n_o === 1'b1);
+                    @(negedge vif.spi_clk_o);
+                join_any
+                if (vif.spi_cs_n_o === 1'b1) begin
+                    vif.spi_miso_i <= 1'b0;
+                end
             end
         end
     endtask

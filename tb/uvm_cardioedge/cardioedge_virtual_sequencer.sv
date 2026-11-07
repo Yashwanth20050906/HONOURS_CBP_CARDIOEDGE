@@ -18,6 +18,9 @@ class cardioedge_virtual_sequencer extends uvm_sequencer;
     spi_pkg::spi_sequencer      spi_seqr;
     uart_pkg::uart_sequencer    uart_seqr;
 
+    // Environment handle for scoreboard & test tracking
+    uvm_component               env_h;
+
     `uvm_component_utils(cardioedge_virtual_sequencer)
 
     function new(string name, uvm_component parent);
